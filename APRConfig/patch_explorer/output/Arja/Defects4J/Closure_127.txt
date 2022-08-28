@@ -1,0 +1,28 @@
+
+    Original test result:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_127/defects4j_Closure_127 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_127/defects4j_Closure_127  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_127/defects4j_Closure_127 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_127/defects4j_Closure_127 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_127/defects4j_Closure_127/failing_tests  run.dev.tests 2>&1Failing tests: 6
+  - com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue4177428_return
+  - com.google.javascript.jscomp.UnreachableCodeEliminationTest::testDontRemoveBreakInTryFinally
+  - com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue4177428_continue
+  - com.google.javascript.jscomp.UnreachableCodeEliminationTest::testDontRemoveBreakInTryFinallySwitch
+  - com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue4177428a
+  - com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue4177428c
+
+    Applying patch result:
+    patching file src/com/google/javascript/rhino/Token.java
+patching file src/com/google/javascript/jscomp/UnreachableCodeElimination.java
+
+    Test result after patching:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_127/defects4j_Closure_127 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_127/defects4j_Closure_127  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_127/defects4j_Closure_127 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_127/defects4j_Closure_127 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_127/defects4j_Closure_127/failing_tests  run.dev.tests 2>&1Failing tests: 10
+  - com.google.javascript.jscomp.ControlFlowAnalysisTest::testOptionNotToTraverseFunctions
+  - com.google.javascript.jscomp.ControlFlowAnalysisTest::testBreakInFinally1
+  - com.google.javascript.jscomp.IntegrationTest::testRemoveUnreachableCode
+  - com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIteratedRemoval
+  - com.google.javascript.jscomp.UnreachableCodeEliminationTest::testRemoveUnreachableCode
+  - com.google.javascript.jscomp.UnreachableCodeEliminationTest::testTryCatchFinally
+  - com.google.javascript.jscomp.UnreachableCodeEliminationTest::testUselessUnconditionalContinue
+  - com.google.javascript.jscomp.UnreachableCodeEliminationTest::testUselessUnconditionalReturn
+  - com.google.javascript.jscomp.UnreachableCodeEliminationTest::testUselessUnconditonalBreak
+  - com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue311
+
+    

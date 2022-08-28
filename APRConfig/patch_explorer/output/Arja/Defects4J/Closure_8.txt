@@ -1,0 +1,27 @@
+
+    Original test result:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_8/defects4j_Closure_8 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_8/defects4j_Closure_8  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_8/defects4j_Closure_8 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_8/defects4j_Closure_8 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_8/defects4j_Closure_8/failing_tests  run.dev.tests 2>&1Failing tests: 1
+  - com.google.javascript.jscomp.CollapseVariableDeclarationsTest::testIssue820
+
+    Applying patch result:
+    patching file src/com/google/javascript/rhino/JSDocInfo.java
+patching file src/com/google/javascript/jscomp/CollapseVariableDeclarations.java
+patching file src/com/google/javascript/rhino/Node.java
+
+    Test result after patching:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_8/defects4j_Closure_8 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_8/defects4j_Closure_8  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_8/defects4j_Closure_8 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_8/defects4j_Closure_8 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_8/defects4j_Closure_8/failing_tests  run.dev.tests 2>&1Failing tests: 13
+  - com.google.javascript.jscomp.CollapseVariableDeclarationsTest::testAggressiveRedeclaration
+  - com.google.javascript.jscomp.CommandLineRunnerTest::testTransformAMDAndProcessCJS
+  - com.google.javascript.jscomp.CommandLineRunnerTest::testSyntheticExterns
+  - com.google.javascript.jscomp.IntegrationTest::testRecoverOnBadExterns
+  - com.google.javascript.jscomp.VarCheckTest::testMultiplyDeclaredVars4
+  - com.google.javascript.jscomp.VarCheckTest::testVariableInNormalCodeUsedInExterns1
+  - com.google.javascript.jscomp.VarCheckTest::testVariableInNormalCodeUsedInExterns2
+  - com.google.javascript.jscomp.VarCheckTest::testVariableInNormalCodeUsedInExterns3
+  - com.google.javascript.jscomp.VarCheckTest::testVariableInNormalCodeUsedInExterns4
+  - com.google.javascript.jscomp.VarCheckTest::testPropReferenceInExterns1
+  - com.google.javascript.jscomp.VarCheckTest::testPropReferenceInExterns3
+  - com.google.javascript.jscomp.VarCheckTest::testVarReferenceInExterns
+  - com.google.javascript.jscomp.VarCheckTest::testCallInExterns
+
+    

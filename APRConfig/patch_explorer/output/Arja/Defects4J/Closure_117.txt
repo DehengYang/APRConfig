@@ -1,0 +1,26 @@
+
+    Original test result:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_117/defects4j_Closure_117 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_117/defects4j_Closure_117  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_117/defects4j_Closure_117 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_117/defects4j_Closure_117 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_117/defects4j_Closure_117/failing_tests  run.dev.tests 2>&1Failing tests: 1
+  - com.google.javascript.jscomp.TypeCheckTest::testIssue1047
+
+    Applying patch result:
+    patching file src/com/google/javascript/jscomp/TypeInference.java
+patching file src/com/google/javascript/jscomp/TypedScopeCreator.java
+
+    Test result after patching:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_117/defects4j_Closure_117 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_117/defects4j_Closure_117  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_117/defects4j_Closure_117 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_117/defects4j_Closure_117 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_117/defects4j_Closure_117/failing_tests  run.dev.tests 2>&1Failing tests: 13
+  - com.google.javascript.jscomp.LooseTypeCheckTest::testPrototypePropertyTypes
+  - com.google.javascript.jscomp.LooseTypeCheckTest::testStubFunctionDeclaration4
+  - com.google.javascript.jscomp.LooseTypeCheckTest::testStubFunctionDeclaration5
+  - com.google.javascript.jscomp.TypeCheckTest::testPrototypePropertyTypes
+  - com.google.javascript.jscomp.TypeCheckTest::testStubFunctionDeclaration4
+  - com.google.javascript.jscomp.TypeCheckTest::testStubFunctionDeclaration5
+  - com.google.javascript.jscomp.TypeCheckTest::testIssue483
+  - com.google.javascript.jscomp.TypeInferenceTest::testAssertObject3
+  - com.google.javascript.jscomp.TypedScopeCreatorTest::testCollectedFunctionStubLocal
+  - com.google.javascript.jscomp.TypedScopeCreatorTest::testClassTemplateInheritance3
+  - com.google.javascript.jscomp.TypedScopeCreatorTest::testCollectedFunctionStub
+  - com.google.javascript.jscomp.TypedScopeCreatorTest::testClassTemplateType3
+  - com.google.javascript.jscomp.TypedScopeCreatorTest::testClassTemplateType4
+
+    

@@ -1,0 +1,18 @@
+
+    Original test result:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_12/defects4j_Closure_12 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_12/defects4j_Closure_12  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_12/defects4j_Closure_12 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_12/defects4j_Closure_12 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_12/defects4j_Closure_12/failing_tests  run.dev.tests 2>&1Failing tests: 1
+  - com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testIssue794b
+
+    Applying patch result:
+    patching file src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java
+patching file src/com/google/javascript/jscomp/CheckPathsBetweenNodes.java
+
+    Test result after patching:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_12/defects4j_Closure_12 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_12/defects4j_Closure_12  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_12/defects4j_Closure_12 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_12/defects4j_Closure_12 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_12/defects4j_Closure_12/failing_tests  run.dev.tests 2>&1Failing tests: 5
+  - com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineIfNameIsLeftSideOfAssign
+  - com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testInlineExpressions13
+  - com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testTransitiveDependencies2
+  - com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testIssue698
+  - com.google.javascript.jscomp.FlowSensitiveInlineVariablesTest::testRemoveWithLabels
+
+    

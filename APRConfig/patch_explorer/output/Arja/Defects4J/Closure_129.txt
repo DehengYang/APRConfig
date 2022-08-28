@@ -1,0 +1,15 @@
+
+    Original test result:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_129/defects4j_Closure_129 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_129/defects4j_Closure_129  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_129/defects4j_Closure_129 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_129/defects4j_Closure_129 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_129/defects4j_Closure_129/failing_tests  run.dev.tests 2>&1Failing tests: 1
+  - com.google.javascript.jscomp.IntegrationTest::testIssue937
+
+    Applying patch result:
+    patching file src/com/google/javascript/jscomp/PeepholeFoldConstants.java
+patching file src/com/google/javascript/rhino/Node.java
+
+    Test result after patching:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_129/defects4j_Closure_129 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_129/defects4j_Closure_129  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_129/defects4j_Closure_129 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_129/defects4j_Closure_129 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_129/defects4j_Closure_129/failing_tests  run.dev.tests 2>&1Failing tests: 2
+  - com.google.javascript.jscomp.PeepholeFoldConstantsTest::testFoldGetElem
+  - com.google.javascript.jscomp.PeepholeFoldConstantsTest::testFoldObjectLiteralRef1
+
+    

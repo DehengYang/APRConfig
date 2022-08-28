@@ -1,0 +1,243 @@
+
+    Original test result:
+    Initialized empty Git repository in /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/.git/
+Apache Maven 3.3.9
+Maven home: /usr/share/maven
+Java version: 1.8.0_202, vendor: Oracle Corporation
+Java home: /home/jiayu/env/jdk1.8.0_202/jre
+Default locale: en_US, platform encoding: UTF8
+OS name: "linux", version: "4.4.0-210-generic", arch: "amd64", family: "unix"
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for AutomatedCar:AutomatedCar:jar:1.0
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-compiler-plugin is missing. @ line 65, column 21
+[WARNING] The expression ${artifactId} is deprecated. Please use ${project.artifactId} instead.
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building AutomatedCar 1.0
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.7.8:prepare-agent (prepare-agent) @ AutomatedCar ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ AutomatedCar ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 3 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.2:compile (default-compile) @ AutomatedCar ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ AutomatedCar ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.2:testCompile (default-testCompile) @ AutomatedCar ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.17:test (default-test) @ AutomatedCar ---
+[INFO] Surefire report directory: /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF8
+Picked up _JAVA_OPTIONS: -Djdk.net.URLClassPath.disableClassPathURLCheck=true
+Running hu.oe.nik.szfmv.common.ConfigProviderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.398 sec - in hu.oe.nik.szfmv.common.ConfigProviderTest
+Running hu.oe.nik.szfmv.common.UtilsTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in hu.oe.nik.szfmv.common.UtilsTest
+Running hu.oe.nik.szfmv.automatedcar.bus.VirtualFunctionBusTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in hu.oe.nik.szfmv.automatedcar.bus.VirtualFunctionBusTest
+Running hu.oe.nik.szfmv.visualization.DashboardTest
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.246 sec <<< FAILURE! - in hu.oe.nik.szfmv.visualization.DashboardTest
+allRequiredValuesReceivedOnUpdate(hu.oe.nik.szfmv.visualization.DashboardTest)  Time elapsed: 0.006 sec  <<< ERROR!
+java.awt.AWTError: Can't connect to X11 window server using 'localhost:10.0' as the value of the DISPLAY variable.
+	at sun.awt.X11GraphicsEnvironment.initDisplay(Native Method)
+	at sun.awt.X11GraphicsEnvironment.access$200(X11GraphicsEnvironment.java:65)
+	at sun.awt.X11GraphicsEnvironment$1.run(X11GraphicsEnvironment.java:115)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at sun.awt.X11GraphicsEnvironment.<clinit>(X11GraphicsEnvironment.java:74)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:264)
+	at java.awt.GraphicsEnvironment.createGE(GraphicsEnvironment.java:103)
+	at java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment(GraphicsEnvironment.java:82)
+	at sun.awt.X11.XToolkit.<clinit>(XToolkit.java:132)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:264)
+	at java.awt.Toolkit$2.run(Toolkit.java:860)
+	at java.awt.Toolkit$2.run(Toolkit.java:855)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.awt.Toolkit.getDefaultToolkit(Toolkit.java:854)
+	at sun.swing.SwingUtilities2.getSystemMnemonicKeyMask(SwingUtilities2.java:2020)
+	at javax.swing.plaf.basic.BasicLookAndFeel.initComponentDefaults(BasicLookAndFeel.java:1158)
+	at javax.swing.plaf.metal.MetalLookAndFeel.initComponentDefaults(MetalLookAndFeel.java:431)
+	at javax.swing.plaf.basic.BasicLookAndFeel.getDefaults(BasicLookAndFeel.java:148)
+	at javax.swing.plaf.metal.MetalLookAndFeel.getDefaults(MetalLookAndFeel.java:1577)
+	at javax.swing.UIManager.setLookAndFeel(UIManager.java:539)
+	at javax.swing.UIManager.setLookAndFeel(UIManager.java:579)
+	at javax.swing.UIManager.initializeDefaultLAF(UIManager.java:1349)
+	at javax.swing.UIManager.initialize(UIManager.java:1459)
+	at javax.swing.UIManager.maybeInitialize(UIManager.java:1426)
+	at javax.swing.UIManager.getUI(UIManager.java:1006)
+	at javax.swing.JPanel.updateUI(JPanel.java:126)
+	at javax.swing.JPanel.<init>(JPanel.java:86)
+	at javax.swing.JPanel.<init>(JPanel.java:109)
+	at javax.swing.JPanel.<init>(JPanel.java:117)
+	at hu.oe.nik.szfmv.visualization.Dashboard.<init>(Dashboard.java:46)
+	at hu.oe.nik.szfmv.visualization.DashboardTest.<init>(DashboardTest.java:13)
+
+
+Results :
+
+Tests in error: 
+  DashboardTest.<init>:13 » AWT Can't connect to X11 window server using 'localh...
+
+Tests run: 7, Failures: 0, Errors: 1, Skipped: 0
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 6.855 s
+[INFO] Finished at: 2022-04-20T23:34:48+08:00
+[INFO] Final Memory: 14M/346M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.17:test (default-test) on project AutomatedCar: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/target/surefire-reports for the individual test results.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+    Applying patch result:
+    patching file src/main/java/hu/oe/nik/szfmv/visualization/Dashboard.java
+
+    Test result after patching:
+    Initialized empty Git repository in /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/.git/
+Apache Maven 3.3.9
+Maven home: /usr/share/maven
+Java version: 1.8.0_202, vendor: Oracle Corporation
+Java home: /home/jiayu/env/jdk1.8.0_202/jre
+Default locale: en_US, platform encoding: UTF8
+OS name: "linux", version: "4.4.0-210-generic", arch: "amd64", family: "unix"
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for AutomatedCar:AutomatedCar:jar:1.0
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-compiler-plugin is missing. @ line 65, column 21
+[WARNING] The expression ${artifactId} is deprecated. Please use ${project.artifactId} instead.
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building AutomatedCar 1.0
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.7.8:prepare-agent (prepare-agent) @ AutomatedCar ---
+[INFO] Skipping JaCoCo execution because property jacoco.skip is set.
+[INFO] argLine set to empty
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ AutomatedCar ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 3 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.2:compile (default-compile) @ AutomatedCar ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ AutomatedCar ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.2:testCompile (default-testCompile) @ AutomatedCar ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.17:test (default-test) @ AutomatedCar ---
+[INFO] Surefire report directory: /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF8
+Picked up _JAVA_OPTIONS: -Djdk.net.URLClassPath.disableClassPathURLCheck=true
+Running hu.oe.nik.szfmv.common.ConfigProviderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.417 sec - in hu.oe.nik.szfmv.common.ConfigProviderTest
+Running hu.oe.nik.szfmv.common.UtilsTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.024 sec - in hu.oe.nik.szfmv.common.UtilsTest
+Running hu.oe.nik.szfmv.automatedcar.bus.VirtualFunctionBusTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 sec - in hu.oe.nik.szfmv.automatedcar.bus.VirtualFunctionBusTest
+Running hu.oe.nik.szfmv.visualization.DashboardTest
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.356 sec <<< FAILURE! - in hu.oe.nik.szfmv.visualization.DashboardTest
+allRequiredValuesReceivedOnUpdate(hu.oe.nik.szfmv.visualization.DashboardTest)  Time elapsed: 0.023 sec  <<< ERROR!
+java.awt.AWTError: Can't connect to X11 window server using 'localhost:10.0' as the value of the DISPLAY variable.
+	at sun.awt.X11GraphicsEnvironment.initDisplay(Native Method)
+	at sun.awt.X11GraphicsEnvironment.access$200(X11GraphicsEnvironment.java:65)
+	at sun.awt.X11GraphicsEnvironment$1.run(X11GraphicsEnvironment.java:115)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at sun.awt.X11GraphicsEnvironment.<clinit>(X11GraphicsEnvironment.java:74)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:264)
+	at java.awt.GraphicsEnvironment.createGE(GraphicsEnvironment.java:103)
+	at java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment(GraphicsEnvironment.java:82)
+	at sun.awt.X11.XToolkit.<clinit>(XToolkit.java:132)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:264)
+	at java.awt.Toolkit$2.run(Toolkit.java:860)
+	at java.awt.Toolkit$2.run(Toolkit.java:855)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.awt.Toolkit.getDefaultToolkit(Toolkit.java:854)
+	at sun.swing.SwingUtilities2.getSystemMnemonicKeyMask(SwingUtilities2.java:2020)
+	at javax.swing.plaf.basic.BasicLookAndFeel.initComponentDefaults(BasicLookAndFeel.java:1158)
+	at javax.swing.plaf.metal.MetalLookAndFeel.initComponentDefaults(MetalLookAndFeel.java:431)
+	at javax.swing.plaf.basic.BasicLookAndFeel.getDefaults(BasicLookAndFeel.java:148)
+	at javax.swing.plaf.metal.MetalLookAndFeel.getDefaults(MetalLookAndFeel.java:1577)
+	at javax.swing.UIManager.setLookAndFeel(UIManager.java:539)
+	at javax.swing.UIManager.setLookAndFeel(UIManager.java:579)
+	at javax.swing.UIManager.initializeDefaultLAF(UIManager.java:1349)
+	at javax.swing.UIManager.initialize(UIManager.java:1459)
+	at javax.swing.UIManager.maybeInitialize(UIManager.java:1426)
+	at javax.swing.UIManager.getUI(UIManager.java:1006)
+	at javax.swing.JPanel.updateUI(JPanel.java:126)
+	at javax.swing.JPanel.<init>(JPanel.java:86)
+	at javax.swing.JPanel.<init>(JPanel.java:109)
+	at javax.swing.JPanel.<init>(JPanel.java:117)
+	at hu.oe.nik.szfmv.visualization.Dashboard.<init>(Dashboard.java:46)
+	at hu.oe.nik.szfmv.visualization.DashboardTest.<init>(DashboardTest.java:13)
+
+
+Results :
+
+Tests in error: 
+  DashboardTest.<init>:13 » AWT Can't connect to X11 window server using 'localh...
+
+Tests run: 7, Failures: 0, Errors: 1, Skipped: 0
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 7.293 s
+[INFO] Finished at: 2022-04-20T23:35:36+08:00
+[INFO] Final Memory: 13M/293M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.17:test (default-test) on project AutomatedCar: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/target/surefire-reports for the individual test results.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+    

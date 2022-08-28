@@ -1,0 +1,19 @@
+
+    Original test result:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Time_14/defects4j_Time_14 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Time_14/defects4j_Time_14  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Time_14/defects4j_Time_14 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Time_14/defects4j_Time_14 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Time_14/defects4j_Time_14/failing_tests  run.dev.tests 2>&1Failing tests: 8
+  - org.joda.time.TestMonthDay_Basics::testPlusMonths_int_negativeFromLeap
+  - org.joda.time.TestMonthDay_Basics::testMinusDays_int_negativeFromLeap
+  - org.joda.time.TestMonthDay_Basics::testPlusMonths_int_fromLeap
+  - org.joda.time.TestMonthDay_Basics::testPlusMonths_int_negativeEndOfMonthAdjust
+  - org.joda.time.TestMonthDay_Basics::testMinusMonths_int_endOfMonthAdjust
+  - org.joda.time.TestMonthDay_Basics::testMinusMonths_int_negativeFromLeap
+  - org.joda.time.TestMonthDay_Basics::testMinusMonths_int_fromLeap
+  - org.joda.time.TestMonthDay_Basics::testPlusDays_int_fromLeap
+
+    Applying patch result:
+    patching file src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java
+
+    Test result after patching:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Time_14/defects4j_Time_14 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Time_14/defects4j_Time_14  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Time_14/defects4j_Time_14 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Time_14/defects4j_Time_14 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Time_14/defects4j_Time_14/failing_tests  run.dev.tests 2>&1Failing tests: 0
+
+    

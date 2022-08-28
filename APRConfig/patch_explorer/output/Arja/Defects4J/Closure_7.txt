@@ -1,0 +1,33 @@
+
+    Original test result:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_7/defects4j_Closure_7 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_7/defects4j_Closure_7  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_7/defects4j_Closure_7 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_7/defects4j_Closure_7 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_7/defects4j_Closure_7/failing_tests  run.dev.tests 2>&1Failing tests: 2
+  - com.google.javascript.jscomp.ClosureReverseAbstractInterpreterTest::testGoogIsFunction2
+  - com.google.javascript.jscomp.SemanticReverseAbstractInterpreterTest::testTypeof3
+
+    Applying patch result:
+    patching file src/com/google/javascript/rhino/jstype/FunctionType.java
+patching file src/com/google/javascript/rhino/jstype/UnionType.java
+
+    Test result after patching:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_7/defects4j_Closure_7 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_7/defects4j_Closure_7  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_7/defects4j_Closure_7 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_7/defects4j_Closure_7 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_7/defects4j_Closure_7/failing_tests  run.dev.tests 2>&1Failing tests: 19
+  - com.google.javascript.jscomp.FunctionTypeBuilderTest::testBadFunctionTypeDefinition
+  - com.google.javascript.jscomp.LooseTypeCheckTest::testCall8
+  - com.google.javascript.jscomp.LooseTypeCheckTest::testBooleanPreservation3
+  - com.google.javascript.jscomp.LooseTypeCheckTest::testBug1484445
+  - com.google.javascript.jscomp.TightenTypesTest::testExternSubTypesForObject
+  - com.google.javascript.jscomp.TypeCheckTest::testCall8
+  - com.google.javascript.jscomp.TypeCheckTest::testBooleanPreservation3
+  - com.google.javascript.jscomp.TypedScopeCreatorTest::testTypedStubsInExterns
+  - com.google.javascript.jscomp.TypedScopeCreatorTest::testAbstractMethod2
+  - com.google.javascript.jscomp.TypedScopeCreatorTest::testAbstractMethod4
+  - com.google.javascript.jscomp.TypedScopeCreatorTest::testAbstractMethod
+  - com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseUnionType13
+  - com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseUnionType14
+  - com.google.javascript.rhino.jstype.FunctionTypeTest::testRecursiveFunction
+  - com.google.javascript.rhino.jstype.FunctionTypeTest::testSupAndInfOfReturnTypesWithDifferentParams
+  - com.google.javascript.rhino.jstype.FunctionTypeTest::testSupAndInfWithDifferentParams
+  - com.google.javascript.rhino.jstype.JSTypeTest::testFunctionUnionSubtypeChain
+  - com.google.javascript.rhino.jstype.JSTypeTest::testNullableNamedTypeChain
+  - com.google.javascript.rhino.jstype.JSTypeTest::testUniversalConstructorType
+
+    

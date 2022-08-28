@@ -1,0 +1,25 @@
+
+    Original test result:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_45/defects4j_Closure_45 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_45/defects4j_Closure_45  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_45/defects4j_Closure_45 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_45/defects4j_Closure_45 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_45/defects4j_Closure_45/failing_tests  run.dev.tests 2>&1Failing tests: 1
+  - com.google.javascript.jscomp.RemoveUnusedVarsTest::testIssue618_1
+
+    Applying patch result:
+    patching file src/com/google/javascript/rhino/Node.java
+patching file src/com/google/javascript/jscomp/NodeUtil.java
+patching file src/com/google/javascript/jscomp/RemoveUnusedVars.java
+
+    Test result after patching:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_45/defects4j_Closure_45 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_45/defects4j_Closure_45  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_45/defects4j_Closure_45 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_45/defects4j_Closure_45 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_45/defects4j_Closure_45/failing_tests  run.dev.tests 2>&1Failing tests: 11
+  - com.google.javascript.jscomp.InlineSimpleMethodsTest::testConstantArrayInline
+  - com.google.javascript.jscomp.NodeUtilTest::testIsLiteralOrConstValue
+  - com.google.javascript.jscomp.PeepholeFoldConstantsTest::testFoldTypeof
+  - com.google.javascript.jscomp.PeepholeFoldConstantsTest::testUndefinedComparison1
+  - com.google.javascript.jscomp.PeepholeFoldConstantsTest::testNullComparison1
+  - com.google.javascript.jscomp.PeepholeFoldConstantsTest::testStringAdd
+  - com.google.javascript.jscomp.PeepholeFoldConstantsTest::testFoldInstanceOf
+  - com.google.javascript.jscomp.PeepholeFoldConstantsTest::testFoldMixed
+  - com.google.javascript.jscomp.RemoveUnusedVarsTest::testUnusedPropAssign2b
+  - com.google.javascript.jscomp.RemoveUnusedVarsTest::testUnusedPropAssign3b
+  - com.google.javascript.jscomp.RemoveUnusedVarsTest::testRemoveUnusedVarsPossibleNpeCase
+
+    

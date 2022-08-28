@@ -1,0 +1,958 @@
+
+    Original test result:
+    Initialized empty Git repository in /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_traccar-traccar_212058933-212061222/bears_traccar-traccar_212058933-212061222/.git/
+Apache Maven 3.3.9
+Maven home: /usr/share/maven
+Java version: 1.8.0_202, vendor: Oracle Corporation
+Java home: /home/jiayu/env/jdk1.8.0_202/jre
+Default locale: en_US, platform encoding: UTF8
+OS name: "linux", version: "4.4.0-210-generic", arch: "amd64", family: "unix"
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building traccar 3.10-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:2.17:check (checkstyle) @ traccar ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ traccar ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 0 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ traccar ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ traccar ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_traccar-traccar_212058933-212061222/bears_traccar-traccar_212058933-212061222/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.6.1:testCompile (default-testCompile) @ traccar ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.17:test (default-test) @ traccar ---
+[INFO] Surefire report directory: /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_traccar-traccar_212058933-212061222/bears_traccar-traccar_212058933-212061222/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF8
+Picked up _JAVA_OPTIONS: -Djdk.net.URLClassPath.disableClassPathURLCheck=true
+Running org.traccar.web.WebServerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.263 sec - in org.traccar.web.WebServerTest
+Running org.traccar.geocoder.GeocoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.015 sec - in org.traccar.geocoder.GeocoderTest
+Running org.traccar.geocoder.AddressFormatTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 sec - in org.traccar.geocoder.AddressFormatTest
+Running org.traccar.events.MotionEventHandlerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.975 sec - in org.traccar.events.MotionEventHandlerTest
+Running org.traccar.events.AlertEventHandlerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.events.AlertEventHandlerTest
+Running org.traccar.events.CommandResultEventHandlerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.events.CommandResultEventHandlerTest
+Running org.traccar.events.IgnitionEventHandlerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.events.IgnitionEventHandlerTest
+Running org.traccar.geofence.GeofencePolygonTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.028 sec - in org.traccar.geofence.GeofencePolygonTest
+Running org.traccar.geofence.GeofenceCircleTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec - in org.traccar.geofence.GeofenceCircleTest
+Running org.traccar.geofence.GeofencePolylineTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 sec - in org.traccar.geofence.GeofencePolylineTest
+Running org.traccar.protocol.MeitrackProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.155 sec - in org.traccar.protocol.MeitrackProtocolDecoderTest
+Running org.traccar.protocol.WondexProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.WondexProtocolEncoderTest
+Running org.traccar.protocol.MeitrackFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.MeitrackFrameDecoderTest
+Running org.traccar.protocol.CellocatorProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0 sec - in org.traccar.protocol.CellocatorProtocolEncoderTest
+Running org.traccar.protocol.Pt3000ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.048 sec - in org.traccar.protocol.Pt3000ProtocolDecoderTest
+Running org.traccar.protocol.NavigilProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.054 sec - in org.traccar.protocol.NavigilProtocolDecoderTest
+Running org.traccar.protocol.HuabaoFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.protocol.HuabaoFrameDecoderTest
+Running org.traccar.protocol.TrakMateProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.024 sec - in org.traccar.protocol.TrakMateProtocolDecoderTest
+Running org.traccar.protocol.SupermateProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec - in org.traccar.protocol.SupermateProtocolDecoderTest
+Running org.traccar.protocol.GalileoProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec - in org.traccar.protocol.GalileoProtocolDecoderTest
+Running org.traccar.protocol.LaipacProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 sec - in org.traccar.protocol.LaipacProtocolDecoderTest
+Running org.traccar.protocol.KenjiProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 sec - in org.traccar.protocol.KenjiProtocolDecoderTest
+Running org.traccar.protocol.TrvProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec - in org.traccar.protocol.TrvProtocolDecoderTest
+Running org.traccar.protocol.T800xProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.T800xProtocolDecoderTest
+Running org.traccar.protocol.EnforaProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec - in org.traccar.protocol.EnforaProtocolDecoderTest
+Running org.traccar.protocol.BceProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec - in org.traccar.protocol.BceProtocolDecoderTest
+Running org.traccar.protocol.Gt06FrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.protocol.Gt06FrameDecoderTest
+Running org.traccar.protocol.RitiProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec - in org.traccar.protocol.RitiProtocolDecoderTest
+Running org.traccar.protocol.GalileoFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.protocol.GalileoFrameDecoderTest
+Running org.traccar.protocol.IdplProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.protocol.IdplProtocolDecoderTest
+Running org.traccar.protocol.Avl301ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.Avl301ProtocolDecoderTest
+Running org.traccar.protocol.CguardProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec - in org.traccar.protocol.CguardProtocolDecoderTest
+Running org.traccar.protocol.EelinkProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.EelinkProtocolEncoderTest
+Running org.traccar.protocol.UlbotechProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.023 sec - in org.traccar.protocol.UlbotechProtocolDecoderTest
+Running org.traccar.protocol.BoxProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 sec - in org.traccar.protocol.BoxProtocolDecoderTest
+Running org.traccar.protocol.OsmAndProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.135 sec - in org.traccar.protocol.OsmAndProtocolDecoderTest
+Running org.traccar.protocol.TrackboxProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.protocol.TrackboxProtocolDecoderTest
+Running org.traccar.protocol.MiniFinderProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 sec - in org.traccar.protocol.MiniFinderProtocolEncoderTest
+Running org.traccar.protocol.StarLinkProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 sec - in org.traccar.protocol.StarLinkProtocolDecoderTest
+Running org.traccar.protocol.Jt600FrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.Jt600FrameDecoderTest
+Running org.traccar.protocol.ExtremTracProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec - in org.traccar.protocol.ExtremTracProtocolDecoderTest
+Running org.traccar.protocol.NoranProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.NoranProtocolEncoderTest
+Running org.traccar.protocol.GoSafeProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.029 sec - in org.traccar.protocol.GoSafeProtocolDecoderTest
+Running org.traccar.protocol.MaestroProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.protocol.MaestroProtocolDecoderTest
+Running org.traccar.protocol.DishaProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 sec - in org.traccar.protocol.DishaProtocolDecoderTest
+Running org.traccar.protocol.SkypatrolProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec - in org.traccar.protocol.SkypatrolProtocolDecoderTest
+Running org.traccar.protocol.GpsmtaProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec - in org.traccar.protocol.GpsmtaProtocolDecoderTest
+Running org.traccar.protocol.BlackKiteProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.protocol.BlackKiteProtocolDecoderTest
+Running org.traccar.protocol.KhdProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.KhdProtocolEncoderTest
+Running org.traccar.protocol.XexunFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 sec - in org.traccar.protocol.XexunFrameDecoderTest
+Running org.traccar.protocol.PricolProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.PricolProtocolDecoderTest
+Running org.traccar.protocol.MiniFinderProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 sec - in org.traccar.protocol.MiniFinderProtocolDecoderTest
+Running org.traccar.protocol.HomtecsProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.HomtecsProtocolDecoderTest
+Running org.traccar.protocol.H02FrameDecoderTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec - in org.traccar.protocol.H02FrameDecoderTest
+Running org.traccar.protocol.IntellitracProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.IntellitracProtocolDecoderTest
+Running org.traccar.protocol.GlobalSatProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec - in org.traccar.protocol.GlobalSatProtocolDecoderTest
+Running org.traccar.protocol.AutoGradeProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec - in org.traccar.protocol.AutoGradeProtocolDecoderTest
+Running org.traccar.protocol.OigoProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec - in org.traccar.protocol.OigoProtocolDecoderTest
+Running org.traccar.protocol.GnxProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.protocol.GnxProtocolDecoderTest
+Running org.traccar.protocol.RuptelaProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.028 sec - in org.traccar.protocol.RuptelaProtocolDecoderTest
+Running org.traccar.protocol.GranitProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.protocol.GranitProtocolDecoderTest
+Running org.traccar.protocol.Tlt2hProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.protocol.Tlt2hProtocolDecoderTest
+Running org.traccar.protocol.EasyTrackProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.EasyTrackProtocolDecoderTest
+Running org.traccar.protocol.MeitrackProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.MeitrackProtocolEncoderTest
+Running org.traccar.protocol.GatorProtocolDecoderTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.protocol.GatorProtocolDecoderTest
+Running org.traccar.protocol.HaicomProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.HaicomProtocolDecoderTest
+Running org.traccar.protocol.SmokeyProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec - in org.traccar.protocol.SmokeyProtocolDecoderTest
+Running org.traccar.protocol.Tt8850ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 sec - in org.traccar.protocol.Tt8850ProtocolDecoderTest
+Running org.traccar.protocol.FifotrackProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec - in org.traccar.protocol.FifotrackProtocolDecoderTest
+Running org.traccar.protocol.Tk102ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec - in org.traccar.protocol.Tk102ProtocolDecoderTest
+Running org.traccar.protocol.Pt502FrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.Pt502FrameDecoderTest
+Running org.traccar.protocol.MxtProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 sec - in org.traccar.protocol.MxtProtocolDecoderTest
+Running org.traccar.protocol.TytanProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 sec - in org.traccar.protocol.TytanProtocolDecoderTest
+Running org.traccar.protocol.FlextrackProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.025 sec - in org.traccar.protocol.FlextrackProtocolDecoderTest
+Running org.traccar.protocol.ApelProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec - in org.traccar.protocol.ApelProtocolDecoderTest
+Running org.traccar.protocol.EelinkProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.protocol.EelinkProtocolDecoderTest
+Running org.traccar.protocol.UlbotechFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec - in org.traccar.protocol.UlbotechFrameDecoderTest
+Running org.traccar.protocol.AstraProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 sec - in org.traccar.protocol.AstraProtocolDecoderTest
+Running org.traccar.protocol.Gt02ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.protocol.Gt02ProtocolDecoderTest
+Running org.traccar.protocol.NoranProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 sec - in org.traccar.protocol.NoranProtocolDecoderTest
+Running org.traccar.protocol.V680ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.protocol.V680ProtocolDecoderTest
+Running org.traccar.protocol.WondexFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec - in org.traccar.protocol.WondexFrameDecoderTest
+Running org.traccar.protocol.AplicomProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 sec - in org.traccar.protocol.AplicomProtocolDecoderTest
+Running org.traccar.protocol.Gps103ProtocolEncoderTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.Gps103ProtocolEncoderTest
+Running org.traccar.protocol.TotemProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec - in org.traccar.protocol.TotemProtocolDecoderTest
+Running org.traccar.protocol.WatchProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 sec - in org.traccar.protocol.WatchProtocolEncoderTest
+Running org.traccar.protocol.WondexProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.protocol.WondexProtocolDecoderTest
+Running org.traccar.protocol.GpsGateProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.GpsGateProtocolDecoderTest
+Running org.traccar.protocol.YwtProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.protocol.YwtProtocolDecoderTest
+Running org.traccar.protocol.TzoneProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.TzoneProtocolDecoderTest
+Running org.traccar.protocol.AppelloProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.AppelloProtocolDecoderTest
+Running org.traccar.protocol.CarTrackProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec - in org.traccar.protocol.CarTrackProtocolDecoderTest
+Running org.traccar.protocol.CastelProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 sec - in org.traccar.protocol.CastelProtocolDecoderTest
+Running org.traccar.protocol.HuaShengFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec - in org.traccar.protocol.HuaShengFrameDecoderTest
+Running org.traccar.protocol.WatchProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec - in org.traccar.protocol.WatchProtocolDecoderTest
+Running org.traccar.protocol.WialonProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec - in org.traccar.protocol.WialonProtocolDecoderTest
+Running org.traccar.protocol.KhdProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.KhdProtocolDecoderTest
+Running org.traccar.protocol.MegastekFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.MegastekFrameDecoderTest
+Running org.traccar.protocol.TopflytechProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.TopflytechProtocolDecoderTest
+Running org.traccar.protocol.GotopProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.GotopProtocolDecoderTest
+Running org.traccar.protocol.SuntechProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.033 sec <<< FAILURE! - in org.traccar.protocol.SuntechProtocolDecoderTest
+testDecode(org.traccar.protocol.SuntechProtocolDecoderTest)  Time elapsed: 0.033 sec  <<< ERROR!
+java.lang.NumberFormatException: For input string: "017.159"
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:580)
+	at java.lang.Integer.parseInt(Integer.java:615)
+	at org.traccar.protocol.SuntechProtocolDecoder.decode23(SuntechProtocolDecoder.java:148)
+	at org.traccar.protocol.SuntechProtocolDecoder.decode(SuntechProtocolDecoder.java:169)
+	at org.traccar.ProtocolTest.verifyPosition(ProtocolTest.java:94)
+	at org.traccar.protocol.SuntechProtocolDecoderTest.testDecode(SuntechProtocolDecoderTest.java:16)
+
+Running org.traccar.protocol.TeltonikaProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.TeltonikaProtocolDecoderTest
+Running org.traccar.protocol.FreedomProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.FreedomProtocolDecoderTest
+Running org.traccar.protocol.MtxProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.MtxProtocolDecoderTest
+Running org.traccar.protocol.SanavProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.SanavProtocolDecoderTest
+Running org.traccar.protocol.Tk103ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.Tk103ProtocolDecoderTest
+Running org.traccar.protocol.Xt013ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.023 sec - in org.traccar.protocol.Xt013ProtocolDecoderTest
+Running org.traccar.protocol.Gl100ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.protocol.Gl100ProtocolDecoderTest
+Running org.traccar.protocol.HuaShengProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.HuaShengProtocolDecoderTest
+Running org.traccar.protocol.SiwiProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.SiwiProtocolDecoderTest
+Running org.traccar.protocol.TaipProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 sec - in org.traccar.protocol.TaipProtocolDecoderTest
+Running org.traccar.protocol.MeiligaoFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.MeiligaoFrameDecoderTest
+Running org.traccar.protocol.PiligrimProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.PiligrimProtocolDecoderTest
+Running org.traccar.protocol.PretraceProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.protocol.PretraceProtocolDecoderTest
+Running org.traccar.protocol.L100FrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.L100FrameDecoderTest
+Running org.traccar.protocol.TotemFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.TotemFrameDecoderTest
+Running org.traccar.protocol.OrionProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.OrionProtocolDecoderTest
+Running org.traccar.protocol.At2000ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.029 sec - in org.traccar.protocol.At2000ProtocolDecoderTest
+Running org.traccar.protocol.Pt502ProtocolEncoderTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.Pt502ProtocolEncoderTest
+Running org.traccar.protocol.AtrackProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.AtrackProtocolDecoderTest
+Running org.traccar.protocol.VisiontekProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec - in org.traccar.protocol.VisiontekProtocolDecoderTest
+Running org.traccar.protocol.MeiligaoProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.MeiligaoProtocolDecoderTest
+Running org.traccar.protocol.Jt600ProtocolEncoderTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.Jt600ProtocolEncoderTest
+Running org.traccar.protocol.TelicProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 sec - in org.traccar.protocol.TelicProtocolDecoderTest
+Running org.traccar.protocol.AuroProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.AuroProtocolDecoderTest
+Running org.traccar.protocol.GpsMarkerProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.GpsMarkerProtocolDecoderTest
+Running org.traccar.protocol.CellocatorProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec - in org.traccar.protocol.CellocatorProtocolDecoderTest
+Running org.traccar.protocol.H02ProtocolEncoderTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec - in org.traccar.protocol.H02ProtocolEncoderTest
+Running org.traccar.protocol.ArknavProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.ArknavProtocolDecoderTest
+Running org.traccar.protocol.Gt06ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.023 sec - in org.traccar.protocol.Gt06ProtocolDecoderTest
+Running org.traccar.protocol.JpKorjarProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.JpKorjarProtocolDecoderTest
+Running org.traccar.protocol.Gt30ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.Gt30ProtocolDecoderTest
+Running org.traccar.protocol.TramigoProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 sec - in org.traccar.protocol.TramigoProtocolDecoderTest
+Running org.traccar.protocol.PathAwayProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec - in org.traccar.protocol.PathAwayProtocolDecoderTest
+Running org.traccar.protocol.ProgressProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.ProgressProtocolDecoderTest
+Running org.traccar.protocol.Pt502ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.02 sec - in org.traccar.protocol.Pt502ProtocolDecoderTest
+Running org.traccar.protocol.Tr900ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.Tr900ProtocolDecoderTest
+Running org.traccar.protocol.TmgProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.TmgProtocolDecoderTest
+Running org.traccar.protocol.CradlepointProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.CradlepointProtocolDecoderTest
+Running org.traccar.protocol.MegastekProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.025 sec - in org.traccar.protocol.MegastekProtocolDecoderTest
+Running org.traccar.protocol.TeltonikaProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.TeltonikaProtocolEncoderTest
+Running org.traccar.protocol.RuptelaProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.RuptelaProtocolEncoderTest
+Running org.traccar.protocol.HuabaoProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.001 sec - in org.traccar.protocol.HuabaoProtocolEncoderTest
+Running org.traccar.protocol.HunterProProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec - in org.traccar.protocol.HunterProProtocolDecoderTest
+Running org.traccar.protocol.Gps103ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.029 sec - in org.traccar.protocol.Gps103ProtocolDecoderTest
+Running org.traccar.protocol.L100ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec - in org.traccar.protocol.L100ProtocolDecoderTest
+Running org.traccar.protocol.XexunProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.XexunProtocolDecoderTest
+Running org.traccar.protocol.DmtProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.DmtProtocolDecoderTest
+Running org.traccar.protocol.UproProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.UproProtocolDecoderTest
+Running org.traccar.protocol.NvsFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.NvsFrameDecoderTest
+Running org.traccar.protocol.GranitFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.GranitFrameDecoderTest
+Running org.traccar.protocol.Stl060ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.Stl060ProtocolDecoderTest
+Running org.traccar.protocol.ThinkRaceProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.ThinkRaceProtocolDecoderTest
+Running org.traccar.protocol.TotemProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.TotemProtocolEncoderTest
+Running org.traccar.protocol.CarscopProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.CarscopProtocolDecoderTest
+Running org.traccar.protocol.ArnaviProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.ArnaviProtocolDecoderTest
+Running org.traccar.protocol.AisProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 sec - in org.traccar.protocol.AisProtocolDecoderTest
+Running org.traccar.protocol.RaveonProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 sec - in org.traccar.protocol.RaveonProtocolDecoderTest
+Running org.traccar.protocol.CityeasyProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.CityeasyProtocolEncoderTest
+Running org.traccar.protocol.Tr20ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.Tr20ProtocolDecoderTest
+Running org.traccar.protocol.TelicFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.TelicFrameDecoderTest
+Running org.traccar.protocol.AdmProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec - in org.traccar.protocol.AdmProtocolDecoderTest
+Running org.traccar.protocol.ManPowerProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec - in org.traccar.protocol.ManPowerProtocolDecoderTest
+Running org.traccar.protocol.Xt2400ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.Xt2400ProtocolDecoderTest
+Running org.traccar.protocol.H02ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 sec - in org.traccar.protocol.H02ProtocolDecoderTest
+Running org.traccar.protocol.At2000FrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec - in org.traccar.protocol.At2000FrameDecoderTest
+Running org.traccar.protocol.Gl200ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.045 sec - in org.traccar.protocol.Gl200ProtocolDecoderTest
+Running org.traccar.protocol.HuabaoProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.HuabaoProtocolDecoderTest
+Running org.traccar.protocol.XirgoProtocolDecoderTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec - in org.traccar.protocol.XirgoProtocolDecoderTest
+Running org.traccar.protocol.CityeasyProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.CityeasyProtocolDecoderTest
+Running org.traccar.protocol.AutoFonProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.AutoFonProtocolDecoderTest
+Running org.traccar.protocol.Jt600ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec - in org.traccar.protocol.Jt600ProtocolDecoderTest
+Running org.traccar.protocol.AquilaProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.AquilaProtocolDecoderTest
+Running org.traccar.protocol.T800xProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.T800xProtocolEncoderTest
+Running org.traccar.protocol.ObdDongleProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.ObdDongleProtocolDecoderTest
+Running org.traccar.protocol.FoxProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.FoxProtocolDecoderTest
+Running org.traccar.protocol.Ardi01ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.Ardi01ProtocolDecoderTest
+Running org.traccar.protocol.NavisProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 sec - in org.traccar.protocol.NavisProtocolDecoderTest
+Running org.traccar.protocol.M2mProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.M2mProtocolDecoderTest
+Running org.traccar.protocol.Gt06ProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.Gt06ProtocolEncoderTest
+Running org.traccar.protocol.ArknavX8ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.02 sec - in org.traccar.protocol.ArknavX8ProtocolDecoderTest
+Running org.traccar.protocol.T55ProtocolDecoderTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec - in org.traccar.protocol.T55ProtocolDecoderTest
+Running org.traccar.protocol.CalAmpProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.CalAmpProtocolDecoderTest
+Running org.traccar.protocol.MeiligaoProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.MeiligaoProtocolEncoderTest
+Running org.traccar.protocol.NvsProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.NvsProtocolDecoderTest
+Running org.traccar.geolocation.GeolocationProviderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.geolocation.GeolocationProviderTest
+Running org.traccar.DistanceHandlerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec - in org.traccar.DistanceHandlerTest
+Running org.traccar.reports.TripsTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 sec - in org.traccar.reports.TripsTest
+Running org.traccar.reports.ReportUtilsTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.reports.ReportUtilsTest
+Running org.traccar.calendar.CalendarTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.314 sec - in org.traccar.calendar.CalendarTest
+Running org.traccar.WebDataHandlerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.WebDataHandlerTest
+Running org.traccar.FilterHandlerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec - in org.traccar.FilterHandlerTest
+Running org.traccar.model.MiscFormatterTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.model.MiscFormatterTest
+Running org.traccar.database.GroupTreeTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.database.GroupTreeTest
+Running org.traccar.helper.StringFinderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.helper.StringFinderTest
+Running org.traccar.helper.BitBufferTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.helper.BitBufferTest
+Running org.traccar.helper.PatternUtilTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.helper.PatternUtilTest
+Running org.traccar.helper.LocationTreeTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.helper.LocationTreeTest
+Running org.traccar.helper.LogTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.helper.LogTest
+Running org.traccar.helper.ObdDecoderTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.helper.ObdDecoderTest
+Running org.traccar.helper.DistanceCalculatorTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec - in org.traccar.helper.DistanceCalculatorTest
+Running org.traccar.helper.BitUtilTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.helper.BitUtilTest
+Running org.traccar.helper.DateUtilTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.helper.DateUtilTest
+Running org.traccar.helper.ChecksumTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.helper.ChecksumTest
+Running org.traccar.helper.DateBuilderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.helper.DateBuilderTest
+Running org.traccar.helper.BcdUtilTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.helper.BcdUtilTest
+Running org.traccar.helper.PatternBuilderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.helper.PatternBuilderTest
+
+Results :
+
+Tests in error: 
+  SuntechProtocolDecoderTest.testDecode:16->ProtocolTest.verifyPosition:94 » NumberFormat
+
+Tests run: 237, Failures: 0, Errors: 1, Skipped: 4
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 13.367 s
+[INFO] Finished at: 2022-04-20T23:19:31+08:00
+[INFO] Final Memory: 25M/544M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.17:test (default-test) on project traccar: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_traccar-traccar_212058933-212061222/bears_traccar-traccar_212058933-212061222/target/surefire-reports for the individual test results.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+    Applying patch result:
+    patching file src/org/traccar/protocol/SuntechProtocolDecoder.java
+
+    Test result after patching:
+    Initialized empty Git repository in /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_traccar-traccar_212058933-212061222/bears_traccar-traccar_212058933-212061222/.git/
+Apache Maven 3.3.9
+Maven home: /usr/share/maven
+Java version: 1.8.0_202, vendor: Oracle Corporation
+Java home: /home/jiayu/env/jdk1.8.0_202/jre
+Default locale: en_US, platform encoding: UTF8
+OS name: "linux", version: "4.4.0-210-generic", arch: "amd64", family: "unix"
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building traccar 3.10-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:2.17:check (checkstyle) @ traccar ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ traccar ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 0 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ traccar ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ traccar ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_traccar-traccar_212058933-212061222/bears_traccar-traccar_212058933-212061222/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.6.1:testCompile (default-testCompile) @ traccar ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.17:test (default-test) @ traccar ---
+[INFO] Surefire report directory: /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_traccar-traccar_212058933-212061222/bears_traccar-traccar_212058933-212061222/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF8
+Picked up _JAVA_OPTIONS: -Djdk.net.URLClassPath.disableClassPathURLCheck=true
+Running org.traccar.web.WebServerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.248 sec - in org.traccar.web.WebServerTest
+Running org.traccar.geocoder.GeocoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0 sec - in org.traccar.geocoder.GeocoderTest
+Running org.traccar.geocoder.AddressFormatTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.geocoder.AddressFormatTest
+Running org.traccar.events.MotionEventHandlerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.058 sec - in org.traccar.events.MotionEventHandlerTest
+Running org.traccar.events.AlertEventHandlerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.events.AlertEventHandlerTest
+Running org.traccar.events.CommandResultEventHandlerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.events.CommandResultEventHandlerTest
+Running org.traccar.events.IgnitionEventHandlerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.events.IgnitionEventHandlerTest
+Running org.traccar.geofence.GeofencePolygonTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.034 sec - in org.traccar.geofence.GeofencePolygonTest
+Running org.traccar.geofence.GeofenceCircleTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.geofence.GeofenceCircleTest
+Running org.traccar.geofence.GeofencePolylineTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 sec - in org.traccar.geofence.GeofencePolylineTest
+Running org.traccar.protocol.MeitrackProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.093 sec - in org.traccar.protocol.MeitrackProtocolDecoderTest
+Running org.traccar.protocol.WondexProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.protocol.WondexProtocolEncoderTest
+Running org.traccar.protocol.MeitrackFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 sec - in org.traccar.protocol.MeitrackFrameDecoderTest
+Running org.traccar.protocol.CellocatorProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.002 sec - in org.traccar.protocol.CellocatorProtocolEncoderTest
+Running org.traccar.protocol.Pt3000ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 sec - in org.traccar.protocol.Pt3000ProtocolDecoderTest
+Running org.traccar.protocol.NavigilProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.035 sec - in org.traccar.protocol.NavigilProtocolDecoderTest
+Running org.traccar.protocol.HuabaoFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.HuabaoFrameDecoderTest
+Running org.traccar.protocol.TrakMateProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.02 sec - in org.traccar.protocol.TrakMateProtocolDecoderTest
+Running org.traccar.protocol.SupermateProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec - in org.traccar.protocol.SupermateProtocolDecoderTest
+Running org.traccar.protocol.GalileoProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 sec - in org.traccar.protocol.GalileoProtocolDecoderTest
+Running org.traccar.protocol.LaipacProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 sec - in org.traccar.protocol.LaipacProtocolDecoderTest
+Running org.traccar.protocol.KenjiProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.protocol.KenjiProtocolDecoderTest
+Running org.traccar.protocol.TrvProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 sec - in org.traccar.protocol.TrvProtocolDecoderTest
+Running org.traccar.protocol.T800xProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.T800xProtocolDecoderTest
+Running org.traccar.protocol.EnforaProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 sec - in org.traccar.protocol.EnforaProtocolDecoderTest
+Running org.traccar.protocol.BceProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec - in org.traccar.protocol.BceProtocolDecoderTest
+Running org.traccar.protocol.Gt06FrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.Gt06FrameDecoderTest
+Running org.traccar.protocol.RitiProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec - in org.traccar.protocol.RitiProtocolDecoderTest
+Running org.traccar.protocol.GalileoFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.GalileoFrameDecoderTest
+Running org.traccar.protocol.IdplProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec - in org.traccar.protocol.IdplProtocolDecoderTest
+Running org.traccar.protocol.Avl301ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.Avl301ProtocolDecoderTest
+Running org.traccar.protocol.CguardProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 sec - in org.traccar.protocol.CguardProtocolDecoderTest
+Running org.traccar.protocol.EelinkProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.EelinkProtocolEncoderTest
+Running org.traccar.protocol.UlbotechProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec - in org.traccar.protocol.UlbotechProtocolDecoderTest
+Running org.traccar.protocol.BoxProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.BoxProtocolDecoderTest
+Running org.traccar.protocol.OsmAndProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.09 sec - in org.traccar.protocol.OsmAndProtocolDecoderTest
+Running org.traccar.protocol.TrackboxProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec - in org.traccar.protocol.TrackboxProtocolDecoderTest
+Running org.traccar.protocol.MiniFinderProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.protocol.MiniFinderProtocolEncoderTest
+Running org.traccar.protocol.StarLinkProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec - in org.traccar.protocol.StarLinkProtocolDecoderTest
+Running org.traccar.protocol.Jt600FrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.Jt600FrameDecoderTest
+Running org.traccar.protocol.ExtremTracProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.ExtremTracProtocolDecoderTest
+Running org.traccar.protocol.NoranProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.NoranProtocolEncoderTest
+Running org.traccar.protocol.GoSafeProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.02 sec - in org.traccar.protocol.GoSafeProtocolDecoderTest
+Running org.traccar.protocol.MaestroProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec - in org.traccar.protocol.MaestroProtocolDecoderTest
+Running org.traccar.protocol.DishaProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 sec - in org.traccar.protocol.DishaProtocolDecoderTest
+Running org.traccar.protocol.SkypatrolProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.SkypatrolProtocolDecoderTest
+Running org.traccar.protocol.GpsmtaProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 sec - in org.traccar.protocol.GpsmtaProtocolDecoderTest
+Running org.traccar.protocol.BlackKiteProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.BlackKiteProtocolDecoderTest
+Running org.traccar.protocol.KhdProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.KhdProtocolEncoderTest
+Running org.traccar.protocol.XexunFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.XexunFrameDecoderTest
+Running org.traccar.protocol.PricolProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.PricolProtocolDecoderTest
+Running org.traccar.protocol.MiniFinderProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.MiniFinderProtocolDecoderTest
+Running org.traccar.protocol.HomtecsProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.HomtecsProtocolDecoderTest
+Running org.traccar.protocol.H02FrameDecoderTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.protocol.H02FrameDecoderTest
+Running org.traccar.protocol.IntellitracProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 sec - in org.traccar.protocol.IntellitracProtocolDecoderTest
+Running org.traccar.protocol.GlobalSatProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.GlobalSatProtocolDecoderTest
+Running org.traccar.protocol.AutoGradeProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.AutoGradeProtocolDecoderTest
+Running org.traccar.protocol.OigoProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.OigoProtocolDecoderTest
+Running org.traccar.protocol.GnxProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.GnxProtocolDecoderTest
+Running org.traccar.protocol.RuptelaProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 sec - in org.traccar.protocol.RuptelaProtocolDecoderTest
+Running org.traccar.protocol.GranitProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 sec - in org.traccar.protocol.GranitProtocolDecoderTest
+Running org.traccar.protocol.Tlt2hProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec - in org.traccar.protocol.Tlt2hProtocolDecoderTest
+Running org.traccar.protocol.EasyTrackProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.EasyTrackProtocolDecoderTest
+Running org.traccar.protocol.MeitrackProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.MeitrackProtocolEncoderTest
+Running org.traccar.protocol.GatorProtocolDecoderTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.036 sec - in org.traccar.protocol.GatorProtocolDecoderTest
+Running org.traccar.protocol.HaicomProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.protocol.HaicomProtocolDecoderTest
+Running org.traccar.protocol.SmokeyProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.SmokeyProtocolDecoderTest
+Running org.traccar.protocol.Tt8850ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.Tt8850ProtocolDecoderTest
+Running org.traccar.protocol.FifotrackProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.FifotrackProtocolDecoderTest
+Running org.traccar.protocol.Tk102ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.Tk102ProtocolDecoderTest
+Running org.traccar.protocol.Pt502FrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.Pt502FrameDecoderTest
+Running org.traccar.protocol.MxtProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.MxtProtocolDecoderTest
+Running org.traccar.protocol.TytanProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.protocol.TytanProtocolDecoderTest
+Running org.traccar.protocol.FlextrackProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.FlextrackProtocolDecoderTest
+Running org.traccar.protocol.ApelProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.ApelProtocolDecoderTest
+Running org.traccar.protocol.EelinkProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.EelinkProtocolDecoderTest
+Running org.traccar.protocol.UlbotechFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.UlbotechFrameDecoderTest
+Running org.traccar.protocol.AstraProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec - in org.traccar.protocol.AstraProtocolDecoderTest
+Running org.traccar.protocol.Gt02ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec - in org.traccar.protocol.Gt02ProtocolDecoderTest
+Running org.traccar.protocol.NoranProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.NoranProtocolDecoderTest
+Running org.traccar.protocol.V680ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.V680ProtocolDecoderTest
+Running org.traccar.protocol.WondexFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.WondexFrameDecoderTest
+Running org.traccar.protocol.AplicomProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.AplicomProtocolDecoderTest
+Running org.traccar.protocol.Gps103ProtocolEncoderTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.Gps103ProtocolEncoderTest
+Running org.traccar.protocol.TotemProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 sec - in org.traccar.protocol.TotemProtocolDecoderTest
+Running org.traccar.protocol.WatchProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.04 sec - in org.traccar.protocol.WatchProtocolEncoderTest
+Running org.traccar.protocol.WondexProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec - in org.traccar.protocol.WondexProtocolDecoderTest
+Running org.traccar.protocol.GpsGateProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 sec - in org.traccar.protocol.GpsGateProtocolDecoderTest
+Running org.traccar.protocol.YwtProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.YwtProtocolDecoderTest
+Running org.traccar.protocol.TzoneProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.TzoneProtocolDecoderTest
+Running org.traccar.protocol.AppelloProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.AppelloProtocolDecoderTest
+Running org.traccar.protocol.CarTrackProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec - in org.traccar.protocol.CarTrackProtocolDecoderTest
+Running org.traccar.protocol.CastelProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.protocol.CastelProtocolDecoderTest
+Running org.traccar.protocol.HuaShengFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec - in org.traccar.protocol.HuaShengFrameDecoderTest
+Running org.traccar.protocol.WatchProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.protocol.WatchProtocolDecoderTest
+Running org.traccar.protocol.WialonProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.034 sec - in org.traccar.protocol.WialonProtocolDecoderTest
+Running org.traccar.protocol.KhdProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.KhdProtocolDecoderTest
+Running org.traccar.protocol.MegastekFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.MegastekFrameDecoderTest
+Running org.traccar.protocol.TopflytechProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.TopflytechProtocolDecoderTest
+Running org.traccar.protocol.GotopProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 sec - in org.traccar.protocol.GotopProtocolDecoderTest
+Running org.traccar.protocol.SuntechProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 sec - in org.traccar.protocol.SuntechProtocolDecoderTest
+Running org.traccar.protocol.TeltonikaProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.protocol.TeltonikaProtocolDecoderTest
+Running org.traccar.protocol.FreedomProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec - in org.traccar.protocol.FreedomProtocolDecoderTest
+Running org.traccar.protocol.MtxProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.MtxProtocolDecoderTest
+Running org.traccar.protocol.SanavProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.SanavProtocolDecoderTest
+Running org.traccar.protocol.Tk103ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.Tk103ProtocolDecoderTest
+Running org.traccar.protocol.Xt013ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.Xt013ProtocolDecoderTest
+Running org.traccar.protocol.Gl100ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 sec - in org.traccar.protocol.Gl100ProtocolDecoderTest
+Running org.traccar.protocol.HuaShengProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.HuaShengProtocolDecoderTest
+Running org.traccar.protocol.SiwiProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec - in org.traccar.protocol.SiwiProtocolDecoderTest
+Running org.traccar.protocol.TaipProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.053 sec - in org.traccar.protocol.TaipProtocolDecoderTest
+Running org.traccar.protocol.MeiligaoFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.MeiligaoFrameDecoderTest
+Running org.traccar.protocol.PiligrimProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 sec - in org.traccar.protocol.PiligrimProtocolDecoderTest
+Running org.traccar.protocol.PretraceProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec - in org.traccar.protocol.PretraceProtocolDecoderTest
+Running org.traccar.protocol.L100FrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.L100FrameDecoderTest
+Running org.traccar.protocol.TotemFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec - in org.traccar.protocol.TotemFrameDecoderTest
+Running org.traccar.protocol.OrionProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.OrionProtocolDecoderTest
+Running org.traccar.protocol.At2000ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.022 sec - in org.traccar.protocol.At2000ProtocolDecoderTest
+Running org.traccar.protocol.Pt502ProtocolEncoderTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.Pt502ProtocolEncoderTest
+Running org.traccar.protocol.AtrackProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec - in org.traccar.protocol.AtrackProtocolDecoderTest
+Running org.traccar.protocol.VisiontekProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec - in org.traccar.protocol.VisiontekProtocolDecoderTest
+Running org.traccar.protocol.MeiligaoProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 sec - in org.traccar.protocol.MeiligaoProtocolDecoderTest
+Running org.traccar.protocol.Jt600ProtocolEncoderTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec - in org.traccar.protocol.Jt600ProtocolEncoderTest
+Running org.traccar.protocol.TelicProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec - in org.traccar.protocol.TelicProtocolDecoderTest
+Running org.traccar.protocol.AuroProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 sec - in org.traccar.protocol.AuroProtocolDecoderTest
+Running org.traccar.protocol.GpsMarkerProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec - in org.traccar.protocol.GpsMarkerProtocolDecoderTest
+Running org.traccar.protocol.CellocatorProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.CellocatorProtocolDecoderTest
+Running org.traccar.protocol.H02ProtocolEncoderTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.protocol.H02ProtocolEncoderTest
+Running org.traccar.protocol.ArknavProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 sec - in org.traccar.protocol.ArknavProtocolDecoderTest
+Running org.traccar.protocol.Gt06ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.Gt06ProtocolDecoderTest
+Running org.traccar.protocol.JpKorjarProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.JpKorjarProtocolDecoderTest
+Running org.traccar.protocol.Gt30ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.Gt30ProtocolDecoderTest
+Running org.traccar.protocol.TramigoProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.035 sec - in org.traccar.protocol.TramigoProtocolDecoderTest
+Running org.traccar.protocol.PathAwayProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.PathAwayProtocolDecoderTest
+Running org.traccar.protocol.ProgressProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.ProgressProtocolDecoderTest
+Running org.traccar.protocol.Pt502ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.protocol.Pt502ProtocolDecoderTest
+Running org.traccar.protocol.Tr900ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.protocol.Tr900ProtocolDecoderTest
+Running org.traccar.protocol.TmgProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec - in org.traccar.protocol.TmgProtocolDecoderTest
+Running org.traccar.protocol.CradlepointProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.CradlepointProtocolDecoderTest
+Running org.traccar.protocol.MegastekProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.023 sec - in org.traccar.protocol.MegastekProtocolDecoderTest
+Running org.traccar.protocol.TeltonikaProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.TeltonikaProtocolEncoderTest
+Running org.traccar.protocol.RuptelaProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.RuptelaProtocolEncoderTest
+Running org.traccar.protocol.HuabaoProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0 sec - in org.traccar.protocol.HuabaoProtocolEncoderTest
+Running org.traccar.protocol.HunterProProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.HunterProProtocolDecoderTest
+Running org.traccar.protocol.Gps103ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 sec - in org.traccar.protocol.Gps103ProtocolDecoderTest
+Running org.traccar.protocol.L100ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.L100ProtocolDecoderTest
+Running org.traccar.protocol.XexunProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec - in org.traccar.protocol.XexunProtocolDecoderTest
+Running org.traccar.protocol.DmtProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.protocol.DmtProtocolDecoderTest
+Running org.traccar.protocol.UproProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.03 sec - in org.traccar.protocol.UproProtocolDecoderTest
+Running org.traccar.protocol.NvsFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.NvsFrameDecoderTest
+Running org.traccar.protocol.GranitFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec - in org.traccar.protocol.GranitFrameDecoderTest
+Running org.traccar.protocol.Stl060ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.Stl060ProtocolDecoderTest
+Running org.traccar.protocol.ThinkRaceProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.ThinkRaceProtocolDecoderTest
+Running org.traccar.protocol.TotemProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.TotemProtocolEncoderTest
+Running org.traccar.protocol.CarscopProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.CarscopProtocolDecoderTest
+Running org.traccar.protocol.ArnaviProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.ArnaviProtocolDecoderTest
+Running org.traccar.protocol.AisProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec - in org.traccar.protocol.AisProtocolDecoderTest
+Running org.traccar.protocol.RaveonProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.RaveonProtocolDecoderTest
+Running org.traccar.protocol.CityeasyProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.CityeasyProtocolEncoderTest
+Running org.traccar.protocol.Tr20ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.Tr20ProtocolDecoderTest
+Running org.traccar.protocol.TelicFrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.TelicFrameDecoderTest
+Running org.traccar.protocol.AdmProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.AdmProtocolDecoderTest
+Running org.traccar.protocol.ManPowerProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 sec - in org.traccar.protocol.ManPowerProtocolDecoderTest
+Running org.traccar.protocol.Xt2400ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.Xt2400ProtocolDecoderTest
+Running org.traccar.protocol.H02ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 sec - in org.traccar.protocol.H02ProtocolDecoderTest
+Running org.traccar.protocol.At2000FrameDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.03 sec - in org.traccar.protocol.At2000FrameDecoderTest
+Running org.traccar.protocol.Gl200ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 sec - in org.traccar.protocol.Gl200ProtocolDecoderTest
+Running org.traccar.protocol.HuabaoProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.HuabaoProtocolDecoderTest
+Running org.traccar.protocol.XirgoProtocolDecoderTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 sec - in org.traccar.protocol.XirgoProtocolDecoderTest
+Running org.traccar.protocol.CityeasyProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.protocol.CityeasyProtocolDecoderTest
+Running org.traccar.protocol.AutoFonProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec - in org.traccar.protocol.AutoFonProtocolDecoderTest
+Running org.traccar.protocol.Jt600ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 sec - in org.traccar.protocol.Jt600ProtocolDecoderTest
+Running org.traccar.protocol.AquilaProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec - in org.traccar.protocol.AquilaProtocolDecoderTest
+Running org.traccar.protocol.T800xProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.T800xProtocolEncoderTest
+Running org.traccar.protocol.ObdDongleProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.protocol.ObdDongleProtocolDecoderTest
+Running org.traccar.protocol.FoxProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.FoxProtocolDecoderTest
+Running org.traccar.protocol.Ardi01ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.protocol.Ardi01ProtocolDecoderTest
+Running org.traccar.protocol.NavisProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec - in org.traccar.protocol.NavisProtocolDecoderTest
+Running org.traccar.protocol.M2mProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec - in org.traccar.protocol.M2mProtocolDecoderTest
+Running org.traccar.protocol.Gt06ProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.protocol.Gt06ProtocolEncoderTest
+Running org.traccar.protocol.ArknavX8ProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec - in org.traccar.protocol.ArknavX8ProtocolDecoderTest
+Running org.traccar.protocol.T55ProtocolDecoderTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.traccar.protocol.T55ProtocolDecoderTest
+Running org.traccar.protocol.CalAmpProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec - in org.traccar.protocol.CalAmpProtocolDecoderTest
+Running org.traccar.protocol.MeiligaoProtocolEncoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.protocol.MeiligaoProtocolEncoderTest
+Running org.traccar.protocol.NvsProtocolDecoderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.protocol.NvsProtocolDecoderTest
+Running org.traccar.geolocation.GeolocationProviderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.geolocation.GeolocationProviderTest
+Running org.traccar.DistanceHandlerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 sec - in org.traccar.DistanceHandlerTest
+Running org.traccar.reports.TripsTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec - in org.traccar.reports.TripsTest
+Running org.traccar.reports.ReportUtilsTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.reports.ReportUtilsTest
+Running org.traccar.calendar.CalendarTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.381 sec - in org.traccar.calendar.CalendarTest
+Running org.traccar.WebDataHandlerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 sec - in org.traccar.WebDataHandlerTest
+Running org.traccar.FilterHandlerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec - in org.traccar.FilterHandlerTest
+Running org.traccar.model.MiscFormatterTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec - in org.traccar.model.MiscFormatterTest
+Running org.traccar.database.GroupTreeTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.database.GroupTreeTest
+Running org.traccar.helper.StringFinderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.helper.StringFinderTest
+Running org.traccar.helper.BitBufferTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.helper.BitBufferTest
+Running org.traccar.helper.PatternUtilTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.helper.PatternUtilTest
+Running org.traccar.helper.LocationTreeTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.helper.LocationTreeTest
+Running org.traccar.helper.LogTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.helper.LogTest
+Running org.traccar.helper.ObdDecoderTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.helper.ObdDecoderTest
+Running org.traccar.helper.DistanceCalculatorTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.traccar.helper.DistanceCalculatorTest
+Running org.traccar.helper.BitUtilTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.helper.BitUtilTest
+Running org.traccar.helper.DateUtilTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.helper.DateUtilTest
+Running org.traccar.helper.ChecksumTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in org.traccar.helper.ChecksumTest
+Running org.traccar.helper.DateBuilderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.traccar.helper.DateBuilderTest
+Running org.traccar.helper.BcdUtilTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.helper.BcdUtilTest
+Running org.traccar.helper.PatternBuilderTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.traccar.helper.PatternBuilderTest
+
+Results :
+
+Tests run: 237, Failures: 0, Errors: 0, Skipped: 4
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 12.902 s
+[INFO] Finished at: 2022-04-20T23:21:18+08:00
+[INFO] Final Memory: 23M/458M
+[INFO] ------------------------------------------------------------------------
+
+    

@@ -1,0 +1,41 @@
+
+    Original test result:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_116/defects4j_Closure_116 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_116/defects4j_Closure_116  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_116/defects4j_Closure_116 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_116/defects4j_Closure_116 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_116/defects4j_Closure_116/failing_tests  run.dev.tests 2>&1Failing tests: 8
+  - com.google.javascript.jscomp.FunctionInjectorTest::testIssue1101a
+  - com.google.javascript.jscomp.FunctionInjectorTest::testIssue1101b
+  - com.google.javascript.jscomp.InlineFunctionsTest::testBug4944818
+  - com.google.javascript.jscomp.InlineFunctionsTest::testDoubleInlining2
+  - com.google.javascript.jscomp.InlineFunctionsTest::testIssue1101
+  - com.google.javascript.jscomp.InlineFunctionsTest::testInlineIfParametersModified8
+  - com.google.javascript.jscomp.InlineFunctionsTest::testInlineIfParametersModified9
+  - com.google.javascript.jscomp.InlineFunctionsTest::testInlineFunctions6
+
+    Applying patch result:
+    patching file src/com/google/javascript/jscomp/FunctionInjector.java
+patching file src/com/google/javascript/jscomp/ExpressionDecomposer.java
+patching file src/com/google/javascript/rhino/Node.java
+
+    Test result after patching:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_116/defects4j_Closure_116 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_116/defects4j_Closure_116  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_116/defects4j_Closure_116 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_116/defects4j_Closure_116 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_116/defects4j_Closure_116/failing_tests  run.dev.tests 2>&1Failing tests: 20
+  - com.google.javascript.jscomp.FunctionInjectorTest::testCanInlineReferenceToFunction5
+  - com.google.javascript.jscomp.FunctionInjectorTest::testCanInlineReferenceToFunction7
+  - com.google.javascript.jscomp.FunctionInjectorTest::testCanInlineReferenceToFunction9
+  - com.google.javascript.jscomp.FunctionInjectorTest::testCanInlineReferenceToFunction11
+  - com.google.javascript.jscomp.FunctionInjectorTest::testCanInlineReferenceToFunction14
+  - com.google.javascript.jscomp.FunctionInjectorTest::testCanInlineReferenceToFunction31
+  - com.google.javascript.jscomp.FunctionInjectorTest::testCanInlineReferenceToFunction33
+  - com.google.javascript.jscomp.FunctionInjectorTest::testCanInlineReferenceToFunction45
+  - com.google.javascript.jscomp.FunctionInjectorTest::testCanInlineReferenceToFunction49
+  - com.google.javascript.jscomp.FunctionInjectorTest::testIsSimpleFunction2
+  - com.google.javascript.jscomp.FunctionInjectorTest::testIsSimpleFunction3
+  - com.google.javascript.jscomp.FunctionInjectorTest::testInline10
+  - com.google.javascript.jscomp.FunctionInjectorTest::testInline11
+  - com.google.javascript.jscomp.FunctionInjectorTest::testInline4
+  - com.google.javascript.jscomp.FunctionInjectorTest::testInline6
+  - com.google.javascript.jscomp.FunctionInjectorTest::testInline8
+  - com.google.javascript.jscomp.FunctionInjectorTest::testInlineFunctionWithInnerFunction1
+  - com.google.javascript.jscomp.FunctionInjectorTest::testInlineFunctionWithInnerFunction3
+  - com.google.javascript.jscomp.InlineFunctionsTest::testInlineObject
+  - com.google.javascript.rhino.NodeTest::testCheckTreeEqualsImplDifferentChild
+
+    

@@ -1,0 +1,54 @@
+
+    Original test result:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Chart_4/defects4j_Chart_4 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Chart_4/defects4j_Chart_4  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Chart_4/defects4j_Chart_4 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Chart_4/defects4j_Chart_4 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Chart_4/defects4j_Chart_4/failing_tests  run.dev.tests 2>&1Failing tests: 22
+  - org.jfree.chart.axis.junit.LogAxisTests::testXYAutoRange1
+  - org.jfree.chart.axis.junit.LogAxisTests::testXYAutoRange2
+  - org.jfree.chart.axis.junit.NumberAxisTests::testXYAutoRange1
+  - org.jfree.chart.axis.junit.NumberAxisTests::testXYAutoRange2
+  - org.jfree.chart.axis.junit.ValueAxisTests::testAxisMargins
+  - org.jfree.chart.junit.JFreeChartTests::testSerialization4
+  - org.jfree.chart.junit.ScatterPlotTests::testDrawWithNullInfo
+  - org.jfree.chart.junit.ScatterPlotTests::testSetSeriesToolTipGenerator
+  - org.jfree.chart.junit.ScatterPlotTests::testReplaceDataset
+  - org.jfree.chart.junit.TimeSeriesChartTests::testDrawWithNullInfo
+  - org.jfree.chart.junit.TimeSeriesChartTests::testSetSeriesToolTipGenerator
+  - org.jfree.chart.junit.TimeSeriesChartTests::testReplaceDataset
+  - org.jfree.chart.junit.XYAreaChartTests::testDrawWithNullInfo
+  - org.jfree.chart.junit.XYAreaChartTests::testSetSeriesToolTipGenerator
+  - org.jfree.chart.junit.XYAreaChartTests::testReplaceDataset
+  - org.jfree.chart.junit.XYStepAreaChartTests::testDrawWithNullInfo
+  - org.jfree.chart.junit.XYStepAreaChartTests::testSetSeriesToolTipGenerator
+  - org.jfree.chart.junit.XYStepAreaChartTests::testReplaceDataset
+  - org.jfree.chart.junit.XYStepChartTests::testDrawWithNullInfo
+  - org.jfree.chart.junit.XYStepChartTests::testSetSeriesToolTipGenerator
+  - org.jfree.chart.junit.XYStepChartTests::testReplaceDataset
+  - org.jfree.chart.plot.junit.XYPlotTests::testDrawRangeGridlines
+
+    Applying patch result:
+    patching file source/org/jfree/chart/plot/XYPlot.java
+
+    Test result after patching:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Chart_4/defects4j_Chart_4 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Chart_4/defects4j_Chart_4  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Chart_4/defects4j_Chart_4 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Chart_4/defects4j_Chart_4 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Chart_4/defects4j_Chart_4/failing_tests  run.dev.tests 2>&1Failing tests: 21
+  - org.jfree.chart.axis.junit.LogAxisTests::testXYAutoRange1
+  - org.jfree.chart.axis.junit.LogAxisTests::testXYAutoRange2
+  - org.jfree.chart.axis.junit.NumberAxisTests::testXYAutoRange1
+  - org.jfree.chart.axis.junit.NumberAxisTests::testXYAutoRange2
+  - org.jfree.chart.axis.junit.ValueAxisTests::testAxisMargins
+  - org.jfree.chart.junit.JFreeChartTests::testSerialization4
+  - org.jfree.chart.junit.ScatterPlotTests::testDrawWithNullInfo
+  - org.jfree.chart.junit.ScatterPlotTests::testSetSeriesToolTipGenerator
+  - org.jfree.chart.junit.ScatterPlotTests::testReplaceDataset
+  - org.jfree.chart.junit.TimeSeriesChartTests::testDrawWithNullInfo
+  - org.jfree.chart.junit.TimeSeriesChartTests::testSetSeriesToolTipGenerator
+  - org.jfree.chart.junit.TimeSeriesChartTests::testReplaceDataset
+  - org.jfree.chart.junit.XYAreaChartTests::testDrawWithNullInfo
+  - org.jfree.chart.junit.XYAreaChartTests::testSetSeriesToolTipGenerator
+  - org.jfree.chart.junit.XYAreaChartTests::testReplaceDataset
+  - org.jfree.chart.junit.XYStepAreaChartTests::testDrawWithNullInfo
+  - org.jfree.chart.junit.XYStepAreaChartTests::testSetSeriesToolTipGenerator
+  - org.jfree.chart.junit.XYStepAreaChartTests::testReplaceDataset
+  - org.jfree.chart.junit.XYStepChartTests::testDrawWithNullInfo
+  - org.jfree.chart.junit.XYStepChartTests::testSetSeriesToolTipGenerator
+  - org.jfree.chart.junit.XYStepChartTests::testReplaceDataset
+
+    

@@ -1,0 +1,535 @@
+
+    Original test result:
+    Initialized empty Git repository in /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/.git/
+Apache Maven 3.3.9
+Maven home: /usr/share/maven
+Java version: 1.8.0_202, vendor: Oracle Corporation
+Java home: /home/jiayu/env/jdk1.8.0_202/jre
+Default locale: en_US, platform encoding: UTF8
+OS name: "linux", version: "4.4.0-210-generic", arch: "amd64", family: "unix"
+[INFO] Scanning for projects...
+[INFO] Inspecting build with total of 1 modules...
+[INFO] Installing Nexus Staging features:
+[INFO]   ... total of 1 executions of maven-deploy-plugin replaced with nexus-staging-maven-plugin
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building PMD-Security-Rules 2.20.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ pmd-gds ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 8 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:compile (default-compile) @ pmd-gds ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ pmd-gds ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:testCompile (default-testCompile) @ pmd-gds ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.17:test (default-test) @ pmd-gds ---
+[INFO] Surefire report directory: /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF8
+Picked up _JAVA_OPTIONS: -Djdk.net.URLClassPath.disableClassPathURLCheck=true
+Running com.gdssecurity.pmd.CWE113HttpResponseSplittingTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe113responsesplitting/TestRedirectServlet.java:17:	HTTP Response Splitting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe113responsesplitting/TestRedirectServlet.java:17:	Unvalidated Redirect
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.923 sec - in com.gdssecurity.pmd.CWE113HttpResponseSplittingTest
+Running com.gdssecurity.pmd.SanitizersTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/XSSSanitizers.java:15:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/XSSSanitizersParseInt.java:15:	Cross-Site Scripting
+Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.452 sec <<< FAILURE! - in com.gdssecurity.pmd.SanitizersTest
+testSanitizerParseInt(com.gdssecurity.pmd.SanitizersTest)  Time elapsed: 0.119 sec  <<< FAILURE!
+java.lang.AssertionError: expected:<0> but was:<1>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:834)
+	at org.junit.Assert.assertEquals(Assert.java:645)
+	at org.junit.Assert.assertEquals(Assert.java:631)
+	at com.gdssecurity.pmd.SanitizersTest.testSanitizerParseInt(SanitizersTest.java:48)
+
+Running com.gdssecurity.pmd.CWE931XssTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/TestXSSServlet.java:31:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/XSS1jsp.java:61:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/XSS2jsp.java:65:	Cross-Site Scripting
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.486 sec - in com.gdssecurity.pmd.CWE931XssTest
+Running com.gdssecurity.pmd.AnnotationsGeneratorTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorBadExample.java:14:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorBadExample.java:18:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorStringBuilder.java:20:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorStringBuilder.java:34:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorStatic.java:12:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorPrivateCallBad.java:24:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorExample.java:15:	Cross-Site Scripting (Reflected)
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.698 sec - in com.gdssecurity.pmd.AnnotationsGeneratorTest
+Running com.gdssecurity.pmd.CWE935NoAccessControlTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe935noaccesscontrol/TestRoleAuthZServlet.java:25:	Missing Or Incorrect Authorization
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe935noaccesscontrol/TestRoleAuthZServlet.java:33:	Missing Or Incorrect Authorization
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.152 sec - in com.gdssecurity.pmd.CWE935NoAccessControlTest
+Running com.gdssecurity.pmd.PMDBug1393HangsTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.24 sec - in com.gdssecurity.pmd.PMDBug1393HangsTest
+Running com.gdssecurity.pmd.CWE327BrokenCryptoTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe327brokencrypto/CWE327UseBrokenCryptoBasic.java:18:	Insecure Cryptographic Algorithm
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.073 sec - in com.gdssecurity.pmd.CWE327BrokenCryptoTest
+Running com.gdssecurity.pmd.DefaultConfigTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExample.java:13:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleSinkConcat.java:15:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleValidateParams.java:13:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleValidateParamsQualified.java:13:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleValidateParamsStatic.java:13:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleValidateParamsStaticQualified.java:13:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorBadExample.java:24:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorChainedCall.java:21:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorChainedCall.java:26:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorChainedCall.java:30:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorExample.java:15:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorOkExample.java:25:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorOkExample.java:26:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorPrivateCallBad.java:15:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorPrivateCallOk.java:17:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorStaticCaller.java:12:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorStringBuilder.java:38:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorStringBuilder.java:42:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorStringBuilder.java:48:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/twocallsonefile/TwoCallsInOneFile.java:19:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/twocallsonefile/TwoCallsInOneFile.java:23:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/twocallstwofiles/TwoCallsInTwoFiles1.java:18:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/twocallstwofiles/TwoCallsInTwoFiles2.java:9:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe113responsesplitting/TestRedirectServlet.java:17:	HTTP Response Splitting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe113responsesplitting/TestRedirectServlet.java:17:	Unvalidated Redirect
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe327brokencrypto/CWE327UseBrokenCryptoBasic.java:18:	Insecure Cryptographic Algorithm
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe328reversiblehash/CWE328ReversibleOneWayHashBasic.java:16:	Insecure Cryptographic Algorithm
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe328reversiblehash/CWE328ReversibleOneWayHashBasic.java:32:	Insecure Cryptographic Algorithm
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/JPAInjection.java:13:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/JPAInjection.java:16:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/JPAInjection.java:19:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliAppendString.java:11:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliConditional.java:17:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliConditional.java:28:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:15:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:16:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:17:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:18:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:19:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:20:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:21:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:22:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:23:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:24:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:25:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:26:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:27:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:28:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:29:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:30:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:31:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:32:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:33:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:34:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliFieldsAreTainted.java:11:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliFieldsAreTainted.java:15:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliMethodParametersAreTainted.java:9:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliServletTest.java:47:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/StringBuilderTest.java:17:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/StringBuilderTest.java:26:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/TestXSSServlet.java:31:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/XSS1jsp.java:61:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/XSS2jsp.java:65:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/XSSSanitizers.java:15:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/XSSSanitizersParseInt.java:15:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/inheritance/Children.java:15:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/inheritance/Children.java:19:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/noascii/NonASCIIJavaExample.java:17:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/noascii/NonASCIIJavaExample.java:23:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/CallInReturnExample.java:13:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/CallInReturnWithParenthesis.java:12:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/SinkFullPackageExample.java:11:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/StringManipulationExample.java:14:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/StringManipulationExample.java:20:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/StringManipulationExample.java:25:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/UsingThis.java:12:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/bug28/ViolationAfterCatch.java:38:	Cross-Site Scripting
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.449 sec - in com.gdssecurity.pmd.DefaultConfigTest
+Running com.gdssecurity.pmd.StringManipulationTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/StringManipulationExample.java:14:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/StringManipulationExample.java:20:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/StringManipulationExample.java:25:	Sql Injection
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.065 sec - in com.gdssecurity.pmd.StringManipulationTest
+Running com.gdssecurity.pmd.PMDBug1024HangsTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.903 sec - in com.gdssecurity.pmd.PMDBug1024HangsTest
+Running com.gdssecurity.pmd.CWE89SqlInjectionTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/StringBuilderTest.java:17:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/StringBuilderTest.java:26:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliServletTest.java:47:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliMethodParametersAreTainted.java:9:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliConditional.java:17:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliConditional.java:28:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliAppendString.java:11:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliFieldsAreTainted.java:11:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliFieldsAreTainted.java:15:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:15:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:16:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:17:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:18:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:19:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:20:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:21:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:22:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:23:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:24:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:25:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:26:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:27:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:28:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:29:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:30:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:31:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:32:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:33:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:34:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/JPAInjection.java:13:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/JPAInjection.java:16:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/JPAInjection.java:19:	Sql Injection
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.547 sec - in com.gdssecurity.pmd.CWE89SqlInjectionTest
+Running com.gdssecurity.pmd.InheritanceTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/inheritance/Children.java:15:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/inheritance/Children.java:19:	Sql Injection
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.049 sec - in com.gdssecurity.pmd.InheritanceTest
+Running com.gdssecurity.pmd.ViolationAfterCatchTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/bug28/ViolationAfterCatch.java:38:	Cross-Site Scripting
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.078 sec - in com.gdssecurity.pmd.ViolationAfterCatchTest
+Running com.gdssecurity.pmd.GetterForConnectionTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.003 sec - in com.gdssecurity.pmd.GetterForConnectionTest
+Running com.gdssecurity.pmd.AnnotationTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleValidateParamsStaticQualified.java:17:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExample2.java:11:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleValidateParams.java:17:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleValidateParamsStatic.java:17:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleValidateParamsStaticOtherClass.java:11:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleValidateParamsQualified.java:17:	Cross-Site Scripting (Reflected)
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.312 sec - in com.gdssecurity.pmd.AnnotationTest
+Running com.gdssecurity.pmd.CallInReturnTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/CallInReturnExample.java:13:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/CallInReturnWithParenthesis.java:12:	Sql Injection
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.099 sec - in com.gdssecurity.pmd.CallInReturnTest
+Running com.gdssecurity.pmd.UsingThisTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/UsingThis.java:12:	Sql Injection
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 sec - in com.gdssecurity.pmd.UsingThisTest
+Running com.gdssecurity.pmd.NonASCIIJavaTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/noascii/NonASCIIJavaExample.java:17:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/noascii/NonASCIIJavaExample.java:23:	Sql Injection
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.042 sec - in com.gdssecurity.pmd.NonASCIIJavaTest
+Running com.gdssecurity.pmd.TernaryAsParameterTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.19 sec - in com.gdssecurity.pmd.TernaryAsParameterTest
+Running com.gdssecurity.pmd.SinkFullPackageNameTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/SinkFullPackageExample.java:11:	Cross-Site Scripting
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 sec - in com.gdssecurity.pmd.SinkFullPackageNameTest
+Running com.gdssecurity.pmd.CWE328ReversibleHashTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe328reversiblehash/CWE328ReversibleOneWayHashBasic.java:16:	Insecure Cryptographic Algorithm
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe328reversiblehash/CWE328ReversibleOneWayHashBasic.java:32:	Insecure Cryptographic Algorithm
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.056 sec - in com.gdssecurity.pmd.CWE328ReversibleHashTest
+Running com.gdssecurity.pmd.SanitizerWildcardImportTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 sec - in com.gdssecurity.pmd.SanitizerWildcardImportTest
+Running com.gdssecurity.pmd.SanitizerFullPackageNameTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 sec - in com.gdssecurity.pmd.SanitizerFullPackageNameTest
+
+Results :
+
+Failed tests: 
+  SanitizersTest.testSanitizerParseInt:48 expected:<0> but was:<1>
+
+Tests run: 59, Failures: 1, Errors: 0, Skipped: 1
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 21.183 s
+[INFO] Finished at: 2022-04-20T23:37:19+08:00
+[INFO] Final Memory: 18M/287M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.17:test (default-test) on project pmd-gds: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/target/surefire-reports for the individual test results.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+    Applying patch result:
+    patching file src/main/java/com/gdssecurity/pmd/rules/BaseSecurityRule.java
+
+    Test result after patching:
+    Initialized empty Git repository in /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/.git/
+Apache Maven 3.3.9
+Maven home: /usr/share/maven
+Java version: 1.8.0_202, vendor: Oracle Corporation
+Java home: /home/jiayu/env/jdk1.8.0_202/jre
+Default locale: en_US, platform encoding: UTF8
+OS name: "linux", version: "4.4.0-210-generic", arch: "amd64", family: "unix"
+[INFO] Scanning for projects...
+[INFO] Inspecting build with total of 1 modules...
+[INFO] Installing Nexus Staging features:
+[INFO]   ... total of 1 executions of maven-deploy-plugin replaced with nexus-staging-maven-plugin
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building PMD-Security-Rules 2.20.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ pmd-gds ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 8 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:compile (default-compile) @ pmd-gds ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ pmd-gds ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:testCompile (default-testCompile) @ pmd-gds ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.17:test (default-test) @ pmd-gds ---
+[INFO] Surefire report directory: /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF8
+Picked up _JAVA_OPTIONS: -Djdk.net.URLClassPath.disableClassPathURLCheck=true
+Running com.gdssecurity.pmd.CWE113HttpResponseSplittingTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe113responsesplitting/TestRedirectServlet.java:17:	HTTP Response Splitting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe113responsesplitting/TestRedirectServlet.java:17:	Unvalidated Redirect
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.739 sec - in com.gdssecurity.pmd.CWE113HttpResponseSplittingTest
+Running com.gdssecurity.pmd.SanitizersTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/XSSSanitizers.java:15:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/XSSSanitizersParseInt.java:15:	Cross-Site Scripting
+Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.465 sec <<< FAILURE! - in com.gdssecurity.pmd.SanitizersTest
+testSanitizerParseInt(com.gdssecurity.pmd.SanitizersTest)  Time elapsed: 0.067 sec  <<< FAILURE!
+java.lang.AssertionError: expected:<0> but was:<1>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:834)
+	at org.junit.Assert.assertEquals(Assert.java:645)
+	at org.junit.Assert.assertEquals(Assert.java:631)
+	at com.gdssecurity.pmd.SanitizersTest.testSanitizerParseInt(SanitizersTest.java:48)
+
+Running com.gdssecurity.pmd.CWE931XssTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/TestXSSServlet.java:31:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/XSS1jsp.java:61:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/XSS2jsp.java:65:	Cross-Site Scripting
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.406 sec - in com.gdssecurity.pmd.CWE931XssTest
+Running com.gdssecurity.pmd.AnnotationsGeneratorTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorBadExample.java:14:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorBadExample.java:18:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorStringBuilder.java:20:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorStringBuilder.java:34:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorStatic.java:12:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorPrivateCallBad.java:24:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorExample.java:15:	Cross-Site Scripting (Reflected)
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.954 sec - in com.gdssecurity.pmd.AnnotationsGeneratorTest
+Running com.gdssecurity.pmd.CWE935NoAccessControlTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe935noaccesscontrol/TestRoleAuthZServlet.java:25:	Missing Or Incorrect Authorization
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe935noaccesscontrol/TestRoleAuthZServlet.java:33:	Missing Or Incorrect Authorization
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.125 sec - in com.gdssecurity.pmd.CWE935NoAccessControlTest
+Running com.gdssecurity.pmd.PMDBug1393HangsTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.17 sec - in com.gdssecurity.pmd.PMDBug1393HangsTest
+Running com.gdssecurity.pmd.CWE327BrokenCryptoTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe327brokencrypto/CWE327UseBrokenCryptoBasic.java:18:	Insecure Cryptographic Algorithm
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.07 sec - in com.gdssecurity.pmd.CWE327BrokenCryptoTest
+Running com.gdssecurity.pmd.DefaultConfigTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExample.java:13:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleSinkConcat.java:15:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleValidateParams.java:13:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleValidateParamsQualified.java:13:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleValidateParamsStatic.java:13:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleValidateParamsStaticQualified.java:13:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorBadExample.java:24:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorChainedCall.java:21:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorChainedCall.java:26:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorChainedCall.java:30:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorExample.java:15:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorOkExample.java:25:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorOkExample.java:26:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorPrivateCallBad.java:15:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorPrivateCallOk.java:17:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorStaticCaller.java:12:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorStringBuilder.java:38:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorStringBuilder.java:42:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/AnnotationsGeneratorStringBuilder.java:48:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/twocallsonefile/TwoCallsInOneFile.java:19:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/twocallsonefile/TwoCallsInOneFile.java:23:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/twocallstwofiles/TwoCallsInTwoFiles1.java:18:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/generator/twocallstwofiles/TwoCallsInTwoFiles2.java:9:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe113responsesplitting/TestRedirectServlet.java:17:	HTTP Response Splitting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe113responsesplitting/TestRedirectServlet.java:17:	Unvalidated Redirect
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe327brokencrypto/CWE327UseBrokenCryptoBasic.java:18:	Insecure Cryptographic Algorithm
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe328reversiblehash/CWE328ReversibleOneWayHashBasic.java:16:	Insecure Cryptographic Algorithm
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe328reversiblehash/CWE328ReversibleOneWayHashBasic.java:32:	Insecure Cryptographic Algorithm
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/JPAInjection.java:13:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/JPAInjection.java:16:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/JPAInjection.java:19:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliAppendString.java:11:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliConditional.java:17:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliConditional.java:28:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:15:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:16:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:17:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:18:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:19:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:20:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:21:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:22:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:23:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:24:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:25:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:26:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:27:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:28:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:29:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:30:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:31:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:32:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:33:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:34:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliFieldsAreTainted.java:11:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliFieldsAreTainted.java:15:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliMethodParametersAreTainted.java:9:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliServletTest.java:47:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/StringBuilderTest.java:17:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/StringBuilderTest.java:26:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/TestXSSServlet.java:31:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/XSS1jsp.java:61:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/XSS2jsp.java:65:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/XSSSanitizers.java:15:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe931xss/XSSSanitizersParseInt.java:15:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/inheritance/Children.java:15:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/inheritance/Children.java:19:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/noascii/NonASCIIJavaExample.java:17:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/noascii/NonASCIIJavaExample.java:23:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/CallInReturnExample.java:13:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/CallInReturnWithParenthesis.java:12:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/SinkFullPackageExample.java:11:	Cross-Site Scripting
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/StringManipulationExample.java:14:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/StringManipulationExample.java:20:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/StringManipulationExample.java:25:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/UsingThis.java:12:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/bug28/ViolationAfterCatch.java:38:	Cross-Site Scripting
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.557 sec - in com.gdssecurity.pmd.DefaultConfigTest
+Running com.gdssecurity.pmd.StringManipulationTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/StringManipulationExample.java:14:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/StringManipulationExample.java:20:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/StringManipulationExample.java:25:	Sql Injection
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 sec - in com.gdssecurity.pmd.StringManipulationTest
+Running com.gdssecurity.pmd.PMDBug1024HangsTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.809 sec - in com.gdssecurity.pmd.PMDBug1024HangsTest
+Running com.gdssecurity.pmd.CWE89SqlInjectionTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/StringBuilderTest.java:17:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/StringBuilderTest.java:26:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliServletTest.java:47:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliMethodParametersAreTainted.java:9:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliConditional.java:17:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliConditional.java:28:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliAppendString.java:11:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliFieldsAreTainted.java:11:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliFieldsAreTainted.java:15:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:15:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:16:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:17:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:18:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:19:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:20:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:21:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:22:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:23:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:24:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:25:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:26:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:27:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:28:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:29:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:30:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:31:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:32:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:33:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/SqliDontMissAFunction.java:34:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/JPAInjection.java:13:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/JPAInjection.java:16:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe89sqlinjection/JPAInjection.java:19:	Sql Injection
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.663 sec - in com.gdssecurity.pmd.CWE89SqlInjectionTest
+Running com.gdssecurity.pmd.InheritanceTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/inheritance/Children.java:15:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/inheritance/Children.java:19:	Sql Injection
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.044 sec - in com.gdssecurity.pmd.InheritanceTest
+Running com.gdssecurity.pmd.ViolationAfterCatchTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/bug28/ViolationAfterCatch.java:38:	Cross-Site Scripting
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.045 sec - in com.gdssecurity.pmd.ViolationAfterCatchTest
+Running com.gdssecurity.pmd.GetterForConnectionTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0 sec - in com.gdssecurity.pmd.GetterForConnectionTest
+Running com.gdssecurity.pmd.AnnotationTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleValidateParamsStaticQualified.java:17:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExample2.java:11:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleValidateParams.java:17:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleValidateParamsStatic.java:17:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleValidateParamsStaticOtherClass.java:11:	Cross-Site Scripting (Reflected)
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/annotations/AnnotationExampleValidateParamsQualified.java:17:	Cross-Site Scripting (Reflected)
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.332 sec - in com.gdssecurity.pmd.AnnotationTest
+Running com.gdssecurity.pmd.CallInReturnTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/CallInReturnExample.java:13:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/CallInReturnWithParenthesis.java:12:	Sql Injection
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.086 sec - in com.gdssecurity.pmd.CallInReturnTest
+Running com.gdssecurity.pmd.UsingThisTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/UsingThis.java:12:	Sql Injection
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.024 sec - in com.gdssecurity.pmd.UsingThisTest
+Running com.gdssecurity.pmd.NonASCIIJavaTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/noascii/NonASCIIJavaExample.java:17:	Sql Injection
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/noascii/NonASCIIJavaExample.java:23:	Sql Injection
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.042 sec - in com.gdssecurity.pmd.NonASCIIJavaTest
+Running com.gdssecurity.pmd.TernaryAsParameterTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.138 sec - in com.gdssecurity.pmd.TernaryAsParameterTest
+Running com.gdssecurity.pmd.SinkFullPackageNameTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/others/SinkFullPackageExample.java:11:	Cross-Site Scripting
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.028 sec - in com.gdssecurity.pmd.SinkFullPackageNameTest
+Running com.gdssecurity.pmd.CWE328ReversibleHashTest
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe328reversiblehash/CWE328ReversibleOneWayHashBasic.java:16:	Insecure Cryptographic Algorithm
+/mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/test/java/resources/cwe328reversiblehash/CWE328ReversibleOneWayHashBasic.java:32:	Insecure Cryptographic Algorithm
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.051 sec - in com.gdssecurity.pmd.CWE328ReversibleHashTest
+Running com.gdssecurity.pmd.SanitizerWildcardImportTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.039 sec - in com.gdssecurity.pmd.SanitizerWildcardImportTest
+Running com.gdssecurity.pmd.SanitizerFullPackageNameTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 sec - in com.gdssecurity.pmd.SanitizerFullPackageNameTest
+
+Results :
+
+Failed tests: 
+  SanitizersTest.testSanitizerParseInt:48 expected:<0> but was:<1>
+
+Tests run: 59, Failures: 1, Errors: 0, Skipped: 1
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 20.456 s
+[INFO] Finished at: 2022-04-20T23:38:50+08:00
+[INFO] Final Memory: 18M/303M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.17:test (default-test) on project pmd-gds: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/target/surefire-reports for the individual test results.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+    

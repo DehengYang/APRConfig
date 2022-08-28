@@ -1,0 +1,270 @@
+
+    Original test result:
+    Initialized empty Git repository in /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_julianps-modelmapper-module-vavr_441307573-461240331/bears_julianps-modelmapper-module-vavr_441307573-461240331/.git/
+Apache Maven 3.3.9
+Maven home: /usr/share/maven
+Java version: 1.8.0_202, vendor: Oracle Corporation
+Java home: /home/jiayu/env/jdk1.8.0_202/jre
+Default locale: en_US, platform encoding: UTF8
+OS name: "linux", version: "4.4.0-210-generic", arch: "amd64", family: "unix"
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building modelmapper-vavr-module 1.0.2
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ modelmapper-vavr-module ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ modelmapper-vavr-module ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_julianps-modelmapper-module-vavr_441307573-461240331/bears_julianps-modelmapper-module-vavr_441307573-461240331/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:compile (default-compile) @ modelmapper-vavr-module ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ modelmapper-vavr-module ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_julianps-modelmapper-module-vavr_441307573-461240331/bears_julianps-modelmapper-module-vavr_441307573-461240331/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:testCompile (default-testCompile) @ modelmapper-vavr-module ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.21.0:test (default-test) @ modelmapper-vavr-module ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.github.julianps.modelmapper.ValueConverterTest
+[ERROR] Tests run: 9, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.071 s <<< FAILURE! - in com.github.julianps.modelmapper.ValueConverterTest
+[ERROR] testNormalListNull(com.github.julianps.modelmapper.ValueConverterTest)  Time elapsed: 0.023 s  <<< ERROR!
+org.modelmapper.MappingException: 
+ModelMapper mapping errors:
+
+1) Converter com.github.julianps.modelmapper.ValueConverter@43814d18 failed to convert io.vavr.collection.List to io.vavr.collection.List.
+
+1 error
+	at com.github.julianps.modelmapper.ValueConverterTest.testNormalListNull(ValueConverterTest.java:57)
+Caused by: java.lang.NullPointerException
+	at com.github.julianps.modelmapper.ValueConverterTest.testNormalListNull(ValueConverterTest.java:57)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Errors: 
+[ERROR]   ValueConverterTest.testNormalListNull:57 » Mapping ModelMapper mapping errors:...
+[INFO] 
+[ERROR] Tests run: 9, Failures: 0, Errors: 1, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 8.336 s
+[INFO] Finished at: 2022-04-20T23:44:30+08:00
+[INFO] Final Memory: 13M/299M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.21.0:test (default-test) on project modelmapper-vavr-module: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_julianps-modelmapper-module-vavr_441307573-461240331/bears_julianps-modelmapper-module-vavr_441307573-461240331/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date]-jvmRun[N].dump, [date].dumpstream and [date]-jvmRun[N].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+    Applying patch result:
+    patching file src/main/java/com/github/julianps/modelmapper/VavrModule.java
+
+    Test result after patching:
+    Initialized empty Git repository in /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_julianps-modelmapper-module-vavr_441307573-461240331/bears_julianps-modelmapper-module-vavr_441307573-461240331/.git/
+Apache Maven 3.3.9
+Maven home: /usr/share/maven
+Java version: 1.8.0_202, vendor: Oracle Corporation
+Java home: /home/jiayu/env/jdk1.8.0_202/jre
+Default locale: en_US, platform encoding: UTF8
+OS name: "linux", version: "4.4.0-210-generic", arch: "amd64", family: "unix"
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building modelmapper-vavr-module 1.0.2
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ modelmapper-vavr-module ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ modelmapper-vavr-module ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_julianps-modelmapper-module-vavr_441307573-461240331/bears_julianps-modelmapper-module-vavr_441307573-461240331/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:compile (default-compile) @ modelmapper-vavr-module ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ modelmapper-vavr-module ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_julianps-modelmapper-module-vavr_441307573-461240331/bears_julianps-modelmapper-module-vavr_441307573-461240331/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:testCompile (default-testCompile) @ modelmapper-vavr-module ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.21.0:test (default-test) @ modelmapper-vavr-module ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.github.julianps.modelmapper.ValueConverterTest
+[ERROR] Tests run: 9, Failures: 6, Errors: 2, Skipped: 0, Time elapsed: 1.085 s <<< FAILURE! - in com.github.julianps.modelmapper.ValueConverterTest
+[ERROR] testDerivedSet(com.github.julianps.modelmapper.ValueConverterTest)  Time elapsed: 0.685 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting:
+  <StubFactory.Source(x=5)>
+to be an instance of:
+  <com.github.julianps.modelmapper.StubFactory.Dest>
+but was instance of:
+  <com.github.julianps.modelmapper.StubFactory.Source>
+	at com.github.julianps.modelmapper.ValueConverterTest.checkSetResult(ValueConverterTest.java:110)
+	at com.github.julianps.modelmapper.ValueConverterTest.testDerivedSet(ValueConverterTest.java:104)
+
+[ERROR] testNormalList(com.github.julianps.modelmapper.ValueConverterTest)  Time elapsed: 0.069 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting:
+  <StubFactory.Source(x=5)>
+to be an instance of:
+  <com.github.julianps.modelmapper.StubFactory.Dest>
+but was instance of:
+  <com.github.julianps.modelmapper.StubFactory.Source>
+	at com.github.julianps.modelmapper.ValueConverterTest.checkListResult(ValueConverterTest.java:71)
+	at com.github.julianps.modelmapper.ValueConverterTest.testNormalList(ValueConverterTest.java:52)
+
+[ERROR] testNormalArray(com.github.julianps.modelmapper.ValueConverterTest)  Time elapsed: 0.021 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting:
+  <StubFactory.Source(x=5)>
+to be an instance of:
+  <com.github.julianps.modelmapper.StubFactory.Dest>
+but was instance of:
+  <com.github.julianps.modelmapper.StubFactory.Source>
+	at com.github.julianps.modelmapper.ValueConverterTest.checkArrayResult(ValueConverterTest.java:91)
+	at com.github.julianps.modelmapper.ValueConverterTest.testNormalArray(ValueConverterTest.java:79)
+
+[ERROR] testDerivedArray(com.github.julianps.modelmapper.ValueConverterTest)  Time elapsed: 0.017 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting:
+  <StubFactory.Source(x=5)>
+to be an instance of:
+  <com.github.julianps.modelmapper.StubFactory.Dest>
+but was instance of:
+  <com.github.julianps.modelmapper.StubFactory.Source>
+	at com.github.julianps.modelmapper.ValueConverterTest.checkArrayResult(ValueConverterTest.java:91)
+	at com.github.julianps.modelmapper.ValueConverterTest.testDerivedArray(ValueConverterTest.java:85)
+
+[ERROR] testDerivedList(com.github.julianps.modelmapper.ValueConverterTest)  Time elapsed: 0.004 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting:
+  <StubFactory.Source(x=5)>
+to be an instance of:
+  <com.github.julianps.modelmapper.StubFactory.Dest>
+but was instance of:
+  <com.github.julianps.modelmapper.StubFactory.Source>
+	at com.github.julianps.modelmapper.ValueConverterTest.checkListResult(ValueConverterTest.java:71)
+	at com.github.julianps.modelmapper.ValueConverterTest.testDerivedList(ValueConverterTest.java:65)
+
+[ERROR] testOptionNull(com.github.julianps.modelmapper.ValueConverterTest)  Time elapsed: 0.042 s  <<< ERROR!
+java.lang.ClassCastException: com.github.julianps.modelmapper.StubFactory$Y cannot be cast to com.github.julianps.modelmapper.StubFactory$YInfo
+	at com.github.julianps.modelmapper.ValueConverterTest.testOptionNull(ValueConverterTest.java:46)
+
+[ERROR] testNormalSet(com.github.julianps.modelmapper.ValueConverterTest)  Time elapsed: 0.01 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting:
+  <StubFactory.Source(x=5)>
+to be an instance of:
+  <com.github.julianps.modelmapper.StubFactory.Dest>
+but was instance of:
+  <com.github.julianps.modelmapper.StubFactory.Source>
+	at com.github.julianps.modelmapper.ValueConverterTest.checkSetResult(ValueConverterTest.java:110)
+	at com.github.julianps.modelmapper.ValueConverterTest.testNormalSet(ValueConverterTest.java:98)
+
+[ERROR] testOption(com.github.julianps.modelmapper.ValueConverterTest)  Time elapsed: 0.003 s  <<< ERROR!
+java.lang.ClassCastException: com.github.julianps.modelmapper.StubFactory$Y cannot be cast to com.github.julianps.modelmapper.StubFactory$YInfo
+	at com.github.julianps.modelmapper.ValueConverterTest.testOption(ValueConverterTest.java:33)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   ValueConverterTest.testDerivedArray:85->checkArrayResult:91 
+Expecting:
+  <StubFactory.Source(x=5)>
+to be an instance of:
+  <com.github.julianps.modelmapper.StubFactory.Dest>
+but was instance of:
+  <com.github.julianps.modelmapper.StubFactory.Source>
+[ERROR]   ValueConverterTest.testDerivedList:65->checkListResult:71 
+Expecting:
+  <StubFactory.Source(x=5)>
+to be an instance of:
+  <com.github.julianps.modelmapper.StubFactory.Dest>
+but was instance of:
+  <com.github.julianps.modelmapper.StubFactory.Source>
+[ERROR]   ValueConverterTest.testDerivedSet:104->checkSetResult:110 
+Expecting:
+  <StubFactory.Source(x=5)>
+to be an instance of:
+  <com.github.julianps.modelmapper.StubFactory.Dest>
+but was instance of:
+  <com.github.julianps.modelmapper.StubFactory.Source>
+[ERROR]   ValueConverterTest.testNormalArray:79->checkArrayResult:91 
+Expecting:
+  <StubFactory.Source(x=5)>
+to be an instance of:
+  <com.github.julianps.modelmapper.StubFactory.Dest>
+but was instance of:
+  <com.github.julianps.modelmapper.StubFactory.Source>
+[ERROR]   ValueConverterTest.testNormalList:52->checkListResult:71 
+Expecting:
+  <StubFactory.Source(x=5)>
+to be an instance of:
+  <com.github.julianps.modelmapper.StubFactory.Dest>
+but was instance of:
+  <com.github.julianps.modelmapper.StubFactory.Source>
+[ERROR]   ValueConverterTest.testNormalSet:98->checkSetResult:110 
+Expecting:
+  <StubFactory.Source(x=5)>
+to be an instance of:
+  <com.github.julianps.modelmapper.StubFactory.Dest>
+but was instance of:
+  <com.github.julianps.modelmapper.StubFactory.Source>
+[ERROR] Errors: 
+[ERROR]   ValueConverterTest.testOption:33 ClassCast com.github.julianps.modelmapper.Stu...
+[ERROR]   ValueConverterTest.testOptionNull:46 ClassCast com.github.julianps.modelmapper...
+[INFO] 
+[ERROR] Tests run: 9, Failures: 6, Errors: 2, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 9.097 s
+[INFO] Finished at: 2022-04-20T23:45:25+08:00
+[INFO] Final Memory: 14M/343M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.21.0:test (default-test) on project modelmapper-vavr-module: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_julianps-modelmapper-module-vavr_441307573-461240331/bears_julianps-modelmapper-module-vavr_441307573-461240331/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date]-jvmRun[N].dump, [date].dumpstream and [date]-jvmRun[N].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+    

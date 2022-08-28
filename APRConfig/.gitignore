@@ -2,7 +2,7 @@
 __pycache__/
 
 # output
-output/
+#output/
 logs/
 
 #

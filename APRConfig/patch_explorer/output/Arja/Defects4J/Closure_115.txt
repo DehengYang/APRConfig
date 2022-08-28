@@ -1,0 +1,26 @@
+
+    Original test result:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_115/defects4j_Closure_115 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_115/defects4j_Closure_115  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_115/defects4j_Closure_115 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_115/defects4j_Closure_115 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_115/defects4j_Closure_115/failing_tests  run.dev.tests 2>&1Failing tests: 7
+  - com.google.javascript.jscomp.InlineFunctionsTest::testBug4944818
+  - com.google.javascript.jscomp.InlineFunctionsTest::testDoubleInlining1
+  - com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineIfParametersModified8
+  - com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineIfParametersModified9
+  - com.google.javascript.jscomp.InlineFunctionsTest::testInlineFunctions22
+  - com.google.javascript.jscomp.InlineFunctionsTest::testInlineFunctions23
+  - com.google.javascript.jscomp.InlineFunctionsTest::testInlineFunctions6
+
+    Applying patch result:
+    patching file src/com/google/javascript/jscomp/FunctionInjector.java
+
+    Test result after patching:
+    cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_115/defects4j_Closure_115 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_115/defects4j_Closure_115  compile.tests 2>&1cmd:  cd /mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_115/defects4j_Closure_115 && ant -f /mnt/data/bias_validation_2021/datasets/defects4j/framework/projects/defects4j.build.xml -Dd4j.home=/mnt/data/bias_validation_2021/datasets/defects4j -Dd4j.dir.projects=/mnt/data/bias_validation_2021/datasets/defects4j/framework/projects -Dbasedir=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_115/defects4j_Closure_115 -DOUTFILE=/mnt/data/bias_validation_2021/patch_explorer_Defects4J/defects4j_Closure_115/defects4j_Closure_115/failing_tests  run.dev.tests 2>&1Failing tests: 8
+  - com.google.javascript.jscomp.FunctionInjectorTest::testCanInlineReferenceToFunction19
+  - com.google.javascript.jscomp.FunctionInjectorTest::testCanInlineReferenceToFunction20
+  - com.google.javascript.jscomp.FunctionInjectorTest::testCanInlineReferenceToFunction21
+  - com.google.javascript.jscomp.FunctionInjectorTest::testCanInlineReferenceToFunction22
+  - com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineMutableArgs1
+  - com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineMutableArgs2
+  - com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineMutableArgs3
+  - com.google.javascript.jscomp.InlineFunctionsTest::testNoInlineMutableArgs4
+
+    

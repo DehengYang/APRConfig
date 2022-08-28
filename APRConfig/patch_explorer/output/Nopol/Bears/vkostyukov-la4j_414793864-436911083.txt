@@ -1,0 +1,265 @@
+
+    Original test result:
+    Initialized empty Git repository in /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_vkostyukov-la4j_414793864-436911083/bears_vkostyukov-la4j_414793864-436911083/.git/
+Apache Maven 3.3.9
+Maven home: /usr/share/maven
+Java version: 1.8.0_202, vendor: Oracle Corporation
+Java home: /home/jiayu/env/jdk1.8.0_202/jre
+Default locale: en_US, platform encoding: UTF8
+OS name: "linux", version: "4.4.0-210-generic", arch: "amd64", family: "unix"
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building la4j 0.6.0
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ la4j ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ la4j ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_vkostyukov-la4j_414793864-436911083/bears_vkostyukov-la4j_414793864-436911083/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.5.1:compile (default-compile) @ la4j ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ la4j ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_vkostyukov-la4j_414793864-436911083/bears_vkostyukov-la4j_414793864-436911083/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.5.1:testCompile (default-testCompile) @ la4j ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.17:test (default-test) @ la4j ---
+[INFO] Surefire report directory: /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_vkostyukov-la4j_414793864-436911083/bears_vkostyukov-la4j_414793864-436911083/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF8
+Picked up _JAVA_OPTIONS: -Djdk.net.URLClassPath.disableClassPathURLCheck=true
+Running org.la4j.inversion.NoPivotGaussInverterTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.987 sec - in org.la4j.inversion.NoPivotGaussInverterTest
+Running org.la4j.inversion.GaussJordanInverterTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.478 sec - in org.la4j.inversion.GaussJordanInverterTest
+Running org.la4j.linear.JacobiSolverTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.068 sec - in org.la4j.linear.JacobiSolverTest
+Running org.la4j.linear.SweepSolverTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 sec - in org.la4j.linear.SweepSolverTest
+Running org.la4j.linear.SeidelSolverTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 sec - in org.la4j.linear.SeidelSolverTest
+Running org.la4j.linear.ForwardBackSubstitutionSolverTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.043 sec - in org.la4j.linear.ForwardBackSubstitutionSolverTest
+Running org.la4j.linear.GaussianSolverTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.la4j.linear.GaussianSolverTest
+Running org.la4j.linear.LeastSquaresSolverTest
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 sec - in org.la4j.linear.LeastSquaresSolverTest
+Running org.la4j.linear.SquareRootSolverTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec - in org.la4j.linear.SquareRootSolverTest
+Running org.la4j.decomposition.QRDecompositorTest
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.02 sec - in org.la4j.decomposition.QRDecompositorTest
+Running org.la4j.decomposition.EigenDecompositorTest
+Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.57 sec - in org.la4j.decomposition.EigenDecompositorTest
+Running org.la4j.decomposition.LUDecompositorTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.023 sec - in org.la4j.decomposition.LUDecompositorTest
+Running org.la4j.decomposition.SingularValueDecompositorTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 sec - in org.la4j.decomposition.SingularValueDecompositorTest
+Running org.la4j.decomposition.CholeskyDecompositorTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 sec - in org.la4j.decomposition.CholeskyDecompositorTest
+Running org.la4j.vector.dense.BasicVectorTest
+Tests run: 65, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.075 sec <<< FAILURE! - in org.la4j.vector.dense.BasicVectorTest
+testFromMap_unordered(org.la4j.vector.dense.BasicVectorTest)  Time elapsed: 0.01 sec  <<< FAILURE!
+java.lang.AssertionError: expected:<1.000 0.000 0.000 2.000 0.000 1.000 0.000> but was:<0.000 0.000 0.000 0.000 0.000 1.000 0.000>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:743)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at org.la4j.vector.VectorTest.testFromMap_unordered(VectorTest.java:735)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:264)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:124)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:200)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:153)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
+
+Running org.la4j.vector.sparse.CompressedVectorTest
+Tests run: 78, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.037 sec <<< FAILURE! - in org.la4j.vector.sparse.CompressedVectorTest
+testFromMap_unordered(org.la4j.vector.sparse.CompressedVectorTest)  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.AssertionError: expected:<1.000 0.000 0.000 2.000 0.000 1.000 0.000> but was:<0.000 0.000 0.000 0.000 0.000 1.000 0.000>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:743)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at org.la4j.vector.VectorTest.testFromMap_unordered(VectorTest.java:735)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:264)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:124)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:200)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:153)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
+
+Running org.la4j.matrix.dense.Basic1DMatrixTest
+Tests run: 138, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.102 sec - in org.la4j.matrix.dense.Basic1DMatrixTest
+Running org.la4j.matrix.dense.Basic2DMatrixTest
+Tests run: 138, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.06 sec - in org.la4j.matrix.dense.Basic2DMatrixTest
+Running org.la4j.matrix.sparse.CCSMatrixTest
+Tests run: 151, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.063 sec - in org.la4j.matrix.sparse.CCSMatrixTest
+Running org.la4j.matrix.sparse.CRSMatrixTest
+Tests run: 151, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.115 sec - in org.la4j.matrix.sparse.CRSMatrixTest
+
+Results :
+
+Failed tests: 
+  BasicVectorTest>VectorTest.testFromMap_unordered:735 expected:<1.000 0.000 0.000 2.000 0.000 1.000 0.000> but was:<0.000 0.000 0.000 0.000 0.000 1.000 0.000>
+  CompressedVectorTest>VectorTest.testFromMap_unordered:735 expected:<1.000 0.000 0.000 2.000 0.000 1.000 0.000> but was:<0.000 0.000 0.000 0.000 0.000 1.000 0.000>
+
+Tests run: 819, Failures: 2, Errors: 0, Skipped: 0
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 13.990 s
+[INFO] Finished at: 2022-04-20T21:03:22+08:00
+[INFO] Final Memory: 14M/295M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.17:test (default-test) on project la4j: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_vkostyukov-la4j_414793864-436911083/bears_vkostyukov-la4j_414793864-436911083/target/surefire-reports for the individual test results.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+    Applying patch result:
+    patching file src/main/java/org/la4j/Vector.java
+
+    Test result after patching:
+    Initialized empty Git repository in /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_vkostyukov-la4j_414793864-436911083/bears_vkostyukov-la4j_414793864-436911083/.git/
+Apache Maven 3.3.9
+Maven home: /usr/share/maven
+Java version: 1.8.0_202, vendor: Oracle Corporation
+Java home: /home/jiayu/env/jdk1.8.0_202/jre
+Default locale: en_US, platform encoding: UTF8
+OS name: "linux", version: "4.4.0-210-generic", arch: "amd64", family: "unix"
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building la4j 0.6.0
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ la4j ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ la4j ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_vkostyukov-la4j_414793864-436911083/bears_vkostyukov-la4j_414793864-436911083/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.5.1:compile (default-compile) @ la4j ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ la4j ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_vkostyukov-la4j_414793864-436911083/bears_vkostyukov-la4j_414793864-436911083/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.5.1:testCompile (default-testCompile) @ la4j ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.17:test (default-test) @ la4j ---
+[INFO] Surefire report directory: /mnt/data/bias_validation_2021/patch_explorer_Bears/bears_vkostyukov-la4j_414793864-436911083/bears_vkostyukov-la4j_414793864-436911083/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF8
+Picked up _JAVA_OPTIONS: -Djdk.net.URLClassPath.disableClassPathURLCheck=true
+Running org.la4j.inversion.NoPivotGaussInverterTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.119 sec - in org.la4j.inversion.NoPivotGaussInverterTest
+Running org.la4j.inversion.GaussJordanInverterTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.155 sec - in org.la4j.inversion.GaussJordanInverterTest
+Running org.la4j.linear.JacobiSolverTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.037 sec - in org.la4j.linear.JacobiSolverTest
+Running org.la4j.linear.SweepSolverTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 sec - in org.la4j.linear.SweepSolverTest
+Running org.la4j.linear.SeidelSolverTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec - in org.la4j.linear.SeidelSolverTest
+Running org.la4j.linear.ForwardBackSubstitutionSolverTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec - in org.la4j.linear.ForwardBackSubstitutionSolverTest
+Running org.la4j.linear.GaussianSolverTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.la4j.linear.GaussianSolverTest
+Running org.la4j.linear.LeastSquaresSolverTest
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.la4j.linear.LeastSquaresSolverTest
+Running org.la4j.linear.SquareRootSolverTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.02 sec - in org.la4j.linear.SquareRootSolverTest
+Running org.la4j.decomposition.QRDecompositorTest
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec - in org.la4j.decomposition.QRDecompositorTest
+Running org.la4j.decomposition.EigenDecompositorTest
+Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.66 sec - in org.la4j.decomposition.EigenDecompositorTest
+Running org.la4j.decomposition.LUDecompositorTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec - in org.la4j.decomposition.LUDecompositorTest
+Running org.la4j.decomposition.SingularValueDecompositorTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec - in org.la4j.decomposition.SingularValueDecompositorTest
+Running org.la4j.decomposition.CholeskyDecompositorTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in org.la4j.decomposition.CholeskyDecompositorTest
+Running org.la4j.vector.dense.BasicVectorTest
+Tests run: 65, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.062 sec - in org.la4j.vector.dense.BasicVectorTest
+Running org.la4j.vector.sparse.CompressedVectorTest
+Tests run: 78, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.05 sec - in org.la4j.vector.sparse.CompressedVectorTest
+Running org.la4j.matrix.dense.Basic1DMatrixTest
+Tests run: 138, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.073 sec - in org.la4j.matrix.dense.Basic1DMatrixTest
+Running org.la4j.matrix.dense.Basic2DMatrixTest
+Tests run: 138, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.033 sec - in org.la4j.matrix.dense.Basic2DMatrixTest
+Running org.la4j.matrix.sparse.CCSMatrixTest
+Tests run: 151, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.043 sec - in org.la4j.matrix.sparse.CCSMatrixTest
+Running org.la4j.matrix.sparse.CRSMatrixTest
+Tests run: 151, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.114 sec - in org.la4j.matrix.sparse.CRSMatrixTest
+
+Results :
+
+Tests run: 819, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 12.934 s
+[INFO] Finished at: 2022-04-20T21:04:00+08:00
+[INFO] Final Memory: 14M/295M
+[INFO] ------------------------------------------------------------------------
+
+    
