@@ -132,7 +132,9 @@ python Statistical_tests.py
 
 ## 6. APRConfig Extension
 
-Integrating more APR-related components or techniques (e.g., dataset, fault localization) into APRConfig is easy to operate. We have integrated [Deptest](https://github.com/DehengYang/dataset_purification) tool into APRConfig by adding [Deptest.py](./APRConfig/apr/Deptest.py) and placing Deptest repository in [our apr_tool directory](./apr_tools). This could be a typical example for users to add more extensions into APRConig.
+<!-- Integrating more APR-related components or techniques (e.g., dataset, fault localization) into APRConfig is easy to operate. We have integrated [Deptest](https://github.com/DehengYang/dataset_purification) tool into APRConfig by adding [Deptest.py](./APRConfig/apr/Deptest.py) and placing Deptest repository in [our apr_tool directory](./apr_tools). This could be a typical example for users to add more extensions into APRConig. -->
+
+To facilitate the usage of potential users, we plan to continuously maintain this repository. Accordingly, we provide the guideline, which is available at [How_to_extend.md](./How_to_extend.md), on how to extend APRConfig with more datasets, fault localizers, patch generation algorithms, and patch validators. Any question or contribution is much welcomed.
 
 ## 7. LICENSE
 
