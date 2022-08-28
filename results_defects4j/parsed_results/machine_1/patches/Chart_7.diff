@@ -1,0 +1,138 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_7/defects4j_Chart_7/defects4j_Chart_7/source/org/jfree/data/time/TimePeriodValues.java /tmp/fixed/defects4j_Chart_7/source/org/jfree/data/time/TimePeriodValues.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_7/defects4j_Chart_7/defects4j_Chart_7/source/org/jfree/data/time/TimePeriodValues.java	2021-08-25 02:47:07.504489518 +0800
++++ /tmp/fixed/defects4j_Chart_7/source/org/jfree/data/time/TimePeriodValues.java	2021-08-25 02:47:21.149071802 +0800
+@@ -297,9 +297,9 @@
+         }
+         
+         if (this.maxMiddleIndex >= 0) {
+-            long s = getDataItem(this.minMiddleIndex).getPeriod().getStart()
++            long s = getDataItem(this.maxMiddleIndex).getPeriod().getStart()
+                 .getTime();
+-            long e = getDataItem(this.minMiddleIndex).getPeriod().getEnd()
++            long e = getDataItem(this.maxMiddleIndex).getPeriod().getEnd()
+                 .getTime();
+             long maxMiddle = s + (e - s) / 2;
+             if (middle > maxMiddle) {
+
+
+                
+                ====================== simfix_1 Chart_7 ================================
+                
+                [PATCH 256] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_7/defects4j_Chart_7/defects4j_Chart_7/source//org/jfree/data/time/TimePeriodValues.java, range: <299,311>, original: if(this.maxMiddleIndex>=0){
+long s=getDataItem(this.minMiddleIndex).getPeriod().getStart().getTime();
+long e=getDataItem(this.minMiddleIndex).getPeriod().getEnd().getTime();
+long maxMiddle=s+(e-s)/2;
+if(middle>maxMiddle){
+this.maxMiddleIndex=index;
+}
+}else {
+this.maxMiddleIndex=index;
+}
+, patch: if(this.maxMiddleIndex>=0){
+long s=getDataItem(this.maxMiddleIndex).getPeriod().getStart().getTime();
+long e=getDataItem(this.maxMiddleIndex).getPeriod().getEnd().getTime();
+long maxMiddle=s+(e-s)/2;
+if(middle>maxMiddle){
+this.maxMiddleIndex=index;
+}
+}else {
+this.maxMiddleIndex=index;
+}
+
+
+                
+                ====================== simfix_2 Chart_7 ================================
+                
+                [PATCH 256] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_7/defects4j_Chart_7/defects4j_Chart_7/source//org/jfree/data/time/TimePeriodValues.java, range: <299,311>, original: if(this.maxMiddleIndex>=0){
+long s=getDataItem(this.minMiddleIndex).getPeriod().getStart().getTime();
+long e=getDataItem(this.minMiddleIndex).getPeriod().getEnd().getTime();
+long maxMiddle=s+(e-s)/2;
+if(middle>maxMiddle){
+this.maxMiddleIndex=index;
+}
+}else {
+this.maxMiddleIndex=index;
+}
+, patch: if(this.maxMiddleIndex>=0){
+long s=getDataItem(this.maxMiddleIndex).getPeriod().getStart().getTime();
+long e=getDataItem(this.maxMiddleIndex).getPeriod().getEnd().getTime();
+long maxMiddle=s+(e-s)/2;
+if(middle>maxMiddle){
+this.maxMiddleIndex=index;
+}
+}else {
+this.maxMiddleIndex=index;
+}
+
+
+                
+                ====================== simfix_3 Chart_7 ================================
+                
+                [PATCH 256] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_7/defects4j_Chart_7/defects4j_Chart_7/source//org/jfree/data/time/TimePeriodValues.java, range: <299,311>, original: if(this.maxMiddleIndex>=0){
+long s=getDataItem(this.minMiddleIndex).getPeriod().getStart().getTime();
+long e=getDataItem(this.minMiddleIndex).getPeriod().getEnd().getTime();
+long maxMiddle=s+(e-s)/2;
+if(middle>maxMiddle){
+this.maxMiddleIndex=index;
+}
+}else {
+this.maxMiddleIndex=index;
+}
+, patch: if(this.maxMiddleIndex>=0){
+long s=getDataItem(this.maxMiddleIndex).getPeriod().getStart().getTime();
+long e=getDataItem(this.maxMiddleIndex).getPeriod().getEnd().getTime();
+long maxMiddle=s+(e-s)/2;
+if(middle>maxMiddle){
+this.maxMiddleIndex=index;
+}
+}else {
+this.maxMiddleIndex=index;
+}
+
+
+                
+                ====================== tbar_1 Chart_7 ================================
+                
+                [PATCH 2]//**********************************************************
+//org/jfree/data/time/TimePeriodValues.java ------ 552
+//**********************************************************
+===Buggy Code===
+return this.maxMiddleIndex;
+
+===Patch Code===
+return this.maxStartIndex;
+
+
+
+                
+                ====================== tbar_2 Chart_7 ================================
+                
+                [PATCH 2]//**********************************************************
+//org/jfree/data/time/TimePeriodValues.java ------ 552
+//**********************************************************
+===Buggy Code===
+return this.maxMiddleIndex;
+
+===Patch Code===
+return this.maxStartIndex;
+
+
+
+                
+                ====================== tbar_3 Chart_7 ================================
+                
+                [PATCH 2]//**********************************************************
+//org/jfree/data/time/TimePeriodValues.java ------ 552
+//**********************************************************
+===Buggy Code===
+return this.maxMiddleIndex;
+
+===Patch Code===
+return this.maxStartIndex;
+
+
+
+                

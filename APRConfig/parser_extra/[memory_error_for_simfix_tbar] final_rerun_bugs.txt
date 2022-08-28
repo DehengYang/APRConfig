@@ -1,0 +1,24 @@
+# machine 2
+simfix_1 Time_7 machine2
+simfix_1 Time_14 machine2
+simfix_1 Lang_19 machine2
+simfix_2 Lang_50 machine2
+simfix_0 Math_44 machine2
+
+
+# machine 4
+simfix_1 Mockito_7 machine4
+simfix_1 Mockito_10 machine4
+simfix_0 Time_14 machine1
+tbar_1 Lang_6 machine1
+tbar_1 Lang_18 machine1
+simfix_0 Lang_19 machine1
+
+
+# machine 1
+simfix_2 Mockito_15 machine1
+simfix_2 Mockito_25 machine1
+simfix_2 Mockito_27 machine1
+simfix_2 Mockito_29 machine1
+simfix_2 Mockito_30 machine1
+simfix_2 Mockito_31 machine1

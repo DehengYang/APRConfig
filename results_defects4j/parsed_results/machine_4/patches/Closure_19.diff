@@ -1,0 +1,78 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_19/defects4j_Closure_19/defects4j_Closure_19/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java /tmp/fixed/defects4j_Closure_19/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_19/defects4j_Closure_19/defects4j_Closure_19/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java	2021-09-03 02:27:30.209738283 +0800
++++ /tmp/fixed/defects4j_Closure_19/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java	2021-09-03 02:28:10.431288379 +0800
+@@ -169,7 +169,9 @@
+         scope.inferQualifiedSlot(node, qualifiedName, origType, type);
+         break;
+ 
++      case Token.THIS:
+         // "this" references aren't currently modeled in the CFG.
++        break;
+ 
+       default:
+         throw new IllegalArgumentException("Node cannot be refined. \n" +
+
+
+                
+                ====================== dynamoth_2 Closure_19 ================================
+                
+                --- a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java
++++ b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java
+@@ -174,4 +174,6 @@
+default:
+-        throw new IllegalArgumentException("Node cannot be refined. \n" +
+-            node.toStringTree());
++        if (false) {
++          throw new IllegalArgumentException("Node cannot be refined. \n" +
++          node.toStringTree());
++        }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Closure_19 ================================
+                
+                --- a/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java
++++ b/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java
+@@ -174,4 +174,6 @@
+default:
+-        throw new IllegalArgumentException("Node cannot be refined. \n" +
+-            node.toStringTree());
++        if (false) {
++          throw new IllegalArgumentException("Node cannot be refined. \n" +
++          node.toStringTree());
++        }
+}
+
+
+
+
+                
+                ====================== simfix_1 Closure_19 ================================
+                
+                [PATCH 6784] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_19/defects4j_Closure_19/defects4j_Closure_19/src//com/google/javascript/rhino/Node.java, range: <1030,1032>, original: for(int i=0;i!=level;++i){
+sb.append("    ");
+}
+, patch: for(int i=0;i!=level;++i){
+i++;
+sb.append("    ");
+}
+
+
+                
+                ====================== simfix_2 Closure_19 ================================
+                
+                [PATCH 6868] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_19/defects4j_Closure_19/defects4j_Closure_19/src//com/google/javascript/rhino/Node.java, range: <1030,1032>, original: for(int i=0;i!=level;++i){
+sb.append("    ");
+}
+, patch: for(int i=EMPTY_BLOCK;i!=level;++i){
+sb.append("    ");
+}
+
+
+                

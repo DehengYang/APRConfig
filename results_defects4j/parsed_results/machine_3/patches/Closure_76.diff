@@ -1,0 +1,271 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_76/defects4j_Closure_76/defects4j_Closure_76/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java /tmp/fixed/defects4j_Closure_76/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_76/defects4j_Closure_76/defects4j_Closure_76/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java	2021-09-01 09:16:15.683654538 +0800
++++ /tmp/fixed/defects4j_Closure_76/src/com/google/javascript/jscomp/DeadAssignmentsElimination.java	2021-09-01 09:16:30.104244938 +0800
+@@ -297,26 +297,40 @@
+           // If the currently node is the first child of
+           // AND/OR, be conservative only consider the READs
+           // of the second operand.
++          if (n.getNext() != null) {
++            state = isVariableReadBeforeKill(
++                n.getNext(), variable);
++            if (state == VariableLiveness.KILL) {
++              state = VariableLiveness.MAYBE_LIVE;
++            }
++          }
++          break;
+ 
+         case Token.HOOK:
+           // If current node is the condition, check each following
+           // branch, otherwise it is a conditional branch and the
+           // other branch can be ignored.
++          if (n.getNext() != null && n.getNext().getNext() != null) {
++            state = checkHookBranchReadBeforeKill(
++                n.getNext(), n.getNext().getNext(), variable);
++          }
++          break;
+ 
+         default:
+           for(Node sibling = n.getNext(); sibling != null;
+               sibling = sibling.getNext()) {
+-            if (!ControlFlowGraph.isEnteringNewCfgNode(sibling)) {
+             state = isVariableReadBeforeKill(sibling, variable);
++            if (state != VariableLiveness.MAYBE_LIVE) {
++              break;
++            }
++          }
++      }
+ 
+       // If we see a READ or KILL there is no need to continue.
+       if (state == VariableLiveness.READ) {
+         return true;
+       } else if (state == VariableLiveness.KILL) {
+         return false;
+-            }
+-          }
+-      }
+       }
+       n = n.getParent();
+     }
+@@ -337,6 +351,9 @@
+    */
+   private VariableLiveness isVariableReadBeforeKill(
+       Node n, String variable) {
++    if (ControlFlowGraph.isEnteringNewCfgNode(n)) { // Not a FUNCTION
++      return VariableLiveness.MAYBE_LIVE;
++    }
+ 
+     if (NodeUtil.isName(n) && variable.equals(n.getString())) {
+       if (NodeUtil.isLhs(n, n.getParent())) {
+@@ -359,9 +376,25 @@
+       // Conditionals
+       case Token.OR:
+       case Token.AND:
++        VariableLiveness v1 = isVariableReadBeforeKill(
++          n.getFirstChild(), variable);
++        VariableLiveness v2 = isVariableReadBeforeKill(
++          n.getLastChild(), variable);
+         // With a AND/OR the first branch always runs, but the second is
+         // may not.
++        if (v1 != VariableLiveness.MAYBE_LIVE) {
++          return v1;
++        } else if (v2 == VariableLiveness.READ) {
++          return VariableLiveness.READ;
++        } else {
++          return VariableLiveness.MAYBE_LIVE;
++        }
+       case Token.HOOK:
++        VariableLiveness first = isVariableReadBeforeKill(
++            n.getFirstChild(), variable);
++        if (first != VariableLiveness.MAYBE_LIVE) {
++          return first;
++        }
+         return checkHookBranchReadBeforeKill(
+             n.getFirstChild().getNext(), n.getLastChild(), variable);
+ 
+@@ -369,13 +402,11 @@
+         // Expressions are evaluated left-right, depth first.
+         for (Node child = n.getFirstChild();
+             child != null; child = child.getNext()) {
+-          if (!ControlFlowGraph.isEnteringNewCfgNode(child)) { // Not a FUNCTION
+           VariableLiveness state = isVariableReadBeforeKill(child, variable);
+           if (state != VariableLiveness.MAYBE_LIVE) {
+             return state;
+           }
+         }
+-      }
+     }
+ 
+     return VariableLiveness.MAYBE_LIVE;
+
+
+                
+                ====================== dynamoth_1 Closure_76 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1368,7 +1368,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (this.getChildCount() == 0) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                
+                ====================== dynamoth_2 Closure_76 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1368,7 +1368,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (this.getChildCount() == 0) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Closure_76 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1368,7 +1368,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (this.getChildCount() == 0) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                
+                ====================== nopol_1 Closure_76 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1368,7 +1368,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (com.google.javascript.rhino.Node.this.type < 11) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                
+                ====================== nopol_2 Closure_76 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1368,7 +1368,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (com.google.javascript.rhino.Node.this.type < 11) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                
+                ====================== nopol_3 Closure_76 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1368,7 +1368,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (com.google.javascript.rhino.Node.this.type < 11) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                
+                ====================== simfix_1 Closure_76 ================================
+                
+                [PATCH 2275] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_76/defects4j_Closure_76/defects4j_Closure_76/src//com/google/javascript/rhino/Node.java, range: <1063,1065>, original: for(int i=0;i!=level;++i){
+sb.append("    ");
+}
+, patch: for(int i=FREE_CALL;i!=level;++i){
+sb.append("    ");
+}
+
+
+                
+                ====================== simfix_2 Closure_76 ================================
+                
+                [PATCH 2203] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_76/defects4j_Closure_76/defects4j_Closure_76/src//com/google/javascript/rhino/Node.java, range: <1063,1065>, original: for(int i=0;i!=level;++i){
+sb.append("    ");
+}
+, patch: for(int i=0;i!=level;++i){
+i++;
+sb.append("    ");
+}
+
+
+                

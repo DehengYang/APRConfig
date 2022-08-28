@@ -1,0 +1,68 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_3/defects4j_Lang_3/defects4j_Lang_3/src/main/java/org/apache/commons/lang3/math/NumberUtils.java /tmp/fixed/defects4j_Lang_3/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_3/defects4j_Lang_3/defects4j_Lang_3/src/main/java/org/apache/commons/lang3/math/NumberUtils.java	2021-09-02 16:54:52.253422658 +0800
++++ /tmp/fixed/defects4j_Lang_3/src/main/java/org/apache/commons/lang3/math/NumberUtils.java	2021-09-02 16:55:09.486039376 +0800
+@@ -590,18 +590,22 @@
+         //Must be a Float, Double, BigDecimal
+         final boolean allZeros = isAllZeros(mant) && isAllZeros(exp);
+         try {
++            if(numDecimals <= 7){// If number has 7 or fewer digits past the decimal point then make it a float
+                 final Float f = createFloat(str);
+                 if (!(f.isInfinite() || (f.floatValue() == 0.0F && !allZeros))) {
+                     return f;
+                 }
++            }
+         } catch (final NumberFormatException nfe) { // NOPMD
+             // ignore the bad number
+         }
+         try {
++            if(numDecimals <= 16){// If number has between 8 and 16 digits past the decimal point then make it a double
+                 final Double d = createDouble(str);
+                 if (!(d.isInfinite() || (d.doubleValue() == 0.0D && !allZeros))) {
+                     return d;
+                 }
++            }
+         } catch (final NumberFormatException nfe) { // NOPMD
+             // ignore the bad number
+         }
+
+
+                
+                ====================== simfix_1 Lang_3 ================================
+                
+                [PATCH 717] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_3/defects4j_Lang_3/defects4j_Lang_3/src/main/java//org/apache/commons/lang3/math/NumberUtils.java, range: <570,574>, original: if(expPos>-1&&expPos<str.length()-1){
+exp=str.substring(expPos+1,str.length());
+}else {
+exp=null;
+}
+, patch: if(!Character.isUpperCase(str.charAt(1))||!Character.isUpperCase(str.charAt(2))){
+throw new IllegalArgumentException("Invalid locale format: "+str);
+}
+if(expPos>-1&&expPos<str.length()-1){
+exp=str.substring(expPos+1,str.length());
+}else {
+exp=null;
+}
+
+
+                
+                ====================== simfix_2 Lang_3 ================================
+                
+                [PATCH 717] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_3/defects4j_Lang_3/defects4j_Lang_3/src/main/java//org/apache/commons/lang3/math/NumberUtils.java, range: <570,574>, original: if(expPos>-1&&expPos<str.length()-1){
+exp=str.substring(expPos+1,str.length());
+}else {
+exp=null;
+}
+, patch: if(!Character.isUpperCase(str.charAt(1))||!Character.isUpperCase(str.charAt(2))){
+throw new IllegalArgumentException("Invalid locale format: "+str);
+}
+if(expPos>-1&&expPos<str.length()-1){
+exp=str.substring(expPos+1,str.length());
+}else {
+exp=null;
+}
+
+
+                

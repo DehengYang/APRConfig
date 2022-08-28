@@ -1,0 +1,96 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_61/defects4j_Closure_61/defects4j_Closure_61/src/com/google/javascript/jscomp/NodeUtil.java /tmp/fixed/defects4j_Closure_61/src/com/google/javascript/jscomp/NodeUtil.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_61/defects4j_Closure_61/defects4j_Closure_61/src/com/google/javascript/jscomp/NodeUtil.java	2021-08-29 03:56:08.177428581 +0800
++++ /tmp/fixed/defects4j_Closure_61/src/com/google/javascript/jscomp/NodeUtil.java	2021-08-29 03:56:33.626469373 +0800
+@@ -955,6 +955,12 @@
+       }
+ 
+       // Functions in the "Math" namespace have no side effects.
++      if (nameNode.getFirstChild().getType() == Token.NAME) {
++        String namespaceName = nameNode.getFirstChild().getString();
++        if (namespaceName.equals("Math")) {
++          return false;
++        }
++      }
+ 
+       if (compiler != null && !compiler.hasRegExpGlobalReferences()) {
+         if (nameNode.getFirstChild().getType() == Token.REGEXP
+
+
+                
+                ====================== dynamoth_1 Closure_61 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1460,7 +1460,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (this.getChildCount() == 0) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                
+                ====================== nopol_1 Closure_61 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1460,7 +1460,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (node2.type <= com.google.javascript.rhino.Node.ENUM_PROP) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                
+                ====================== simfix_1 Closure_61 ================================
+                
+                [PATCH 801] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_61/defects4j_Closure_61/defects4j_Closure_61/src//com/google/javascript/rhino/Node.java, range: <1141,1152>, original: if(Token.printTrees){
+for(int i=0;i!=level;++i){
+sb.append("    ");
+}
+sb.append(n.toString());
+sb.append('\n');
+for(Node cursor=n.getFirstChild();cursor!=null;cursor=cursor.getNext()){
+toStringTreeHelper(cursor,level+1,sb);
+}
+}
+, patch: if(Token.printTrees){
+for(int i=0;i!=level;++i){
+level++;
+sb.append("    ");
+}
+sb.append(n.toString());
+sb.append('\n');
+for(Node cursor=n.getFirstChild();cursor!=null;cursor=cursor.getNext()){
+toStringTreeHelper(cursor,level+1,sb);
+}
+}
+
+
+                

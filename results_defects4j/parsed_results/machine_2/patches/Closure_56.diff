@@ -1,0 +1,50 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_56/defects4j_Closure_56/defects4j_Closure_56/src/com/google/javascript/jscomp/SourceFile.java /tmp/fixed/defects4j_Closure_56/src/com/google/javascript/jscomp/SourceFile.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_56/defects4j_Closure_56/defects4j_Closure_56/src/com/google/javascript/jscomp/SourceFile.java	2021-09-05 16:20:34.355022879 +0800
++++ /tmp/fixed/defects4j_Closure_56/src/com/google/javascript/jscomp/SourceFile.java	2021-09-05 16:21:07.272150567 +0800
+@@ -239,7 +239,11 @@
+       // If next new line cannot be found, there are two cases
+       // 1. pos already reaches the end of file, then null should be returned
+       // 2. otherwise, return the contents between pos and the end of file.
++      if (pos >= js.length()) {
+         return null;
++      } else {
++        return js.substring(pos, js.length());
++      }
+     } else {
+       return js.substring(pos, js.indexOf('\n', pos));
+     }
+
+
+                
+                ====================== tbar_2 Closure_56 ================================
+                
+                [PATCH 3057]//**********************************************************
+//com/google/javascript/jscomp/CrossModuleMethodMotion.java ------ 174
+//**********************************************************
+===Buggy Code===
+unstubParent.addChildToFront(
+              // A.prototype.b = JSCompiler_unstubMethod(id, body);
+              new Node(Token.EXPR_RESULT,
+                  new Node(Token.ASSIGN,
+                      new Node(Token.GETPROP,
+                          proto.cloneTree(),
+                          Node.newString(Token.STRING, nameInfo.name)),
+                      unstubCall))
+                  .copyInformationFromForTree(value));
+
+===Patch Code===
+unstubParent.addChildToFront(
+              // A.prototype.b = JSCompiler_unstubMethod(id, body);
+              new Node(Token.STRING,
+                  new Node(Token.ASSIGN,
+                      new Node(Token.GETPROP,
+                          proto.cloneTree(),
+                          Node.newString(Token.STRING, nameInfo.name)),
+                      unstubCall))
+                  .copyInformationFromForTree(value));
+
+
+                

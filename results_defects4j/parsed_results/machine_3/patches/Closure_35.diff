@@ -1,0 +1,77 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_35/defects4j_Closure_35/defects4j_Closure_35/src/com/google/javascript/jscomp/TypeInference.java /tmp/fixed/defects4j_Closure_35/src/com/google/javascript/jscomp/TypeInference.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_35/defects4j_Closure_35/defects4j_Closure_35/src/com/google/javascript/jscomp/TypeInference.java	2021-08-30 10:59:40.211756940 +0800
++++ /tmp/fixed/defects4j_Closure_35/src/com/google/javascript/jscomp/TypeInference.java	2021-08-30 11:00:06.224821911 +0800
+@@ -1118,21 +1118,8 @@
+ 
+     ObjectType constraintObj =
+         ObjectType.cast(constraint.restrictByNotNullOrUndefined());
+-    if (constraintObj != null && constraintObj.isRecordType()) {
+-      ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());
+-      if (objType != null) {
+-        for (String prop : constraintObj.getOwnPropertyNames()) {
+-          JSType propType = constraintObj.getPropertyType(prop);
+-          if (!objType.isPropertyTypeDeclared(prop)) {
+-            JSType typeToInfer = propType;
+-            if (!objType.hasProperty(prop)) {
+-              typeToInfer =
+-                  getNativeType(VOID_TYPE).getLeastSupertype(propType);
+-            }
+-            objType.defineInferredProperty(prop, typeToInfer, null);
+-          }
+-        }
+-      }
++    if (constraintObj != null) {
++      type.matchConstraint(constraintObj);
+     }
+   }
+ 
+
+
+                
+                ====================== dynamoth_1 Closure_35 ================================
+                
+                --- a/src/com/google/javascript/rhino/jstype/RecordType.java
++++ b/src/com/google/javascript/rhino/jstype/RecordType.java
+@@ -247,4 +247,6 @@
+for (String property : typeB.properties.keySet()) {
+-      if (!typeA.hasProperty(property)) {
+-        return false;
++      if (typeA.hasReferenceName() || typeA.isRecordType()) {
++        if (!typeA.hasProperty(property)) {
++          return false;
++        }
+}
+
+
+
+
+                
+                ====================== nopol_1 Closure_35 ================================
+                
+                --- a/src/com/google/javascript/rhino/jstype/JSTypeRegistry.java
++++ b/src/com/google/javascript/rhino/jstype/JSTypeRegistry.java
+@@ -1654,8 +1654,10 @@
+// Add the property to the record.
+-      if (builder.addProperty(fieldName, fieldType, fieldNameNode) == null) {
+-        // Duplicate field name, warning and skip
+-        reporter.warning(
+-            "Duplicate record field " + fieldName,
+-            sourceName,
+-            n.getLineno(), fieldNameNode.getCharno());
++      if ((5) != (fieldName.length())) {
++        if (builder.addProperty(fieldName, fieldType, fieldNameNode) == null) {
++          // Duplicate field name, warning and skip
++          reporter.warning(
++          "Duplicate record field " + fieldName,
++          sourceName,
++          n.getLineno(), fieldNameNode.getCharno());
++        }
+}
+
+
+
+
+                

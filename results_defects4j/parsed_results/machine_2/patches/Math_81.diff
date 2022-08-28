@@ -1,0 +1,183 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_81/defects4j_Math_81/defects4j_Math_81/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java /tmp/fixed/defects4j_Math_81/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_81/defects4j_Math_81/defects4j_Math_81/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java	2021-08-31 05:34:31.773365104 +0800
++++ /tmp/fixed/defects4j_Math_81/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java	2021-08-31 05:34:45.357850588 +0800
+@@ -600,6 +600,7 @@
+         lowerSpectra = Math.min(lowerSpectra, lower);
+         final double upper = dCurrent + eCurrent;
+         work[upperStart + m - 1] = upper;
++        upperSpectra = Math.max(upperSpectra, upper);
+         minPivot = MathUtils.SAFE_MIN * Math.max(1.0, eMax * eMax);
+ 
+     }
+@@ -902,8 +903,8 @@
+                     diagMax    = work[4 * i0];
+                     offDiagMin = work[4 * i0 + 2];
+                     double previousEMin = work[4 * i0 + 3];
+-                    for (int i = 4 * i0; i < 4 * n0 - 11; i += 4) {
+-                        if ((work[i + 3] <= TOLERANCE_2 * work[i]) &&
++                    for (int i = 4 * i0; i < 4 * n0 - 16; i += 4) {
++                        if ((work[i + 3] <= TOLERANCE_2 * work[i]) ||
+                             (work[i + 2] <= TOLERANCE_2 * sigma)) {
+                             // insert a split
+                             work[i + 2]  = -sigma;
+@@ -1540,7 +1541,7 @@
+                 double a2 = (work[np - 8] / b2) * (1 + work[np - 4] / b1);
+ 
+                 // approximate contribution to norm squared from i < nn-2.
+-                if (end - start > 2) {
++                if (end - start > 3) {
+                     b2 = work[nn - 13] / work[nn - 15];
+                     a2 = a2 + b2;
+                     for (int i4 = nn - 17; i4 >= 4 * start + 2 + pingPong; i4 -= 4) {
+
+
+                
+                ====================== dynamoth_1 Math_81 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java
++++ b/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java
+@@ -1536,3 +1536,3 @@
+final double gam = dN2;
+-                if (work[np - 8] > b2 || work[np - 4] > b1) {
++                if (true) {
+return;
+
+
+
+
+                
+                ====================== nopol_1 Math_81 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java
++++ b/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java
+@@ -1479,3 +1479,5 @@
+gam = dN;
+-                        a2 = 0.0;
++                        if (org.apache.commons.math.linear.EigenDecompositionImpl.this.cachedV!=null) {
++                            a2 = 0.0;
++                        }
+if (work[nn - 5]  >  work[nn - 7]) {
+
+
+
+
+                
+                ====================== nopol_2 Math_81 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java
++++ b/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java
+@@ -1479,3 +1479,5 @@
+gam = dN;
+-                        a2 = 0.0;
++                        if (org.apache.commons.math.linear.EigenDecompositionImpl.this.cachedV!=null) {
++                            a2 = 0.0;
++                        }
+if (work[nn - 5]  >  work[nn - 7]) {
+
+
+
+
+                
+                ====================== nopol_3 Math_81 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java
++++ b/src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java
+@@ -1479,3 +1479,5 @@
+gam = dN;
+-                        a2 = 0.0;
++                        if (org.apache.commons.math.linear.EigenDecompositionImpl.this.cachedV!=null) {
++                            a2 = 0.0;
++                        }
+if (work[nn - 5]  >  work[nn - 7]) {
+
+
+
+
+                
+                ====================== simfix_1 Math_81 ================================
+                
+                [PATCH 312] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_81/defects4j_Math_81/defects4j_Math_81/src/main/java//org/apache/commons/math/linear/EigenDecompositionImpl.java, range: <1535,1539>, original: double b2=work[np-6];
+ final double gam=dN2;
+if(work[np-8]>b2||work[np-4]>b1){
+return ;
+}
+, patch: double b2=work[np-6];
+ final double gam=dN2;
+if(b2>0.0&&b2>b2*b1/(1+b2*b2)){
+return ;
+}
+
+
+                
+                ====================== simfix_2 Math_81 ================================
+                
+                [PATCH 312] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_81/defects4j_Math_81/defects4j_Math_81/src/main/java//org/apache/commons/math/linear/EigenDecompositionImpl.java, range: <1535,1539>, original: double b2=work[np-6];
+ final double gam=dN2;
+if(work[np-8]>b2||work[np-4]>b1){
+return ;
+}
+, patch: double b2=work[np-6];
+ final double gam=dN2;
+if(b2>0.0&&b2>b2*b1/(1+b2*b2)){
+return ;
+}
+
+
+                
+                ====================== simfix_3 Math_81 ================================
+                
+                [PATCH 312] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_81/defects4j_Math_81/defects4j_Math_81/src/main/java//org/apache/commons/math/linear/EigenDecompositionImpl.java, range: <1535,1539>, original: double b2=work[np-6];
+ final double gam=dN2;
+if(work[np-8]>b2||work[np-4]>b1){
+return ;
+}
+, patch: double b2=work[np-6];
+ final double gam=dN2;
+if(b2>0.0&&b2>b2*b1/(1+b2*b2)){
+return ;
+}
+
+
+                
+                ====================== tbar_1 Math_81 ================================
+                
+                [PATCH 77]//**********************************************************
+//org/apache/commons/math/linear/EigenDecompositionImpl.java ------ 1533
+//**********************************************************
+===Buggy Code===
+final int np = nn - 2 * pingPong;
+
+===Patch Code===
+final int np = nn - 2 * this.tType;
+
+
+                
+                ====================== tbar_2 Math_81 ================================
+                
+                [PATCH 77]//**********************************************************
+//org/apache/commons/math/linear/EigenDecompositionImpl.java ------ 1533
+//**********************************************************
+===Buggy Code===
+final int np = nn - 2 * pingPong;
+
+===Patch Code===
+final int np = nn - 2 * this.tType;
+
+
+                
+                ====================== tbar_3 Math_81 ================================
+                
+                [PATCH 77]//**********************************************************
+//org/apache/commons/math/linear/EigenDecompositionImpl.java ------ 1533
+//**********************************************************
+===Buggy Code===
+final int np = nn - 2 * pingPong;
+
+===Patch Code===
+final int np = nn - 2 * this.tType;
+
+
+                

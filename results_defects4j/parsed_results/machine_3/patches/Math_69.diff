@@ -1,0 +1,153 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_69/defects4j_Math_69/defects4j_Math_69/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java /tmp/fixed/defects4j_Math_69/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_69/defects4j_Math_69/defects4j_Math_69/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java	2021-09-06 04:53:08.043125197 +0800
++++ /tmp/fixed/defects4j_Math_69/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java	2021-09-06 04:53:34.255797053 +0800
+@@ -168,7 +168,7 @@
+                 } else {
+                     double r = correlationMatrix.getEntry(i, j);
+                     double t = Math.abs(r * Math.sqrt((nObs - 2)/(1 - r * r)));
+-                    out[i][j] = 2 * (1 - tDistribution.cumulativeProbability(t));
++                    out[i][j] = 2 * tDistribution.cumulativeProbability(-t);
+                 }
+             }
+         }
+
+
+                
+                ====================== dynamoth_2 Math_69 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java
++++ b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java
+@@ -188,9 +188,11 @@
+RealMatrix outMatrix = new BlockRealMatrix(nVars, nVars);
+-        for (int i = 0; i < nVars; i++) {
+-            for (int j = 0; j < i; j++) {
+-              double corr = correlation(matrix.getColumn(i), matrix.getColumn(j));
+-              outMatrix.setEntry(i, j, corr);
+-              outMatrix.setEntry(j, i, corr);
++        if (matrix.getEntry((int) nVars, (int) 0) != matrix.getEntry((int) 1, (int) nVars)) {
++            for (int i = 0; i < nVars; i++) {
++                for (int j = 0; j < i; j++) {
++                    double corr = correlation(matrix.getColumn(i), matrix.getColumn(j));
++                    outMatrix.setEntry(i, j, corr);
++                    outMatrix.setEntry(j, i, corr);
++                }
++                outMatrix.setEntry(i, i, 1d);
+}
+-            outMatrix.setEntry(i, i, 1d);
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Math_69 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java
++++ b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java
+@@ -188,9 +188,11 @@
+RealMatrix outMatrix = new BlockRealMatrix(nVars, nVars);
+-        for (int i = 0; i < nVars; i++) {
+-            for (int j = 0; j < i; j++) {
+-              double corr = correlation(matrix.getColumn(i), matrix.getColumn(j));
+-              outMatrix.setEntry(i, j, corr);
+-              outMatrix.setEntry(j, i, corr);
++        if (matrix.getEntry((int) nVars, (int) 0) != matrix.getEntry((int) 1, (int) nVars)) {
++            for (int i = 0; i < nVars; i++) {
++                for (int j = 0; j < i; j++) {
++                    double corr = correlation(matrix.getColumn(i), matrix.getColumn(j));
++                    outMatrix.setEntry(i, j, corr);
++                    outMatrix.setEntry(j, i, corr);
++                }
++                outMatrix.setEntry(i, i, 1d);
+}
+-            outMatrix.setEntry(i, i, 1d);
+}
+
+
+
+
+                
+                ====================== nopol_1 Math_69 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java
++++ b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java
+@@ -188,9 +188,11 @@
+RealMatrix outMatrix = new BlockRealMatrix(nVars, nVars);
+-        for (int i = 0; i < nVars; i++) {
+-            for (int j = 0; j < i; j++) {
+-              double corr = correlation(matrix.getColumn(i), matrix.getColumn(j));
+-              outMatrix.setEntry(i, j, corr);
+-              outMatrix.setEntry(j, i, corr);
++        if ((nVars) != (2)) {
++            for (int i = 0; i < nVars; i++) {
++                for (int j = 0; j < i; j++) {
++                    double corr = correlation(matrix.getColumn(i), matrix.getColumn(j));
++                    outMatrix.setEntry(i, j, corr);
++                    outMatrix.setEntry(j, i, corr);
++                }
++                outMatrix.setEntry(i, i, 1d);
+}
+-            outMatrix.setEntry(i, i, 1d);
+}
+
+
+
+
+                
+                ====================== nopol_2 Math_69 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java
++++ b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java
+@@ -188,9 +188,11 @@
+RealMatrix outMatrix = new BlockRealMatrix(nVars, nVars);
+-        for (int i = 0; i < nVars; i++) {
+-            for (int j = 0; j < i; j++) {
+-              double corr = correlation(matrix.getColumn(i), matrix.getColumn(j));
+-              outMatrix.setEntry(i, j, corr);
+-              outMatrix.setEntry(j, i, corr);
++        if ((nVars) != (2)) {
++            for (int i = 0; i < nVars; i++) {
++                for (int j = 0; j < i; j++) {
++                    double corr = correlation(matrix.getColumn(i), matrix.getColumn(j));
++                    outMatrix.setEntry(i, j, corr);
++                    outMatrix.setEntry(j, i, corr);
++                }
++                outMatrix.setEntry(i, i, 1d);
+}
+-            outMatrix.setEntry(i, i, 1d);
+}
+
+
+
+
+                
+                ====================== nopol_3 Math_69 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java
++++ b/src/main/java/org/apache/commons/math/stat/correlation/PearsonsCorrelation.java
+@@ -188,9 +188,11 @@
+RealMatrix outMatrix = new BlockRealMatrix(nVars, nVars);
+-        for (int i = 0; i < nVars; i++) {
+-            for (int j = 0; j < i; j++) {
+-              double corr = correlation(matrix.getColumn(i), matrix.getColumn(j));
+-              outMatrix.setEntry(i, j, corr);
+-              outMatrix.setEntry(j, i, corr);
++        if ((nVars) != (2)) {
++            for (int i = 0; i < nVars; i++) {
++                for (int j = 0; j < i; j++) {
++                    double corr = correlation(matrix.getColumn(i), matrix.getColumn(j));
++                    outMatrix.setEntry(i, j, corr);
++                    outMatrix.setEntry(j, i, corr);
++                }
++                outMatrix.setEntry(i, i, 1d);
+}
+-            outMatrix.setEntry(i, i, 1d);
+}
+
+
+
+
+                

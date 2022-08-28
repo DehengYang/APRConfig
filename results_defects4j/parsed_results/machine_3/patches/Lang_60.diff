@@ -1,0 +1,53 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_60/defects4j_Lang_60/defects4j_Lang_60/src/java/org/apache/commons/lang/text/StrBuilder.java /tmp/fixed/defects4j_Lang_60/src/java/org/apache/commons/lang/text/StrBuilder.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_60/defects4j_Lang_60/defects4j_Lang_60/src/java/org/apache/commons/lang/text/StrBuilder.java	2021-09-02 06:24:02.390949579 +0800
++++ /tmp/fixed/defects4j_Lang_60/src/java/org/apache/commons/lang/text/StrBuilder.java	2021-09-02 06:24:17.836630206 +0800
+@@ -1670,7 +1670,7 @@
+      */
+     public boolean contains(char ch) {
+         char[] thisBuf = buffer;
+-        for (int i = 0; i < thisBuf.length; i++) {
++        for (int i = 0; i < this.size; i++) {
+             if (thisBuf[i] == ch) {
+                 return true;
+             }
+@@ -1727,7 +1727,7 @@
+             return -1;
+         }
+         char[] thisBuf = buffer;
+-        for (int i = startIndex; i < thisBuf.length; i++) {
++        for (int i = startIndex; i < size; i++) {
+             if (thisBuf[i] == ch) {
+                 return i;
+             }
+
+
+                
+                ====================== tbar_1 Lang_60 ================================
+                
+                [PATCH 2230]//**********************************************************
+//org/apache/commons/lang/text/StrBuilder.java ------ 1114
+//**********************************************************
+===Buggy Code===
+System.arraycopy(buffer, endIndex, buffer, startIndex, size - endIndex);
+
+===Patch Code===
+System.arraycopy(buffer, endIndex, buffer, startIndex, capacity() - endIndex);
+
+
+                
+                ====================== tbar_2 Lang_60 ================================
+                
+                [PATCH 2230]//**********************************************************
+//org/apache/commons/lang/text/StrBuilder.java ------ 1114
+//**********************************************************
+===Buggy Code===
+System.arraycopy(buffer, endIndex, buffer, startIndex, size - endIndex);
+
+===Patch Code===
+System.arraycopy(buffer, endIndex, buffer, startIndex, capacity() - endIndex);
+
+
+                

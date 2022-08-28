@@ -1,0 +1,52 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_26/defects4j_Lang_26/defects4j_Lang_26/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java /tmp/fixed/defects4j_Lang_26/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_26/defects4j_Lang_26/defects4j_Lang_26/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java	2021-09-03 00:24:26.356997741 +0800
++++ /tmp/fixed/defects4j_Lang_26/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java	2021-09-03 00:24:43.105598655 +0800
+@@ -817,7 +817,7 @@
+      * @return the formatted string
+      */
+     public String format(Date date) {
+-        Calendar c = new GregorianCalendar(mTimeZone);
++        Calendar c = new GregorianCalendar(mTimeZone, mLocale);
+         c.setTime(date);
+         return applyRules(c, new StringBuffer(mMaxLengthEstimate)).toString();
+     }
+
+
+                
+                ====================== simfix_1 Lang_26 ================================
+                
+                [PATCH 567] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_26/defects4j_Lang_26/defects4j_Lang_26/src/main/java//org/apache/commons/lang3/time/FastDateFormat.java, range: <745,751>, original: if(!inLiteral&&(c>='A'&&c<='Z'||c>='a'&&c<='z')){
+i--;
+break;
+}else {
+buf.append(c);
+}
+, patch: if(mLocaleForced&&c!='\''){
+i--;
+break;
+}else {
+buf.append(c);
+}
+
+
+                
+                ====================== simfix_2 Lang_26 ================================
+                
+                [PATCH 567] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_26/defects4j_Lang_26/defects4j_Lang_26/src/main/java//org/apache/commons/lang3/time/FastDateFormat.java, range: <745,751>, original: if(!inLiteral&&(c>='A'&&c<='Z'||c>='a'&&c<='z')){
+i--;
+break;
+}else {
+buf.append(c);
+}
+, patch: if(mLocaleForced&&c!='\''){
+i--;
+break;
+}else {
+buf.append(c);
+}
+
+
+                

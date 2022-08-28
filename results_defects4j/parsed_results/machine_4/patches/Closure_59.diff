@@ -1,0 +1,51 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_59/defects4j_Closure_59/defects4j_Closure_59/src/com/google/javascript/jscomp/Compiler.java /tmp/fixed/defects4j_Closure_59/src/com/google/javascript/jscomp/Compiler.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_59/defects4j_Closure_59/defects4j_Closure_59/src/com/google/javascript/jscomp/Compiler.java	2021-09-08 06:59:46.704602459 +0800
++++ /tmp/fixed/defects4j_Closure_59/src/com/google/javascript/jscomp/Compiler.java	2021-09-08 07:00:07.869405644 +0800
+@@ -252,7 +252,8 @@
+           CheckLevel.OFF);
+     }
+ 
+-    if (options.checkGlobalThisLevel.isOn()) {
++    if (options.checkGlobalThisLevel.isOn() &&
++        !options.disables(DiagnosticGroups.GLOBAL_THIS)) {
+       options.setWarningLevel(
+           DiagnosticGroups.GLOBAL_THIS,
+           options.checkGlobalThisLevel);
+
+
+                
+                ====================== dynamoth_2 Closure_59 ================================
+                
+                --- a/src/com/google/javascript/jscomp/WarningLevel.java
++++ b/src/com/google/javascript/jscomp/WarningLevel.java
+@@ -78,3 +78,5 @@
+options.checkSuspiciousCode = true;
+-    options.checkGlobalThisLevel = CheckLevel.WARNING;
++    if (false) {
++      options.checkGlobalThisLevel = CheckLevel.WARNING;
++    }
+options.checkSymbols = true;
+
+
+
+
+                
+                ====================== dynamoth_3 Closure_59 ================================
+                
+                --- a/src/com/google/javascript/jscomp/WarningLevel.java
++++ b/src/com/google/javascript/jscomp/WarningLevel.java
+@@ -78,3 +78,5 @@
+options.checkSuspiciousCode = true;
+-    options.checkGlobalThisLevel = CheckLevel.WARNING;
++    if (false) {
++      options.checkGlobalThisLevel = CheckLevel.WARNING;
++    }
+options.checkSymbols = true;
+
+
+
+
+                

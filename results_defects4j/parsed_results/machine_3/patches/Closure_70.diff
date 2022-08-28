@@ -1,0 +1,29 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_70/defects4j_Closure_70/defects4j_Closure_70/src/com/google/javascript/jscomp/TypedScopeCreator.java /tmp/fixed/defects4j_Closure_70/src/com/google/javascript/jscomp/TypedScopeCreator.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_70/defects4j_Closure_70/defects4j_Closure_70/src/com/google/javascript/jscomp/TypedScopeCreator.java	2021-08-31 02:03:19.194814231 +0800
++++ /tmp/fixed/defects4j_Closure_70/src/com/google/javascript/jscomp/TypedScopeCreator.java	2021-08-31 02:03:45.183877847 +0800
+@@ -1742,7 +1742,7 @@
+           for (Node astParameter : astParameters.children()) {
+             if (jsDocParameter != null) {
+               defineSlot(astParameter, functionNode,
+-                  jsDocParameter.getJSType(), true);
++                  jsDocParameter.getJSType(), false);
+               jsDocParameter = jsDocParameter.getNext();
+             } else {
+               defineSlot(astParameter, functionNode, null, true);
+
+
+                
+                ====================== simfix_2 Closure_70 ================================
+                
+                [PATCH 1510] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_70/defects4j_Closure_70/defects4j_Closure_70/src//com/google/javascript/jscomp/InlineObjectLiterals.java, range: <199,203>, original: if(child.getType()==Token.GET||child.getType()==Token.SET){
+return false;
+}
+, patch: if(child.getType()==Token.ASSIGN){
+return true;
+}
+
+
+                

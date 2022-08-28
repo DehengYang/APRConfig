@@ -1,0 +1,212 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_44/defects4j_Lang_44/defects4j_Lang_44/src/java/org/apache/commons/lang/NumberUtils.java /tmp/fixed/defects4j_Lang_44/src/java/org/apache/commons/lang/NumberUtils.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_44/defects4j_Lang_44/defects4j_Lang_44/src/java/org/apache/commons/lang/NumberUtils.java	2021-08-30 10:48:17.577811210 +0800
++++ /tmp/fixed/defects4j_Lang_44/src/java/org/apache/commons/lang/NumberUtils.java	2021-08-30 10:48:28.682268578 +0800
+@@ -142,6 +142,9 @@
+         if (val.length() == 0) {
+             throw new NumberFormatException("\"\" is not a valid number.");
+         }
++        if (val.length() == 1 && !Character.isDigit(val.charAt(0))) {
++            throw new NumberFormatException(val + " is not a valid number.");
++        }
+         if (val.startsWith("--")) {
+             // this is protection for poorness in java.lang.BigDecimal.
+             // it accepts this as a legal value, but it does not appear 
+
+
+                
+                ====================== nopol_1 Lang_44 ================================
+                
+                --- a/src/java/org/apache/commons/lang/NumberUtils.java
++++ b/src/java/org/apache/commons/lang/NumberUtils.java
+@@ -192,12 +192,14 @@
+case 'L' :
+-                    if (dec == null
++                    if ((1) != (val.length())) {
++                        if (dec == null
+&& exp == null
+&& (numeric.charAt(0) == '-' && isDigits(numeric.substring(1)) || isDigits(numeric))) {
+-                        try {
+-                            return createLong(numeric);
+-                        } catch (NumberFormatException nfe) {
+-                            //Too big for a long
++                            try {
++                                return createLong(numeric);
++                            } catch (NumberFormatException nfe) {
++                                //Too big for a long
++                            }
++                            return createBigInteger(numeric);
++
+}
+-                        return createBigInteger(numeric);
+-
+}
+
+
+
+
+                
+                ====================== simfix_1 Lang_44 ================================
+                
+                [PATCH 746] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_44/defects4j_Lang_44/defects4j_Lang_44/src/java//org/apache/commons/lang/NumberUtils.java, range: <193,203>, original: if(dec==null&&exp==null&&(numeric.charAt(0)=='-'&&isDigits(numeric.substring(1))||isDigits(numeric))){
+try{
+return createLong(numeric);
+}catch (NumberFormatException nfe) {
+}
+
+return createBigInteger(numeric);
+}
+, patch: if(dec==null&&exp==null&&expPos<numeric.length()-1){
+try{
+return createLong(numeric);
+}catch (NumberFormatException nfe) {
+}
+
+return createBigInteger(numeric);
+}
+
+
+                
+                ====================== simfix_2 Lang_44 ================================
+                
+                [PATCH 746] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_44/defects4j_Lang_44/defects4j_Lang_44/src/java//org/apache/commons/lang/NumberUtils.java, range: <193,203>, original: if(dec==null&&exp==null&&(numeric.charAt(0)=='-'&&isDigits(numeric.substring(1))||isDigits(numeric))){
+try{
+return createLong(numeric);
+}catch (NumberFormatException nfe) {
+}
+
+return createBigInteger(numeric);
+}
+, patch: if(dec==null&&exp==null&&expPos<numeric.length()-1){
+try{
+return createLong(numeric);
+}catch (NumberFormatException nfe) {
+}
+
+return createBigInteger(numeric);
+}
+
+
+                
+                ====================== simfix_3 Lang_44 ================================
+                
+                [PATCH 746] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_44/defects4j_Lang_44/defects4j_Lang_44/src/java//org/apache/commons/lang/NumberUtils.java, range: <193,203>, original: if(dec==null&&exp==null&&(numeric.charAt(0)=='-'&&isDigits(numeric.substring(1))||isDigits(numeric))){
+try{
+return createLong(numeric);
+}catch (NumberFormatException nfe) {
+}
+
+return createBigInteger(numeric);
+}
+, patch: if(dec==null&&exp==null&&expPos<numeric.length()-1){
+try{
+return createLong(numeric);
+}catch (NumberFormatException nfe) {
+}
+
+return createBigInteger(numeric);
+}
+
+
+                
+                ====================== tbar_1 Lang_44 ================================
+                
+                [PATCH 456]//**********************************************************
+//org/apache/commons/lang/NumberUtils.java ------ 193
+//**********************************************************
+===Buggy Code===
+if (dec == null
+                        && exp == null
+                        && (numeric.charAt(0) == '-' && isDigits(numeric.substring(1)) || isDigits(numeric))) {
+                        try {
+                            return createLong(numeric);
+                        } catch (NumberFormatException nfe) {
+                            //Too big for a long
+                        }
+                        return createBigInteger(numeric);
+
+                    }
+
+===Patch Code===
+if (dec != numeric || (dec == null
+                        && exp == null
+                        && (numeric.charAt(0) == '-' && isDigits(numeric.substring(1)) || isDigits(numeric)))) {
+                        try {
+                            return createLong(numeric);
+                        } catch (NumberFormatException nfe) {
+                            //Too big for a long
+                        }
+                        return createBigInteger(numeric);
+
+                    }
+
+
+                
+                ====================== tbar_2 Lang_44 ================================
+                
+                [PATCH 456]//**********************************************************
+//org/apache/commons/lang/NumberUtils.java ------ 193
+//**********************************************************
+===Buggy Code===
+if (dec == null
+                        && exp == null
+                        && (numeric.charAt(0) == '-' && isDigits(numeric.substring(1)) || isDigits(numeric))) {
+                        try {
+                            return createLong(numeric);
+                        } catch (NumberFormatException nfe) {
+                            //Too big for a long
+                        }
+                        return createBigInteger(numeric);
+
+                    }
+
+===Patch Code===
+if (dec != numeric || (dec == null
+                        && exp == null
+                        && (numeric.charAt(0) == '-' && isDigits(numeric.substring(1)) || isDigits(numeric)))) {
+                        try {
+                            return createLong(numeric);
+                        } catch (NumberFormatException nfe) {
+                            //Too big for a long
+                        }
+                        return createBigInteger(numeric);
+
+                    }
+
+
+                
+                ====================== tbar_3 Lang_44 ================================
+                
+                [PATCH 456]//**********************************************************
+//org/apache/commons/lang/NumberUtils.java ------ 193
+//**********************************************************
+===Buggy Code===
+if (dec == null
+                        && exp == null
+                        && (numeric.charAt(0) == '-' && isDigits(numeric.substring(1)) || isDigits(numeric))) {
+                        try {
+                            return createLong(numeric);
+                        } catch (NumberFormatException nfe) {
+                            //Too big for a long
+                        }
+                        return createBigInteger(numeric);
+
+                    }
+
+===Patch Code===
+if (dec != numeric || (dec == null
+                        && exp == null
+                        && (numeric.charAt(0) == '-' && isDigits(numeric.substring(1)) || isDigits(numeric)))) {
+                        try {
+                            return createLong(numeric);
+                        } catch (NumberFormatException nfe) {
+                            //Too big for a long
+                        }
+                        return createBigInteger(numeric);
+
+                    }
+
+
+                

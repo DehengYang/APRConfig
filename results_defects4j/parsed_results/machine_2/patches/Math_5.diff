@@ -1,0 +1,104 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_5/defects4j_Math_5/defects4j_Math_5/src/main/java/org/apache/commons/math3/complex/Complex.java /tmp/fixed/defects4j_Math_5/src/main/java/org/apache/commons/math3/complex/Complex.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_5/defects4j_Math_5/defects4j_Math_5/src/main/java/org/apache/commons/math3/complex/Complex.java	2021-08-28 17:52:27.386972231 +0800
++++ /tmp/fixed/defects4j_Math_5/src/main/java/org/apache/commons/math3/complex/Complex.java	2021-08-28 17:52:51.291827334 +0800
+@@ -302,7 +302,7 @@
+         }
+ 
+         if (real == 0.0 && imaginary == 0.0) {
+-            return NaN;
++            return INF;
+         }
+ 
+         if (isInfinite) {
+
+
+                
+                ====================== dynamoth_1 Math_5 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/complex/Complex.java
++++ b/src/main/java/org/apache/commons/math3/complex/Complex.java
+@@ -344,3 +344,3 @@
+Complex c = (Complex)other;
+-            if (c.isNaN) {
++            if (this.isNaN) {
+return isNaN;
+
+
+
+
+                
+                ====================== simfix_1 Math_5 ================================
+                
+                [PATCH 1] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_5/defects4j_Math_5/defects4j_Math_5/src/main/java//org/apache/commons/math3/complex/Complex.java, range: <304,306>, original: if(real==0.0&&imaginary==0.0){
+return NaN;
+}
+, patch: if(real==0.0&&imaginary==0.0){
+return INF;
+}
+
+
+                
+                ====================== simfix_2 Math_5 ================================
+                
+                [PATCH 1] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_5/defects4j_Math_5/defects4j_Math_5/src/main/java//org/apache/commons/math3/complex/Complex.java, range: <304,306>, original: if(real==0.0&&imaginary==0.0){
+return NaN;
+}
+, patch: if(real==0.0&&imaginary==0.0){
+return INF;
+}
+
+
+                
+                ====================== simfix_3 Math_5 ================================
+                
+                 file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_5/defects4j_Math_5/defects4j_Math_5/src/main/java//org/apache/commons/math3/complex/Complex.java, range: <304,306>, original: if(real==0.0&&imaginary==0.0){
+return NaN;
+}
+, patch: if(real==0.0&&imaginary==0.0){
+return INF;
+}
+
+
+                
+                ====================== tbar_1 Math_5 ================================
+                
+                [PATCH 2]//**********************************************************
+//org/apache/commons/math3/complex/Complex.java ------ 305
+//**********************************************************
+===Buggy Code===
+return NaN;
+
+===Patch Code===
+return INF;
+
+
+                
+                ====================== tbar_2 Math_5 ================================
+                
+                [PATCH 3]//**********************************************************
+//org/apache/commons/math3/complex/Complex.java ------ 305
+//**********************************************************
+===Buggy Code===
+return NaN;
+
+===Patch Code===
+return Complex.INF;
+
+
+                
+                ====================== tbar_3 Math_5 ================================
+                
+                //**********************************************************
+//org/apache/commons/math3/complex/Complex.java ------ 305
+//**********************************************************
+===Buggy Code===
+return NaN;
+
+===Patch Code===
+return INF;
+
+
+                

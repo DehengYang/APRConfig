@@ -1,0 +1,156 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_88/defects4j_Math_88/defects4j_Math_88/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java /tmp/fixed/defects4j_Math_88/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_88/defects4j_Math_88/defects4j_Math_88/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java	2021-08-26 03:54:36.161362398 +0800
++++ /tmp/fixed/defects4j_Math_88/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java	2021-08-26 03:54:54.030093457 +0800
+@@ -326,19 +326,18 @@
+         Integer basicRow =
+             getBasicRow(getNumObjectiveFunctions() + getOriginalNumDecisionVariables());
+         double mostNegative = basicRow == null ? 0 : getEntry(basicRow, getRhsOffset());
++        Set<Integer> basicRows = new HashSet<Integer>();
+         for (int i = 0; i < coefficients.length; i++) {
+             basicRow = getBasicRow(getNumObjectiveFunctions() + i);
++            if (basicRows.contains(basicRow)) {
+                 // if multiple variables can take a given value 
+                 // then we choose the first and set the rest equal to 0
++                coefficients[i] = 0;
++            } else {
++                basicRows.add(basicRow);
+                 coefficients[i] =
+                     (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) -
+                     (restrictToNonNegative ? 0 : mostNegative);
+-            if (basicRow != null) {
+-                for (int j = getNumObjectiveFunctions(); j < getNumObjectiveFunctions() + i; j++) {
+-                    if (tableau.getEntry(basicRow, j) == 1) {
+-                         coefficients[i] = 0;
+-                    }
+-                }
+             }
+         }
+         return new RealPointValuePair(coefficients, f.getValue(coefficients));
+
+
+                
+                ====================== dynamoth_1 Math_88 ================================
+                
+                --- a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
++++ b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
+@@ -338,3 +338,5 @@
+if (tableau.getEntry(basicRow, j) == 1) {
+-                         coefficients[i] = 0;
++                         if (mostNegative != coefficients[0]) {
++                             coefficients[i] = 0;
++                         }
+}
+
+
+
+
+                
+                ====================== nopol_1 Math_88 ================================
+                
+                --- a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
++++ b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
+@@ -338,3 +338,5 @@
+if (tableau.getEntry(basicRow, j) == 1) {
+-                         coefficients[i] = 0;
++                         if ((org.apache.commons.math.optimization.linear.SimplexTableau.this.constraints.size()) != (coefficients.length)) {
++                             coefficients[i] = 0;
++                         }
+}
+
+
+
+
+                
+                ====================== simfix_1 Math_88 ================================
+                
+                [PATCH 2122] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_88/defects4j_Math_88/defects4j_Math_88/src/java//org/apache/commons/math/optimization/linear/SimplexSolver.java, range: <83,86>, original: if(ratio<minRatio){
+minRatio=ratio;
+minRatioPos=i;
+}
+, patch: if(ratio<=minRatio){
+minRatio=ratio;
+minRatioPos=i;
+}
+
+
+                
+                ====================== simfix_2 Math_88 ================================
+                
+                [PATCH 2122] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_88/defects4j_Math_88/defects4j_Math_88/src/java//org/apache/commons/math/optimization/linear/SimplexSolver.java, range: <83,86>, original: if(ratio<minRatio){
+minRatio=ratio;
+minRatioPos=i;
+}
+, patch: if(ratio<=minRatio){
+minRatio=ratio;
+minRatioPos=i;
+}
+
+
+                
+                ====================== simfix_3 Math_88 ================================
+                
+                [PATCH 2122] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_88/defects4j_Math_88/defects4j_Math_88/src/java//org/apache/commons/math/optimization/linear/SimplexSolver.java, range: <83,86>, original: if(ratio<minRatio){
+minRatio=ratio;
+minRatioPos=i;
+}
+, patch: if(ratio<=minRatio){
+minRatio=ratio;
+minRatioPos=i;
+}
+
+
+                
+                ====================== tbar_1 Math_88 ================================
+                
+                [PATCH 561]//**********************************************************
+//org/apache/commons/math/optimization/linear/SimplexTableau.java ------ 338
+//**********************************************************
+===Buggy Code===
+if (tableau.getEntry(basicRow, j) == 1) {
+                         coefficients[i] = 0;
+                    }
+
+===Patch Code===
+if (j == i && (tableau.getEntry(basicRow, j) == 1)) {
+                         coefficients[i] = 0;
+                    }
+
+
+                
+                ====================== tbar_2 Math_88 ================================
+                
+                [PATCH 561]//**********************************************************
+//org/apache/commons/math/optimization/linear/SimplexTableau.java ------ 338
+//**********************************************************
+===Buggy Code===
+if (tableau.getEntry(basicRow, j) == 1) {
+                         coefficients[i] = 0;
+                    }
+
+===Patch Code===
+if (j == i && (tableau.getEntry(basicRow, j) == 1)) {
+                         coefficients[i] = 0;
+                    }
+
+
+                
+                ====================== tbar_3 Math_88 ================================
+                
+                [PATCH 561]//**********************************************************
+//org/apache/commons/math/optimization/linear/SimplexTableau.java ------ 338
+//**********************************************************
+===Buggy Code===
+if (tableau.getEntry(basicRow, j) == 1) {
+                         coefficients[i] = 0;
+                    }
+
+===Patch Code===
+if (j == i && (tableau.getEntry(basicRow, j) == 1)) {
+                         coefficients[i] = 0;
+                    }
+
+
+                

@@ -1,0 +1,50 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_105/defects4j_Math_105/defects4j_Math_105/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java /tmp/fixed/defects4j_Math_105/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_105/defects4j_Math_105/defects4j_Math_105/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java	2021-08-29 11:56:38.108933410 +0800
++++ /tmp/fixed/defects4j_Math_105/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java	2021-08-29 11:56:51.609485893 +0800
+@@ -261,7 +261,7 @@
+      * @return sum of squared errors associated with the regression model
+      */
+     public double getSumSquaredErrors() {
+-        return sumYY - sumXY * sumXY / sumXX;
++        return Math.max(0d, sumYY - sumXY * sumXY / sumXX);
+     }
+ 
+     /**
+
+
+                
+                ====================== dynamoth_1 Math_105 ================================
+                
+                --- a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java
++++ b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java
+@@ -106,3 +106,5 @@
+if (n == 0) {
+-            xbar = x;
++            if ((x <= 1) || (y <= x)) {
++                xbar = x;
++            }
+ybar = y;
+
+
+
+
+                
+                ====================== nopol_1 Math_105 ================================
+                
+                --- a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java
++++ b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java
+@@ -106,3 +106,5 @@
+if (n == 0) {
+-            xbar = x;
++            if (((!((x) != (1))) && (!((x) != (1)))) || (y < x)) {
++                xbar = x;
++            }
+ybar = y;
+
+
+
+
+                

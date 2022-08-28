@@ -1,0 +1,117 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_8/defects4j_Mockito_8/defects4j_Mockito_8/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java /tmp/fixed/defects4j_Mockito_8/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_8/defects4j_Mockito_8/defects4j_Mockito_8/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java	2021-08-27 21:56:49.624408817 +0800
++++ /tmp/fixed/defects4j_Mockito_8/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java	2021-08-27 21:57:44.974648308 +0800
+@@ -76,7 +76,7 @@
+ 
+             if (actualTypeArgument instanceof WildcardType) {
+                 contextualActualTypeParameters.put(typeParameter, boundsOf((WildcardType) actualTypeArgument));
+-            } else {
++            } else if (typeParameter != actualTypeArgument) {
+                 contextualActualTypeParameters.put(typeParameter, actualTypeArgument);
+             }
+             // logger.log("For '" + parameterizedType + "' found type variable : { '" + typeParameter + "(" + System.identityHashCode(typeParameter) + ")" + "' : '" + actualTypeArgument + "(" + System.identityHashCode(typeParameter) + ")" + "' }");
+
+
+                
+                ====================== dynamoth_1 Mockito_8 ================================
+                
+                --- a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java
++++ b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java
+@@ -375,4 +375,6 @@
+private void readTypeVariables() {
+-            for (Type type : typeVariable.getBounds()) {
+-                registerTypeVariablesOn(type);
++            if (false) {
++                for (Type type : typeVariable.getBounds()) {
++                    registerTypeVariablesOn(type);
++                }
+}
+
+
+
+
+                
+                ====================== dynamoth_2 Mockito_8 ================================
+                
+                --- a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java
++++ b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java
+@@ -375,4 +375,6 @@
+private void readTypeVariables() {
+-            for (Type type : typeVariable.getBounds()) {
+-                registerTypeVariablesOn(type);
++            if (false) {
++                for (Type type : typeVariable.getBounds()) {
++                    registerTypeVariablesOn(type);
++                }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Mockito_8 ================================
+                
+                --- a/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java
++++ b/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java
+@@ -375,4 +375,6 @@
+private void readTypeVariables() {
+-            for (Type type : typeVariable.getBounds()) {
+-                registerTypeVariablesOn(type);
++            if (false) {
++                for (Type type : typeVariable.getBounds()) {
++                    registerTypeVariablesOn(type);
++                }
+}
+
+
+
+
+                
+                ====================== tbar_1 Mockito_8 ================================
+                
+                [PATCH 681]//**********************************************************
+//org/mockito/internal/util/reflection/GenericMetadataSupport.java ------ 376
+//**********************************************************
+===Buggy Code===
+for (Type type : typeVariable.getBounds()) {
+                registerTypeVariablesOn(type);
+            }
+
+===Patch Code===
+
+
+
+                
+                ====================== tbar_2 Mockito_8 ================================
+                
+                [PATCH 681]//**********************************************************
+//org/mockito/internal/util/reflection/GenericMetadataSupport.java ------ 376
+//**********************************************************
+===Buggy Code===
+for (Type type : typeVariable.getBounds()) {
+                registerTypeVariablesOn(type);
+            }
+
+===Patch Code===
+
+
+
+                
+                ====================== tbar_3 Mockito_8 ================================
+                
+                //**********************************************************
+//org/mockito/internal/util/reflection/GenericMetadataSupport.java ------ 376
+//**********************************************************
+===Buggy Code===
+for (Type type : typeVariable.getBounds()) {
+                registerTypeVariablesOn(type);
+            }
+
+===Patch Code===
+
+
+
+                

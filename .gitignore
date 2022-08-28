@@ -1,0 +1,30 @@
+#execution_framework/bugs_info/
+#figs
+
+# config
+project-info-maven-plugin/
+
+# output
+#results_*
+#results_defects4j/
+results_defects4j/merge/
+results_defects4j/all_apr_df.csv
+
+# build
+target/
+libs/
+
+# debug
+results_debug/
+
+# python project
+#!/execution_framework/dataset/datasets/
+*.pyc
+
+# modules
+datasets/
+# apr_tools/
+# patch_validator/
+# fl_modules/
+
+git_rm.sh

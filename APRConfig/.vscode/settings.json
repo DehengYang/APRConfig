@@ -1,0 +1,11 @@
+{
+    "python.envFile": "${workspaceFolder}/dev.env",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    // "python.formatting.yapfArgs": ["--style={ based_on_style: pep8, column_limit: 120 }"],
+    // "python.linting.pylintArgs": [
+    //     // "--disable=F0401"
+    //     "--disable=E0401"
+    // ] 
+}
+

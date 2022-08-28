@@ -1,0 +1,144 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_3/defects4j_Chart_3/defects4j_Chart_3/source/org/jfree/data/time/TimeSeries.java /tmp/fixed/defects4j_Chart_3/source/org/jfree/data/time/TimeSeries.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_3/defects4j_Chart_3/defects4j_Chart_3/source/org/jfree/data/time/TimeSeries.java	2021-08-31 04:45:05.429237544 +0800
++++ /tmp/fixed/defects4j_Chart_3/source/org/jfree/data/time/TimeSeries.java	2021-08-31 04:45:26.518107624 +0800
+@@ -1054,6 +1054,8 @@
+             throw new IllegalArgumentException("Requires start <= end.");
+         }
+         TimeSeries copy = (TimeSeries) super.clone();
++        copy.minY = Double.NaN;
++        copy.maxY = Double.NaN;
+         copy.data = new java.util.ArrayList();
+         if (this.data.size() > 0) {
+             for (int index = start; index <= end; index++) {
+
+
+                
+                ====================== simfix_1 Chart_3 ================================
+                
+                [PATCH 2667] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_3/defects4j_Chart_3/defects4j_Chart_3/source//org/jfree/data/time/TimeSeries.java, range: <626,640>, original: if(added){
+updateBoundsForAddedItem(item);
+if(getItemCount()>this.maximumItemCount){
+TimeSeriesDataItem d=(TimeSeriesDataItem)this.data.remove(0);
+updateBoundsForRemovedItem(d);
+}
+removeAgedItems(false);
+if(notify){
+fireSeriesChanged();
+}
+}
+, patch: findBoundsByIteration();
+if(added){
+updateBoundsForAddedItem(item);
+if(getItemCount()>this.maximumItemCount){
+TimeSeriesDataItem d=(TimeSeriesDataItem)this.data.remove(0);
+updateBoundsForRemovedItem(d);
+}
+removeAgedItems(false);
+if(notify){
+fireSeriesChanged();
+}
+}
+
+
+                
+                ====================== simfix_2 Chart_3 ================================
+                
+                [PATCH 2667] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_3/defects4j_Chart_3/defects4j_Chart_3/source//org/jfree/data/time/TimeSeries.java, range: <626,640>, original: if(added){
+updateBoundsForAddedItem(item);
+if(getItemCount()>this.maximumItemCount){
+TimeSeriesDataItem d=(TimeSeriesDataItem)this.data.remove(0);
+updateBoundsForRemovedItem(d);
+}
+removeAgedItems(false);
+if(notify){
+fireSeriesChanged();
+}
+}
+, patch: findBoundsByIteration();
+if(added){
+updateBoundsForAddedItem(item);
+if(getItemCount()>this.maximumItemCount){
+TimeSeriesDataItem d=(TimeSeriesDataItem)this.data.remove(0);
+updateBoundsForRemovedItem(d);
+}
+removeAgedItems(false);
+if(notify){
+fireSeriesChanged();
+}
+}
+
+
+                
+                ====================== simfix_3 Chart_3 ================================
+                
+                [PATCH 2667] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_3/defects4j_Chart_3/defects4j_Chart_3/source//org/jfree/data/time/TimeSeries.java, range: <626,640>, original: if(added){
+updateBoundsForAddedItem(item);
+if(getItemCount()>this.maximumItemCount){
+TimeSeriesDataItem d=(TimeSeriesDataItem)this.data.remove(0);
+updateBoundsForRemovedItem(d);
+}
+removeAgedItems(false);
+if(notify){
+fireSeriesChanged();
+}
+}
+, patch: findBoundsByIteration();
+if(added){
+updateBoundsForAddedItem(item);
+if(getItemCount()>this.maximumItemCount){
+TimeSeriesDataItem d=(TimeSeriesDataItem)this.data.remove(0);
+updateBoundsForRemovedItem(d);
+}
+removeAgedItems(false);
+if(notify){
+fireSeriesChanged();
+}
+}
+
+
+                
+                ====================== tbar_1 Chart_3 ================================
+                
+                [PATCH 451]//**********************************************************
+//org/jfree/data/time/TimeSeries.java ------ 564
+//**********************************************************
+===Buggy Code===
+add(item, true);
+
+===Patch Code===
+updateBoundsForRemovedItem(item);
+	add(item, true);
+
+
+                
+                ====================== tbar_2 Chart_3 ================================
+                
+                [PATCH 451]//**********************************************************
+//org/jfree/data/time/TimeSeries.java ------ 564
+//**********************************************************
+===Buggy Code===
+add(item, true);
+
+===Patch Code===
+updateBoundsForRemovedItem(item);
+	add(item, true);
+
+
+                
+                ====================== tbar_3 Chart_3 ================================
+                
+                [PATCH 451]//**********************************************************
+//org/jfree/data/time/TimeSeries.java ------ 564
+//**********************************************************
+===Buggy Code===
+add(item, true);
+
+===Patch Code===
+updateBoundsForRemovedItem(item);
+	add(item, true);
+
+
+                

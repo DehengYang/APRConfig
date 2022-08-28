@@ -1,0 +1,69 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_35/defects4j_Closure_35/defects4j_Closure_35/src/com/google/javascript/jscomp/TypeInference.java /tmp/fixed/defects4j_Closure_35/src/com/google/javascript/jscomp/TypeInference.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_35/defects4j_Closure_35/defects4j_Closure_35/src/com/google/javascript/jscomp/TypeInference.java	2021-09-02 14:29:59.321938973 +0800
++++ /tmp/fixed/defects4j_Closure_35/src/com/google/javascript/jscomp/TypeInference.java	2021-09-02 14:30:40.887545519 +0800
+@@ -1118,21 +1118,8 @@
+ 
+     ObjectType constraintObj =
+         ObjectType.cast(constraint.restrictByNotNullOrUndefined());
+-    if (constraintObj != null && constraintObj.isRecordType()) {
+-      ObjectType objType = ObjectType.cast(type.restrictByNotNullOrUndefined());
+-      if (objType != null) {
+-        for (String prop : constraintObj.getOwnPropertyNames()) {
+-          JSType propType = constraintObj.getPropertyType(prop);
+-          if (!objType.isPropertyTypeDeclared(prop)) {
+-            JSType typeToInfer = propType;
+-            if (!objType.hasProperty(prop)) {
+-              typeToInfer =
+-                  getNativeType(VOID_TYPE).getLeastSupertype(propType);
+-            }
+-            objType.defineInferredProperty(prop, typeToInfer, null);
+-          }
+-        }
+-      }
++    if (constraintObj != null) {
++      type.matchConstraint(constraintObj);
+     }
+   }
+ 
+
+
+                
+                ====================== dynamoth_2 Closure_35 ================================
+                
+                --- a/src/com/google/javascript/rhino/jstype/RecordType.java
++++ b/src/com/google/javascript/rhino/jstype/RecordType.java
+@@ -247,4 +247,6 @@
+for (String property : typeB.properties.keySet()) {
+-      if (!typeA.hasProperty(property)) {
+-        return false;
++      if (typeA.hasReferenceName() || typeA.isRecordType()) {
++        if (!typeA.hasProperty(property)) {
++          return false;
++        }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Closure_35 ================================
+                
+                --- a/src/com/google/javascript/rhino/jstype/RecordType.java
++++ b/src/com/google/javascript/rhino/jstype/RecordType.java
+@@ -247,4 +247,6 @@
+for (String property : typeB.properties.keySet()) {
+-      if (!typeA.hasProperty(property)) {
+-        return false;
++      if (typeA.hasReferenceName() || typeA.isRecordType()) {
++        if (!typeA.hasProperty(property)) {
++          return false;
++        }
+}
+
+
+
+
+                

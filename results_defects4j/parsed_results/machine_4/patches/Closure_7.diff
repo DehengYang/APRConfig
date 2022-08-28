@@ -1,0 +1,72 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_7/defects4j_Closure_7/defects4j_Closure_7/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java /tmp/fixed/defects4j_Closure_7/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_7/defects4j_Closure_7/defects4j_Closure_7/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java	2021-09-02 09:26:10.484639029 +0800
++++ /tmp/fixed/defects4j_Closure_7/src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java	2021-09-02 09:26:28.397332807 +0800
+@@ -610,9 +610,13 @@
+     public JSType caseObjectType(ObjectType type) {
+       if (value.equals("function")) {
+         JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);
+-        return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;
++        if (resultEqualsValue) {
+           // Objects are restricted to "Function", subtypes are left
++          return ctorType.getGreatestSubtype(type);
++        } else {
+           // Only filter out subtypes of "function"
++          return type.isSubtype(ctorType) ? null : type;
++        }
+       }
+       return matchesExpectation("object") ? type : null;
+     }
+
+
+                
+                ====================== tbar_1 Closure_7 ================================
+                
+                [PATCH 1611]//**********************************************************
+//com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java ------ 611
+//**********************************************************
+===Buggy Code===
+if (value.equals("function")) {
+        JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);
+        return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;
+          // Objects are restricted to "Function", subtypes are left
+          // Only filter out subtypes of "function"
+      }
+
+===Patch Code===
+if ((value.equals("function")) && ((value.equals("object") || value.equals("function")) ==
+          resultEqualsValue)) {
+        JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);
+        return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;
+          // Objects are restricted to "Function", subtypes are left
+          // Only filter out subtypes of "function"
+      }
+
+
+                
+                ====================== tbar_2 Closure_7 ================================
+                
+                [PATCH 1611]//**********************************************************
+//com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java ------ 611
+//**********************************************************
+===Buggy Code===
+if (value.equals("function")) {
+        JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);
+        return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;
+          // Objects are restricted to "Function", subtypes are left
+          // Only filter out subtypes of "function"
+      }
+
+===Patch Code===
+if ((value.equals("function")) && ((value.equals("object") || value.equals("function")) ==
+          resultEqualsValue)) {
+        JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);
+        return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;
+          // Objects are restricted to "Function", subtypes are left
+          // Only filter out subtypes of "function"
+      }
+
+
+                

@@ -1,0 +1,73 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_82/defects4j_Math_82/defects4j_Math_82/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java /tmp/fixed/defects4j_Math_82/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_82/defects4j_Math_82/defects4j_Math_82/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java	2021-08-31 08:00:22.550410677 +0800
++++ /tmp/fixed/defects4j_Math_82/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java	2021-08-31 08:00:41.139076407 +0800
+@@ -79,7 +79,7 @@
+         for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {
+             final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);
+             final double entry = tableau.getEntry(i, col);
+-            if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {
++            if (MathUtils.compareTo(entry, 0, epsilon) > 0) {
+                 final double ratio = rhs / entry;
+                 if (ratio < minRatio) {
+                     minRatio = ratio;
+
+
+                
+                ====================== dynamoth_1 Math_82 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java
++++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java
+@@ -62,3 +62,5 @@
+if (MathUtils.compareTo(tableau.getEntry(0, i), minValue, epsilon) < 0) {
+-                minValue = tableau.getEntry(0, i);
++                if (false) {
++                    minValue = tableau.getEntry(0, i);
++                }
+minPos = i;
+
+
+
+
+                
+                ====================== simfix_1 Math_82 ================================
+                
+                [PATCH 759] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_82/defects4j_Math_82/defects4j_Math_82/src/main/java//org/apache/commons/math/optimization/linear/SimplexSolver.java, range: <62,65>, original: if(MathUtils.compareTo(tableau.getEntry(0,i),minValue,epsilon)<0){
+minValue=tableau.getEntry(0,i);
+minPos=i;
+}
+, patch: if(MathUtils.compareTo(tableau.getEntry(0,i),0,epsilon)<0){
+minValue=tableau.getEntry(0,i);
+minPos=i;
+}
+
+
+                
+                ====================== simfix_2 Math_82 ================================
+                
+                [PATCH 759] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_82/defects4j_Math_82/defects4j_Math_82/src/main/java//org/apache/commons/math/optimization/linear/SimplexSolver.java, range: <62,65>, original: if(MathUtils.compareTo(tableau.getEntry(0,i),minValue,epsilon)<0){
+minValue=tableau.getEntry(0,i);
+minPos=i;
+}
+, patch: if(MathUtils.compareTo(tableau.getEntry(0,i),0,epsilon)<0){
+minValue=tableau.getEntry(0,i);
+minPos=i;
+}
+
+
+                
+                ====================== simfix_3 Math_82 ================================
+                
+                [PATCH 759] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_82/defects4j_Math_82/defects4j_Math_82/src/main/java//org/apache/commons/math/optimization/linear/SimplexSolver.java, range: <62,65>, original: if(MathUtils.compareTo(tableau.getEntry(0,i),minValue,epsilon)<0){
+minValue=tableau.getEntry(0,i);
+minPos=i;
+}
+, patch: if(MathUtils.compareTo(tableau.getEntry(0,i),0,epsilon)<0){
+minValue=tableau.getEntry(0,i);
+minPos=i;
+}
+
+
+                

@@ -1,0 +1,29 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {"PYTHONPATH": "${workspaceFolder}${pathSeparator}${env:PYTHONPATH}"},
+            "args":
+            // Dataset_main.py
+            // ["-d", "defects4j", "-b", "chart-1"] //, "-w", "./test_output"
+            // ["-d", "bears", "-b", "FasterXML-jackson-databind_176912167-190405643"]
+            // ["-d", "bugsdotjar", "-b", "Jackrabbit-Oak_36fe017c"]
+            // ["-d", "quixbugs", "-b", "BREADTH_FIRST_SEARCH_"]
+            // apr
+            // ["-d", "defects4j", "-b", "chart-1", "-apr", "nopol", "-localizer", "gzoltar"]
+            // ["-d", "defects4j", "-b", "chart-5", "-apr", "nopol_1", "-localizer", "gzoltar"]
+            // ["-d", "defects4j", "-b", "chart-1", "-apr", "kali", "-localizer", "gzoltar"]
+            // ["-d", "defects4j", "-b", "chart-1", "-apr", "simfix", "-localizer", "gzoltar"]
+            ["-d", "defects4j", "-b", "chart-1", "-apr", "tbar", "-localizer", "gzoltar"]
+        }
+    ]
+}

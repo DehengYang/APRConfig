@@ -1,0 +1,50 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_89/defects4j_Closure_89/defects4j_Closure_89/src/com/google/javascript/jscomp/CollapseProperties.java /tmp/fixed/defects4j_Closure_89/src/com/google/javascript/jscomp/CollapseProperties.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_89/defects4j_Closure_89/defects4j_Closure_89/src/com/google/javascript/jscomp/CollapseProperties.java	2021-08-27 17:46:15.855969569 +0800
++++ /tmp/fixed/defects4j_Closure_89/src/com/google/javascript/jscomp/CollapseProperties.java	2021-08-27 17:46:28.724490365 +0800
+@@ -481,6 +481,9 @@
+     Node greatGramps = gramps.getParent();
+     Node greatGreatGramps = greatGramps.getParent();
+ 
++    if (rvalue != null && rvalue.getType() == Token.FUNCTION) {
++      checkForHosedThisReferences(rvalue, refName.docInfo, refName);
++    }
+ 
+     // Create the new alias node.
+     Node nameNode = NodeUtil.newName(
+diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_89/defects4j_Closure_89/defects4j_Closure_89/src/com/google/javascript/jscomp/GlobalNamespace.java /tmp/fixed/defects4j_Closure_89/src/com/google/javascript/jscomp/GlobalNamespace.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_89/defects4j_Closure_89/defects4j_Closure_89/src/com/google/javascript/jscomp/GlobalNamespace.java	2021-08-27 17:46:15.855969569 +0800
++++ /tmp/fixed/defects4j_Closure_89/src/com/google/javascript/jscomp/GlobalNamespace.java	2021-08-27 17:46:28.724490365 +0800
+@@ -917,7 +917,7 @@
+       }
+ 
+       // If this is aliased, then its properties can't be collapsed either.
+-      if (type != Type.FUNCTION && aliasingGets > 0) {
++      if (aliasingGets > 0) {
+         return false;
+       }
+ 
+
+
+                
+                ====================== simfix_1 Closure_89 ================================
+                
+                [PATCH 98] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_89/defects4j_Closure_89/defects4j_Closure_89/src//com/google/javascript/rhino/ScriptRuntime.java, range: <422,422>, original: return getMessage(messageId,null);
+, patch: return getMessage(messageId,emptyArgs);
+
+
+                
+                ====================== simfix_2 Closure_89 ================================
+                
+                [PATCH 4324] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_89/defects4j_Closure_89/defects4j_Closure_89/src//com/google/javascript/rhino/Node.java, range: <1870,1872>, original: if(result.last!=null){
+result.last.next=n2clone;
+}
+, patch: last.next=n2clone;
+if(result.last!=null){
+result.last.next=n2clone;
+}
+
+
+                

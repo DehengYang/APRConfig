@@ -1,0 +1,158 @@
+
+                ====================== human-written patch ================================
+                
+                --- /mnt/data/bias_validation_2021/datasets/QuixBugs/java_programs/QUICKSORT.java	2020-05-12 16:47:29.350528000 +0800
++++ /mnt/data/bias_validation_2021/datasets/QuixBugs/correct_java_programs/QUICKSORT.java	2020-05-12 16:47:29.474534000 +0800
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ 
+ /*
+@@ -23,7 +23,7 @@
+         for (Integer x : arr.subList(1, arr.size())) {
+             if (x < pivot) {
+                 lesser.add(x);
+-            } else if (x > pivot) {
++            } else if (x >= pivot) {
+                 greater.add(x);
+             }
+         }
+
+
+                
+                ====================== dynamoth_1 QUICKSORT_ ================================
+                
+                --- a/src/main/java/QUICKSORT.java
++++ b/src/main/java/QUICKSORT.java
+@@ -25,3 +25,3 @@
+lesser.add(x);
+-            } else if (x > pivot) {
++            } else if (true) {
+greater.add(x);
+
+
+
+
+                
+                ====================== dynamoth_2 QUICKSORT_ ================================
+                
+                --- a/src/main/java/QUICKSORT.java
++++ b/src/main/java/QUICKSORT.java
+@@ -25,3 +25,3 @@
+lesser.add(x);
+-            } else if (x > pivot) {
++            } else if (true) {
+greater.add(x);
+
+
+
+
+                
+                ====================== dynamoth_3 QUICKSORT_ ================================
+                
+                --- a/src/main/java/QUICKSORT.java
++++ b/src/main/java/QUICKSORT.java
+@@ -25,3 +25,3 @@
+lesser.add(x);
+-            } else if (x > pivot) {
++            } else if (true) {
+greater.add(x);
+
+
+
+
+                
+                ====================== nopol_1 QUICKSORT_ ================================
+                
+                --- a/src/main/java/QUICKSORT.java
++++ b/src/main/java/QUICKSORT.java
+@@ -25,3 +25,3 @@
+lesser.add(x);
+-            } else if (x > pivot) {
++            } else if (lesser!=null) {
+greater.add(x);
+
+
+
+
+                
+                ====================== nopol_2 QUICKSORT_ ================================
+                
+                --- a/src/main/java/QUICKSORT.java
++++ b/src/main/java/QUICKSORT.java
+@@ -25,3 +25,3 @@
+lesser.add(x);
+-            } else if (x > pivot) {
++            } else if (lesser!=null) {
+greater.add(x);
+
+
+
+
+                
+                ====================== nopol_3 QUICKSORT_ ================================
+                
+                --- a/src/main/java/QUICKSORT.java
++++ b/src/main/java/QUICKSORT.java
+@@ -25,3 +25,3 @@
+lesser.add(x);
+-            } else if (x > pivot) {
++            } else if (lesser!=null) {
+greater.add(x);
+
+
+
+
+                
+                ====================== tbar_1 QUICKSORT_ ================================
+                
+                [PATCH 5]//**********************************************************
+//QUICKSORT.java ------ 26
+//**********************************************************
+===Buggy Code===
+if (x > pivot) {
+                greater.add(x);
+            }
+
+===Patch Code===
+if (x>=pivot) {
+                greater.add(x);
+            }
+
+
+                
+                ====================== tbar_2 QUICKSORT_ ================================
+                
+                [PATCH 5]//**********************************************************
+//QUICKSORT.java ------ 26
+//**********************************************************
+===Buggy Code===
+if (x > pivot) {
+                greater.add(x);
+            }
+
+===Patch Code===
+if (x>=pivot) {
+                greater.add(x);
+            }
+
+
+                
+                ====================== tbar_3 QUICKSORT_ ================================
+                
+                [PATCH 5]//**********************************************************
+//QUICKSORT.java ------ 26
+//**********************************************************
+===Buggy Code===
+if (x > pivot) {
+                greater.add(x);
+            }
+
+===Patch Code===
+if (x>=pivot) {
+                greater.add(x);
+            }
+
+
+                

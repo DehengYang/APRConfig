@@ -1,0 +1,30 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_93/defects4j_Closure_93/defects4j_Closure_93/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java /tmp/fixed/defects4j_Closure_93/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_93/defects4j_Closure_93/defects4j_Closure_93/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java	2021-08-28 15:34:02.621279504 +0800
++++ /tmp/fixed/defects4j_Closure_93/src/com/google/javascript/jscomp/ProcessClosurePrimitives.java	2021-08-28 15:34:13.941736933 +0800
+@@ -786,7 +786,7 @@
+         } else {
+           // In this case, the name was implicitly provided by two independent
+           // modules. We need to move this code up to a common module.
+-          int indexOfDot = namespace.indexOf('.');
++          int indexOfDot = namespace.lastIndexOf('.');
+           if (indexOfDot == -1) {
+             // Any old place is fine.
+             compiler.getNodeForCodeInsertion(minimumModule)
+
+
+                
+                ====================== simfix_2 Closure_93 ================================
+                
+                [PATCH 4363] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_93/defects4j_Closure_93/defects4j_Closure_93/src//com/google/javascript/rhino/Node.java, range: <1870,1872>, original: if(result.last!=null){
+result.last.next=n2clone;
+}
+, patch: last.next=n2clone;
+if(result.last!=null){
+result.last.next=n2clone;
+}
+
+
+                

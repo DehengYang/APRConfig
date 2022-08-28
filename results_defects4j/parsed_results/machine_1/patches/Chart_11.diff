@@ -1,0 +1,57 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_11/defects4j_Chart_11/defects4j_Chart_11/source/org/jfree/chart/util/ShapeUtilities.java /tmp/fixed/defects4j_Chart_11/source/org/jfree/chart/util/ShapeUtilities.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_11/defects4j_Chart_11/defects4j_Chart_11/source/org/jfree/chart/util/ShapeUtilities.java	2021-08-25 07:50:14.481444581 +0800
++++ /tmp/fixed/defects4j_Chart_11/source/org/jfree/chart/util/ShapeUtilities.java	2021-08-25 07:50:28.330014800 +0800
+@@ -272,7 +272,7 @@
+             return false;
+         }
+         PathIterator iterator1 = p1.getPathIterator(null);
+-        PathIterator iterator2 = p1.getPathIterator(null);
++        PathIterator iterator2 = p2.getPathIterator(null);
+         double[] d1 = new double[6];
+         double[] d2 = new double[6];
+         boolean done = iterator1.isDone() && iterator2.isDone();
+
+
+                
+                ====================== tbar_1 Chart_11 ================================
+                
+                [PATCH 104]//**********************************************************
+//org/jfree/chart/util/ShapeUtilities.java ------ 274
+//**********************************************************
+===Buggy Code===
+PathIterator iterator1 = p1.getPathIterator(null);
+
+===Patch Code===
+PathIterator iterator1 = p2.getPathIterator(null);
+
+
+                
+                ====================== tbar_2 Chart_11 ================================
+                
+                [PATCH 104]//**********************************************************
+//org/jfree/chart/util/ShapeUtilities.java ------ 274
+//**********************************************************
+===Buggy Code===
+PathIterator iterator1 = p1.getPathIterator(null);
+
+===Patch Code===
+PathIterator iterator1 = p2.getPathIterator(null);
+
+
+                
+                ====================== tbar_3 Chart_11 ================================
+                
+                [PATCH 104]//**********************************************************
+//org/jfree/chart/util/ShapeUtilities.java ------ 274
+//**********************************************************
+===Buggy Code===
+PathIterator iterator1 = p1.getPathIterator(null);
+
+===Patch Code===
+PathIterator iterator1 = p2.getPathIterator(null);
+
+
+                

@@ -1,0 +1,118 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_63/defects4j_Closure_63/defects4j_Closure_63/src/com/google/javascript/jscomp/LightweightMessageFormatter.java /tmp/fixed/defects4j_Closure_63/src/com/google/javascript/jscomp/LightweightMessageFormatter.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_63/defects4j_Closure_63/defects4j_Closure_63/src/com/google/javascript/jscomp/LightweightMessageFormatter.java	2021-09-06 06:07:47.230809297 +0800
++++ /tmp/fixed/defects4j_Closure_63/src/com/google/javascript/jscomp/LightweightMessageFormatter.java	2021-09-06 06:08:08.491537157 +0800
+@@ -95,7 +95,7 @@
+       // charno == sourceExpert.length() means something is missing
+       // at the end of the line
+       if (excerpt.equals(LINE)
+-          && 0 <= charno && charno < sourceExcerpt.length()) {
++          && 0 <= charno && charno <= sourceExcerpt.length()) {
+         for (int i = 0; i < charno; i++) {
+           char c = sourceExcerpt.charAt(i);
+           if (Character.isWhitespace(c)) {
+
+
+                
+                ====================== nopol_2 Closure_63 ================================
+                
+                --- a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java
++++ b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java
+@@ -96,4 +96,3 @@
+// at the end of the line
+-      if (excerpt.equals(LINE)
+-          && 0 <= charno && charno < sourceExcerpt.length()) {
++      if (com.google.javascript.jscomp.LightweightMessageFormatter.excerptFormatter!=null) {
+for (int i = 0; i < charno; i++) {
+
+
+
+
+                
+                ====================== nopol_3 Closure_63 ================================
+                
+                --- a/src/com/google/javascript/jscomp/LightweightMessageFormatter.java
++++ b/src/com/google/javascript/jscomp/LightweightMessageFormatter.java
+@@ -96,4 +96,3 @@
+// at the end of the line
+-      if (excerpt.equals(LINE)
+-          && 0 <= charno && charno < sourceExcerpt.length()) {
++      if (com.google.javascript.jscomp.LightweightMessageFormatter.excerptFormatter!=null) {
+for (int i = 0; i < charno; i++) {
+
+
+
+
+                
+                ====================== tbar_1 Closure_63 ================================
+                
+                [PATCH 315]//**********************************************************
+//com/google/javascript/jscomp/LightweightMessageFormatter.java ------ 97
+//**********************************************************
+===Buggy Code===
+if (excerpt.equals(LINE)
+          && 0 <= charno && charno < sourceExcerpt.length()) {
+        for (int i = 0; i < charno; i++) {
+          char c = sourceExcerpt.charAt(i);
+          if (Character.isWhitespace(c)) {
+            b.append(c);
+          } else {
+            b.append(' ');
+          }
+        }
+        b.append("^\n");
+      }
+
+===Patch Code===
+if (excerpt.equals(LINE)
+          && 0 <= charno && charno<=sourceExcerpt.length()) {
+        for (int i = 0; i < charno; i++) {
+          char c = sourceExcerpt.charAt(i);
+          if (Character.isWhitespace(c)) {
+            b.append(c);
+          } else {
+            b.append(' ');
+          }
+        }
+        b.append("^\n");
+      }
+
+
+                
+                ====================== tbar_2 Closure_63 ================================
+                
+                [PATCH 315]//**********************************************************
+//com/google/javascript/jscomp/LightweightMessageFormatter.java ------ 97
+//**********************************************************
+===Buggy Code===
+if (excerpt.equals(LINE)
+          && 0 <= charno && charno < sourceExcerpt.length()) {
+        for (int i = 0; i < charno; i++) {
+          char c = sourceExcerpt.charAt(i);
+          if (Character.isWhitespace(c)) {
+            b.append(c);
+          } else {
+            b.append(' ');
+          }
+        }
+        b.append("^\n");
+      }
+
+===Patch Code===
+if (excerpt.equals(LINE)
+          && 0 <= charno && charno<=sourceExcerpt.length()) {
+        for (int i = 0; i < charno; i++) {
+          char c = sourceExcerpt.charAt(i);
+          if (Character.isWhitespace(c)) {
+            b.append(c);
+          } else {
+            b.append(' ');
+          }
+        }
+        b.append("^\n");
+      }
+
+
+                

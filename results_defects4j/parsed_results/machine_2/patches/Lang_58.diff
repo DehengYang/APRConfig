@@ -1,0 +1,114 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_58/defects4j_Lang_58/defects4j_Lang_58/src/java/org/apache/commons/lang/math/NumberUtils.java /tmp/fixed/defects4j_Lang_58/src/java/org/apache/commons/lang/math/NumberUtils.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_58/defects4j_Lang_58/defects4j_Lang_58/src/java/org/apache/commons/lang/math/NumberUtils.java	2021-08-26 14:52:44.955975577 +0800
++++ /tmp/fixed/defects4j_Lang_58/src/java/org/apache/commons/lang/math/NumberUtils.java	2021-08-26 14:53:00.388527210 +0800
+@@ -451,8 +451,7 @@
+                 case 'L' :
+                     if (dec == null
+                         && exp == null
+-                        && isDigits(numeric.substring(1))
+-                        && (numeric.charAt(0) == '-' || Character.isDigit(numeric.charAt(0)))) {
++                        && (numeric.charAt(0) == '-' && isDigits(numeric.substring(1)) || isDigits(numeric))) {
+                         try {
+                             return createLong(numeric);
+                         } catch (NumberFormatException nfe) {
+
+
+                
+                ====================== dynamoth_1 Lang_58 ================================
+                
+                --- a/src/java/org/apache/commons/lang/math/NumberUtils.java
++++ b/src/java/org/apache/commons/lang/math/NumberUtils.java
+@@ -463,3 +463,5 @@
+}
+-                    throw new NumberFormatException(str + " is not a valid number.");
++                    if (org.apache.commons.lang.math.NumberUtils.isDigits((java.lang.String) mant)) {
++                        throw new NumberFormatException(str + " is not a valid number.");
++                    }
+case 'f' :
+
+
+
+
+                
+                ====================== nopol_1 Lang_58 ================================
+                
+                --- a/src/java/org/apache/commons/lang/math/NumberUtils.java
++++ b/src/java/org/apache/commons/lang/math/NumberUtils.java
+@@ -463,3 +463,5 @@
+}
+-                    throw new NumberFormatException(str + " is not a valid number.");
++                    if ((numeric.length()) != (org.apache.commons.lang.math.NumberUtils.SHORT_ONE)) {
++                        throw new NumberFormatException(str + " is not a valid number.");
++                    }
+case 'f' :
+
+
+
+
+                
+                ====================== simfix_1 Lang_58 ================================
+                
+                [PATCH 303] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_58/defects4j_Lang_58/defects4j_Lang_58/src/java//org/apache/commons/lang/math/NumberUtils.java, range: <452,463>, original: if(dec==null&&exp==null&&isDigits(numeric.substring(1))&&(numeric.charAt(0)=='-'||Character.isDigit(numeric.charAt(0)))){
+try{
+return createLong(numeric);
+}catch (NumberFormatException nfe) {
+}
+
+return createBigInteger(numeric);
+}
+, patch: if(dec==null&&exp==null&&(numeric.charAt(0)=='-'&&isDigits(numeric.substring(1))||isDigits(numeric))){
+try{
+return createLong(numeric);
+}catch (NumberFormatException nfe) {
+}
+
+return createBigInteger(numeric);
+}
+
+
+                
+                ====================== simfix_2 Lang_58 ================================
+                
+                [PATCH 303] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_58/defects4j_Lang_58/defects4j_Lang_58/src/java//org/apache/commons/lang/math/NumberUtils.java, range: <452,463>, original: if(dec==null&&exp==null&&isDigits(numeric.substring(1))&&(numeric.charAt(0)=='-'||Character.isDigit(numeric.charAt(0)))){
+try{
+return createLong(numeric);
+}catch (NumberFormatException nfe) {
+}
+
+return createBigInteger(numeric);
+}
+, patch: if(dec==null&&exp==null&&(numeric.charAt(0)=='-'&&isDigits(numeric.substring(1))||isDigits(numeric))){
+try{
+return createLong(numeric);
+}catch (NumberFormatException nfe) {
+}
+
+return createBigInteger(numeric);
+}
+
+
+                
+                ====================== simfix_3 Lang_58 ================================
+                
+                [PATCH 303] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_58/defects4j_Lang_58/defects4j_Lang_58/src/java//org/apache/commons/lang/math/NumberUtils.java, range: <452,463>, original: if(dec==null&&exp==null&&isDigits(numeric.substring(1))&&(numeric.charAt(0)=='-'||Character.isDigit(numeric.charAt(0)))){
+try{
+return createLong(numeric);
+}catch (NumberFormatException nfe) {
+}
+
+return createBigInteger(numeric);
+}
+, patch: if(dec==null&&exp==null&&(numeric.charAt(0)=='-'&&isDigits(numeric.substring(1))||isDigits(numeric))){
+try{
+return createLong(numeric);
+}catch (NumberFormatException nfe) {
+}
+
+return createBigInteger(numeric);
+}
+
+
+                

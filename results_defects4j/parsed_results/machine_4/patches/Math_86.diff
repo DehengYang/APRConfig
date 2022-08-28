@@ -1,0 +1,87 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_86/defects4j_Math_86/defects4j_Math_86/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java /tmp/fixed/defects4j_Math_86/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_86/defects4j_Math_86/defects4j_Math_86/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java	2021-09-02 23:22:55.139411359 +0800
++++ /tmp/fixed/defects4j_Math_86/src/java/org/apache/commons/math/linear/CholeskyDecompositionImpl.java	2021-09-02 23:23:13.484118620 +0800
+@@ -111,9 +111,6 @@
+ 
+             final double[] lI = lTData[i];
+ 
+-            if (lTData[i][i] < absolutePositivityThreshold) {
+-                throw new NotPositiveDefiniteMatrixException();
+-            }
+             // check off-diagonal elements (and reset them to 0)
+             for (int j = i + 1; j < order; ++j) {
+                 final double[] lJ = lTData[j];
+@@ -134,6 +131,9 @@
+             final double[] ltI = lTData[i];
+ 
+             // check diagonal element
++            if (ltI[i] < absolutePositivityThreshold) {
++                throw new NotPositiveDefiniteMatrixException();
++            }
+ 
+             ltI[i] = Math.sqrt(ltI[i]);
+             final double inverse = 1.0 / ltI[i];
+
+
+                
+                ====================== simfix_1 Math_86 ================================
+                
+                [PATCH 1554] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_86/defects4j_Math_86/defects4j_Math_86/src/java//org/apache/commons/math/linear/DenseRealMatrix.java, range: <626,637>, original: for(int p=pStart;p<pEnd;++p){
+ final double[] dataP=data[p];
+int blockIndex=iBlock*blockColumns;
+int dataPos=0;
+for(int jBlock=0;jBlock<blockColumns-1;++jBlock){
+System.arraycopy(blocks[blockIndex++],regularPos,dataP,dataPos,BLOCK_SIZE);
+dataPos+=BLOCK_SIZE;
+}
+System.arraycopy(blocks[blockIndex],lastPos,dataP,dataPos,lastColumns);
+regularPos+=BLOCK_SIZE;
+lastPos+=lastColumns;
+}
+, patch: for(int p=pStart;p<pEnd;++p){
+ final double[] dataP=data[p];
+int blockIndex=iBlock*blockColumns;
+int dataPos=0;
+for(int jBlock=0;jBlock<=blockColumns-1;++jBlock){
+System.arraycopy(blocks[blockIndex++],regularPos,dataP,dataPos,BLOCK_SIZE);
+dataPos+=BLOCK_SIZE;
+}
+System.arraycopy(blocks[blockIndex],lastPos,dataP,dataPos,lastColumns);
+regularPos+=BLOCK_SIZE;
+lastPos+=lastColumns;
+}
+
+
+                
+                ====================== simfix_2 Math_86 ================================
+                
+                [PATCH 1553] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_86/defects4j_Math_86/defects4j_Math_86/src/java//org/apache/commons/math/linear/DenseRealMatrix.java, range: <626,637>, original: for(int p=pStart;p<pEnd;++p){
+ final double[] dataP=data[p];
+int blockIndex=iBlock*blockColumns;
+int dataPos=0;
+for(int jBlock=0;jBlock<blockColumns-1;++jBlock){
+System.arraycopy(blocks[blockIndex++],regularPos,dataP,dataPos,BLOCK_SIZE);
+dataPos+=BLOCK_SIZE;
+}
+System.arraycopy(blocks[blockIndex],lastPos,dataP,dataPos,lastColumns);
+regularPos+=BLOCK_SIZE;
+lastPos+=lastColumns;
+}
+, patch: for(int p=pStart;p<iBlock;++p){
+ final double[] dataP=data[p];
+int blockIndex=iBlock*blockColumns;
+int dataPos=0;
+for(int jBlock=0;jBlock<blockColumns-1;++jBlock){
+System.arraycopy(blocks[blockIndex++],regularPos,dataP,dataPos,BLOCK_SIZE);
+dataPos+=BLOCK_SIZE;
+}
+System.arraycopy(blocks[blockIndex],lastPos,dataP,dataPos,lastColumns);
+regularPos+=BLOCK_SIZE;
+lastPos+=lastColumns;
+}
+
+
+                

@@ -1,0 +1,85 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_4/defects4j_Chart_4/defects4j_Chart_4/source/org/jfree/chart/plot/XYPlot.java /tmp/fixed/defects4j_Chart_4/source/org/jfree/chart/plot/XYPlot.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_4/defects4j_Chart_4/defects4j_Chart_4/source/org/jfree/chart/plot/XYPlot.java	2021-08-30 21:33:19.049206071 +0800
++++ /tmp/fixed/defects4j_Chart_4/source/org/jfree/chart/plot/XYPlot.java	2021-08-30 21:33:35.181871352 +0800
+@@ -4490,6 +4490,7 @@
+                     }
+                 }
+                 
++                if (r != null) {
+                     Collection c = r.getAnnotations();
+                     Iterator i = c.iterator();
+                     while (i.hasNext()) {
+@@ -4498,6 +4499,7 @@
+                             includedAnnotations.add(a);
+                         }
+                     }
++                }
+             }
+         }
+ 
+
+
+                
+                ====================== tbar_1 Chart_4 ================================
+                
+                [PATCH 2583]//**********************************************************
+//org/jfree/chart/plot/XYPlot.java ------ 4493
+//**********************************************************
+===Buggy Code===
+Collection c = r.getAnnotations();
+                    Iterator i = c.iterator();
+                    while (i.hasNext()) {
+                        XYAnnotation a = (XYAnnotation) i.next();
+                        if (a instanceof XYAnnotationBoundsInfo) {
+                            includedAnnotations.add(a);
+                        }
+                    }
+
+===Patch Code===
+if (r != null) {
+	Collection c = r.getAnnotations();
+                    Iterator i = c.iterator();
+                    while (i.hasNext()) {
+                        XYAnnotation a = (XYAnnotation) i.next();
+                        if (a instanceof XYAnnotationBoundsInfo) {
+                            includedAnnotations.add(a);
+                        }
+                    }
+	}
+
+
+
+                
+                ====================== tbar_2 Chart_4 ================================
+                
+                [PATCH 2583]//**********************************************************
+//org/jfree/chart/plot/XYPlot.java ------ 4493
+//**********************************************************
+===Buggy Code===
+Collection c = r.getAnnotations();
+                    Iterator i = c.iterator();
+                    while (i.hasNext()) {
+                        XYAnnotation a = (XYAnnotation) i.next();
+                        if (a instanceof XYAnnotationBoundsInfo) {
+                            includedAnnotations.add(a);
+                        }
+                    }
+
+===Patch Code===
+if (r != null) {
+	Collection c = r.getAnnotations();
+                    Iterator i = c.iterator();
+                    while (i.hasNext()) {
+                        XYAnnotation a = (XYAnnotation) i.next();
+                        if (a instanceof XYAnnotationBoundsInfo) {
+                            includedAnnotations.add(a);
+                        }
+                    }
+	}
+
+
+
+                

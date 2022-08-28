@@ -1,0 +1,13 @@
+# python
+__pycache__/
+
+# output
+output/
+logs/
+
+#
+Main_d4j_*.py
+Main_quixbugs_*.py
+run_quixbugs*.sh
+bugs_info-(copy)/
+run_d4j*.sh

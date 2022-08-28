@@ -1,0 +1,111 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_45/defects4j_Closure_45/defects4j_Closure_45/src/com/google/javascript/jscomp/RemoveUnusedVars.java /tmp/fixed/defects4j_Closure_45/src/com/google/javascript/jscomp/RemoveUnusedVars.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_45/defects4j_Closure_45/defects4j_Closure_45/src/com/google/javascript/jscomp/RemoveUnusedVars.java	2021-08-25 16:05:14.400088080 +0800
++++ /tmp/fixed/defects4j_Closure_45/src/com/google/javascript/jscomp/RemoveUnusedVars.java	2021-08-25 16:05:45.417357062 +0800
+@@ -729,6 +729,7 @@
+             assignedToUnknownValue = true;
+           }
+ 
++          boolean maybeEscaped = false;
+           for (Assign assign : assignsByVar.get(var)) {
+             if (assign.isPropertyAssign) {
+               hasPropertyAssign = true;
+@@ -736,9 +737,12 @@
+                 assign.assignNode.getLastChild(), true)) {
+               assignedToUnknownValue = true;
+             }
++            if (assign.maybeAliased) {
++              maybeEscaped = true;
++            }
+           }
+ 
+-          if (assignedToUnknownValue && hasPropertyAssign) {
++          if ((assignedToUnknownValue || maybeEscaped) && hasPropertyAssign) {
+             changes = markReferencedVar(var) || changes;
+             maybeUnreferenced.remove(current);
+             current--;
+@@ -901,7 +905,7 @@
+       this.nameNode = nameNode;
+       this.isPropertyAssign = isPropertyAssign;
+ 
+-      this.maybeAliased = !assignNode.getParent().isExprResult();
++      this.maybeAliased = NodeUtil.isExpressionResultUsed(assignNode);
+       this.mayHaveSecondarySideEffects =
+           maybeAliased ||
+           NodeUtil.mayHaveSideEffects(assignNode.getFirstChild()) ||
+
+
+                
+                ====================== dynamoth_1 Closure_45 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1403,7 +1403,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (this.isAdd()) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                
+                ====================== nopol_1 Closure_45 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1403,7 +1403,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (com.google.javascript.rhino.Node.this.type <= 51) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                
+                ====================== simfix_1 Closure_45 ================================
+                
+                [PATCH 4722] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_45/defects4j_Closure_45/defects4j_Closure_45/src//com/google/javascript/rhino/Node.java, range: <1009,1011>, original: for(int i=0;i!=level;++i){
+sb.append("    ");
+}
+, patch: for(int i=0;i!=level;++i){
+i++;
+sb.append("    ");
+}
+
+
+                
+                ====================== simfix_2 Closure_45 ================================
+                
+                [PATCH 4804] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_45/defects4j_Closure_45/defects4j_Closure_45/src//com/google/javascript/rhino/Node.java, range: <1009,1011>, original: for(int i=0;i!=level;++i){
+sb.append("    ");
+}
+, patch: for(int i=EMPTY_BLOCK;i!=level;++i){
+sb.append("    ");
+}
+
+
+                

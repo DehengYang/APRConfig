@@ -1,0 +1,75 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_104/defects4j_Math_104/defects4j_Math_104/src/java/org/apache/commons/math/special/Gamma.java /tmp/fixed/defects4j_Math_104/src/java/org/apache/commons/math/special/Gamma.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_104/defects4j_Math_104/defects4j_Math_104/src/java/org/apache/commons/math/special/Gamma.java	2021-09-06 01:59:30.964368903 +0800
++++ /tmp/fixed/defects4j_Math_104/src/java/org/apache/commons/math/special/Gamma.java	2021-09-06 01:59:46.064879317 +0800
+@@ -34,7 +34,7 @@
+     private static final long serialVersionUID = -6587513359895466954L;
+ 
+     /** Maximum allowed numerical error. */
+-    private static final double DEFAULT_EPSILON = 10e-9;
++    private static final double DEFAULT_EPSILON = 10e-15;
+ 
+     /** Lanczos coefficients */
+     private static double[] lanczos =
+
+
+                
+                ====================== tbar_2 Math_104 ================================
+                
+                [PATCH 995]//**********************************************************
+//org/apache/commons/math/special/Gamma.java ------ 162
+//**********************************************************
+===Buggy Code===
+if (a >= 1.0 && x > a) {
+            // use regularizedGammaQ because it should converge faster in this
+            // case.
+            ret = 1.0 - regularizedGammaQ(a, x, epsilon, maxIterations);
+        } else {
+            // calculate series
+            double n = 0.0; // current element index
+            double an = 1.0 / a; // n-th element in the series
+            double sum = an; // partial sum
+            while (Math.abs(an) > epsilon && n < maxIterations) {
+                // compute next element in the series
+                n = n + 1.0;
+                an = an * (x / (a + n));
+
+                // update partial sum
+                sum = sum + an;
+            }
+            if (n >= maxIterations) {
+                throw new MaxIterationsExceededException(maxIterations);
+            } else {
+                ret = Math.exp(-x + (a * Math.log(x)) - logGamma(a)) * sum;
+            }
+        }
+
+===Patch Code===
+if (a >= 1.0 && x>=a) {
+            // use regularizedGammaQ because it should converge faster in this
+            // case.
+            ret = 1.0 - regularizedGammaQ(a, x, epsilon, maxIterations);
+        } else {
+            // calculate series
+            double n = 0.0; // current element index
+            double an = 1.0 / a; // n-th element in the series
+            double sum = an; // partial sum
+            while (Math.abs(an) > epsilon && n < maxIterations) {
+                // compute next element in the series
+                n = n + 1.0;
+                an = an * (x / (a + n));
+
+                // update partial sum
+                sum = sum + an;
+            }
+            if (n >= maxIterations) {
+                throw new MaxIterationsExceededException(maxIterations);
+            } else {
+                ret = Math.exp(-x + (a * Math.log(x)) - logGamma(a)) * sum;
+            }
+        }
+
+
+                

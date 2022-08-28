@@ -1,0 +1,65 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_18/defects4j_Lang_18/defects4j_Lang_18/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java /tmp/fixed/defects4j_Lang_18/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_18/defects4j_Lang_18/defects4j_Lang_18/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java	2021-09-30 17:18:49.059148041 +0800
++++ /tmp/fixed/defects4j_Lang_18/src/main/java/org/apache/commons/lang3/time/FastDateFormat.java	2021-09-30 17:19:00.511609076 +0800
+@@ -492,10 +492,10 @@
+                 rule = new TextField(Calendar.ERA, ERAs);
+                 break;
+             case 'y': // year (number)
+-                if (tokenLen >= 4) {
+-                    rule = selectNumberRule(Calendar.YEAR, tokenLen);
+-                } else {
++                if (tokenLen == 2) {
+                     rule = TwoDigitYearField.INSTANCE;
++                } else {
++                    rule = selectNumberRule(Calendar.YEAR, tokenLen < 4 ? 4 : tokenLen);
+                 }
+                 break;
+             case 'M': // month in year (text and number)
+
+
+                
+                ====================== tbar_1 Lang_18 ================================
+                
+                [PATCH 3895]//**********************************************************
+//org/apache/commons/lang3/time/FastDateFormat.java ------ 495
+//**********************************************************
+===Buggy Code===
+if (tokenLen >= 4) {
+                    rule = selectNumberRule(Calendar.YEAR, tokenLen);
+                } else {
+                    rule = TwoDigitYearField.INSTANCE;
+                }
+
+===Patch Code===
+if ((tokenLen >= 4) || !(tokenLen == 2)) {
+                    rule = selectNumberRule(Calendar.YEAR, tokenLen);
+                } else {
+                    rule = TwoDigitYearField.INSTANCE;
+                }
+
+
+                
+                ====================== tbar_2 Lang_18 ================================
+                
+                [PATCH 3895]//**********************************************************
+//org/apache/commons/lang3/time/FastDateFormat.java ------ 495
+//**********************************************************
+===Buggy Code===
+if (tokenLen >= 4) {
+                    rule = selectNumberRule(Calendar.YEAR, tokenLen);
+                } else {
+                    rule = TwoDigitYearField.INSTANCE;
+                }
+
+===Patch Code===
+if ((tokenLen >= 4) || !(tokenLen == 2)) {
+                    rule = selectNumberRule(Calendar.YEAR, tokenLen);
+                } else {
+                    rule = TwoDigitYearField.INSTANCE;
+                }
+
+
+                

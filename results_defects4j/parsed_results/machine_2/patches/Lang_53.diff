@@ -1,0 +1,50 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_53/defects4j_Lang_53/defects4j_Lang_53/src/java/org/apache/commons/lang/time/DateUtils.java /tmp/fixed/defects4j_Lang_53/src/java/org/apache/commons/lang/time/DateUtils.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_53/defects4j_Lang_53/defects4j_Lang_53/src/java/org/apache/commons/lang/time/DateUtils.java	2021-08-26 00:34:37.358780302 +0800
++++ /tmp/fixed/defects4j_Lang_53/src/java/org/apache/commons/lang/time/DateUtils.java	2021-08-26 00:34:49.107200824 +0800
+@@ -640,18 +640,18 @@
+         int millisecs = val.get(Calendar.MILLISECOND);
+         if (!round || millisecs < 500) {
+             time = time - millisecs;
++        }
+         if (field == Calendar.SECOND) {
+             done = true;
+-            }
+         }
+ 
+         // truncate seconds
+         int seconds = val.get(Calendar.SECOND);
+         if (!done && (!round || seconds < 30)) {
+             time = time - (seconds * 1000L);
++        }
+         if (field == Calendar.MINUTE) {
+             done = true;
+-            }
+         }
+ 
+         // truncate minutes
+
+
+                
+                ====================== nopol_1 Lang_53 ================================
+                
+                --- a/src/java/org/apache/commons/lang/time/DateUtils.java
++++ b/src/java/org/apache/commons/lang/time/DateUtils.java
+@@ -663,5 +663,7 @@
+// reset time
+-        if (date.getTime() != time) {
+-            date.setTime(time);
+-            val.setTime(date);
++        if (org.apache.commons.lang.time.DateUtils.RANGE_WEEK_RELATIVE == seconds) {
++            if (date.getTime() != time) {
++                date.setTime(time);
++                val.setTime(date);
++            }
+}
+
+
+
+
+                

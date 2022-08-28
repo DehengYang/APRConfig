@@ -1,0 +1,90 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_63/defects4j_Math_63/defects4j_Math_63/src/main/java/org/apache/commons/math/util/MathUtils.java /tmp/fixed/defects4j_Math_63/src/main/java/org/apache/commons/math/util/MathUtils.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_63/defects4j_Math_63/defects4j_Math_63/src/main/java/org/apache/commons/math/util/MathUtils.java	2021-08-27 17:47:53.136397777 +0800
++++ /tmp/fixed/defects4j_Math_63/src/main/java/org/apache/commons/math/util/MathUtils.java	2021-08-27 17:48:11.621059171 +0800
+@@ -414,7 +414,7 @@
+      * @return {@code true} if the values are equal.
+      */
+     public static boolean equals(double x, double y) {
+-        return (Double.isNaN(x) && Double.isNaN(y)) || x == y;
++        return equals(x, y, 1);
+     }
+ 
+     /**
+
+
+                
+                ====================== simfix_1 Math_63 ================================
+                
+                [PATCH 16] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_63/defects4j_Math_63/defects4j_Math_63/src/main/java//org/apache/commons/math/util/MathUtils.java, range: <417,417>, original: return (Double.isNaN(x)&&Double.isNaN(y))||x==y;
+, patch: return equals(x,y,1)||FastMath.abs(y-x)<=SAFE_MIN;
+
+
+                
+                ====================== simfix_2 Math_63 ================================
+                
+                [PATCH 16] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_63/defects4j_Math_63/defects4j_Math_63/src/main/java//org/apache/commons/math/util/MathUtils.java, range: <417,417>, original: return (Double.isNaN(x)&&Double.isNaN(y))||x==y;
+, patch: return equals(x,y,1)||FastMath.abs(y-x)<=SAFE_MIN;
+
+
+                
+                ====================== simfix_3 Math_63 ================================
+                
+                [PATCH 16] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_63/defects4j_Math_63/defects4j_Math_63/src/main/java//org/apache/commons/math/util/MathUtils.java, range: <417,417>, original: return (Double.isNaN(x)&&Double.isNaN(y))||x==y;
+, patch: return equals(x,y,1)||FastMath.abs(y-x)<=SAFE_MIN;
+
+
+                
+                ====================== tbar_1 Math_63 ================================
+                
+                [PATCH 615]//**********************************************************
+//org/apache/commons/math/util/MathUtils.java ------ 530
+//**********************************************************
+===Buggy Code===
+if (!equals(x[i], y[i])) {
+                return false;
+            }
+
+===Patch Code===
+if (!equals(x[i], y[i], i)) {
+                return false;
+            }
+
+
+                
+                ====================== tbar_2 Math_63 ================================
+                
+                [PATCH 615]//**********************************************************
+//org/apache/commons/math/util/MathUtils.java ------ 530
+//**********************************************************
+===Buggy Code===
+if (!equals(x[i], y[i])) {
+                return false;
+            }
+
+===Patch Code===
+if (!equals(x[i], y[i], i)) {
+                return false;
+            }
+
+
+                
+                ====================== tbar_3 Math_63 ================================
+                
+                [PATCH 615]//**********************************************************
+//org/apache/commons/math/util/MathUtils.java ------ 530
+//**********************************************************
+===Buggy Code===
+if (!equals(x[i], y[i])) {
+                return false;
+            }
+
+===Patch Code===
+if (!equals(x[i], y[i], i)) {
+                return false;
+            }
+
+
+                

@@ -1,0 +1,97 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_51/defects4j_Lang_51/defects4j_Lang_51/src/java/org/apache/commons/lang/BooleanUtils.java /tmp/fixed/defects4j_Lang_51/src/java/org/apache/commons/lang/BooleanUtils.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_51/defects4j_Lang_51/defects4j_Lang_51/src/java/org/apache/commons/lang/BooleanUtils.java	2021-09-03 15:23:03.555479992 +0800
++++ /tmp/fixed/defects4j_Lang_51/src/java/org/apache/commons/lang/BooleanUtils.java	2021-09-03 15:23:18.753141890 +0800
+@@ -679,6 +679,7 @@
+                         (str.charAt(1) == 'E' || str.charAt(1) == 'e') &&
+                         (str.charAt(2) == 'S' || str.charAt(2) == 's');
+                 }
++                return false;
+             }
+             case 4: {
+                 char ch = str.charAt(0);
+
+
+                
+                ====================== dynamoth_2 Lang_51 ================================
+                
+                --- a/src/java/org/apache/commons/lang/BooleanUtils.java
++++ b/src/java/org/apache/commons/lang/BooleanUtils.java
+@@ -671,6 +671,6 @@
+char ch = str.charAt(0);
+-                if (ch == 'y') {
+-                    return
+-                        (str.charAt(1) == 'e' || str.charAt(1) == 'E') &&
+-                        (str.charAt(2) == 's' || str.charAt(2) == 'S');
++                if (true) {
++                    return
++                    (str.charAt(1) == 'e' || str.charAt(1) == 'E') &&
++                    (str.charAt(2) == 's' || str.charAt(2) == 'S');
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Lang_51 ================================
+                
+                --- a/src/java/org/apache/commons/lang/BooleanUtils.java
++++ b/src/java/org/apache/commons/lang/BooleanUtils.java
+@@ -671,6 +671,6 @@
+char ch = str.charAt(0);
+-                if (ch == 'y') {
+-                    return
+-                        (str.charAt(1) == 'e' || str.charAt(1) == 'E') &&
+-                        (str.charAt(2) == 's' || str.charAt(2) == 'S');
++                if (true) {
++                    return
++                    (str.charAt(1) == 'e' || str.charAt(1) == 'E') &&
++                    (str.charAt(2) == 's' || str.charAt(2) == 'S');
+}
+
+
+
+
+                
+                ====================== nopol_2 Lang_51 ================================
+                
+                --- a/src/java/org/apache/commons/lang/BooleanUtils.java
++++ b/src/java/org/apache/commons/lang/BooleanUtils.java
+@@ -671,6 +671,6 @@
+char ch = str.charAt(0);
+-                if (ch == 'y') {
+-                    return
+-                        (str.charAt(1) == 'e' || str.charAt(1) == 'E') &&
+-                        (str.charAt(2) == 's' || str.charAt(2) == 'S');
++                if (str!=null) {
++                    return
++                    (str.charAt(1) == 'e' || str.charAt(1) == 'E') &&
++                    (str.charAt(2) == 's' || str.charAt(2) == 'S');
+}
+
+
+
+
+                
+                ====================== nopol_3 Lang_51 ================================
+                
+                --- a/src/java/org/apache/commons/lang/BooleanUtils.java
++++ b/src/java/org/apache/commons/lang/BooleanUtils.java
+@@ -671,6 +671,6 @@
+char ch = str.charAt(0);
+-                if (ch == 'y') {
+-                    return
+-                        (str.charAt(1) == 'e' || str.charAt(1) == 'E') &&
+-                        (str.charAt(2) == 's' || str.charAt(2) == 'S');
++                if (str!=null) {
++                    return
++                    (str.charAt(1) == 'e' || str.charAt(1) == 'E') &&
++                    (str.charAt(2) == 's' || str.charAt(2) == 'S');
+}
+
+
+
+
+                

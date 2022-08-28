@@ -1,0 +1,38 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_26/defects4j_Math_26/defects4j_Math_26/src/main/java/org/apache/commons/math3/fraction/Fraction.java /tmp/fixed/defects4j_Math_26/src/main/java/org/apache/commons/math3/fraction/Fraction.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_26/defects4j_Math_26/defects4j_Math_26/src/main/java/org/apache/commons/math3/fraction/Fraction.java	2021-09-03 12:25:22.220807320 +0800
++++ /tmp/fixed/defects4j_Math_26/src/main/java/org/apache/commons/math3/fraction/Fraction.java	2021-09-03 12:25:44.979295312 +0800
+@@ -178,7 +178,7 @@
+         long overflow = Integer.MAX_VALUE;
+         double r0 = value;
+         long a0 = (long)FastMath.floor(r0);
+-        if (a0 > overflow) {
++        if (FastMath.abs(a0) > overflow) {
+             throw new FractionConversionException(value, a0, 1l);
+         }
+ 
+@@ -206,7 +206,7 @@
+             long a1 = (long)FastMath.floor(r1);
+             p2 = (a1 * p1) + p0;
+             q2 = (a1 * q1) + q0;
+-            if ((p2 > overflow) || (q2 > overflow)) {
++            if ((FastMath.abs(p2) > overflow) || (FastMath.abs(q2) > overflow)) {
+                 throw new FractionConversionException(value, p2, q2);
+             }
+ 
+
+
+                
+                ====================== simfix_2 Math_26 ================================
+                
+                [PATCH 4432] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_26/defects4j_Math_26/defects4j_Math_26/src/main/java//org/apache/commons/math3/util/FastMath.java, range: <3254,3256>, original: if(y==0){
+return x*y;
+}
+, patch: if(y!=0){
+return x*y;
+}
+
+
+                

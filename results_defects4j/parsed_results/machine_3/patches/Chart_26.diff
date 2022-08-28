@@ -1,0 +1,79 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_26/defects4j_Chart_26/defects4j_Chart_26/source/org/jfree/chart/axis/Axis.java /tmp/fixed/defects4j_Chart_26/source/org/jfree/chart/axis/Axis.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_26/defects4j_Chart_26/defects4j_Chart_26/source/org/jfree/chart/axis/Axis.java	2021-09-07 10:12:11.049513208 +0800
++++ /tmp/fixed/defects4j_Chart_26/source/org/jfree/chart/axis/Axis.java	2021-09-07 10:12:28.957972374 +0800
+@@ -1189,11 +1189,13 @@
+         }
+         if (plotState != null && hotspot != null) {
+             ChartRenderingInfo owner = plotState.getOwner();
++            if (owner != null) {
+                 EntityCollection entities = owner.getEntityCollection();
+                 if (entities != null) {
+                     entities.add(new AxisLabelEntity(this, hotspot, 
+                             this.labelToolTip, this.labelURL));
+                 }
++            }
+         }
+         return state;
+ 
+
+
+                
+                ====================== dynamoth_2 Chart_26 ================================
+                
+                --- a/source/org/jfree/chart/plot/CategoryPlot.java
++++ b/source/org/jfree/chart/plot/CategoryPlot.java
+@@ -2537,3 +2537,3 @@
+boolean b2 = (area.getHeight() <= MINIMUM_HEIGHT_TO_DRAW);
+-        if (b1 || b2) {
++        if (true) {
+return;
+
+
+
+
+                
+                ====================== dynamoth_3 Chart_26 ================================
+                
+                --- a/source/org/jfree/chart/plot/CategoryPlot.java
++++ b/source/org/jfree/chart/plot/CategoryPlot.java
+@@ -2537,3 +2537,3 @@
+boolean b2 = (area.getHeight() <= MINIMUM_HEIGHT_TO_DRAW);
+-        if (b1 || b2) {
++        if (true) {
+return;
+
+
+
+
+                
+                ====================== nopol_2 Chart_26 ================================
+                
+                --- a/source/org/jfree/chart/plot/CategoryPlot.java
++++ b/source/org/jfree/chart/plot/CategoryPlot.java
+@@ -2537,3 +2537,3 @@
+boolean b2 = (area.getHeight() <= MINIMUM_HEIGHT_TO_DRAW);
+-        if (b1 || b2) {
++        if (org.jfree.chart.plot.CategoryPlot.this.backgroundRangeMarkers!=null) {
+return;
+
+
+
+
+                
+                ====================== nopol_3 Chart_26 ================================
+                
+                --- a/source/org/jfree/chart/plot/CategoryPlot.java
++++ b/source/org/jfree/chart/plot/CategoryPlot.java
+@@ -2537,3 +2537,3 @@
+boolean b2 = (area.getHeight() <= MINIMUM_HEIGHT_TO_DRAW);
+-        if (b1 || b2) {
++        if (org.jfree.chart.plot.CategoryPlot.this.backgroundRangeMarkers!=null) {
+return;
+
+
+
+
+                

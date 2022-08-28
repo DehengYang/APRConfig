@@ -1,0 +1,31 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_7/defects4j_Mockito_7/defects4j_Mockito_7/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java /tmp/fixed/defects4j_Mockito_7/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_7/defects4j_Mockito_7/defects4j_Mockito_7/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java	2021-09-05 11:20:50.707968724 +0800
++++ /tmp/fixed/defects4j_Mockito_7/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java	2021-09-05 11:22:08.622603130 +0800
+@@ -376,6 +376,7 @@
+             for (Type type : typeVariable.getBounds()) {
+                 registerTypeVariablesOn(type);
+             }
++            registerTypeParametersOn(new TypeVariable[] { typeVariable });
+             registerTypeVariablesOn(getActualTypeArgumentFor(typeVariable));
+         }
+ 
+
+
+                
+                ====================== tbar_2 Mockito_7 ================================
+                
+                [PATCH 4230]//**********************************************************
+//org/mockito/internal/util/reflection/GenericMetadataSupport.java ------ 182
+//**********************************************************
+===Buggy Code===
+Type type = this.contextualActualTypeParameters.get(typeParameter);
+
+===Patch Code===
+registerTypeVariableIfNotPresent(typeParameter);
+	Type type = this.contextualActualTypeParameters.get(typeParameter);
+
+
+                

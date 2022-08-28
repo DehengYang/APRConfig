@@ -1,0 +1,219 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_126/defects4j_Closure_126/defects4j_Closure_126/src/com/google/javascript/jscomp/MinimizeExitPoints.java /tmp/fixed/defects4j_Closure_126/src/com/google/javascript/jscomp/MinimizeExitPoints.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_126/defects4j_Closure_126/defects4j_Closure_126/src/com/google/javascript/jscomp/MinimizeExitPoints.java	2021-08-25 07:47:52.040791547 +0800
++++ /tmp/fixed/defects4j_Closure_126/src/com/google/javascript/jscomp/MinimizeExitPoints.java	2021-08-25 07:48:27.878240544 +0800
+@@ -138,10 +138,6 @@
+        * can cause problems if it changes the completion type of the finally
+        * block. See ECMA 262 Sections 8.9 & 12.14
+        */
+-      if (NodeUtil.hasFinally(n)) {
+-        Node finallyBlock = n.getLastChild();
+-        tryMinimizeExits(finallyBlock, exitType, labelName);
+-      }
+     }
+ 
+     // Just a 'label'.
+
+
+                
+                ====================== dynamoth_1 Closure_126 ================================
+                
+                --- a/src/com/google/javascript/jscomp/MinimizeExitPoints.java
++++ b/src/com/google/javascript/jscomp/MinimizeExitPoints.java
+@@ -142,3 +142,5 @@
+Node finallyBlock = n.getLastChild();
+-        tryMinimizeExits(finallyBlock, exitType, labelName);
++        if (false) {
++          tryMinimizeExits(finallyBlock, exitType, labelName);
++        }
+}
+
+
+
+
+                
+                ====================== dynamoth_2 Closure_126 ================================
+                
+                --- a/src/com/google/javascript/jscomp/MinimizeExitPoints.java
++++ b/src/com/google/javascript/jscomp/MinimizeExitPoints.java
+@@ -142,3 +142,5 @@
+Node finallyBlock = n.getLastChild();
+-        tryMinimizeExits(finallyBlock, exitType, labelName);
++        if (false) {
++          tryMinimizeExits(finallyBlock, exitType, labelName);
++        }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Closure_126 ================================
+                
+                --- a/src/com/google/javascript/jscomp/MinimizeExitPoints.java
++++ b/src/com/google/javascript/jscomp/MinimizeExitPoints.java
+@@ -142,3 +142,5 @@
+Node finallyBlock = n.getLastChild();
+-        tryMinimizeExits(finallyBlock, exitType, labelName);
++        if (false) {
++          tryMinimizeExits(finallyBlock, exitType, labelName);
++        }
+}
+
+
+
+
+                
+                ====================== nopol_1 Closure_126 ================================
+                
+                --- a/src/com/google/javascript/jscomp/MinimizeExitPoints.java
++++ b/src/com/google/javascript/jscomp/MinimizeExitPoints.java
+@@ -142,3 +142,5 @@
+Node finallyBlock = n.getLastChild();
+-        tryMinimizeExits(finallyBlock, exitType, labelName);
++        if (1 <= -1) {
++          tryMinimizeExits(finallyBlock, exitType, labelName);
++        }
+}
+
+
+
+
+                
+                ====================== nopol_2 Closure_126 ================================
+                
+                --- a/src/com/google/javascript/jscomp/MinimizeExitPoints.java
++++ b/src/com/google/javascript/jscomp/MinimizeExitPoints.java
+@@ -142,3 +142,5 @@
+Node finallyBlock = n.getLastChild();
+-        tryMinimizeExits(finallyBlock, exitType, labelName);
++        if (1 <= -1) {
++          tryMinimizeExits(finallyBlock, exitType, labelName);
++        }
+}
+
+
+
+
+                
+                ====================== simfix_1 Closure_126 ================================
+                
+                [PATCH 19] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_126/defects4j_Closure_126/defects4j_Closure_126/src//com/google/javascript/jscomp/MinimizeExitPoints.java, range: <141,144>, original: if(NodeUtil.hasFinally(n)){
+Node finallyBlock=n.getLastChild();
+tryMinimizeExits(finallyBlock,exitType,labelName);
+}
+, patch: if(!n.isName()){
+return ;
+}
+if(NodeUtil.hasFinally(n)){
+Node finallyBlock=n.getLastChild();
+tryMinimizeExits(finallyBlock,exitType,labelName);
+}
+
+
+                
+                ====================== simfix_1 Closure_126 ================================
+                
+                [PATCH 19] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_126/defects4j_Closure_126/defects4j_Closure_126/src//com/google/javascript/jscomp/MinimizeExitPoints.java, range: <141,144>, original: if(NodeUtil.hasFinally(n)){
+Node finallyBlock=n.getLastChild();
+tryMinimizeExits(finallyBlock,exitType,labelName);
+}
+, patch: if(!n.isName()){
+return ;
+}
+if(NodeUtil.hasFinally(n)){
+Node finallyBlock=n.getLastChild();
+tryMinimizeExits(finallyBlock,exitType,labelName);
+}
+
+
+                
+                ====================== simfix_2 Closure_126 ================================
+                
+                [PATCH 19] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_126/defects4j_Closure_126/defects4j_Closure_126/src//com/google/javascript/jscomp/MinimizeExitPoints.java, range: <141,144>, original: if(NodeUtil.hasFinally(n)){
+Node finallyBlock=n.getLastChild();
+tryMinimizeExits(finallyBlock,exitType,labelName);
+}
+, patch: if(!n.isName()){
+return ;
+}
+if(NodeUtil.hasFinally(n)){
+Node finallyBlock=n.getLastChild();
+tryMinimizeExits(finallyBlock,exitType,labelName);
+}
+
+
+                
+                ====================== simfix_2 Closure_126 ================================
+                
+                [PATCH 19] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_126/defects4j_Closure_126/defects4j_Closure_126/src//com/google/javascript/jscomp/MinimizeExitPoints.java, range: <141,144>, original: if(NodeUtil.hasFinally(n)){
+Node finallyBlock=n.getLastChild();
+tryMinimizeExits(finallyBlock,exitType,labelName);
+}
+, patch: if(!n.isName()){
+return ;
+}
+if(NodeUtil.hasFinally(n)){
+Node finallyBlock=n.getLastChild();
+tryMinimizeExits(finallyBlock,exitType,labelName);
+}
+
+
+                
+                ====================== simfix_3 Closure_126 ================================
+                
+                 file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_126/defects4j_Closure_126/defects4j_Closure_126/src//com/google/javascript/jscomp/MinimizeExitPoints.java, range: <141,144>, original: if(NodeUtil.hasFinally(n)){
+Node finallyBlock=n.getLastChild();
+tryMinimizeExits(finallyBlock,exitType,labelName);
+}
+, patch: if(!n.isName()){
+return ;
+}
+if(NodeUtil.hasFinally(n)){
+Node finallyBlock=n.getLastChild();
+tryMinimizeExits(finallyBlock,exitType,labelName);
+}
+
+
+                
+                ====================== tbar_1 Closure_126 ================================
+                
+                [PATCH 39]//**********************************************************
+//com/google/javascript/jscomp/MinimizeExitPoints.java ------ 142
+//**********************************************************
+===Buggy Code===
+Node finallyBlock = n.getLastChild();
+
+===Patch Code===
+Node finallyBlock = n.getFirstChild();
+
+
+                
+                ====================== tbar_2 Closure_126 ================================
+                
+                [PATCH 39]//**********************************************************
+//com/google/javascript/jscomp/MinimizeExitPoints.java ------ 142
+//**********************************************************
+===Buggy Code===
+Node finallyBlock = n.getLastChild();
+
+===Patch Code===
+Node finallyBlock = n.getFirstChild();
+
+
+                
+                ====================== tbar_3 Closure_126 ================================
+                
+                //**********************************************************
+//com/google/javascript/jscomp/MinimizeExitPoints.java ------ 142
+//**********************************************************
+===Buggy Code===
+Node finallyBlock = n.getLastChild();
+
+===Patch Code===
+Node finallyBlock = n.getFirstChild();
+
+
+                

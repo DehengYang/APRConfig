@@ -1,0 +1,36 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_126/defects4j_Closure_126/defects4j_Closure_126/src/com/google/javascript/jscomp/MinimizeExitPoints.java /tmp/fixed/defects4j_Closure_126/src/com/google/javascript/jscomp/MinimizeExitPoints.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_126/defects4j_Closure_126/defects4j_Closure_126/src/com/google/javascript/jscomp/MinimizeExitPoints.java	2021-09-07 10:16:39.243942930 +0800
++++ /tmp/fixed/defects4j_Closure_126/src/com/google/javascript/jscomp/MinimizeExitPoints.java	2021-09-07 10:17:09.905150236 +0800
+@@ -138,10 +138,6 @@
+        * can cause problems if it changes the completion type of the finally
+        * block. See ECMA 262 Sections 8.9 & 12.14
+        */
+-      if (NodeUtil.hasFinally(n)) {
+-        Node finallyBlock = n.getLastChild();
+-        tryMinimizeExits(finallyBlock, exitType, labelName);
+-      }
+     }
+ 
+     // Just a 'label'.
+
+
+                
+                ====================== nopol_3 Closure_126 ================================
+                
+                --- a/src/com/google/javascript/jscomp/MinimizeExitPoints.java
++++ b/src/com/google/javascript/jscomp/MinimizeExitPoints.java
+@@ -142,3 +142,5 @@
+Node finallyBlock = n.getLastChild();
+-        tryMinimizeExits(finallyBlock, exitType, labelName);
++        if (1 <= -1) {
++          tryMinimizeExits(finallyBlock, exitType, labelName);
++        }
+}
+
+
+
+
+                

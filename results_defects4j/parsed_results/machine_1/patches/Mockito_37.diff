@@ -1,0 +1,33 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_37/defects4j_Mockito_37/defects4j_Mockito_37/src/org/mockito/internal/stubbing/answers/AnswersValidator.java /tmp/fixed/defects4j_Mockito_37/src/org/mockito/internal/stubbing/answers/AnswersValidator.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_37/defects4j_Mockito_37/defects4j_Mockito_37/src/org/mockito/internal/stubbing/answers/AnswersValidator.java	2021-09-08 10:28:46.193543534 +0800
++++ /tmp/fixed/defects4j_Mockito_37/src/org/mockito/internal/stubbing/answers/AnswersValidator.java	2021-09-08 10:28:57.985940654 +0800
+@@ -25,8 +25,16 @@
+             validateDoNothing((DoesNothing) answer, invocation);
+         }
+         
++        if (answer instanceof CallsRealMethods) {
++            validateMockingConcreteClass((CallsRealMethods) answer, invocation);
++        }
+     }
+ 
++    private void validateMockingConcreteClass(CallsRealMethods answer, Invocation invocation) {
++        if (invocation.getMethod().getDeclaringClass().isInterface()) {
++            reporter.cannotCallRealMethodOnInterface();
++        }
++    }
+ 
+     private void validateDoNothing(DoesNothing answer, Invocation invocation) {
+         if (!invocation.isVoid()) {
+
+
+                
+                ====================== simfix_3 Mockito_37 ================================
+                
+                [PATCH 329] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_37/defects4j_Mockito_37/defects4j_Mockito_37/src//org/mockito/internal/util/ObjectMethodsGuru.java, range: <23,23>, original: return method.getName().equals("equals")&&method.getParameterTypes().length==1&&method.getParameterTypes()[0]==Object.class;
+, patch: return method.getReturnType()==String.class&&method.getParameterTypes().length==0&&method.getParameterTypes()[0]==Object.class;
+
+
+                

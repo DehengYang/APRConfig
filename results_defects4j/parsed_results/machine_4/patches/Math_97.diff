@@ -1,0 +1,93 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_97/defects4j_Math_97/defects4j_Math_97/src/java/org/apache/commons/math/analysis/BrentSolver.java /tmp/fixed/defects4j_Math_97/src/java/org/apache/commons/math/analysis/BrentSolver.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_97/defects4j_Math_97/defects4j_Math_97/src/java/org/apache/commons/math/analysis/BrentSolver.java	2021-09-03 15:59:07.576984933 +0800
++++ /tmp/fixed/defects4j_Math_97/src/java/org/apache/commons/math/analysis/BrentSolver.java	2021-09-03 15:59:17.761377593 +0800
+@@ -135,17 +135,31 @@
+         
+         // Verify bracketing
+         double sign = yMin * yMax;
+-        if (sign >= 0) {
++        if (sign > 0) {
+             // check if either value is close to a zero
++            if (Math.abs(yMin) <= functionValueAccuracy) {
++                setResult(min, 0);
++                ret = min;
++            } else if (Math.abs(yMax) <= functionValueAccuracy) {
++                setResult(max, 0);
++                ret = max;
++            } else {
+                 // neither value is close to zero and min and max do not bracket root.
+                 throw new IllegalArgumentException
+                 ("Function values at endpoints do not have different signs." +
+                         "  Endpoints: [" + min + "," + max + "]" + 
+                         "  Values: [" + yMin + "," + yMax + "]");
+-        } else {
++            }
++        } else if (sign < 0){
+             // solve using only the first endpoint as initial guess
+             ret = solve(min, yMin, max, yMax, min, yMin);
++        } else {
+             // either min or max is a root
++            if (yMin == 0.0) {
++                ret = min;
++            } else {
++                ret = max;
++            }
+         }
+ 
+         return ret;
+
+
+                
+                ====================== dynamoth_2 Math_97 ================================
+                
+                --- a/src/java/org/apache/commons/math/analysis/BrentSolver.java
++++ b/src/java/org/apache/commons/math/analysis/BrentSolver.java
+@@ -137,9 +137,9 @@
+double sign = yMin * yMax;
+-        if (sign >= 0) {
++        if (this.functionValueAccuracy <= sign) {
+// check if either value is close to a zero
+-                // neither value is close to zero and min and max do not bracket root.
+-                throw new IllegalArgumentException
+-                ("Function values at endpoints do not have different signs." +
+-                        "  Endpoints: [" + min + "," + max + "]" +
+-                        "  Values: [" + yMin + "," + yMax + "]");
++            // neither value is close to zero and min and max do not bracket root.
++            throw new IllegalArgumentException
++            ("Function values at endpoints do not have different signs." +
++            "  Endpoints: [" + min + "," + max + "]" +
++            "  Values: [" + yMin + "," + yMax + "]");
+} else {
+
+
+
+
+                
+                ====================== dynamoth_3 Math_97 ================================
+                
+                --- a/src/java/org/apache/commons/math/analysis/BrentSolver.java
++++ b/src/java/org/apache/commons/math/analysis/BrentSolver.java
+@@ -137,9 +137,9 @@
+double sign = yMin * yMax;
+-        if (sign >= 0) {
++        if (this.functionValueAccuracy <= sign) {
+// check if either value is close to a zero
+-                // neither value is close to zero and min and max do not bracket root.
+-                throw new IllegalArgumentException
+-                ("Function values at endpoints do not have different signs." +
+-                        "  Endpoints: [" + min + "," + max + "]" +
+-                        "  Values: [" + yMin + "," + yMax + "]");
++            // neither value is close to zero and min and max do not bracket root.
++            throw new IllegalArgumentException
++            ("Function values at endpoints do not have different signs." +
++            "  Endpoints: [" + min + "," + max + "]" +
++            "  Values: [" + yMin + "," + yMax + "]");
+} else {
+
+
+
+
+                

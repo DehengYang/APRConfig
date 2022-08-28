@@ -1,0 +1,62 @@
+
+                ====================== human-written patch ================================
+                
+                --- /mnt/data/bias_validation_2021/datasets/QuixBugs/java_programs/HANOI.java	2020-05-12 16:47:29.330527000 +0800
++++ /mnt/data/bias_validation_2021/datasets/QuixBugs/correct_java_programs/HANOI.java	2020-05-12 16:47:29.466534000 +0800
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ 
+ /*
+@@ -24,7 +24,7 @@
+             crap_set.remove(end);
+             int helper = crap_set.poll();
+             steps.addAll(hanoi(height-1, start, helper));
+-            steps.add(new Pair<Integer,Integer>(start, helper));
++            steps.add(new Pair<Integer,Integer>(start, end));
+             steps.addAll(hanoi(height-1, helper, end));
+         }
+ 
+
+
+                
+                ====================== tbar_1 HANOI_ ================================
+                
+                [PATCH 145]//**********************************************************
+//HANOI.java ------ 27
+//**********************************************************
+===Buggy Code===
+steps.add(new Pair<Integer,Integer>(start, helper));
+
+===Patch Code===
+steps.add(new Pair<Integer,Integer>(start, end));
+
+
+                
+                ====================== tbar_2 HANOI_ ================================
+                
+                [PATCH 145]//**********************************************************
+//HANOI.java ------ 27
+//**********************************************************
+===Buggy Code===
+steps.add(new Pair<Integer,Integer>(start, helper));
+
+===Patch Code===
+steps.add(new Pair<Integer,Integer>(start, end));
+
+
+                
+                ====================== tbar_3 HANOI_ ================================
+                
+                [PATCH 145]//**********************************************************
+//HANOI.java ------ 27
+//**********************************************************
+===Buggy Code===
+steps.add(new Pair<Integer,Integer>(start, helper));
+
+===Patch Code===
+steps.add(new Pair<Integer,Integer>(start, end));
+
+
+                

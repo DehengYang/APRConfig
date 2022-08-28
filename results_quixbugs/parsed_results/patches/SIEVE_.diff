@@ -1,0 +1,74 @@
+
+                ====================== human-written patch ================================
+                
+                --- /mnt/data/bias_validation_2021/datasets/QuixBugs/java_programs/SIEVE.java	2020-05-12 16:47:29.350528000 +0800
++++ /mnt/data/bias_validation_2021/datasets/QuixBugs/correct_java_programs/SIEVE.java	2020-05-12 16:47:29.474534000 +0800
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ 
+ /*
+@@ -38,7 +38,7 @@
+     public static ArrayList<Integer> sieve(Integer max) {
+         ArrayList<Integer> primes = new ArrayList<Integer>();
+         for (int n=2; n<max+1; n++) {
+-            if (any(list_comp(n, primes))) {
++            if (all(list_comp(n, primes))) {
+                 primes.add(n);
+             }
+         }
+
+
+                
+                ====================== tbar_1 SIEVE_ ================================
+                
+                [PATCH 35]//**********************************************************
+//SIEVE.java ------ 41
+//**********************************************************
+===Buggy Code===
+if (any(list_comp(n, primes))) {
+                primes.add(n);
+            }
+
+===Patch Code===
+if (all(list_comp(n, primes))) {
+                primes.add(n);
+            }
+
+
+                
+                ====================== tbar_2 SIEVE_ ================================
+                
+                [PATCH 35]//**********************************************************
+//SIEVE.java ------ 41
+//**********************************************************
+===Buggy Code===
+if (any(list_comp(n, primes))) {
+                primes.add(n);
+            }
+
+===Patch Code===
+if (all(list_comp(n, primes))) {
+                primes.add(n);
+            }
+
+
+                
+                ====================== tbar_3 SIEVE_ ================================
+                
+                [PATCH 35]//**********************************************************
+//SIEVE.java ------ 41
+//**********************************************************
+===Buggy Code===
+if (any(list_comp(n, primes))) {
+                primes.add(n);
+            }
+
+===Patch Code===
+if (all(list_comp(n, primes))) {
+                primes.add(n);
+            }
+
+
+                

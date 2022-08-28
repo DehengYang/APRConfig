@@ -1,0 +1,50 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_105/defects4j_Math_105/defects4j_Math_105/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java /tmp/fixed/defects4j_Math_105/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_105/defects4j_Math_105/defects4j_Math_105/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java	2021-09-08 00:16:22.411194956 +0800
++++ /tmp/fixed/defects4j_Math_105/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java	2021-09-08 00:16:34.951669395 +0800
+@@ -261,7 +261,7 @@
+      * @return sum of squared errors associated with the regression model
+      */
+     public double getSumSquaredErrors() {
+-        return sumYY - sumXY * sumXY / sumXX;
++        return Math.max(0d, sumYY - sumXY * sumXY / sumXX);
+     }
+ 
+     /**
+
+
+                
+                ====================== dynamoth_2 Math_105 ================================
+                
+                --- a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java
++++ b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java
+@@ -106,3 +106,5 @@
+if (n == 0) {
+-            xbar = x;
++            if ((x <= 1) || (y <= x)) {
++                xbar = x;
++            }
+ybar = y;
+
+
+
+
+                
+                ====================== dynamoth_3 Math_105 ================================
+                
+                --- a/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java
++++ b/src/java/org/apache/commons/math/stat/regression/SimpleRegression.java
+@@ -106,3 +106,5 @@
+if (n == 0) {
+-            xbar = x;
++            if ((x <= 1) || (y <= x)) {
++                xbar = x;
++            }
+ybar = y;
+
+
+
+
+                

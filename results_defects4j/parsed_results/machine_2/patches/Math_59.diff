@@ -1,0 +1,39 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_59/defects4j_Math_59/defects4j_Math_59/src/main/java/org/apache/commons/math/util/FastMath.java /tmp/fixed/defects4j_Math_59/src/main/java/org/apache/commons/math/util/FastMath.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_59/defects4j_Math_59/defects4j_Math_59/src/main/java/org/apache/commons/math/util/FastMath.java	2021-08-26 20:45:24.424509530 +0800
++++ /tmp/fixed/defects4j_Math_59/src/main/java/org/apache/commons/math/util/FastMath.java	2021-08-26 20:45:43.077176694 +0800
+@@ -3479,7 +3479,7 @@
+      * @return b if a is lesser or equal to b, a otherwise
+      */
+     public static float max(final float a, final float b) {
+-        return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);
++        return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : a);
+     }
+ 
+     /** Compute the maximum of two values
+
+
+                
+                ====================== simfix_1 Math_59 ================================
+                
+                [PATCH 9] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_59/defects4j_Math_59/defects4j_Math_59/src/main/java//org/apache/commons/math/util/FastMath.java, range: <3482,3482>, original: return (a<=b)?b:(Float.isNaN(a+b)?Float.NaN:b);
+, patch: return (a<=b)?b:(Float.isNaN(a+b)?Float.NaN:a);
+
+
+                
+                ====================== simfix_2 Math_59 ================================
+                
+                [PATCH 9] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_59/defects4j_Math_59/defects4j_Math_59/src/main/java//org/apache/commons/math/util/FastMath.java, range: <3482,3482>, original: return (a<=b)?b:(Float.isNaN(a+b)?Float.NaN:b);
+, patch: return (a<=b)?b:(Float.isNaN(a+b)?Float.NaN:a);
+
+
+                
+                ====================== simfix_3 Math_59 ================================
+                
+                [PATCH 9] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_59/defects4j_Math_59/defects4j_Math_59/src/main/java//org/apache/commons/math/util/FastMath.java, range: <3482,3482>, original: return (a<=b)?b:(Float.isNaN(a+b)?Float.NaN:b);
+, patch: return (a<=b)?b:(Float.isNaN(a+b)?Float.NaN:a);
+
+
+                

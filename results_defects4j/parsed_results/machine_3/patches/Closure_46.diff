@@ -1,0 +1,157 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_46/defects4j_Closure_46/defects4j_Closure_46/src/com/google/javascript/rhino/jstype/RecordType.java /tmp/fixed/defects4j_Closure_46/src/com/google/javascript/rhino/jstype/RecordType.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_46/defects4j_Closure_46/defects4j_Closure_46/src/com/google/javascript/rhino/jstype/RecordType.java	2021-08-25 20:22:40.552127009 +0800
++++ /tmp/fixed/defects4j_Closure_46/src/com/google/javascript/rhino/jstype/RecordType.java	2021-08-25 20:23:07.377224753 +0800
+@@ -137,22 +137,6 @@
+         propertyNode);
+   }
+ 
+-  @Override
+-  public JSType getLeastSupertype(JSType that) {
+-    if (!that.isRecordType()) {
+-      return super.getLeastSupertype(that);
+-    }
+-    RecordTypeBuilder builder = new RecordTypeBuilder(registry);
+-    for (String property : properties.keySet()) {
+-      if (that.toMaybeRecordType().hasProperty(property) &&
+-          that.toMaybeRecordType().getPropertyType(property).isEquivalentTo(
+-              getPropertyType(property))) {
+-        builder.addProperty(property, getPropertyType(property),
+-            getPropertyNode(property));
+-      }
+-    }
+-    return builder.build();
+-  }
+   JSType getGreatestSubtypeHelper(JSType that) {
+     if (that.isRecordType()) {
+       RecordType thatRecord = that.toMaybeRecordType();
+
+
+                
+                ====================== simfix_1 Closure_46 ================================
+                
+                [PATCH 19] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_46/defects4j_Closure_46/defects4j_Closure_46/src//com/google/javascript/rhino/jstype/RecordType.java, range: <142,154>, original: if(!that.isRecordType()){
+return super.getLeastSupertype(that);
+}
+RecordTypeBuilder builder=new RecordTypeBuilder(registry);
+for(String property : properties.keySet()){
+if(that.toMaybeRecordType().hasProperty(property)&&that.toMaybeRecordType().getPropertyType(property).isEquivalentTo(getPropertyType(property))){
+builder.addProperty(property,getPropertyType(property),getPropertyNode(property));
+}
+}
+return builder.build();
+, patch: if(!that.isRecordType()){
+return super.getLeastSupertype(that);
+}
+RecordTypeBuilder builder=new RecordTypeBuilder(registry);
+for(String property : properties.keySet()){
+if(that.toMaybeRecordType().hasProperty(property)&&that.toMaybeRecordType().getPropertyType(property).isEquivalentTo(getPropertyType(property))){
+builder.addProperty(property,getPropertyType(property),getPropertyNode(property));
+}
+}
+return getLeastSupertype(this,that);
+
+
+                
+                ====================== simfix_1 Closure_46 ================================
+                
+                [PATCH 19] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_46/defects4j_Closure_46/defects4j_Closure_46/src//com/google/javascript/rhino/jstype/RecordType.java, range: <142,154>, original: if(!that.isRecordType()){
+return super.getLeastSupertype(that);
+}
+RecordTypeBuilder builder=new RecordTypeBuilder(registry);
+for(String property : properties.keySet()){
+if(that.toMaybeRecordType().hasProperty(property)&&that.toMaybeRecordType().getPropertyType(property).isEquivalentTo(getPropertyType(property))){
+builder.addProperty(property,getPropertyType(property),getPropertyNode(property));
+}
+}
+return builder.build();
+, patch: if(!that.isRecordType()){
+return super.getLeastSupertype(that);
+}
+RecordTypeBuilder builder=new RecordTypeBuilder(registry);
+for(String property : properties.keySet()){
+if(that.toMaybeRecordType().hasProperty(property)&&that.toMaybeRecordType().getPropertyType(property).isEquivalentTo(getPropertyType(property))){
+builder.addProperty(property,getPropertyType(property),getPropertyNode(property));
+}
+}
+return getLeastSupertype(this,that);
+
+
+                
+                ====================== simfix_2 Closure_46 ================================
+                
+                [PATCH 19] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_46/defects4j_Closure_46/defects4j_Closure_46/src//com/google/javascript/rhino/jstype/RecordType.java, range: <142,154>, original: if(!that.isRecordType()){
+return super.getLeastSupertype(that);
+}
+RecordTypeBuilder builder=new RecordTypeBuilder(registry);
+for(String property : properties.keySet()){
+if(that.toMaybeRecordType().hasProperty(property)&&that.toMaybeRecordType().getPropertyType(property).isEquivalentTo(getPropertyType(property))){
+builder.addProperty(property,getPropertyType(property),getPropertyNode(property));
+}
+}
+return builder.build();
+, patch: if(!that.isRecordType()){
+return super.getLeastSupertype(that);
+}
+RecordTypeBuilder builder=new RecordTypeBuilder(registry);
+for(String property : properties.keySet()){
+if(that.toMaybeRecordType().hasProperty(property)&&that.toMaybeRecordType().getPropertyType(property).isEquivalentTo(getPropertyType(property))){
+builder.addProperty(property,getPropertyType(property),getPropertyNode(property));
+}
+}
+return getLeastSupertype(this,that);
+
+
+                
+                ====================== simfix_2 Closure_46 ================================
+                
+                [PATCH 19] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_46/defects4j_Closure_46/defects4j_Closure_46/src//com/google/javascript/rhino/jstype/RecordType.java, range: <142,154>, original: if(!that.isRecordType()){
+return super.getLeastSupertype(that);
+}
+RecordTypeBuilder builder=new RecordTypeBuilder(registry);
+for(String property : properties.keySet()){
+if(that.toMaybeRecordType().hasProperty(property)&&that.toMaybeRecordType().getPropertyType(property).isEquivalentTo(getPropertyType(property))){
+builder.addProperty(property,getPropertyType(property),getPropertyNode(property));
+}
+}
+return builder.build();
+, patch: if(!that.isRecordType()){
+return super.getLeastSupertype(that);
+}
+RecordTypeBuilder builder=new RecordTypeBuilder(registry);
+for(String property : properties.keySet()){
+if(that.toMaybeRecordType().hasProperty(property)&&that.toMaybeRecordType().getPropertyType(property).isEquivalentTo(getPropertyType(property))){
+builder.addProperty(property,getPropertyType(property),getPropertyNode(property));
+}
+}
+return getLeastSupertype(this,that);
+
+
+                
+                ====================== simfix_3 Closure_46 ================================
+                
+                 file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_46/defects4j_Closure_46/defects4j_Closure_46/src//com/google/javascript/rhino/jstype/RecordType.java, range: <142,154>, original: if(!that.isRecordType()){
+return super.getLeastSupertype(that);
+}
+RecordTypeBuilder builder=new RecordTypeBuilder(registry);
+for(String property : properties.keySet()){
+if(that.toMaybeRecordType().hasProperty(property)&&that.toMaybeRecordType().getPropertyType(property).isEquivalentTo(getPropertyType(property))){
+builder.addProperty(property,getPropertyType(property),getPropertyNode(property));
+}
+}
+return builder.build();
+, patch: if(!that.isRecordType()){
+return super.getLeastSupertype(that);
+}
+RecordTypeBuilder builder=new RecordTypeBuilder(registry);
+for(String property : properties.keySet()){
+if(that.toMaybeRecordType().hasProperty(property)&&that.toMaybeRecordType().getPropertyType(property).isEquivalentTo(getPropertyType(property))){
+builder.addProperty(property,getPropertyType(property),getPropertyNode(property));
+}
+}
+return getLeastSupertype(this,that);
+
+
+                

@@ -1,0 +1,50 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_22/defects4j_Time_22/defects4j_Time_22/src/main/java/org/joda/time/base/BasePeriod.java /tmp/fixed/defects4j_Time_22/src/main/java/org/joda/time/base/BasePeriod.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_22/defects4j_Time_22/defects4j_Time_22/src/main/java/org/joda/time/base/BasePeriod.java	2021-09-02 15:42:12.685420347 +0800
++++ /tmp/fixed/defects4j_Time_22/src/main/java/org/joda/time/base/BasePeriod.java	2021-09-02 15:42:33.466163487 +0800
+@@ -219,8 +219,13 @@
+      * @param duration  the duration, in milliseconds
+      */
+     protected BasePeriod(long duration) {
+-        this(duration, null, null);
++        super();
+         // bug [3264409]
++        iType = PeriodType.time();
++        int[] values = ISOChronology.getInstanceUTC().get(this, duration);
++        iType = PeriodType.standard();
++        iValues = new int[8];
++        System.arraycopy(values, 0, iValues, 4, 4);
+     }
+ 
+     /**
+
+
+                
+                ====================== simfix_1 Time_22 ================================
+                
+                [PATCH 5669] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_22/defects4j_Time_22/defects4j_Time_22/src/main/java//org/joda/time/format/FormatUtils.java, range: <63,65>, original: for(;size>1;size--){
+buf.append('0');
+}
+, patch: for(;size>1;size--){
+size++;
+buf.append('0');
+}
+
+
+                
+                ====================== simfix_2 Time_22 ================================
+                
+                [PATCH 4453] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_22/defects4j_Time_22/defects4j_Time_22/src/main/java//org/joda/time/DateTimeZone.java, range: <641,644>, original: offset-=hours*(int)DateTimeConstants.MILLIS_PER_HOUR;
+int minutes=offset/DateTimeConstants.MILLIS_PER_MINUTE;
+buf.append(':');
+, patch: if(offset==0){
+throw new IllegalArgumentException("The offset cannot be zero");
+}
+offset-=hours*(int)DateTimeConstants.MILLIS_PER_HOUR;
+int minutes=offset/DateTimeConstants.MILLIS_PER_MINUTE;
+buf.append(':');
+
+
+                

@@ -1,0 +1,33 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_27/defects4j_Mockito_27/defects4j_Mockito_27/src/org/mockito/internal/util/MockUtil.java /tmp/fixed/defects4j_Mockito_27/src/org/mockito/internal/util/MockUtil.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_27/defects4j_Mockito_27/defects4j_Mockito_27/src/org/mockito/internal/util/MockUtil.java	2021-09-09 09:26:00.400694542 +0800
++++ /tmp/fixed/defects4j_Mockito_27/src/org/mockito/internal/util/MockUtil.java	2021-09-09 09:26:13.801146141 +0800
+@@ -61,8 +61,7 @@
+ 
+     public <T> void resetMock(T mock) {
+         MockHandlerInterface<T> oldMockHandler = getMockHandler(mock);
+-        MockHandler<T> newMockHandler = new MockHandler<T>(oldMockHandler);
+-        MethodInterceptorFilter newFilter = new MethodInterceptorFilter(newMockHandler, (MockSettingsImpl) org.mockito.Mockito.withSettings().defaultAnswer(org.mockito.Mockito.RETURNS_DEFAULTS));
++        MethodInterceptorFilter newFilter = newMethodInterceptorFilter(oldMockHandler.getMockSettings());
+         ((Factory) mock).setCallback(0, newFilter);
+     }
+ 
+
+
+                
+                ====================== simfix_1 Mockito_27 ================================
+                
+                [PATCH 461] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_27/defects4j_Mockito_27/defects4j_Mockito_27/src//org/mockito/internal/util/ObjectMethodsGuru.java, range: <28,28>, original: return method.getName().equals("equals")&&method.getParameterTypes().length==1&&method.getParameterTypes()[0]==Object.class;
+, patch: return method.getName().equals("hashCode")&&method.getParameterTypes().length==0;
+
+
+                
+                ====================== simfix_3 Mockito_27 ================================
+                
+                [PATCH 461] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_27/defects4j_Mockito_27/defects4j_Mockito_27/src//org/mockito/internal/util/ObjectMethodsGuru.java, range: <28,28>, original: return method.getName().equals("equals")&&method.getParameterTypes().length==1&&method.getParameterTypes()[0]==Object.class;
+, patch: return method.getName().equals("hashCode")&&method.getParameterTypes().length==0;
+
+
+                

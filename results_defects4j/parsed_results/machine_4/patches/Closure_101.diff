@@ -1,0 +1,34 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_101/defects4j_Closure_101/defects4j_Closure_101/src/com/google/javascript/jscomp/CommandLineRunner.java /tmp/fixed/defects4j_Closure_101/src/com/google/javascript/jscomp/CommandLineRunner.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_101/defects4j_Closure_101/defects4j_Closure_101/src/com/google/javascript/jscomp/CommandLineRunner.java	2021-08-30 20:08:10.946523609 +0800
++++ /tmp/fixed/defects4j_Closure_101/src/com/google/javascript/jscomp/CommandLineRunner.java	2021-08-30 20:08:27.051175043 +0800
+@@ -430,10 +430,8 @@
+     for (FormattingOption formattingOption : flags.formatting) {
+       formattingOption.applyToOptions(options);
+     }
+-    if (flags.process_closure_primitives) {
+-      options.closurePass = true;
+-    }
+ 
++    options.closurePass = flags.process_closure_primitives;
+     initOptionsFromFlags(options);
+     return options;
+   }
+
+
+                
+                ====================== simfix_2 Closure_101 ================================
+                
+                [PATCH 50] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_101/defects4j_Closure_101/defects4j_Closure_101/src//com/google/javascript/rhino/Node.java, range: <583,586>, original: if(last==null){
+first=last=child;
+return ;
+}
+, patch: if(next==null){
+first=last=child;
+return ;
+}
+
+
+                

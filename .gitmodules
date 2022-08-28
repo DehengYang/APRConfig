@@ -1,0 +1,22 @@
+[submodule "apr_tools/TBar"]
+	path = apr_tools/TBar
+	url = git@github.com:DehengYang/TBar.git
+	branch = tbar_pv
+[submodule "apr_tools/SimFix"]
+	path = apr_tools/SimFix
+	url = git@github.com:DehengYang/SimFix.git
+	branch = simfix_pv
+[submodule "fl_modules/fault_localizer"]
+	path = fl_modules/fault_localizer
+	url = git@github.com:DehengYang/fault_localizer.git
+[submodule "patch_validator/patch_validator"]
+	path = patch_validator/patch_validator
+	url = git@github.com:DehengYang/patch_validator.git
+[submodule "apr_tools/nopol"]
+	path = apr_tools/nopol
+	url = git@github.com:DehengYang/nopol.git
+	branch = nopol_pv
+[submodule "apr_tools/Deptest"]
+	path = apr_tools/Deptest
+	url = git@github.com:DehengYang/dataset_purification.git
+	branch = develop

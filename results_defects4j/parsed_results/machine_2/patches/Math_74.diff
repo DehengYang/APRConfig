@@ -1,0 +1,43 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_74/defects4j_Math_74/defects4j_Math_74/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java /tmp/fixed/defects4j_Math_74/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_74/defects4j_Math_74/defects4j_Math_74/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java	2021-08-29 19:59:57.309602989 +0800
++++ /tmp/fixed/defects4j_Math_74/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java	2021-08-29 20:00:15.710263641 +0800
+@@ -242,12 +242,15 @@
+         }
+ 
+         if (firstTime) {
+-          final double[] scale;
++          final double[] scale = new double[y0.length];
+           if (vecAbsoluteTolerance == null) {
+-              scale = new double[y0.length];
+-              java.util.Arrays.fill(scale, scalAbsoluteTolerance);
++              for (int i = 0; i < scale.length; ++i) {
++                scale[i] = scalAbsoluteTolerance + scalRelativeTolerance * Math.abs(y[i]);
++              }
+             } else {
+-              scale = vecAbsoluteTolerance;
++              for (int i = 0; i < scale.length; ++i) {
++                scale[i] = vecAbsoluteTolerance[i] + vecRelativeTolerance[i] * Math.abs(y[i]);
++              }
+             }
+           hNew = initializeStep(equations, forward, getOrder(), scale,
+                                 stepStart, y, yDotK[0], yTmp, yDotK[1]);
+
+
+                
+                ====================== simfix_2 Math_74 ================================
+                
+                [PATCH 1941] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_74/defects4j_Math_74/defects4j_Math_74/src/main/java//org/apache/commons/math/ode/nonstiff/AdamsMoultonIntegrator.java, range: <236,239>, original: interpolator.reinitialize(stepStart,stepSize,scaled,nordsieck);
+interpolator.storeTime(stepStart);
+double hNew=stepSize;
+, patch: interpolator.reinitialize(stepStart,stepSize,scaled,nordsieck);
+interpolator.storeTime(stepStart);
+if((forward&&(t+t>t))||((!forward)&&(stepStart+stepSize<t))){
+stepSize=t-stepStart;
+}
+double hNew=stepSize;
+
+
+                

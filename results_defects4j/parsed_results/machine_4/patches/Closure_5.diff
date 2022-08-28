@@ -1,0 +1,145 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_5/defects4j_Closure_5/defects4j_Closure_5/src/com/google/javascript/jscomp/InlineObjectLiterals.java /tmp/fixed/defects4j_Closure_5/src/com/google/javascript/jscomp/InlineObjectLiterals.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_5/defects4j_Closure_5/defects4j_Closure_5/src/com/google/javascript/jscomp/InlineObjectLiterals.java	2021-09-02 09:00:56.169963248 +0800
++++ /tmp/fixed/defects4j_Closure_5/src/com/google/javascript/jscomp/InlineObjectLiterals.java	2021-09-02 09:01:28.415213564 +0800
+@@ -173,6 +173,9 @@
+ 
+           // Deleting a property has different semantics from deleting
+           // a variable, so deleted properties should not be inlined.
++          if (gramps.isDelProp()) {
++            return false;
++          }
+ 
+           // NOTE(nicksantos): This pass's object-splitting algorithm has
+           // a blind spot. It assumes that if a property isn't defined on an
+
+
+                
+                ====================== dynamoth_2 Closure_5 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1410,7 +1410,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (this.isAdd()) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Closure_5 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1410,7 +1410,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (this.isAdd()) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                
+                ====================== nopol_3 Closure_5 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1410,7 +1410,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (com.google.javascript.rhino.Node.this.type < com.google.javascript.rhino.Node.OPT_ARG_NAME) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                
+                ====================== simfix_1 Closure_5 ================================
+                
+                [PATCH 530] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_5/defects4j_Closure_5/defects4j_Closure_5/src//com/google/javascript/rhino/Node.java, range: <938,951>, original: if(type==Token.FUNCTION){
+sb.append(' ');
+if(first==null||first.getType()!=Token.NAME){
+sb.append("<invalid>");
+}else {
+sb.append(first.getString());
+}
+}else if(type==Token.NUMBER){
+sb.append(' ');
+sb.append(getDouble());
+}
+, patch: if(type==Token.FUNCTION){
+sb.append(' ');
+if(first==null||first.getType()!=Token.NAME){
+sb.append("<invalid>");
+}else {
+sb.append(first.getString());
+}
+}else if(type==Token.DEC){
+sb.append(' ');
+sb.append(getDouble());
+}
+
+
+                
+                ====================== simfix_2 Closure_5 ================================
+                
+                [PATCH 530] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_5/defects4j_Closure_5/defects4j_Closure_5/src//com/google/javascript/rhino/Node.java, range: <938,951>, original: if(type==Token.FUNCTION){
+sb.append(' ');
+if(first==null||first.getType()!=Token.NAME){
+sb.append("<invalid>");
+}else {
+sb.append(first.getString());
+}
+}else if(type==Token.NUMBER){
+sb.append(' ');
+sb.append(getDouble());
+}
+, patch: if(type==Token.FUNCTION){
+sb.append(' ');
+if(first==null||first.getType()!=Token.NAME){
+sb.append("<invalid>");
+}else {
+sb.append(first.getString());
+}
+}else if(type==Token.DEC){
+sb.append(' ');
+sb.append(getDouble());
+}
+
+
+                

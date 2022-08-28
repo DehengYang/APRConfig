@@ -1,0 +1,49 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_35/defects4j_Mockito_35/defects4j_Mockito_35/src/org/mockito/Matchers.java /tmp/fixed/defects4j_Mockito_35/src/org/mockito/Matchers.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_35/defects4j_Mockito_35/defects4j_Mockito_35/src/org/mockito/Matchers.java	2021-09-07 18:36:12.818559515 +0800
++++ /tmp/fixed/defects4j_Mockito_35/src/org/mockito/Matchers.java	2021-09-07 18:36:28.779097158 +0800
+@@ -359,7 +359,7 @@
+      * @return <code>null</code>.
+      */
+     public static <T> T isA(Class<T> clazz) {
+-        return reportMatcher(new InstanceOf(clazz)).<T>returnNull();
++        return reportMatcher(new InstanceOf(clazz)).<T>returnFor(clazz);
+     }
+ 
+     /**
+@@ -476,7 +476,7 @@
+      * @return <code>null</code>.
+      */
+     public static <T> T eq(T value) {
+-        return reportMatcher(new Equals(value)).<T>returnNull();
++        return (T) reportMatcher(new Equals(value)).<T>returnFor((Class) value.getClass());
+     }  
+ 
+     /**
+@@ -513,7 +513,7 @@
+      * @return <code>null</code>.
+      */
+     public static <T> T same(T value) {
+-        return reportMatcher(new Same(value)).<T>returnNull();
++        return (T) reportMatcher(new Same(value)).<T>returnFor((Class) value.getClass());
+     }
+ 
+     /**
+
+
+                
+                ====================== tbar_3 Mockito_35 ================================
+                
+                [PATCH 646]//**********************************************************
+//org/mockito/Matchers.java ------ 479
+//**********************************************************
+===Buggy Code===
+return reportMatcher(new Equals(value)).<T>returnNull();
+
+===Patch Code===
+return reportMatcher(new Equals(anySet())).<T>returnNull();
+
+
+                

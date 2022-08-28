@@ -1,0 +1,70 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_85/defects4j_Math_85/defects4j_Math_85/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java /tmp/fixed/defects4j_Math_85/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_85/defects4j_Math_85/defects4j_Math_85/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java	2021-09-08 00:06:49.025494489 +0800
++++ /tmp/fixed/defects4j_Math_85/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java	2021-09-08 00:07:07.142180016 +0800
+@@ -195,7 +195,7 @@
+         } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && 
+                 ((a > lowerBound) || (b < upperBound)));
+    
+-        if (fa * fb >= 0.0 ) {
++        if (fa * fb > 0.0 ) {
+             throw new ConvergenceException(
+                       "number of iterations={0}, maximum iterations={1}, " +
+                       "initial={2}, lower bound={3}, upper bound={4}, final a value={5}, " +
+
+
+                
+                ====================== dynamoth_2 Math_85 ================================
+                
+                --- a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java
++++ b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java
+@@ -198,8 +198,10 @@
+if (fa * fb >= 0.0 ) {
+-            throw new ConvergenceException(
+-                      "number of iterations={0}, maximum iterations={1}, " +
+-                      "initial={2}, lower bound={3}, upper bound={4}, final a value={5}, " +
+-                      "final b value={6}, f(a)={7}, f(b)={8}",
+-                      numIterations, maximumIterations, initial,
+-                      lowerBound, upperBound, a, b, fa, fb);
++            if (false) {
++                throw new ConvergenceException(
++                "number of iterations={0}, maximum iterations={1}, " +
++                "initial={2}, lower bound={3}, upper bound={4}, final a value={5}, " +
++                "final b value={6}, f(a)={7}, f(b)={8}",
++                numIterations, maximumIterations, initial,
++                lowerBound, upperBound, a, b, fa, fb);
++            }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Math_85 ================================
+                
+                --- a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java
++++ b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java
+@@ -198,8 +198,10 @@
+if (fa * fb >= 0.0 ) {
+-            throw new ConvergenceException(
+-                      "number of iterations={0}, maximum iterations={1}, " +
+-                      "initial={2}, lower bound={3}, upper bound={4}, final a value={5}, " +
+-                      "final b value={6}, f(a)={7}, f(b)={8}",
+-                      numIterations, maximumIterations, initial,
+-                      lowerBound, upperBound, a, b, fa, fb);
++            if (false) {
++                throw new ConvergenceException(
++                "number of iterations={0}, maximum iterations={1}, " +
++                "initial={2}, lower bound={3}, upper bound={4}, final a value={5}, " +
++                "final b value={6}, f(a)={7}, f(b)={8}",
++                numIterations, maximumIterations, initial,
++                lowerBound, upperBound, a, b, fa, fb);
++            }
+}
+
+
+
+
+                

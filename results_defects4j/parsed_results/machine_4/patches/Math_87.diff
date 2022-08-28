@@ -1,0 +1,83 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_87/defects4j_Math_87/defects4j_Math_87/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java /tmp/fixed/defects4j_Math_87/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_87/defects4j_Math_87/defects4j_Math_87/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java	2021-09-02 23:59:44.072515663 +0800
++++ /tmp/fixed/defects4j_Math_87/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java	2021-09-03 00:00:02.401221693 +0800
+@@ -272,12 +272,10 @@
+     private Integer getBasicRow(final int col) {
+         Integer row = null;
+         for (int i = getNumObjectiveFunctions(); i < getHeight(); i++) {
+-            if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {
+-                if (row == null) {
++            if (MathUtils.equals(getEntry(i, col), 1.0, epsilon) && (row == null)) {
+                 row = i;
+-                } else {
++            } else if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {
+                 return null;
+-                }
+             }
+         }
+         return row;
+
+
+                
+                ====================== dynamoth_2 Math_87 ================================
+                
+                --- a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
++++ b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
+@@ -160,4 +160,6 @@
+if (!restrictToNonNegative) {
+-                        matrix[row][getSlackVariableOffset() - 1] =
++                        if (this.numSlackVariables != 1) {
++                            matrix[row][getSlackVariableOffset() - 1] =
+getInvertedCoeffiecientSum(constraint.getCoefficients());
++                        }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Math_87 ================================
+                
+                --- a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
++++ b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
+@@ -160,4 +160,6 @@
+if (!restrictToNonNegative) {
+-                        matrix[row][getSlackVariableOffset() - 1] =
++                        if (this.numSlackVariables != 1) {
++                            matrix[row][getSlackVariableOffset() - 1] =
+getInvertedCoeffiecientSum(constraint.getCoefficients());
++                        }
+}
+
+
+
+
+                
+                ====================== simfix_2 Math_87 ================================
+                
+                [PATCH 5326] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_87/defects4j_Math_87/defects4j_Math_87/src/java//org/apache/commons/math/linear/RealMatrixImpl.java, range: <331,342>, original: if(nCols==0){
+throw MathRuntimeException.createIllegalArgumentException("matrix must have at least one column");
+}
+data=new double[subMatrix.length][nCols];
+for(int i=0;i<data.length;++i){
+if(subMatrix[i].length!=nCols){
+throw MathRuntimeException.createIllegalArgumentException("some rows have length {0} while others have length {1}",nCols,subMatrix[i].length);
+}
+System.arraycopy(subMatrix[i],0,data[i+row],column,nCols);
+}
+, patch: if(nCols==0){
+throw MathRuntimeException.createIllegalArgumentException("matrix must have at least one column");
+}
+data=new double[subMatrix.length][nRows];
+for(int i=0;i<data.length;++i){
+if(subMatrix[i].length!=nCols){
+throw MathRuntimeException.createIllegalArgumentException("some rows have length {0} while others have length {1}",nCols,subMatrix[i].length);
+}
+System.arraycopy(subMatrix[i],0,data[i+row],column,nCols);
+}
+
+
+                

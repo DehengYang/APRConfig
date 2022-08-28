@@ -1,0 +1,506 @@
+Refining Fitness Functions for Search-Based Program Repair,bian2021refining,2021
+CGenProg: Adaptation of cartesian genetic programming with migration and opposite guesses for automatic repair of software regression faults,khalilian2021cgenprog,2021
+Beyond Tests: Program Vulnerability Repair via Crash Constraint Extraction,gao2021beyond,2021
+Concolic Program Repair,shariffdeen2021concolic,2021
+GPURepair: Automated Repair of GPU Kernels,joshi2021gpurepair,2021
+Neural Program Repair with Execution-based Backpropagation,ye2021neural,2021
+CURE: Code-Aware Neural Machine Translation for Automatic Program Repair,jiang2021cure,2021
+Applying CodeBERT for Automated Program Repair of Java Simple Bugs,mashhadi2021applying,2021
+AUTOTRAINER: An Automatic DNN Training Problem Detection and Repair System,zhang2021autotrainer,2021
+A Software Repair Bot based on Continual Learning,baudry2021software,2021
+A Bidirectional LSTM Language Model for Code Evaluation and Repair,rahman2021bidirectional,2021
+Self-Supervised Bug Detection and Repair,allamanis2021self,2021
+Combined Similarity Based Automated Program Repair Approaches for Expression Level Bugs,asad2021combined,2021
+Self-Boosted Automated Program Repair,benton2021self,2021
+A novel approach for search-based program repair,trujillo2021novel,2021
+CRNRepair: Automated Program Repair of Chemical Reaction Networks,mesecan2021crnrepair,2021
+CrossFix: Collaborative bug fixing by recommending similar bugs,tan2021crossfix,2021
+Exploring Plausible Patches Using Source Code Embeddings in JavaScript,csuvik2021exploring,2021
+A Model with Iterative Trials for Correcting Logic Errors in Source Code,matsumoto2021model,2021
+On the Impact of Flaky Tests in Automated Program Repair,qin2021impact,2021
+Performance Evaluation of Automatic Bug Repair using Neural Machine Translation with Bug Fix Histories,akiyama2021performance,2021
+How Does Regression Test Selection Affect Program Repair? An Extensive Study on 2 Million Patches,lou2021does,2021
+Analysis of the Impact of Automatically Generated Test Cases on the Results of Automatic Bug Repair,matsuda2021analysis,2021
+A large-scale study on human-cloned changes for automated program repair,madeiral2021large,2021
+Evaluating Automatic Program Repair Capabilities to Repair API Misuses,kechagia2021evaluating,2021
+Is the Ground Truth Really Accurate? Dataset Purification for Automated Program Repair,yang2021ground,2021
+A critical review on the evaluation of automated program repair systems,liu2021critical,2021
+A Comprehensive Study of Automatic Program Repair on the QuixBugs Benchmark,He2021A,2021
+Automated Patch Assessment for Program Repair at Scale,ye2021automated,2021
+Evaluating the usage of fault localization in automated program repair: an empirical study,yang2021evaluating,2021
+High-Quality Automated Program Repair,motwani2021high,2021
+Exploring True Test Overfitting in Dynamic Automated Program Repair using Formal Methods,nilizadeh2021exploring,2021
+On the Introduction of Automatic Program Repair in Bloomberg,kirbas2021introduction,2021
+Automatic Program Repair as Semantic Suggestions: An Empirical Study,campos2021automatic,2021
+Automatic repair of convex optimization problems,barratt2021automatic,2021
+GitHub-OSS Fixit: Fixing bugs at scale in a Software Engineering Course,tan2021github,2021
+Data-Driven Vulnerability Detection and Repair in Java Code,zhang2021data,2021
+Beyond Tests: Program Vulnerability Repair via Crash Constraint Extraction,gao2021beyond,2021
+Transforming abstract to concrete repairs with a generative approach of repair values,kretschmer2021transforming,2021
+Hippocrates: Healing Persistent Memory Bugs Without Doing Any Harm,neal2021hippocrates,2021
+SQLRepair: Identifying and Repairing Mistakes in Student-Authored SQL Queries,presler2021sqlrepair,2021
+Automated Repair of Heap-Manipulating Programs Using Deductive Synthesis,nguyen2021automated,2021
+ObjSim: Lightweight Automatic Patch Prioritization via Object Similarity,ghanbari2020objsim,2020
+Refining Fitness Functions in Test-Based Program Repair,petke2020refining,2020
+Modification point aware test prioritization and sampling to improve patch validation in automatic program repair,venugopal2020modification,2020
+Making better use of repair templates in automated program repair: A multi-objective approach,yuan2020making,2020
+Toward better evolutionary program repair: An integrated approach,yuan2020toward,2020
+An Evolutionary System for Better Automatic Software Repair,yuan2020evolutionary,2020
+Novelty search for automatic bug repair,villanueva2020novelty,2020
+Empirical Analysis of 1-edit Degree Patches in Syntax-Based Automatic Program Repair,dziurzanski2020empirical,2020
+Automated Program-Semantic Defect Repair and False-Positive Elimination without Side Effects,dong2020automated,2020
+TarTar: A Timed Automata Repair Tool,koelbl2020tartar,2020
+Contract-based program repair without the contracts: An extended study,chen2020contract,2020
+Automatic Detection and Repair of Transition-Based Leakage in Software Binaries,athanasiou2020automatic,2020
+Hoppity: Learning Graph Transformations to Detect and Fix Bugs in Programs,dinella2020hoppity,2020
+Applying SeqGAN Algorithm to Software Bug Repair,yang2020applying,2020
+Review4Repair: Code Review Aided AutomaticProgram Repairing,huq2020review4repair,2020
+Adversarial Patch Generation for Automatic Program Repair,alhefdhi2020adversarial,2020
+Restore: Retrospective fault localization enhancing automated program repair,xu2020restore,2020
+A Study of Pyramid Structure for Code Correction,huang2020study,2020
+Applying deep learning algorithm to automatic bug localization and repair,yang2020applying_dl,2020
+Patching as Translation: the Data and the Metaphor,ding2020patching,2020
+Graph-based, Self-Supervised Program Repair from Diagnostic Feedback,yasunaga2020graph,2020
+CoCoNuT: Combining Context-Aware Neural Translation Models using Ensemble for Program Repair,lutellier2020coconut,2020
+Type error feedback via analytic program repair,sakkas2020type,2020
+R-Hero: A Software Repair Bot based on Continual Learning,baudry2020r,2020
+DLFix: Context-based Code Transformation Learning for Automated Program Repair,li2020dlfix,2020
+Human-In-The-Loop Automatic Program Repair,bohme2020human,2020
+Synthesize, execute and debug: Learning to repair for neural program synthesis,gupta2020synthesize,2020
+Improving automated program repair using two-layer tree-based neural networks,li2020improving,2020
+SeqTrans: Automatic Vulnerability Fix via Sequence to Sequence Learning,chi2020seqtrans,2020
+DevReplay: Automatic Repair with Editable Fix Pattern,ueda2020devreplay,2020
+Longitudinal Analysis of the Applicability of Program Repair on Past Commits,etemadi2020longitudinal,2020
+FlexiRepair: Transparent Program Repair with Generic Patches,koyuncu2020flexirepair,2020
+Automatic Program Repair of Java Single Bugs using Two-level Mutation Operators,oo2020automatic,2020
+Fixminer: Mining relevant fix patterns for automated program repair,koyuncu2020fixminer,2020
+Automatic Program Repair of Java Single Bugs using Two-level Mutation Operators,oo2020automatic,2020
+Automatically Repairing Programs Using Both Tests and Bug Reports,motwani2020automatically,2020
+The effectiveness of context-based change application on automatic program repair,kim2020effectiveness,2020
+Automatic Repair of Semantic Defects Using Restraint Mechanisms,dong2020automatic,2020
+Anti-patterns for Java Automated Program Repair Tools,wu2020anti,2020
+Must fault localization for program repair,rothenberg2020must,2020
+Automated repair of feature interaction failures in automated driving systems,abdessalem2020automated,2020
+Automatic Detection, Validation and Repair of Race Conditions in Interrupt-Driven Embedded Software,yu2020automatic,2020
+Automated Code Repair to Ensure Memory Safety,klieber2020automated,2020
+An automated approach to fix buffer overflows,shahab2020automated,2020
+Using API-Embedding for API-Misuse Repair,nielebock2020using,2020
+Automated Repair of Resource Leaks in Android Applications,bhatt2020automated,2020
+Smart contract repair,yu2020smart,2020
+Automatic Repair of Vulnerable Regular Expressions,chida2020automatic,2020
+Input Test Suites for Program Repair: A Novel Construction Method Based on Metamorphic Relations,jia2020empirical,2020
+Towards Automated Support for Conceptual Model Diagnosis and Repair,fumagalli2020towards,2020
+Exploiting fault localisation for efficient program repair,nowack2020exploiting,2020
+IFIX: Fixing Concurrency Bugs While They Are Introduced,wang2020ifix,2020
+Automated Patch Transplantation,shariffdeen2020automated,2020
+E-APR: Mapping the Effectiveness of Automated Program Repair,aleti2020apr,2020
+ How bugs are fixed: exposing bug-fix patterns with edits and nesting levels,islam2020bugs,2020
+Patch Quality and Diversity of Invariant-Guided Search-Based Program Repair,ding2020patch,2020
+The Symptom, Cause and Repair of Workaround,song2020symptom,2020
+On the Effectiveness of Unified Debugging: An Extensive Study on 16 Program Repair Systems,benton2020effectiveness,2020
+Fast and precise on-the-fly patch validation for all,chen2020fast,2020
+Understanding the Non-Repairability Factors of Automated Program Repair Techniques,lin2020understanding,2020
+Quality of Automated Program Repair on Real-World Defects,motwani2020quality,2020
+Exploring the Differences between Plausible and Correct Patches at Fine-Grained level,yang2020exploring,2020
+PRF: a framework for building automatic program repair prototypes for JVM-based languages,ghanbari2020prf,2020
+APRSuite: A suite of components and use cases based on categorical decomposition of automatic program repair techniques and tools,khalilian2020aprsuite,2020
+Can We Use Stack Overflow as a Source of Explainable Bug-fix Data?,tang2020can,2020
+On the Efficiency of Test Suite based Program Repair: A Systematic Assessment of 16 Automated Repair Systems for Java Programs,liu2020efficiency,2020
+Automated Patch Correctness Assessment: How Far are We?,wang2020automated,2020
+Boosting automated program repair with bug-inducing commits,wen2020boosting,2020
+Improving the Accuracy of Spectrum-based Fault Localization for Automated Program Repair,kuma2020improving,2020
+A Comprehensive Study of Code-removal Patches in Automated Program Repair,ginelli2020comprehensive,2020
+Evaluating representation learning of code changes for predicting patch correctness in program repair,tian2020evaluating,2020
+Priority Measurement of Patches for Program Repair Based on Semantic Distance,dong2020priority,2020
+Repairing deep neural networks: Fix patterns and challenges,islam2020repairing,2020
+Toward a Theory of Program Repair,khaireddine2020toward,2020
+Automatic repair of OWASP Top 10 security vulnerabilities: A survey,marchand2020automatic,2020
+Experience Report: How Effective is Automated Program Repair for Industrial Software,noda2020experience,2020
+Would You Fix This Code for Me? Effects of Repair Source and Commenting on Trust in Code Repair,alarcon2020would,2020
+Human factors in the study of automatic software repair: Future directions for research with industry,winter2020human,2020
+Can automated program repair refine fault localization? a unified debugging approach,lou2020can,2020
+Flake It'Till You Make It: Using Automated Repair to Induce and Fix Latent Test Flakiness,parry2020flake,2020
+Beyond Tests: Program Vulnerability Repair via Crash Constraint Extraction,gao2020beyond,2020
+Automatic Hot Patch Generation for Android Kernels,xu2020automatic,2020
+Spongebugs: Automatically generating fix suggestions in response to static code analysis warnings,marcilio2020spongebugs,2020
+C-3PR: A Bot for Fixing Static Analysis Violations via Pull Requests,carvalho2020c,2020
+SAVER: Scalable, Precise, and Safe Memory-Error Repair,hong2020saver,2020
+Interactive Patch Generation and Suggestion,gao2020interactive,2020
+SPINFER: Inferring Semantic Patches for the Linux Kernel,serrano2020spinfer,2020
+Program repair at arbitrary fault depth,khaireddine2019program,2019
+Astor: Exploring the design space of generate-and-validate program repair beyond GenProg,martinez2019astor,2019
+A hybrid evolutionary system for automatic software repair,yuan2019hybrid,2019
+Leveraging program invariants to promote population diversity in search-based automatic program repair,ding2019leveraging,2019
+Leveraging program invariants to promote population diversity in search-based automatic program repair,ding2019leveraging,2019
+Re-factoring based Program Repair applied to Programming Assignments,hu2019re,2019
+Metaro3: Metamorphic Relation Group for Automatic Program Repair,wu2019metaro3,2019
+TBar: Revisiting Template-based Automated Program Repair,liu2019tbar,2019
+Crash-avoiding program repair,gao2019crash,2019
+LoopFix: An Approach to Automatic Repair of Buggy Loops,wang2019loopfix,2019
+Stryker: Scaling specification-based program repair by pruning infeasible mutants with sat,zemin2019stryker,2019
+Automatic program repair using formal verification and expression templates,nguyen2019automatic,2019
+Automatic repair of regular expressions,pan2019automatic,2019
+Improving automated program repair with retrospective fault localization,xu2019improving,2019
+Learning to Fix Build Errors with Graph2Diff Neural Networks,tarlow2019learning,2019
+Inferring How Novice Students Learn to Code: Integrating Automated Program Repair with Cognitive Model,liang2019inferring,2019
+DeepDelta: learning to repair compilation errors,mesbah2019deepdelta,2019
+Neural program repair by jointly learning to localize and repair,vasic2019neural,2019
+Sequence to Sequence Machine Learning for Automatic Program Repair,svensson2019sequence,2019
+Learning the Relation between Code Features and Code Transforms with Structured Prediction,yu2019learning,2019
+Sequencer: Sequence-to-sequence learning for end-to-end program repair,chen2019sequencer,2019
+Sequence to Sequence Machine Learning for Automatic Program Repair,svensson2019sequence,2019
+Harnessing evolution for multi-hunk program repair,saha2019harnessing,2019
+Deep reinforcement learning for syntactic error repair in student programs,gupta2019deep,2019
+Getafix: Learning to fix bugs automatically,scott2019getafix,2019
+Inferring program transformations from singular examples via big code,jiang2019inferring,2019
+Phoenix: automated data-driven synthesis of repairs for static analysis violations,bavishi2019phoenix,2019
+An Automatic Semantic Code Repair Service Based on Deep Learning for Programs with Single Error,sun2019automatic,2019
+Encore: Ensemble learning using convolution neural machine translation for automatic program repair,lutellier2019encore,2019
+Sorting and transforming program repair ingredients via deep learning code similarities,white2019sorting,2019
+Sapfix: Automated end-to-end repair at scale,marginean2019sapfix,2019
+Impact Analysis of Syntactic and Semantic Similarities on Patch Prioritization in Automated Program Repair,asad2019impact,2019
+Avatar: Fixing semantic bugs with fix patterns of static analysis violations,liu2019avatar,2019
+Revisiting ssFix for Better Program Repair,xin2019revisiting,2019
+Better code search and reuse for better program repair,xin2019better,2019
+Improving the eﬀiciency of search-based auto program repair by adequate modification point,jang2019improving,2019
+iFixR: bug report driven program repair,koyuncu2019ifixr,2019
+Better code search and reuse for better program repair,xin2019better,2019
+Tbar: revisiting template-based automated program repair,liu2019tbar,2019
+You Cannot Fix What You Cannot Find! An Investigation of Fault Localization Bias in Benchmarking Automated Program Repair Systems,liu2019you,2019
+Automatic patch generation with context-based change application,kim2019automatic,2019
+Efficient automated repair of high floating-point errors in numerical libraries,yi2019efficient,2019
+Practical program repair via bytecode mutation,ghanbari2019practical,2019
+Toward practical automatic program repair,ghanbari2019toward,2019
+Sosrepair: Expressive semantic search for real-world program repair,afzal2019sosrepair,2019
+PraPR: practical program repair via bytecode mutation,ghanbari2019prapr,2019
+Improving the Efficiency of Search-Based Auto Program Repair by Adequate Modification Point,jang2019improving,2019
+Alleviating patch overfitting with automatic test generation: a study of feasibility and effectiveness for the Nopol repair system,yu2019alleviating,2019
+Automatically repairing binary programs using adapter synthesis,sharma2019automatically,2019
+Program repair for hyperproperties,bonakdarpour2019program,2019
+Detection and repair of architectural inconsistencies in Java,ghorbani2019detection,2019
+Failure-Driven Program Repair,ginelli2019failure,2019
+Automatic B-model repair using model checking and machine learning,cai2019automatic,2019
+VFix: value-flow-guided precise program repair for null pointer dereferences,xu2019vfix,2019
+Automatic repair of timestamp comparisons,liva2019automatic,2019
+A Process for Fault-Driven Repair of Constraints Among Features,arcaini2019process,2019
+ARepair: a repair framework for alloy,wang2019arepair,2019
+Automated Repair of Cross-Site Scripting Vulnerabilities through Unit Testing,mohammadi2019automated,2019
+Automatic Integer Error Repair by Proper-Type Inference,cheng2019automatic,2019
+A heuristic approach for guiding automated theory repair for the ABC theory repair system,urbonas2019heuristic,2019
+Search based repair of deep neural networks,sohn2019search,2019
+Automatic Detection and Repair Recommendation for Missing Checks,situ2019automatic,2019
+Design model repair with formal verification,cai2019design,2019
+How Different Is It Between Machine-Generated and Developer-Provided Patches?: An Empirical Study on the Correct Patches Generated by Automated Program Repair Techniques,wang2019different,2019
+Empirical review of Java program repair tools: a large-scale experiment on 2,141 bugs and 23,551 repair attempts,durieux2019empirical,2019
+Flakime: Laboratory-controlled test flakiness impact assessment. a case study on mutation testing and program repair,cordy2019flakime,2019
+Visualizing code genealogy: How code is evolutionarily fixed in program repair?,tomida2019visualizing,2019
+Attention please: Consider Mockito when evaluating newly proposed automated program repair techniques,wang2019attention,2019
+Improving patch quality by enhancing key components of automatic program repair,soto2019improving,2019
+Validation of Automatically Generated Patches: An Appetizer,ghanbari2019validation,2019
+A manual inspection of Defects4J bugs and its implications for automatic program repair,jiang2019manual,2019
+A Comprehensive Study of Automatic Program Repair on the QuixBugs Benchmark,He2019A,2019
+Speedup automatic program repair using dynamic software updating: an empirical study,guo2019speedup,2019
+Critical Review of BugSwarm for Fault Localization and Program Repair,durieux2019critical,2019
+A Note About: Critical Review of BugSwarm for Fault Localization and Program Repair,tomassi2019note,2019
+How to Explain a Patch: An Empirical Study of Patch Explanations in Open Source Projects,liang2019explain,2019
+Repairnator patches programs automatically,monperrus2019repairnator,2019
+Towards s/engineer/bot: Principles for program repair bots,van2019towards,2019
+Trust in automated software repair,ryan2019trust,2019
+On the Evolutionary Relationship between Change Coupling and Fix-Inducing Changes,sadiq2019evolutionary,2019
+Automating Patching of Vulnerable Open-Source Software Versions in Application Binaries,duan2019automating,2019
+Avatar: Fixing semantic bugs with fix patterns of static analysis violations,liu2019avatar,2019
+VFix: value-flow-guided precise program repair for null pointer dereferences,xu2019vfix,2019
+Extra-large repair search space with automatically mined templates: The cardumen mode of astor,martinez2018ultra,2018
+Improved representation and genetic operators for linear genetic programming for automated program repair,oliveira2018improved,2018
+Comparing line and AST granularity level for program repair using PyGGI,an2018comparing,2018
+kgenprog: A high-performance, high-extensibility and high-portability apr system,higo2018kgenprog,2018
+ARJA: Automated repair of java programs via multi-objective genetic programming,yuan2018arja,2018
+A novel fitness function for automated program repair based on source code checkpoints,de2018novel,2018
+Applying Genetic Programming with Similar Bug Fix Information to Automatic Fault Repair,yang2018applying,2018
+Static automated program repair for heap properties,van2018static,2018
+Semantic program repair using a reference implementation,mechtaev2018semantic,2018
+Neuro-symbolic program corrector for introductory programming assignments,bhatia2018neuro,2018
+Automatic Diagnosis and Correction of Logical Errors for Functional Pro- gramming Assignments,lee2018automatic,2018
+Automated program repair with canonical constraints,hill2018automated,2018
+Automatic data structure repair using separation logic,zheng2018automatic,2018
+Test-Equivalence Analysis for Automatic Patch Generation,mechtaev2018test,2018
+Learning to generate corrective patches using neural machine translation,hata2018learning,2018
+Towards specification-directed program repair,shin2018towards,2018
+Automatic model repair using reinforcement learning.,barriga2018automatic,2018
+Learning to Repair Software Vulnerabilities with Generative Adversarial Networks,harer2018learning,2018
+CODIT: Code Editing with Tree-Based NeuralMachine Translation,chakraborty2018codit,2018
+Automated clustering and program repair for introductory programming assignments,gulwani2018automated,2018
+Automated Large Program Repair based on Big Code,van2018automated,2018
+Shaping program repair space with existing patches and similar code,jiang2018shaping,2018
+Search-Based Efficient Automated Program Repair Using Mutation and Fault Localization,sun2018search,2018
+Pfix: fixing concurrency bugs based on memory access patterns,lin2018pfix,2018
+Hirebuild: An automatic approach to history-driven repair of build scripts,hassan2018hirebuild,2018
+Search, align, and repair: data-driven feedback generation for introductory programming exercise,wang2018search,2018
+Elixir: An Automated Repair Tool for Java Programs,saha2018elixir,2018
+MUT-APR: MUTation-based automated program repair research tool,assiri2018mut,2018
+Lsrepair: Live search of fix ingredients for automated program repair,liu2018lsrepair,2018
+Mining stackoverflow for program repair,liu2018mining,2018
+Towards practical program repair with on-demand candidate generation,hua2018towards,2018
+Sketchfix: A tool for automated program repair approach using lazy candidate generation,hua2018sketchfix,2018
+Context-aware patch generation for better automated program repair,wen2018context,2018
+Mining fix patterns for findbugs violations,liukui2018mining,2018
+The remarkable role of similarity in redundancy-based program repair,chen2018remarkable,2018
+Automated clustering and program repair for introductory programming assignments,gulwani2018automated,2018
+Automated model repair for alloy,wang2018automated,2018
+Segmentation method for automated repair with an additive manufacturing process,touze2018segmentation,2018
+Automated Detecting and Repair of Cross-Site Scripting Vulnerabilities,mohammadi2018automated,2018
+Automated repair of mobile friendly problems in web pages,mahajan2018automated,2018
+Compilation error repair: for the student programs, from the student programs,ahmed2018compilation,2018
+Automated detection and repair of incompatible uses of runtime permissions in Android apps,dilhara2018automated,2018
+Accelerating search-based program repair,mehne2018accelerating,2018
+Ultra-large repair search space with automatically mined templates: The cardumen mode of astor,martinez2018ultra,2018
+Detecting speech act types in developer question/answer conversations during bug repair,wood2018detecting,2018
+Automatic detection and repair recommendation of directive defects in Java API documentation,zhou2018automatic,2018
+Program Repair via Direct State Manipulation,hu2018program,2018
+Eliminating timing side-channel leaks using program repair,wu2018eliminating,2018
+Automated Repair of Data Faults in Templated Spreadsheets,wang2018automated_spread,2018
+Visual web test repair,stocco2018visual,2018
+Automated GUI Testing and Program Repair: A Family of Techniques,liang2018automated,2018
+TailorFix: An Automated Repair Framework for Assignment Statements,ma2018tailorfix,2018
+Memfix: static analysis-based repair of memory deallocation errors for c,lee2018memfix,2018
+Poster: Program Repair that Learns from Mistakes,rothenberg2018poster,2018
+Toward automatic program repair using knowledge extracted from stack overflow,hirose2018toward,2018
+Program Repair Via Code Block Mutation Operator,wang2018program,2018
+Pfix: fixing concurrency bugs based on memory access patterns,lin2018pfix,2018
+Do automated program repair techniques repair hard and important bugs?,motwani2018automated,2018
+How to Measure the Performance of Automated Program Repair,qi2018measure,2018
+A Study on the Impact of Reusing Redundant Patches on Automatic Program Repair,gao2018study,2018
+Mining repair model for exception-related bug,zhong2018mining,2018
+On the Time Performance of Automated Fixes,yi2018time,2018
+Overfitting in semantics-based automated program repair,le2018overfitting,2018
+A correlation study between automated program repair and test-suite metrics,yi2018correlation,2018
+Comparing developer-provided to user-provided tests for fault localization and automated program repair,just2018comparing,2018
+Towards reusing hints from past fixes,zhong2018towards,2018
+The impacts of techniques, programs and tests on automated program repair: An empirical study,kong2018impacts,2018
+Common statement kind changes to inform automatic program repair,soto2018common,2018
+Multi-Location Program Repair Strategies Learned from Past Successful Experience,wang2018multi,2018
+An empirical study on the effect of dynamic slicing on automated program repair efficiency,guo2018empirical,2018
+A new word embedding approach to evaluate potential fixes for automated program repair,amorim2018new,2018
+Identifying patch correctness in test-based program repair,xiong2018identifying,2018
+Evaluating the strategies of statement selection in automated program repair,yang2018evaluating,2018
+Beyond testing configurable systems: applying variational execution to automatic program repair and higher order mutation testing,wong2018beyond,2018
+Human-competitive patches in automatic program repair with repairnator,monperrus2018human,2018
+How to design a program repair bot? insights from the repairnator project,urli2018design,2018
+Toward introducing automated program repair techniques to industrial software development,naitou2018toward,2018
+Unsupervised automatic dataset repair,allingham2018unsupervised,2018
+New strategies for selecting reuse candidates on automated program repair,tanikado2017new,2017
+Precise condition synthesis for program repair,xiong2017precise,2017
+Contract-based program repair without the contracts,chen2017contract,2017
+S3: syntax-and semantic-guided repair synthesis via programming by examples,le2017s3,2017
+Automatic inference of code transforms for patch generation,long2017automatic,2017
+Connecting program synthesis and reachability: Automatic program repair using test-input generation,nguyen2017connecting,2017
+JFIX: semantics-based repair of Java programs via symbolic PathFinder,le2017jfix,2017
+Efficient SAT-based software analysis: from automated testing to automated verification and repair,aguirre2017efficient,2017
+Semantic Code Repair using Neuro-Symbolic Transformation Networks,devlin2017semantic,2017
+Dynamic Neural Program Embedding for Program Repair,wang2017dynamic,2017
+Vurle: Automatic vulnerability detection and repair by learning from examples,ma2017vurle,2017
+Improving performance of automatic program repair using learned heuristics,schramm2017improving,2017
+Elixir: Effective object-oriented program repair,saha2017elixir,2017
+Toward Providing Automatic Program Repair by Utilizing Topic-Based Code Block Similarity,jeong2017toward,2017
+Leveraging syntax-related code for automated program repair,xin2017leveraging,2017
+Automatic grading and feedback using program repair for introductory programming courses,parihar2017automatic,2017
+Xfix: an automated tool for the repair of layout cross browser issues,mahajan2017xfix,2017
+Automated repair of high inaccuracies in numerical programs,yi2017automated,2017
+A revisit of the integration of metamorphic testing and test suite based automated program repair,jiang2017revisit,2017
+Adaptively generating high quality fixes for atomicity violations,cai2017adaptively,2017
+Tortoise: Interactive system configuration repair,weiss2017tortoise,2017
+Intpti: Automatic integer error repair with proper-type inference,cheng2017intpti,2017
+Boostclean: Automated error detection and repair for machine learning,krishnan2017boostclean,2017
+Automated repair of layout cross browser issues using search-based techniques,mahajan2017automated,2017
+A metamorphic testing approach for supporting program repair without the need for a test oracle,jiang2017metamorphic,2017
+Automatic Program Repair Based on Version-Space Algebra,xu2017automatic,2017
+A generic algorithm for program repair,khaireddine2017generic,2017
+Trustworthy Software and Automatic Program Repair,roychoudhury2017trustworthy,2017
+Open-ended exploration of the program repair search space with mined templates: the next 8935 patches for defects4j,martinez2017open,2017
+Challenges and Solutions for Automated Repair of C Code,klieber2017challenges,2017
+Identifying test-suite-overfitted patches through test case generation,xin2017identifying,2017
+On the evaluation metrics of automated program repair,qi2017evaluation,2017
+Evaluating automated program repair using characteristics of defects,yokoyama2017evaluating,2017
+An empirical analysis of the influence of fault space on search-based automated program repair,wen2017empirical,2017
+Common bug-fix patterns: A large-scale observational study,campos2017common,2017
+An investigation into the use of mutation analysis for automated program repair,timperley2017investigation,2017
+An empirical study on the usage of fault localization in automated program repair,yang2017empirical,2017
+Can defects be fixed with weak test suites? An analysis of 50 defects from defects4j,jiang2017can,2017
+A Large-Scale Empirical Study of Security Patches,li2017large,2017
+Better test cases for better automated program repair,yang2017better,2017
+Fault localization for automated program repair: effectiveness, performance, repair correctness,assiri2017fault,2017
+Automatic repair of real bugs in java: A large-scale experiment on the defects4j dataset,martinez2017automatic,2017
+Test case generation for program repair: A study of feasibility and effectiveness,yu2017test,2017
+Towards API-specific automatic program repair,nielebock2017towards,2017
+The patches of the nopol automatic repair system on the bugs of defects4j version 1.1. 0,durieux2017patches,2017
+An analysis of the suitability of test-based patch acceptance criteria,zemin2017analysis,2017
+A feasibility study of using automated program repair for introductory programming assignments,yi2017feasibility,2017
+Vurle: Automatic vulnerability detection and repair by learning from examples,ma2017vurle,2017
+Astor: A program repair library for java,martinez2016astor,2016
+Improved crossover operators for genetic programming for program repair,oliveira2016improved,2016
+Automated program repair using genetic programming and model checking,zojaji2016automated,2016
+A capable crossover technique on automatic program repair,kou2016capable,2016
+Dynamoth: dynamic code synthesis for automatic program repair,durieux2016dynamoth,2016
+Fixing deadlocks via lock pre-acquisitions,cai2016fixing,2016
+Bovinspector: automatic inspection and repair of buffer overflow vulnerabilities,gao2016bovinspector,2016
+Nopol: Automatic repair of conditional statement bugs in java programs,xuan2016nopol,2016
+Angelix: Scalable multiline program patch synthesis via symbolic analysis,mechtaev2016angelix,2016
+Towards eﬀicient and effective automatic program repair,le2016towards,2016
+Qlose: Program Repair with Quantitative Objectives,d2016qlose,2016
+Enhancing automated program repair with deductive verification,le2016enhancing,2016
+sk\_p: a neural program corrector for MOOCs,pu2016sk_p,2016
+Automatic patch generation by learning correct code,long2016automatic,2016
+History driven program repair,le2016history,2016
+Automated Program Repair by Using Similar Code Containing Fix Ingredient,ji2016automated,2016
+Anti-patterns in search-based program repair,tan2016anti,2016
+Sound and complete mutation-based program repair,rothenberg2016sound,2016
+Cdrep: Automatic repair of cryptographic misuses in android applications,ma2016cdrep,2016
+Understanding and generating high quality patches for concurrency bugs,liu2016understanding,2016
+Program repair using code repositories,xin2016program,2016
+Using fast model-based fault localisation to aid students in self-guided program repair and to improve assessment,birch2016using,2016
+Using Test Cases Grouping and Iteration Repair to Fix Multi-points Bug,li2016using,2016
+Towards automatic repair of access control policies,xu2016towards,2016
+ARROW: Automated repair of races on client-side web pages,wang2016arrow,2016
+Automated code repair based on inferred specifications,klieber2016automated,2016
+Automatic fix for C integer errors by precision improvement,cheng2016automatic,2016
+An analysis of the search spaces for generate and validate patch generation systems,long2016analysis,2016
+SemFix and beyond: semantic techniques for program repair,roychoudhury2016semfix,2016
+Empirical study on synthesis engines for semantics-based program repair,le2016empirical,2016
+On the evaluation of automatic program repair techniques and tools,khalilian2016evaluation,2016
+Program repair by stepwise correctness enhancement,diallo2016program,2016
+Toward developer-like automated program repair—Modification comparisons between genprog and developers,nakajima2016toward,2016
+The impact of search algorithms in automated program repair,assiri2015impact,2015
+Staged program repair with condition synthesis,long2015staged,2015
+ConcBugAssist: constraint solving for diagnosis and repair of concurrency bugs,khoshnood2015concbugassist,2015
+Directfix: Looking for simple program repairs,mechtaev2015directfix,2015
+Deductive program repair,kneuss2015deductive,2015
+Automatic repair of infinite loops,marcote2015automatic,2015
+Program repair without regret,von2015program,2015
+Staged program repair in SPR,long2015staged2,2015
+Fixing, preventing, and recovering from concurrency bugs,deng2015fixing,2015
+An analysis of patch plausibility and correctness for generate-and-validate patch generation systems,qi2015analysis,2015
+Repairing programs with semantic code search (t),ke2015repairing,2015
+Automated network repair with meta provenance,wu2015automated,2015
+A type-directed approach to program repair,reinking2015type,2015
+Harvesting fix hints in the history of bug,bissyande2015harvesting,2015
+Automatic Program Repair with Condition Synthesis and Compound Mutations,long2015automatic,2015
+Path-based program repair,riener2015path,2015
+Efficient post-machining and automated repair preparation using adaptive machining technology,bremer2015efficient,2015
+Mining software repair models for reasoning on the search space of automated program fixing,martinez2015mining,2015
+Is the cure worse than the disease? overfitting in automated program repair,smith2015cure,2015
+Is the cure worse than the disease? A large-scale analysis of overfitting in automated program repair,smith2015cure2,2015
+Experience report: How do techniques, programs, and tests impact automated program repair?,kong2015experience,2015
+Should fixing these failures be delegated to automated program repair?,le2015should,2015
+Toward improving graftability on automated program repair,sumi2015toward,2015
+Automatic repair of real bugs: An experience report on the defects4j dataset,durieux2015automatic,2015
+Fault Localization Using Failure-Related Contexts for Automatic Program Repair,li2015fault,2015
+Automated program repair in an integrated development environment,pei2015automated,2015
+CLOTHO: Saving Programs from Malformed Strings and Incorrect String Handling,dhar2015clotho,2015
+Npefix: Automatic runtime repair of null pointer exceptions in java,cornu2015npefix,2015
+Automatic Error Elimination by Horizontal Code Transfer Across Multiple Applications (2015),sidiroglou2015automatic,2015
+The strength of random search on automated program repair,qi2014strength,2014
+ASTOR: Evolutionary automatic software repair for Java,martinez2014astor,2014
+An assessment of the quality of automated program operator repair,assiri2014assessment,2014
+Minthint: Automated Synthesis of Repair Hints,kaleeswaran2014minthint,2014
+Automated fixing of programs with contracts,pei2014automated,2014
+Automatic runtime error repair and containment via recovery shepherding,long2014automatic,2014
+Automatic repair for multi-threaded programs with deadlock/livelock using maximum satisfiability,lin2014automatic,2014
+Automatic repair of buggy if conditions and missing preconditions with SMT,demarco2014automatic,2014
+Cost-aware automatic program repair,samanta2014cost,2014
+Automatic program repair by fixing contracts,pei2014automatic,2014
+Automated error-detection and repair for compositional software specifications,alrajeh2014automated,2014
+Grail: Context-aware fixing of concurrency bugs,liu2014grail,2014
+Program transformations to fix C buffer overflows,shaw2014program,2014
+Semantic differential repair for input validation and sanitization,alkhalaf2014semantic,2014
+Data-guided repair of selection statements,gopinath2014data,2014
+A critical review of" automatic patch generation learned from human-written patches": Essay on the problem statement and the evaluation of automatic software repair,monperrus2014critical,2014
+Do the fix ingredients already exist? an empirical inquiry into the redundancy assumptions of program repair approaches,martinez2014fix,2014
+Mining frequent bug-fix code changes,osman2014mining,2014
+Tool for Evaluating Effectiveness of Fault Location Techniques Based on Automated Software Repair: GenProg-FL,ji2014tool,2014
+Automatically generated patches as debugging aids: a human study,tao2014automatically,2014
+Efficient automated program repair through fault-recorded testing prioritization,qi2013efficient,2013
+Leveraging program equivalence for adaptive program repair: Models and first results,weimer2013leveraging,2013
+Automatically repairing concurrency bugs with ARC,kelk2013automatically,2013
+SemFix: Program repair via semantic analysis,nguyen2013semfix,2013
+Automatic repair of overflowing expressions with abstract interpretation,logozzo2013automatic,2013
+Automated Feedback Generation for Introductory Programming Assignments,singh2013automated,2013
+Leveraging program equivalence for adaptive program repair: Models and first result,weimer2013leveraging,2013
+Automatic patch generation learned from human-written patches,kim2013automatic,2013
+Efficient automatic program repair using function-based part-execution,qi2013efficient2,2013
+Program transformations to fix C integers,coker2013program,2013
+Fix Me Up: Repairing Access-Control Bugs in Web Applications.,son2013fix,2013
+Automated runtime software repair,cornu2013automated,2013
+Repair abstractions for more efficient data structure repair,zaeem2013repair,2013
+Using automated program repair for evaluating the effectiveness of fault localization techniques,qi2013using,2013
+Two flavors in automated software repair: Rigid repair and plastic repair,monperrus2013two,2013
+A study of repetitiveness of code changes in software evolution,nguyen2013study,2013
+Advances in automated program repair and a call to arms,weimer2013advances,2013
+Empirical effectiveness evaluation of spectra-based fault localization on automated program repair,qi2013empirical,2013
+Does genetic programming work well on automated program repair?,qi2013does,2013
+Where should we fix this bug? a two-phase recommendation model,kim2013should,2013
+Fix-it: An extensible code auto-fix component in review bot,balachandran2013fix,2013
+Representations and operators for improving evolutionary software repair,le2012representations,2012
+Making automatic repair for large-scale programs more efficient using weak recompilation,qi2012making,2012
+More efficient automatic repair of large-scale programs using weak recompilation,qi2012more,2012
+Evolutionary software repair,forrest2012evolutionary,2012
+Multi-objective coevolutionary automated software correction,wilkerson2012multi,2012
+Modular and Verified Automatic Program Repair,logozzo2012modular,2012
+Automated repair of HTML generation errors in PHP applications using string constraint solving,samimi2012automated,2012
+Repair with on-the-fly program analysis,konighofer2012repair,2012
+Automated concurrency-bug fixing,jin2012automated,2012
+Automated model repair for distributed programs,bonakdarpour2012automated,2012
+Generic and Automated Runtime Program Repair,weimer2012generic,2012
+Automatic Repair of Software Systems,vassev2012automatic,2012
+Creating automated test and repair solutions with advanced diagnostics and ATE software,dewey2012creating,2012
+Program repair revisited,von2012program,2012
+Mining Repair Actions for Automated Program Fixing,martinez2012mining2,2012
+A human study of patch maintainability,fry2012human,2012
+A multi-agent system for industrial fault detection and repair,bevar2012multi,2012
+Evolving patches for software repair,ackling2011evolving,2011
+Evolutionary Repair of Faulty Software,arcuri2011evolutionary,2011
+A Formal Approach to Fixing Bugs,kalvala2011formal,2011
+Specification-based program repair using SAT,gopinath2011specification,2011
+Automated remote repair for mobile malware,nadji2011automated,2011
+Automated GUI refactoring and test script repair,daniel2011automated,2011
+Automated detection and repair of concurrency bugs,liblit2011automated,2011
+Testcareassistant: Automatic repair of test case compilation errors,mirzaaghaei2011testcareassistant,2011
+Are automated debugging techniques actually helping programmers?,parnin2011automated,2011
+Automated Error Localization and Correction for Imperative Programs,konighofer2011automated,2011
+Specification-based Program Repair Using SAT,gopinath2011specification,2011
+Constraint-Based Program Debugging Using Data Structure Repair,malik2011constraint,2011
+Automated program repair through the evolution of assembly code,schulte2010automated,2010
+Automatic program repair with evolutionary computation,weimer2010automatic,2010
+Automatic repair of concurrency bugs,bradbury2010automatic,2010
+Automated fixing of programs with contracts,wei2010automated,2010
+SemFix and beyond: semantic techniques for program repair,richardson2010nonparametric,2010
+On test repair using symbolic execution,daniel2010test,2010
+Designing Better Fitness Functions for Automated Program Repair,fast2010designing,2010
+Automatically finding patches using genetic programming,weimer2009automatically,2009
+Generating Fixes From Object Behavior Anomalies,dallmeier2009generating,2009
+A case for automated debugging using data structure repair,malik2009case,2009
+Fault localization and repair for Java runtime exceptions,sinha2009fault,2009
+Automatically patching errors in deployed software,perkins2009automatically,2009
+Identifying static analysis techniques for finding non-fix hunks in fix revisions,jung2009identifying,2009
+If It Ain't Broke, Don't Fix It: Challenges and New Directions for Inferring the Impact of Software Patches.,oberheide2009if,2009
+A novel co-evolutionary approach to automatic software bug fixing,arcuri2008novel,2008
+Automated fix generator for sql injection attacks,dysart2008automated,2008
+Program repair suggestions from graphical state-transition specifications,wang2008program,2008
+AutoPaG: towards automated software patch generation with source code root cause identification and repair,lin2007autopag,2007
+Using automated fix generation to secure SQL statements,thomas2007using,2007
+Automated repair tool for usability and accessibility of web sites,jasselette2007automated,2007
+Proof-directed debugging and repair,dennis2006proof,2006
+Automatic Repair Validation,locasto2006automatic,2006
+Back to the future: A framework for automatic malware removal and system repair,hsu2006back,2006
+Program Repair as a Game,jobstmann2005program,2005
+DIRA: Automatic Detection, Identification and Repair of Control-Hijacking Attacks,smirnov2005dira,2005
+Internet-based composite repair,chu2005internet,2005
+Automatic detection and repair of errors in data structures,demsky2003automatic,2003
+Application of support vector machines to fault diagnosis and automated repair,saunders2000application,2000
+Analysis of repair strategies for automatic assembly systems,leung1996analysis,1996
+Automated repair of complex systems by fault compensation,hart1994automated,1994
+On reliability of patch correctness assessment, le2019reliability, 2019
+Mutational Robustness and Automatic Program Repair,fastmutational,-1
+Partial Specifications for Program Repair,kittpartial,-1
+Should We Add Repair Time to an Unfixed Bug?,xushould,-1
+Senx: Semantically Correct Patch Generation for Security Vulnerabilities,huangsenx,-1
+Shipwright: A Human-in-the-Loop System for Dockerfile Repair,henkelshipwright,-1

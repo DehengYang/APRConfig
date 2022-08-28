@@ -1,0 +1,134 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_50/defects4j_Math_50/defects4j_Math_50/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java /tmp/fixed/defects4j_Math_50/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_50/defects4j_Math_50/defects4j_Math_50/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java	2021-08-25 07:06:16.070981357 +0800
++++ /tmp/fixed/defects4j_Math_50/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java	2021-08-25 07:06:32.383563352 +0800
+@@ -184,10 +184,6 @@
+                     break;
+                 case REGULA_FALSI:
+                     // Nothing.
+-                    if (x == x1) {
+-                        x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
+-                        f0 = computeObjectiveValue(x0);
+-                    }
+                     break;
+                 default:
+                     // Should never happen.
+
+
+                
+                ====================== dynamoth_1 Math_50 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
++++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
+@@ -187,3 +187,5 @@
+if (x == x1) {
+-                        x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
++                        if (false) {
++                            x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
++                        }
+f0 = computeObjectiveValue(x0);
+
+
+
+
+                
+                ====================== nopol_1 Math_50 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
++++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseSecantSolver.java
+@@ -186,5 +186,7 @@
+// Nothing.
+-                    if (x == x1) {
+-                        x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
+-                        f0 = computeObjectiveValue(x0);
++                    if (-1 == 0) {
++                        if (x == x1) {
++                            x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
++                            f0 = computeObjectiveValue(x0);
++                        }
+}
+
+
+
+
+                
+                ====================== simfix_1 Math_50 ================================
+                
+                [PATCH 8] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_50/defects4j_Math_50/defects4j_Math_50/src/main/java//org/apache/commons/math/analysis/solvers/BaseSecantSolver.java, range: <187,190>, original: if(x==x1){
+x0=0.5*(x0+x1-FastMath.max(rtol*FastMath.abs(x1),atol));
+f0=computeObjectiveValue(x0);
+}
+, patch: if(x==x0){
+x0=0.5*(x0+x1-FastMath.max(rtol*FastMath.abs(x1),atol));
+f0=computeObjectiveValue(x0);
+}
+
+
+                
+                ====================== simfix_2 Math_50 ================================
+                
+                [PATCH 8] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_50/defects4j_Math_50/defects4j_Math_50/src/main/java//org/apache/commons/math/analysis/solvers/BaseSecantSolver.java, range: <187,190>, original: if(x==x1){
+x0=0.5*(x0+x1-FastMath.max(rtol*FastMath.abs(x1),atol));
+f0=computeObjectiveValue(x0);
+}
+, patch: if(x==x0){
+x0=0.5*(x0+x1-FastMath.max(rtol*FastMath.abs(x1),atol));
+f0=computeObjectiveValue(x0);
+}
+
+
+                
+                ====================== simfix_3 Math_50 ================================
+                
+                [PATCH 8] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_50/defects4j_Math_50/defects4j_Math_50/src/main/java//org/apache/commons/math/analysis/solvers/BaseSecantSolver.java, range: <187,190>, original: if(x==x1){
+x0=0.5*(x0+x1-FastMath.max(rtol*FastMath.abs(x1),atol));
+f0=computeObjectiveValue(x0);
+}
+, patch: if(x==x0){
+x0=0.5*(x0+x1-FastMath.max(rtol*FastMath.abs(x1),atol));
+f0=computeObjectiveValue(x0);
+}
+
+
+                
+                ====================== tbar_1 Math_50 ================================
+                
+                [PATCH 1]//**********************************************************
+//org/apache/commons/math/analysis/solvers/BaseSecantSolver.java ------ 188
+//**********************************************************
+===Buggy Code===
+x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
+
+===Patch Code===
+x0 += 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
+
+
+                
+                ====================== tbar_2 Math_50 ================================
+                
+                [PATCH 1]//**********************************************************
+//org/apache/commons/math/analysis/solvers/BaseSecantSolver.java ------ 188
+//**********************************************************
+===Buggy Code===
+x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
+
+===Patch Code===
+x0 += 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
+
+
+                
+                ====================== tbar_3 Math_50 ================================
+                
+                [PATCH 1]//**********************************************************
+//org/apache/commons/math/analysis/solvers/BaseSecantSolver.java ------ 188
+//**********************************************************
+===Buggy Code===
+x0 = 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
+
+===Patch Code===
+x0 += 0.5 * (x0 + x1 - FastMath.max(rtol * FastMath.abs(x1), atol));
+
+
+                

@@ -1,0 +1,58 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_105/defects4j_Closure_105/defects4j_Closure_105/src/com/google/javascript/jscomp/FoldConstants.java /tmp/fixed/defects4j_Closure_105/src/com/google/javascript/jscomp/FoldConstants.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_105/defects4j_Closure_105/defects4j_Closure_105/src/com/google/javascript/jscomp/FoldConstants.java	2021-08-31 04:01:18.215140049 +0800
++++ /tmp/fixed/defects4j_Closure_105/src/com/google/javascript/jscomp/FoldConstants.java	2021-08-31 04:01:33.891774477 +0800
+@@ -1474,22 +1474,24 @@
+ 
+     String joinString = NodeUtil.getStringValue(right);
+     List<Node> arrayFoldedChildren = Lists.newLinkedList();
+-    StringBuilder sb = new StringBuilder();
++    StringBuilder sb = null;
+     int foldedSize = 0;
+     Node elem = arrayNode.getFirstChild();
+     // Merges adjacent String nodes.
+     while (elem != null) {
+       if (NodeUtil.isImmutableValue(elem)) {
+-        if (sb.length() > 0) {
++        if (sb == null) {
++          sb = new StringBuilder();
++        } else {
+           sb.append(joinString);
+         }
+         sb.append(NodeUtil.getStringValue(elem));
+       } else {
+-        if (sb.length() > 0) {
++        if (sb != null) {
+           // + 2 for the quotes.
+           foldedSize += sb.length() + 2;
+           arrayFoldedChildren.add(Node.newString(sb.toString()));
+-          sb = new StringBuilder();
++          sb = null;
+         }
+         foldedSize += InlineCostEstimator.getCost(elem);
+         arrayFoldedChildren.add(elem);
+@@ -1497,7 +1499,7 @@
+       elem = elem.getNext();
+     }
+ 
+-    if (sb.length() > 0) {
++    if (sb != null) {
+       // + 2 for the quotes.
+       foldedSize += sb.length() + 2;
+       arrayFoldedChildren.add(Node.newString(sb.toString()));
+
+
+                
+                ====================== simfix_2 Closure_105 ================================
+                
+                [PATCH 2543] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_105/defects4j_Closure_105/defects4j_Closure_105/src//com/google/javascript/rhino/jstype/JSTypeRegistry.java, range: <174,177>, original: registerNativeType(JSTypeNative.NUMBER_TYPE,NUMBER_TYPE);
+StringType STRING_TYPE=new StringType(this);
+registerNativeType(JSTypeNative.STRING_TYPE,STRING_TYPE);
+, patch: registerNativeType(JSTypeNative.NUMBER_TYPE,NUMBER_TYPE);
+StringType STRING_TYPE=new StringType(this);
+registerNativeType(JSTypeNative.DATE_TYPE,STRING_TYPE);
+
+
+                

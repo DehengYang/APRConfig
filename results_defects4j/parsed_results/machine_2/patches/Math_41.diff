@@ -1,0 +1,64 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_41/defects4j_Math_41/defects4j_Math_41/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java /tmp/fixed/defects4j_Math_41/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_41/defects4j_Math_41/defects4j_Math_41/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java	2021-09-01 19:47:20.433920695 +0800
++++ /tmp/fixed/defects4j_Math_41/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java	2021-09-01 19:47:37.422530038 +0800
+@@ -517,7 +517,7 @@
+                 }
+ 
+                 double sumWts = 0;
+-                for (int i = 0; i < weights.length; i++) {
++                for (int i = begin; i < begin + length; i++) {
+                     sumWts += weights[i];
+                 }
+ 
+
+
+                
+                ====================== dynamoth_1 Math_41 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java
++++ b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java
+@@ -317,10 +317,12 @@
+
+-        if (test(values, weights,begin, length)) {
+-            clear();
+-            if (length == 1) {
+-                var = 0.0;
+-            } else if (length > 1) {
+-                Mean mean = new Mean();
+-                double m = mean.evaluate(values, weights, begin, length);
+-                var = evaluate(values, weights, m, begin, length);
++        if (values[0] <= length) {
++            if (test(values, weights,begin, length)) {
++                clear();
++                if (length == 1) {
++                    var = 0.0;
++                } else if (length > 1) {
++                    Mean mean = new Mean();
++                    double m = mean.evaluate(values, weights, begin, length);
++                    var = evaluate(values, weights, m, begin, length);
++                }
+}
+
+
+
+
+                
+                ====================== nopol_1 Math_41 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/stat/descriptive/moment/Mean.java
++++ b/src/main/java/org/apache/commons/math/stat/descriptive/moment/Mean.java
+@@ -216,3 +216,5 @@
+}
+-            return xbarw + (correction/sumw);
++            if (xbarw < length) {
++                return xbarw + (correction/sumw);
++            }
+}
+
+
+
+
+                

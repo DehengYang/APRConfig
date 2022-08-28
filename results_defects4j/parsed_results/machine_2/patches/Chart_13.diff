@@ -1,0 +1,128 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_13/defects4j_Chart_13/defects4j_Chart_13/source/org/jfree/chart/block/BorderArrangement.java /tmp/fixed/defects4j_Chart_13/source/org/jfree/chart/block/BorderArrangement.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_13/defects4j_Chart_13/defects4j_Chart_13/source/org/jfree/chart/block/BorderArrangement.java	2021-09-03 07:43:47.557541264 +0800
++++ /tmp/fixed/defects4j_Chart_13/source/org/jfree/chart/block/BorderArrangement.java	2021-09-03 07:44:07.106239589 +0800
+@@ -452,7 +452,7 @@
+         h[3] = h[2];
+         if (this.rightBlock != null) {
+             RectangleConstraint c4 = new RectangleConstraint(0.0,
+-                    new Range(0.0, constraint.getWidth() - w[2]),
++                    new Range(0.0, Math.max(constraint.getWidth() - w[2], 0.0)),
+                     LengthConstraintType.RANGE, h[2], null,
+                     LengthConstraintType.FIXED);
+             Size2D size = this.rightBlock.arrange(g2, c4);
+
+
+                
+                ====================== simfix_1 Chart_13 ================================
+                
+                [PATCH 1655] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_13/defects4j_Chart_13/defects4j_Chart_13/source//org/jfree/chart/block/BorderArrangement.java, range: <136,169>, original: if(w==LengthConstraintType.NONE){
+if(h==LengthConstraintType.NONE){
+contentSize=arrangeNN(container,g2);
+}else if(h==LengthConstraintType.FIXED){
+throw new RuntimeException("Not implemented.");
+}else if(h==LengthConstraintType.RANGE){
+throw new RuntimeException("Not implemented.");
+}
+}else if(w==LengthConstraintType.FIXED){
+if(h==LengthConstraintType.NONE){
+contentSize=arrangeFN(container,g2,constraint.getWidth());
+}else if(h==LengthConstraintType.FIXED){
+contentSize=arrangeFF(container,g2,constraint);
+}else if(h==LengthConstraintType.RANGE){
+contentSize=arrangeFR(container,g2,constraint);
+}
+}else if(w==LengthConstraintType.RANGE){
+if(h==LengthConstraintType.NONE){
+throw new RuntimeException("Not implemented.");
+}else if(h==LengthConstraintType.FIXED){
+throw new RuntimeException("Not implemented.");
+}else if(h==LengthConstraintType.RANGE){
+contentSize=arrangeRR(container,constraint.getWidthRange(),constraint.getHeightRange(),g2);
+}
+}
+, patch: if(w==LengthConstraintType.NONE){
+if(h==LengthConstraintType.NONE){
+contentSize=arrangeNN(container,g2);
+}else if(h==LengthConstraintType.FIXED){
+throw new RuntimeException("Not yet implemented.");
+}else if(h==LengthConstraintType.RANGE){
+throw new RuntimeException("Not yet implemented.");
+}
+}else if(w==LengthConstraintType.FIXED){
+if(h==LengthConstraintType.NONE){
+contentSize=arrangeFN(container,g2,constraint.getWidth());
+}else if(h==LengthConstraintType.FIXED){
+contentSize=arrangeFF(container,g2,constraint);
+}else if(h==LengthConstraintType.RANGE){
+contentSize=arrangeFR(container,g2,constraint);
+}
+}else if(w==LengthConstraintType.RANGE){
+if(h==LengthConstraintType.NONE){
+throw new RuntimeException("Not yet implemented.");
+}else if(h==LengthConstraintType.FIXED){
+throw new RuntimeException("Not implemented.");
+}else if(h==LengthConstraintType.RANGE){
+contentSize=arrangeRR(container,constraint.getWidthRange(),constraint.getHeightRange(),g2);
+}
+}
+
+
+                
+                ====================== simfix_2 Chart_13 ================================
+                
+                [PATCH 1655] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_13/defects4j_Chart_13/defects4j_Chart_13/source//org/jfree/chart/block/BorderArrangement.java, range: <136,169>, original: if(w==LengthConstraintType.NONE){
+if(h==LengthConstraintType.NONE){
+contentSize=arrangeNN(container,g2);
+}else if(h==LengthConstraintType.FIXED){
+throw new RuntimeException("Not implemented.");
+}else if(h==LengthConstraintType.RANGE){
+throw new RuntimeException("Not implemented.");
+}
+}else if(w==LengthConstraintType.FIXED){
+if(h==LengthConstraintType.NONE){
+contentSize=arrangeFN(container,g2,constraint.getWidth());
+}else if(h==LengthConstraintType.FIXED){
+contentSize=arrangeFF(container,g2,constraint);
+}else if(h==LengthConstraintType.RANGE){
+contentSize=arrangeFR(container,g2,constraint);
+}
+}else if(w==LengthConstraintType.RANGE){
+if(h==LengthConstraintType.NONE){
+throw new RuntimeException("Not implemented.");
+}else if(h==LengthConstraintType.FIXED){
+throw new RuntimeException("Not implemented.");
+}else if(h==LengthConstraintType.RANGE){
+contentSize=arrangeRR(container,constraint.getWidthRange(),constraint.getHeightRange(),g2);
+}
+}
+, patch: if(w==LengthConstraintType.NONE){
+if(h==LengthConstraintType.NONE){
+contentSize=arrangeNN(container,g2);
+}else if(h==LengthConstraintType.FIXED){
+throw new RuntimeException("Not yet implemented.");
+}else if(h==LengthConstraintType.RANGE){
+throw new RuntimeException("Not yet implemented.");
+}
+}else if(w==LengthConstraintType.FIXED){
+if(h==LengthConstraintType.NONE){
+contentSize=arrangeFN(container,g2,constraint.getWidth());
+}else if(h==LengthConstraintType.FIXED){
+contentSize=arrangeFF(container,g2,constraint);
+}else if(h==LengthConstraintType.RANGE){
+contentSize=arrangeFR(container,g2,constraint);
+}
+}else if(w==LengthConstraintType.RANGE){
+if(h==LengthConstraintType.NONE){
+throw new RuntimeException("Not yet implemented.");
+}else if(h==LengthConstraintType.FIXED){
+throw new RuntimeException("Not implemented.");
+}else if(h==LengthConstraintType.RANGE){
+contentSize=arrangeRR(container,constraint.getWidthRange(),constraint.getHeightRange(),g2);
+}
+}
+
+
+                

@@ -1,0 +1,85 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_49/defects4j_Math_49/defects4j_Math_49/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java /tmp/fixed/defects4j_Math_49/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_49/defects4j_Math_49/defects4j_Math_49/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java	2021-08-25 02:50:14.156936160 +0800
++++ /tmp/fixed/defects4j_Math_49/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java	2021-08-25 02:50:29.301474141 +0800
+@@ -342,7 +342,7 @@
+     public OpenMapRealVector ebeDivide(RealVector v) {
+         checkVectorDimensions(v.getDimension());
+         OpenMapRealVector res = new OpenMapRealVector(this);
+-        Iterator iter = res.entries.iterator();
++        Iterator iter = entries.iterator();
+         while (iter.hasNext()) {
+             iter.advance();
+             res.setEntry(iter.key(), iter.value() / v.getEntry(iter.key()));
+@@ -355,7 +355,7 @@
+     public OpenMapRealVector ebeDivide(double[] v) {
+         checkVectorDimensions(v.length);
+         OpenMapRealVector res = new OpenMapRealVector(this);
+-        Iterator iter = res.entries.iterator();
++        Iterator iter = entries.iterator();
+         while (iter.hasNext()) {
+             iter.advance();
+             res.setEntry(iter.key(), iter.value() / v[iter.key()]);
+@@ -367,7 +367,7 @@
+     public OpenMapRealVector ebeMultiply(RealVector v) {
+         checkVectorDimensions(v.getDimension());
+         OpenMapRealVector res = new OpenMapRealVector(this);
+-        Iterator iter = res.entries.iterator();
++        Iterator iter = entries.iterator();
+         while (iter.hasNext()) {
+             iter.advance();
+             res.setEntry(iter.key(), iter.value() * v.getEntry(iter.key()));
+@@ -380,7 +380,7 @@
+     public OpenMapRealVector ebeMultiply(double[] v) {
+         checkVectorDimensions(v.length);
+         OpenMapRealVector res = new OpenMapRealVector(this);
+-        Iterator iter = res.entries.iterator();
++        Iterator iter = entries.iterator();
+         while (iter.hasNext()) {
+             iter.advance();
+             res.setEntry(iter.key(), iter.value() * v[iter.key()]);
+
+
+                
+                ====================== dynamoth_1 Math_49 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java
++++ b/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java
+@@ -665,4 +665,8 @@
+entries.put(index, value);
+-        } else if (entries.containsKey(index)) {
+-            entries.remove(index);
++        } else {
++            if (this.DEFAULT_ZERO_TOLERANCE == this.epsilon) {
++                if (entries.containsKey(index)) {
++                    entries.remove(index);
++                }
++            }
+}
+
+
+
+
+                
+                ====================== nopol_1 Math_49 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java
++++ b/src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java
+@@ -665,4 +665,8 @@
+entries.put(index, value);
+-        } else if (entries.containsKey(index)) {
+-            entries.remove(index);
++        } else {
++            if (org.apache.commons.math.linear.OpenMapRealVector.DEFAULT_ZERO_TOLERANCE == org.apache.commons.math.linear.OpenMapRealVector.this.epsilon) {
++                if (entries.containsKey(index)) {
++                    entries.remove(index);
++                }
++            }
+}
+
+
+
+
+                

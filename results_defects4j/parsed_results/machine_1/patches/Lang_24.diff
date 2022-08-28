@@ -1,0 +1,46 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_24/defects4j_Lang_24/defects4j_Lang_24/src/main/java/org/apache/commons/lang3/math/NumberUtils.java /tmp/fixed/defects4j_Lang_24/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_24/defects4j_Lang_24/defects4j_Lang_24/src/main/java/org/apache/commons/lang3/math/NumberUtils.java	2021-08-27 03:19:16.211311066 +0800
++++ /tmp/fixed/defects4j_Lang_24/src/main/java/org/apache/commons/lang3/math/NumberUtils.java	2021-08-27 03:19:30.599903696 +0800
+@@ -1410,7 +1410,7 @@
+             if (chars[i] == 'l'
+                 || chars[i] == 'L') {
+                 // not allowing L with an exponent or decimal point
+-                return foundDigit && !hasExp;
++                return foundDigit && !hasExp && !hasDecPoint;
+             }
+             // last character is illegal
+             return false;
+
+
+                
+                ====================== tbar_2 Lang_24 ================================
+                
+                [PATCH 2514]//**********************************************************
+//org/apache/commons/lang3/math/NumberUtils.java ------ 1395
+//**********************************************************
+===Buggy Code===
+if (chars[i] == '.') {
+                if (hasDecPoint || hasExp) {
+                    // two decimal points or dec in exponent
+                    return false;
+                }
+                // single trailing decimal point after non-exponent is ok
+                return foundDigit;
+            }
+
+===Patch Code===
+if ((chars[i] == '.') || (chars[i] == 'l'
+                || chars[i] == 'L')) {
+                if (hasDecPoint || hasExp) {
+                    // two decimal points or dec in exponent
+                    return false;
+                }
+                // single trailing decimal point after non-exponent is ok
+                return foundDigit;
+            }
+
+
+                

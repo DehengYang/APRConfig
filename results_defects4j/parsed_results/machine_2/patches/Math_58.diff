@@ -1,0 +1,52 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_58/defects4j_Math_58/defects4j_Math_58/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java /tmp/fixed/defects4j_Math_58/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_58/defects4j_Math_58/defects4j_Math_58/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java	2021-08-26 15:24:16.719575175 +0800
++++ /tmp/fixed/defects4j_Math_58/src/main/java/org/apache/commons/math/optimization/fitting/GaussianFitter.java	2021-08-26 15:24:35.244236918 +0800
+@@ -118,7 +118,7 @@
+      */
+     public double[] fit() {
+         final double[] guess = (new ParameterGuesser(getObservations())).guess();
+-        return fit(new Gaussian.Parametric(), guess);
++        return fit(guess);
+     }
+ 
+     /**
+
+
+                
+                ====================== dynamoth_1 Math_58 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/analysis/function/Gaussian.java
++++ b/src/main/java/org/apache/commons/math/analysis/function/Gaussian.java
+@@ -182,3 +182,5 @@
+if (param[2] <= 0) {
+-                throw new NotStrictlyPositiveException(param[2]);
++                if (param[0] <= 0) {
++                    throw new NotStrictlyPositiveException(param[2]);
++                }
+}
+
+
+
+
+                
+                ====================== nopol_1 Math_58 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/analysis/function/Gaussian.java
++++ b/src/main/java/org/apache/commons/math/analysis/function/Gaussian.java
+@@ -181,4 +181,6 @@
+}
+-            if (param[2] <= 0) {
+-                throw new NotStrictlyPositiveException(param[2]);
++            if ((param[2]) == 0) {
++                if (param[2] <= 0) {
++                    throw new NotStrictlyPositiveException(param[2]);
++                }
+}
+
+
+
+
+                

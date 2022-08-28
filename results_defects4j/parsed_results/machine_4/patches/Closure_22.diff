@@ -1,0 +1,144 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_22/defects4j_Closure_22/defects4j_Closure_22/src/com/google/javascript/jscomp/CheckSideEffects.java /tmp/fixed/defects4j_Closure_22/src/com/google/javascript/jscomp/CheckSideEffects.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_22/defects4j_Closure_22/defects4j_Closure_22/src/com/google/javascript/jscomp/CheckSideEffects.java	2021-09-02 04:12:04.251956696 +0800
++++ /tmp/fixed/defects4j_Closure_22/src/com/google/javascript/jscomp/CheckSideEffects.java	2021-09-02 04:12:35.281138186 +0800
+@@ -98,44 +98,20 @@
+     // Do not try to remove a block or an expr result. We already handle
+     // these cases when we visit the child, and the peephole passes will
+     // fix up the tree in more clever ways when these are removed.
+-    if (parent.getType() == Token.COMMA) {
+-      Node gramps = parent.getParent();
+-      if (gramps.isCall() && parent == gramps.getFirstChild()) {
+-        if (n == parent.getFirstChild() && parent.getChildCount() == 2 && n.getNext().isName() && "eval".equals(n.getNext().getString())) {
++    if (n.isExprResult() || n.isBlock()) {
+       return;
+-        }
+     }
+ 
+     // This no-op statement was there so that JSDoc information could
+     // be attached to the name. This check should not complain about it.
+-      if (n == parent.getLastChild()) {
+-        for (Node an : parent.getAncestors()) {
+-          int ancestorType = an.getType();
+-          if (ancestorType == Token.COMMA)
+-            continue;
+-          if (ancestorType != Token.EXPR_RESULT && ancestorType != Token.BLOCK)
+-            return;
+-          else
+-            break;
+-        }
+-      }
+-    } else if (parent.getType() != Token.EXPR_RESULT && parent.getType() != Token.BLOCK) {
+-      if (parent.getType() == Token.FOR && parent.getChildCount() == 4 && (n == parent.getFirstChild() ||
+-           n == parent.getFirstChild().getNext().getNext())) {
+-      } else {
++    if (n.isQualifiedName() && n.getJSDocInfo() != null) {
+       return;
+-      }
+     }
+ 
+     boolean isResultUsed = NodeUtil.isExpressionResultUsed(n);
+     boolean isSimpleOp = NodeUtil.isSimpleOperatorType(n.getType());
+     if (!isResultUsed &&
+         (isSimpleOp || !NodeUtil.mayHaveSideEffects(n, t.getCompiler()))) {
+-      if (n.isQualifiedName() && n.getJSDocInfo() != null) {
+-        return;
+-      } else if (n.isExprResult()) {
+-        return;
+-      }
+       String msg = "This code lacks side-effects. Is there a bug?";
+       if (n.isString()) {
+         msg = "Is there a missing '+' on the previous line?";
+
+
+                
+                ====================== dynamoth_2 Closure_22 ================================
+                
+                --- a/src/com/google/javascript/jscomp/CheckSideEffects.java
++++ b/src/com/google/javascript/jscomp/CheckSideEffects.java
+@@ -110,11 +110,13 @@
+// be attached to the name. This check should not complain about it.
+-      if (n == parent.getLastChild()) {
+-        for (Node an : parent.getAncestors()) {
+-          int ancestorType = an.getType();
+-          if (ancestorType == Token.COMMA)
++      if (false) {
++        if (n == parent.getLastChild()) {
++          for (Node an : parent.getAncestors()) {
++            int ancestorType = an.getType();
++            if (ancestorType == Token.COMMA)
+continue;
+-          if (ancestorType != Token.EXPR_RESULT && ancestorType != Token.BLOCK)
++            if (ancestorType != Token.EXPR_RESULT && ancestorType != Token.BLOCK)
+return;
+-          else
++            else
+break;
++          }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Closure_22 ================================
+                
+                --- a/src/com/google/javascript/jscomp/CheckSideEffects.java
++++ b/src/com/google/javascript/jscomp/CheckSideEffects.java
+@@ -110,11 +110,13 @@
+// be attached to the name. This check should not complain about it.
+-      if (n == parent.getLastChild()) {
+-        for (Node an : parent.getAncestors()) {
+-          int ancestorType = an.getType();
+-          if (ancestorType == Token.COMMA)
++      if (false) {
++        if (n == parent.getLastChild()) {
++          for (Node an : parent.getAncestors()) {
++            int ancestorType = an.getType();
++            if (ancestorType == Token.COMMA)
+continue;
+-          if (ancestorType != Token.EXPR_RESULT && ancestorType != Token.BLOCK)
++            if (ancestorType != Token.EXPR_RESULT && ancestorType != Token.BLOCK)
+return;
+-          else
++            else
+break;
++          }
+}
+
+
+
+
+                
+                ====================== simfix_1 Closure_22 ================================
+                
+                [PATCH 1367] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_22/defects4j_Closure_22/defects4j_Closure_22/src//com/google/javascript/jscomp/CheckSideEffects.java, range: <112,120>, original: for(Node an : parent.getAncestors()){
+int ancestorType=an.getType();
+if(ancestorType==Token.COMMA)continue;
+if(ancestorType!=Token.EXPR_RESULT&&ancestorType!=Token.BLOCK)return ;else break;
+}
+, patch: for(Node an : parent.getAncestors()){
+int ancestorType=parent.getParent().getType();
+if(ancestorType==Token.COMMA)continue;
+if(ancestorType!=Token.EXPR_RESULT&&ancestorType!=Token.BLOCK)return ;else break;
+}
+
+
+                
+                ====================== simfix_2 Closure_22 ================================
+                
+                [PATCH 1367] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_22/defects4j_Closure_22/defects4j_Closure_22/src//com/google/javascript/jscomp/CheckSideEffects.java, range: <112,120>, original: for(Node an : parent.getAncestors()){
+int ancestorType=an.getType();
+if(ancestorType==Token.COMMA)continue;
+if(ancestorType!=Token.EXPR_RESULT&&ancestorType!=Token.BLOCK)return ;else break;
+}
+, patch: for(Node an : parent.getAncestors()){
+int ancestorType=parent.getParent().getType();
+if(ancestorType==Token.COMMA)continue;
+if(ancestorType!=Token.EXPR_RESULT&&ancestorType!=Token.BLOCK)return ;else break;
+}
+
+
+                

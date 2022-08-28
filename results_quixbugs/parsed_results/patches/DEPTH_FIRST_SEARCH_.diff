@@ -1,0 +1,124 @@
+
+                ====================== human-written patch ================================
+                
+                --- /mnt/data/bias_validation_2021/datasets/QuixBugs/java_programs/DEPTH_FIRST_SEARCH.java	2020-05-12 16:47:29.362529000 +0800
++++ /mnt/data/bias_validation_2021/datasets/QuixBugs/correct_java_programs/DEPTH_FIRST_SEARCH.java	2020-05-12 16:47:29.478535000 +0800
+@@ -1,16 +1,18 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ /*
+  * To change this template, choose Tools | Templates
+  * and open the template in the editor.
+  */
+ 
++import java_programs.Node;
++
+ /**
+  *
+  * @author derricklin
+  */
+ public class DEPTH_FIRST_SEARCH {
+-    public boolean depth_first_search(Node startnode, Node goalnode) {
++    public static boolean depth_first_search(Node startnode, Node goalnode) {
+         Set<Node> nodesvisited = new HashSet<>();
+         class Search {
+             boolean search(Node node) {
+@@ -19,6 +21,7 @@
+                 } else if (node == goalnode) {
+                     return true;
+                 } else {
++                  	nodesvisited.add(node);
+                     for (Node successornodes : node.getSuccessors()) {
+ 	                    if (search(successornodes)) { return true; }
+                     }
+
+
+                
+                ====================== dynamoth_1 DEPTH_FIRST_SEARCH_ ================================
+                
+                --- a/src/main/java/Node.java
++++ b/src/main/java/Node.java
+@@ -49,3 +49,5 @@
+public void setSuccessors(ArrayList<Node> successors) {
+-        this.successors = successors;
++        if (false) {
++            this.successors = successors;
++        }
+}
+
+
+
+
+                
+                ====================== dynamoth_2 DEPTH_FIRST_SEARCH_ ================================
+                
+                --- a/src/main/java/Node.java
++++ b/src/main/java/Node.java
+@@ -49,3 +49,5 @@
+public void setSuccessors(ArrayList<Node> successors) {
+-        this.successors = successors;
++        if (false) {
++            this.successors = successors;
++        }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 DEPTH_FIRST_SEARCH_ ================================
+                
+                --- a/src/main/java/Node.java
++++ b/src/main/java/Node.java
+@@ -49,3 +49,5 @@
+public void setSuccessors(ArrayList<Node> successors) {
+-        this.successors = successors;
++        if (false) {
++            this.successors = successors;
++        }
+}
+
+
+
+
+                
+                ====================== tbar_1 DEPTH_FIRST_SEARCH_ ================================
+                
+                [PATCH 3]//**********************************************************
+//Node.java ------ 50
+//**********************************************************
+===Buggy Code===
+this.successors = successors;
+
+===Patch Code===
+this.successors = getSuccessors();
+
+
+                
+                ====================== tbar_2 DEPTH_FIRST_SEARCH_ ================================
+                
+                [PATCH 3]//**********************************************************
+//Node.java ------ 50
+//**********************************************************
+===Buggy Code===
+this.successors = successors;
+
+===Patch Code===
+this.successors = getSuccessors();
+
+
+                
+                ====================== tbar_3 DEPTH_FIRST_SEARCH_ ================================
+                
+                [PATCH 3]//**********************************************************
+//Node.java ------ 50
+//**********************************************************
+===Buggy Code===
+this.successors = successors;
+
+===Patch Code===
+this.successors = getSuccessors();
+
+
+                

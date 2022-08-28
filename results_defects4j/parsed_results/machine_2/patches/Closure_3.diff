@@ -1,0 +1,88 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_3/defects4j_Closure_3/defects4j_Closure_3/src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java /tmp/fixed/defects4j_Closure_3/src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_3/defects4j_Closure_3/defects4j_Closure_3/src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java	2021-09-07 10:53:03.224856142 +0800
++++ /tmp/fixed/defects4j_Closure_3/src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java	2021-09-07 10:53:35.217901639 +0800
+@@ -152,7 +152,7 @@
+     reachingUses = new MaybeReachingVariableUse(cfg, t.getScope(), compiler);
+     reachingUses.analyze();
+     for (Candidate c : candidates) {
+-      if (c.canInline()) {
++      if (c.canInline(t.getScope())) {
+         c.inlineVariable();
+ 
+         // If definition c has dependencies, then inlining it may have
+@@ -277,7 +277,7 @@
+       return defMetadata.node;
+     }
+ 
+-    private boolean canInline() {
++    private boolean canInline(final Scope scope) {
+       // Cannot inline a parameter.
+       if (getDefCfgNode().isFunction()) {
+         return false;
+@@ -372,6 +372,12 @@
+                   case Token.REGEXP:
+                   case Token.NEW:
+                     return true;
++                  case Token.NAME:
++                    Var var = scope.getOwnSlot(input.getString());
++                    if (var != null
++                        && var.getParentNode().isCatch()) {
++                      return true;
++                    }
+                 }
+                 return false;
+               }
+
+
+                
+                ====================== nopol_2 Closure_3 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1410,7 +1410,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (com.google.javascript.rhino.Node.this.type < com.google.javascript.rhino.Node.OPT_ARG_NAME) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                
+                ====================== nopol_3 Closure_3 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1410,7 +1410,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (com.google.javascript.rhino.Node.this.type < com.google.javascript.rhino.Node.OPT_ARG_NAME) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                

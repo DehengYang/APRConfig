@@ -1,0 +1,81 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_44/defects4j_Math_44/defects4j_Math_44/src/main/java/org/apache/commons/math/ode/AbstractIntegrator.java /tmp/fixed/defects4j_Math_44/src/main/java/org/apache/commons/math/ode/AbstractIntegrator.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_44/defects4j_Math_44/defects4j_Math_44/src/main/java/org/apache/commons/math/ode/AbstractIntegrator.java	2021-09-03 01:56:59.389287986 +0800
++++ /tmp/fixed/defects4j_Math_44/src/main/java/org/apache/commons/math/ode/AbstractIntegrator.java	2021-09-03 01:57:22.127780643 +0800
+@@ -277,7 +277,6 @@
+ 
+             double previousT = interpolator.getGlobalPreviousTime();
+             final double currentT = interpolator.getGlobalCurrentTime();
+-            resetOccurred = false;
+ 
+             // initialize the events states if needed
+             if (! statesInitialized) {
+@@ -331,6 +330,9 @@
+                 if (isLastStep) {
+                     // the event asked to stop integration
+                     System.arraycopy(eventY, 0, y, 0, y.length);
++                    for (final EventState remaining : occuringEvents) {
++                        remaining.stepAccepted(eventT, eventY);
++                    }
+                     return eventT;
+                 }
+ 
+@@ -340,6 +342,9 @@
+                     System.arraycopy(eventY, 0, y, 0, y.length);
+                     computeDerivatives(eventT, y, yDot);
+                     resetOccurred = true;
++                    for (final EventState remaining : occuringEvents) {
++                        remaining.stepAccepted(eventT, eventY);
++                    }
+                     return eventT;
+                 }
+ 
+
+
+                
+                ====================== dynamoth_2 Math_44 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/ode/AbstractIntegrator.java
++++ b/src/main/java/org/apache/commons/math/ode/AbstractIntegrator.java
+@@ -286,3 +286,5 @@
+}
+-                statesInitialized = true;
++                if (currentT <= y.length) {
++                    statesInitialized = true;
++                }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Math_44 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/ode/AbstractIntegrator.java
++++ b/src/main/java/org/apache/commons/math/ode/AbstractIntegrator.java
+@@ -286,3 +286,5 @@
+}
+-                statesInitialized = true;
++                if (currentT <= y.length) {
++                    statesInitialized = true;
++                }
+}
+
+
+
+
+                
+                ====================== simfix_2 Math_44 ================================
+                
+                [PATCH 1574] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_44/defects4j_Math_44/defects4j_Math_44/src/main/java//org/apache/commons/math/ode/events/EventState.java, range: <190,192>, original: forward=interpolator.isForward();
+ final double t1=interpolator.getCurrentTime();
+ final double dt=t1-t0;
+, patch: forward=interpolator.isForward();
+t0=interpolator.getPreviousTime();
+ final double t1=interpolator.getCurrentTime();
+ final double dt=t1-t0;
+
+
+                

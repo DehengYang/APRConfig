@@ -1,0 +1,98 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_32/defects4j_Closure_32/defects4j_Closure_32/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java /tmp/fixed/defects4j_Closure_32/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_32/defects4j_Closure_32/defects4j_Closure_32/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java	2021-09-02 08:56:21.311305553 +0800
++++ /tmp/fixed/defects4j_Closure_32/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java	2021-09-02 08:56:55.496631095 +0800
+@@ -1355,12 +1355,14 @@
+     // Track the start of the line to count whitespace that
+     // the tokenizer skipped. Because this case is rare, it's easier
+     // to do this here than in the tokenizer.
++    int lineStartChar = -1;
+ 
+     do {
+       switch (token) {
+         case STAR:
+           if (ignoreStar) {
+             // Mark the position after the star as the new start of the line.
++            lineStartChar = stream.getCharno() + 1;
+           } else {
+             // The star is part of the comment.
+             if (builder.length() > 0) {
+@@ -1379,6 +1381,7 @@
+           }
+ 
+           ignoreStar = true;
++          lineStartChar = 0;
+           token = next();
+           continue;
+ 
+@@ -1386,7 +1389,19 @@
+           ignoreStar = false;
+           state = State.SEARCHING_ANNOTATION;
+ 
++          boolean isEOC = token == JsDocToken.EOC;
++          if (!isEOC) {
++            if (lineStartChar != -1 && option == WhitespaceOption.PRESERVE) {
++              int numSpaces = stream.getCharno() - lineStartChar;
++              for (int i = 0; i < numSpaces; i++) {
++                builder.append(' ');
++              }
++              lineStartChar = -1;
++            } else if (builder.length() > 0) {
+               // All tokens must be separated by a space.
++              builder.append(' ');
++            }
++          }
+ 
+           if (token == JsDocToken.EOC ||
+               token == JsDocToken.EOF ||
+@@ -1411,9 +1426,6 @@
+             return new ExtractionInfo(multilineText, token);
+           }
+ 
+-          if (builder.length() > 0) {
+-            builder.append(' ');
+-          }
+           builder.append(toString(token));
+ 
+           line = stream.getRemainingJSDocLine();
+
+
+                
+                ====================== simfix_1 Closure_32 ================================
+                
+                [PATCH 704] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_32/defects4j_Closure_32/defects4j_Closure_32/src//com/google/javascript/jscomp/parsing/JsDocInfoParser.java, range: <1414,1419>, original: if(builder.length()>0){
+builder.append(' ');
+}
+builder.append(toString(token));
+line=stream.getRemainingJSDocLine();
+, patch: if(builder.length()>0){
+builder.append(' ');
+}
+builder.append(toString(token));
+if(!match(JsDocToken.COMMA)){
+break;
+}
+line=stream.getRemainingJSDocLine();
+
+
+                
+                ====================== simfix_2 Closure_32 ================================
+                
+                [PATCH 704] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_32/defects4j_Closure_32/defects4j_Closure_32/src//com/google/javascript/jscomp/parsing/JsDocInfoParser.java, range: <1414,1419>, original: if(builder.length()>0){
+builder.append(' ');
+}
+builder.append(toString(token));
+line=stream.getRemainingJSDocLine();
+, patch: if(builder.length()>0){
+builder.append(' ');
+}
+builder.append(toString(token));
+if(!match(JsDocToken.COMMA)){
+break;
+}
+line=stream.getRemainingJSDocLine();
+
+
+                

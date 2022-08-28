@@ -1,0 +1,62 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_133/defects4j_Closure_133/defects4j_Closure_133/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java /tmp/fixed/defects4j_Closure_133/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_133/defects4j_Closure_133/defects4j_Closure_133/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java	2021-08-26 16:34:51.516081775 +0800
++++ /tmp/fixed/defects4j_Closure_133/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java	2021-08-26 16:35:13.204959374 +0800
+@@ -2398,6 +2398,7 @@
+    */
+   private String getRemainingJSDocLine() {
+     String result = stream.getRemainingJSDocLine();
++    unreadToken = NO_UNREAD_TOKEN;
+     return result;
+   }
+ 
+
+
+                
+                ====================== dynamoth_1 Closure_133 ================================
+                
+                --- a/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java
++++ b/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java
+@@ -1412,4 +1412,3 @@
+
+-    if (token == JsDocToken.EOC || token == JsDocToken.EOL ||
+-        token == JsDocToken.EOF) {
++    if (this.unreadToken != null) {
+return new ExtractionInfo("", token);
+
+
+
+
+                
+                ====================== dynamoth_2 Closure_133 ================================
+                
+                --- a/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java
++++ b/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java
+@@ -1412,4 +1412,3 @@
+
+-    if (token == JsDocToken.EOC || token == JsDocToken.EOL ||
+-        token == JsDocToken.EOF) {
++    if (this.unreadToken != null) {
+return new ExtractionInfo("", token);
+
+
+
+
+                
+                ====================== dynamoth_3 Closure_133 ================================
+                
+                --- a/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java
++++ b/src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java
+@@ -1412,4 +1412,3 @@
+
+-    if (token == JsDocToken.EOC || token == JsDocToken.EOL ||
+-        token == JsDocToken.EOF) {
++    if (this.unreadToken != null) {
+return new ExtractionInfo("", token);
+
+
+
+
+                

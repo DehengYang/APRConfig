@@ -1,0 +1,66 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_55/defects4j_Closure_55/defects4j_Closure_55/src/com/google/javascript/jscomp/FunctionRewriter.java /tmp/fixed/defects4j_Closure_55/src/com/google/javascript/jscomp/FunctionRewriter.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_55/defects4j_Closure_55/defects4j_Closure_55/src/com/google/javascript/jscomp/FunctionRewriter.java	2021-09-05 14:02:03.342312227 +0800
++++ /tmp/fixed/defects4j_Closure_55/src/com/google/javascript/jscomp/FunctionRewriter.java	2021-09-05 14:02:39.255541636 +0800
+@@ -114,7 +114,8 @@
+   }
+ 
+   private static boolean isReduceableFunctionExpression(Node n) {
+-    return NodeUtil.isFunctionExpression(n);
++    return NodeUtil.isFunctionExpression(n)
++        && !NodeUtil.isGetOrSetKey(n.getParent());
+   }
+ 
+   /**
+
+
+                
+                ====================== nopol_2 Closure_55 ================================
+                
+                --- a/src/com/google/javascript/jscomp/FunctionRewriter.java
++++ b/src/com/google/javascript/jscomp/FunctionRewriter.java
+@@ -78,3 +78,3 @@
+Node helperCode = parseHelperCode(reducer);
+-      if (helperCode == null) {
++      if (((reducers.size() < reductions.size()) && (com.google.javascript.jscomp.FunctionRewriter.this.compiler!=null)) || (reductions.size() <= 1)) {
+continue;
+
+
+
+
+                
+                ====================== nopol_3 Closure_55 ================================
+                
+                --- a/src/com/google/javascript/jscomp/FunctionRewriter.java
++++ b/src/com/google/javascript/jscomp/FunctionRewriter.java
+@@ -78,3 +78,3 @@
+Node helperCode = parseHelperCode(reducer);
+-      if (helperCode == null) {
++      if (((reducers.size() < reductions.size()) && (com.google.javascript.jscomp.FunctionRewriter.this.compiler!=null)) || (reductions.size() <= 1)) {
+continue;
+
+
+
+
+                
+                ====================== tbar_2 Closure_55 ================================
+                
+                [PATCH 2102]//**********************************************************
+//com/google/javascript/jscomp/CrossModuleMethodMotion.java ------ 156
+//**********************************************************
+===Buggy Code===
+Node stubCall = new Node(Token.CALL,
+              Node.newString(Token.NAME, STUB_METHOD_NAME),
+              Node.newNumber(stubId))
+              .copyInformationFromForTree(value);
+
+===Patch Code===
+Node stubCall = new Node(Token.CALL,
+              Node.newString(Token.REF_NS_MEMBER, STUB_METHOD_NAME),
+              Node.newNumber(stubId))
+              .copyInformationFromForTree(value);
+
+
+                

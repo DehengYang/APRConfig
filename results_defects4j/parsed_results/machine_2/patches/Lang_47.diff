@@ -1,0 +1,75 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_47/defects4j_Lang_47/defects4j_Lang_47/src/java/org/apache/commons/lang/text/StrBuilder.java /tmp/fixed/defects4j_Lang_47/src/java/org/apache/commons/lang/text/StrBuilder.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_47/defects4j_Lang_47/defects4j_Lang_47/src/java/org/apache/commons/lang/text/StrBuilder.java	2021-09-03 07:08:29.665821173 +0800
++++ /tmp/fixed/defects4j_Lang_47/src/java/org/apache/commons/lang/text/StrBuilder.java	2021-09-03 07:08:43.374311648 +0800
+@@ -1183,6 +1183,9 @@
+         if (width > 0) {
+             ensureCapacity(size + width);
+             String str = (obj == null ? getNullText() : obj.toString());
++            if (str == null) {
++                str = "";
++            }
+             int strLen = str.length();
+             if (strLen >= width) {
+                 str.getChars(strLen - width, strLen, buffer, size);
+@@ -1227,6 +1230,9 @@
+         if (width > 0) {
+             ensureCapacity(size + width);
+             String str = (obj == null ? getNullText() : obj.toString());
++            if (str == null) {
++                str = "";
++            }
+             int strLen = str.length();
+             if (strLen >= width) {
+                 str.getChars(0, width, buffer, size);
+
+
+                
+                ====================== simfix_1 Lang_47 ================================
+                
+                [PATCH 5514] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_47/defects4j_Lang_47/defects4j_Lang_47/src/java//org/apache/commons/lang/text/StrBuilder.java, range: <228,232>, original: if(capacity>buffer.length){
+char[] old=buffer;
+buffer=new char[capacity];
+System.arraycopy(old,0,buffer,0,size);
+}
+, patch: if(capacity>buffer.length){
+char[] old=buffer;
+buffer=new char[capacity];
+ensureCapacity(capacity+CAPACITY);
+System.arraycopy(old,0,buffer,0,size);
+}
+
+
+                
+                ====================== simfix_2 Lang_47 ================================
+                
+                [PATCH 4000] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_47/defects4j_Lang_47/defects4j_Lang_47/src/java//org/apache/commons/lang/text/StrBuilder.java, range: <1229,1239>, original: String str=(obj==null?getNullText():obj.toString());
+int strLen=str.length();
+if(strLen>=width){
+str.getChars(0,width,buffer,size);
+}else {
+int padLen=width-strLen;
+str.getChars(0,strLen,buffer,size);
+for(int i=0;i<padLen;i++){
+buffer[size+strLen]=padChar;
+}
+}
+, patch: String str=(obj==null?getNullText():obj.toString());
+int strLen=str.length();
+if(strLen>width){
+size=width+strLen;
+str.getChars(0,width,buffer,size);
+}else {
+str.getChars(0,strLen,buffer,size);
+int padLen=width-strLen;
+ensureCapacity(width+strLen);
+str.getChars(0,strLen,buffer,size);
+for(int i=0;i<padLen;i++){
+buffer[size+strLen]=padChar;
+}
+}
+
+
+                

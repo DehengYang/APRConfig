@@ -1,0 +1,42 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_19/defects4j_Time_19/defects4j_Time_19/src/main/java/org/joda/time/DateTimeZone.java /tmp/fixed/defects4j_Time_19/src/main/java/org/joda/time/DateTimeZone.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_19/defects4j_Time_19/defects4j_Time_19/src/main/java/org/joda/time/DateTimeZone.java	2021-09-02 09:46:20.721054219 +0800
++++ /tmp/fixed/defects4j_Time_19/src/main/java/org/joda/time/DateTimeZone.java	2021-09-02 09:46:38.721697433 +0800
+@@ -897,7 +897,7 @@
+                     return offsetLocal;
+                 }
+             }
+-        } else if (offsetLocal > 0) {
++        } else if (offsetLocal >= 0) {
+             long prev = previousTransition(instantAdjusted);
+             if (prev < instantAdjusted) {
+                 int offsetPrev = getOffset(prev);
+
+
+                
+                ====================== simfix_1 Time_19 ================================
+                
+                [PATCH 4719] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_19/defects4j_Time_19/defects4j_Time_19/src/main/java//org/joda/time/format/FormatUtils.java, range: <63,65>, original: for(;size>1;size--){
+buf.append('0');
+}
+, patch: for(;size>1;size--){
+size++;
+buf.append('0');
+}
+
+
+                
+                ====================== simfix_2 Time_19 ================================
+                
+                [PATCH 4719] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_19/defects4j_Time_19/defects4j_Time_19/src/main/java//org/joda/time/format/FormatUtils.java, range: <63,65>, original: for(;size>1;size--){
+buf.append('0');
+}
+, patch: for(;size>1;size--){
+size++;
+buf.append('0');
+}
+
+
+                

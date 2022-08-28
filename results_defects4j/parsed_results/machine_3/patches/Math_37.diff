@@ -1,0 +1,54 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_37/defects4j_Math_37/defects4j_Math_37/src/main/java/org/apache/commons/math/complex/Complex.java /tmp/fixed/defects4j_Math_37/src/main/java/org/apache/commons/math/complex/Complex.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_37/defects4j_Math_37/defects4j_Math_37/src/main/java/org/apache/commons/math/complex/Complex.java	2021-09-02 04:13:50.899085991 +0800
++++ /tmp/fixed/defects4j_Math_37/src/main/java/org/apache/commons/math/complex/Complex.java	2021-09-02 04:14:13.017477236 +0800
+@@ -1015,9 +1015,15 @@
+      * @since 1.2
+      */
+     public Complex tan() {
+-        if (isNaN) {
++        if (isNaN || Double.isInfinite(real)) {
+             return NaN;
+         }
++        if (imaginary > 20.0) {
++            return createComplex(0.0, 1.0);
++        }
++        if (imaginary < -20.0) {
++            return createComplex(0.0, -1.0);
++        }
+ 
+         double real2 = 2.0 * real;
+         double imaginary2 = 2.0 * imaginary;
+@@ -1060,9 +1066,15 @@
+      * @since 1.2
+      */
+     public Complex tanh() {
+-        if (isNaN) {
++        if (isNaN || Double.isInfinite(imaginary)) {
+             return NaN;
+         }
++        if (real > 20.0) {
++            return createComplex(1.0, 0.0);
++        }
++        if (real < -20.0) {
++            return createComplex(-1.0, 0.0);
++        }
+         double real2 = 2.0 * real;
+         double imaginary2 = 2.0 * imaginary;
+         double d = FastMath.cosh(real2) + FastMath.cos(imaginary2);
+
+
+                
+                ====================== simfix_1 Math_37 ================================
+                
+                [PATCH 33] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_37/defects4j_Math_37/defects4j_Math_37/src/main/java//org/apache/commons/math/util/FastMath.java, range: <392,394>, original: if(x>20.0){
+return exp(x)/2.0;
+}
+, patch: if(x>20.0){
+return exp(-x)/2.0;
+}
+
+
+                

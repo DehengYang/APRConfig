@@ -1,0 +1,55 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_53/defects4j_Math_53/defects4j_Math_53/src/main/java/org/apache/commons/math/complex/Complex.java /tmp/fixed/defects4j_Math_53/src/main/java/org/apache/commons/math/complex/Complex.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_53/defects4j_Math_53/defects4j_Math_53/src/main/java/org/apache/commons/math/complex/Complex.java	2021-08-25 16:16:54.945217130 +0800
++++ /tmp/fixed/defects4j_Math_53/src/main/java/org/apache/commons/math/complex/Complex.java	2021-08-25 16:17:11.321803108 +0800
+@@ -150,6 +150,9 @@
+     public Complex add(Complex rhs)
+         throws NullArgumentException {
+         MathUtils.checkNotNull(rhs);
++        if (isNaN || rhs.isNaN) {
++            return NaN;
++        }
+         return createComplex(real + rhs.getReal(),
+             imaginary + rhs.getImaginary());
+     }
+
+
+                
+                ====================== simfix_1 Math_53 ================================
+                
+                [PATCH 2] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_53/defects4j_Math_53/defects4j_Math_53/src/main/java//org/apache/commons/math/complex/Complex.java, range: <152,154>, original: MathUtils.checkNotNull(rhs);
+return createComplex(real+rhs.getReal(),imaginary+rhs.getImaginary());
+, patch: MathUtils.checkNotNull(rhs);
+if(isNaN||rhs.isNaN){
+return NaN;
+}
+return createComplex(real+rhs.getReal(),imaginary+rhs.getImaginary());
+
+
+                
+                ====================== simfix_2 Math_53 ================================
+                
+                [PATCH 2] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_53/defects4j_Math_53/defects4j_Math_53/src/main/java//org/apache/commons/math/complex/Complex.java, range: <152,154>, original: MathUtils.checkNotNull(rhs);
+return createComplex(real+rhs.getReal(),imaginary+rhs.getImaginary());
+, patch: MathUtils.checkNotNull(rhs);
+if(isNaN||rhs.isNaN){
+return NaN;
+}
+return createComplex(real+rhs.getReal(),imaginary+rhs.getImaginary());
+
+
+                
+                ====================== simfix_3 Math_53 ================================
+                
+                [PATCH 2] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_53/defects4j_Math_53/defects4j_Math_53/src/main/java//org/apache/commons/math/complex/Complex.java, range: <152,154>, original: MathUtils.checkNotNull(rhs);
+return createComplex(real+rhs.getReal(),imaginary+rhs.getImaginary());
+, patch: MathUtils.checkNotNull(rhs);
+if(isNaN||rhs.isNaN){
+return NaN;
+}
+return createComplex(real+rhs.getReal(),imaginary+rhs.getImaginary());
+
+
+                

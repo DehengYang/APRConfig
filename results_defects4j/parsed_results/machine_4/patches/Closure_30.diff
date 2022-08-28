@@ -1,0 +1,102 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_30/defects4j_Closure_30/defects4j_Closure_30/src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java /tmp/fixed/defects4j_Closure_30/src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_30/defects4j_Closure_30/defects4j_Closure_30/src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java	2021-09-02 08:52:26.274194673 +0800
++++ /tmp/fixed/defects4j_Closure_30/src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java	2021-09-02 08:52:54.931303131 +0800
+@@ -154,7 +154,7 @@
+ 
+   @Override
+   public void process(Node externs, Node root) {
+-    (new NodeTraversal(compiler, this)).traverse(root);
++    (new NodeTraversal(compiler, this)).traverseRoots(externs, root);
+   }
+ 
+   @Override
+diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_30/defects4j_Closure_30/defects4j_Closure_30/src/com/google/javascript/jscomp/MustBeReachingVariableDef.java /tmp/fixed/defects4j_Closure_30/src/com/google/javascript/jscomp/MustBeReachingVariableDef.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_30/defects4j_Closure_30/defects4j_Closure_30/src/com/google/javascript/jscomp/MustBeReachingVariableDef.java	2021-09-02 08:52:26.274194673 +0800
++++ /tmp/fixed/defects4j_Closure_30/src/com/google/javascript/jscomp/MustBeReachingVariableDef.java	2021-09-02 08:52:54.931303131 +0800
+@@ -68,6 +68,7 @@
+   private static class Definition {
+     final Node node;
+     final Set<Var> depends = Sets.newHashSet();
++    private boolean unknownDependencies = false;
+ 
+     Definition(Node node) {
+       this.node = node;
+@@ -393,9 +394,13 @@
+         new AbstractCfgNodeTraversalCallback() {
+       @Override
+       public void visit(NodeTraversal t, Node n, Node parent) {
+-        if (n.isName() && jsScope.isDeclared(n.getString(), true)) {
++        if (n.isName()) {
+           Var dep = jsScope.getVar(n.getString());
++          if (dep == null) {
++            def.unknownDependencies = true;
++          } else {
+             def.depends.add(dep);
++          }
+         }
+       }
+     });
+@@ -427,6 +432,9 @@
+     GraphNode<Node, Branch> n = getCfg().getNode(useNode);
+     FlowState<MustDef> state = n.getAnnotation();
+     Definition def = state.getIn().reachingDef.get(jsScope.getVar(name));
++    if (def.unknownDependencies) {
++      return true;
++    }
+ 
+     for (Var s : def.depends) {
+       if (s.scope != jsScope) {
+
+
+                
+                ====================== dynamoth_2 Closure_30 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1429,7 +1429,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (this.isAdd()) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Closure_30 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1429,7 +1429,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (this.isAdd()) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                

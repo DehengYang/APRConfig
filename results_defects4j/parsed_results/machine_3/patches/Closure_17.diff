@@ -1,0 +1,39 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_17/defects4j_Closure_17/defects4j_Closure_17/src/com/google/javascript/jscomp/TypedScopeCreator.java /tmp/fixed/defects4j_Closure_17/src/com/google/javascript/jscomp/TypedScopeCreator.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_17/defects4j_Closure_17/defects4j_Closure_17/src/com/google/javascript/jscomp/TypedScopeCreator.java	2021-08-26 16:15:12.319768093 +0800
++++ /tmp/fixed/defects4j_Closure_17/src/com/google/javascript/jscomp/TypedScopeCreator.java	2021-08-26 16:15:37.204787071 +0800
+@@ -1288,8 +1288,12 @@
+           if (info.isConstant()) {
+             JSType knownType = null;
+             if (rValue != null) {
+-              if (rValue.getJSType() != null && !rValue.getJSType().isUnknownType()) {
++              JSDocInfo rValueInfo = rValue.getJSDocInfo();
++              if (rValueInfo != null && rValueInfo.hasType()) {
+                 // If rValue has a type-cast, we use the type in the type-cast.
++                return rValueInfo.getType().evaluate(scope, typeRegistry);
++              } else if (rValue.getJSType() != null
++                  && !rValue.getJSType().isUnknownType()) {
+                 // If rValue's type was already computed during scope creation,
+                 // then we can safely use that.
+                 return rValue.getJSType();
+
+
+                
+                ====================== dynamoth_1 Closure_17 ================================
+                
+                --- a/src/com/google/javascript/jscomp/TypedScopeCreator.java
++++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java
+@@ -1294,3 +1294,5 @@
+// then we can safely use that.
+-                return rValue.getJSType();
++                if (rValue.getChildCount() == 0) {
++                  return rValue.getJSType();
++                }
+} else if (rValue.isOr()) {
+
+
+
+
+                

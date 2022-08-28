@@ -1,0 +1,89 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_38/defects4j_Mockito_38/defects4j_Mockito_38/src/org/mockito/internal/verification/argumentmatching/ArgumentMatchingTool.java /tmp/fixed/defects4j_Mockito_38/src/org/mockito/internal/verification/argumentmatching/ArgumentMatchingTool.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_38/defects4j_Mockito_38/defects4j_Mockito_38/src/org/mockito/internal/verification/argumentmatching/ArgumentMatchingTool.java	2021-09-08 17:22:59.201783151 +0800
++++ /tmp/fixed/defects4j_Mockito_38/src/org/mockito/internal/verification/argumentmatching/ArgumentMatchingTool.java	2021-09-08 17:23:12.574232807 +0800
+@@ -45,6 +45,6 @@
+     }
+ 
+     private boolean toStringEquals(Matcher m, Object arg) {
+-        return StringDescription.toString(m).equals(arg.toString());
++        return StringDescription.toString(m).equals(arg == null? "null" : arg.toString());
+     }
+ }
+
+
+                
+                ====================== dynamoth_1 Mockito_38 ================================
+                
+                --- a/src/org/mockito/internal/verification/argumentmatching/ArgumentMatchingTool.java
++++ b/src/org/mockito/internal/verification/argumentmatching/ArgumentMatchingTool.java
+@@ -27,7 +27,9 @@
+for (Matcher m : matchers) {
+-            if (m instanceof ContainsExtraTypeInformation
+-                    && !safelyMatches(m, arguments[i])
+-                    && toStringEquals(m, arguments[i])
+-                    && !((ContainsExtraTypeInformation) m).typeMatches(arguments[i])) {
+-                suspicious.add(i);
++            if (arguments[0] != null) {
++                if (m instanceof ContainsExtraTypeInformation
++                && !safelyMatches(m, arguments[i])
++                && toStringEquals(m, arguments[i])
++                && !((ContainsExtraTypeInformation) m).typeMatches(arguments[i])) {
++                    suspicious.add(i);
++                }
+}
+
+
+
+
+                
+                ====================== tbar_1 Mockito_38 ================================
+                
+                [PATCH 28]//**********************************************************
+//org/mockito/internal/verification/argumentmatching/ArgumentMatchingTool.java ------ 48
+//**********************************************************
+===Buggy Code===
+return StringDescription.toString(m).equals(arg.toString());
+
+===Patch Code===
+if (arg == null) {
+	    return false;
+	}
+return StringDescription.toString(m).equals(arg.toString());
+
+
+                
+                ====================== tbar_2 Mockito_38 ================================
+                
+                [PATCH 28]//**********************************************************
+//org/mockito/internal/verification/argumentmatching/ArgumentMatchingTool.java ------ 48
+//**********************************************************
+===Buggy Code===
+return StringDescription.toString(m).equals(arg.toString());
+
+===Patch Code===
+if (arg == null) {
+	    return false;
+	}
+return StringDescription.toString(m).equals(arg.toString());
+
+
+                
+                ====================== tbar_3 Mockito_38 ================================
+                
+                [PATCH 28]//**********************************************************
+//org/mockito/internal/verification/argumentmatching/ArgumentMatchingTool.java ------ 48
+//**********************************************************
+===Buggy Code===
+return StringDescription.toString(m).equals(arg.toString());
+
+===Patch Code===
+if (arg == null) {
+	    return false;
+	}
+return StringDescription.toString(m).equals(arg.toString());
+
+
+                

@@ -1,0 +1,68 @@
+
+                ====================== human-written patch ================================
+                
+                --- /mnt/data/bias_validation_2021/datasets/QuixBugs/java_programs/SHORTEST_PATH_LENGTHS.java	2020-05-12 16:47:29.382530000 +0800
++++ /mnt/data/bias_validation_2021/datasets/QuixBugs/correct_java_programs/SHORTEST_PATH_LENGTHS.java	2020-05-12 16:47:29.486535000 +0800
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ import java.lang.Math.*;
+ /*
+@@ -33,7 +33,7 @@
+             for (int i = 0; i < numNodes; i++) {
+                 for (int j = 0; j < numNodes; j++) {
+                     int update_length = Math.min(length_by_path.get(Arrays.asList(i,j)),
+-                            length_by_path.get(Arrays.asList(i,k)) + length_by_path.get(Arrays.asList(j,k)));
++                            length_by_path.get(Arrays.asList(i,k)) + length_by_path.get(Arrays.asList(k,j)));
+                     length_by_path.put(Arrays.asList(i,j), update_length);
+                 }
+             }
+
+
+                
+                ====================== tbar_1 SHORTEST_PATH_LENGTHS_ ================================
+                
+                [PATCH 241]//**********************************************************
+//SHORTEST_PATH_LENGTHS.java ------ 35
+//**********************************************************
+===Buggy Code===
+int update_length = Math.min(length_by_path.get(Arrays.asList(i,j)),
+                            length_by_path.get(Arrays.asList(i,k)) + length_by_path.get(Arrays.asList(j,k)));
+
+===Patch Code===
+int update_length = Math.min(length_by_path.get(Arrays.asList(i,j)),
+                            length_by_path.get(Arrays.asList(i,k)) + length_by_path.get(Arrays.asList(k,j)));
+
+
+                
+                ====================== tbar_2 SHORTEST_PATH_LENGTHS_ ================================
+                
+                [PATCH 241]//**********************************************************
+//SHORTEST_PATH_LENGTHS.java ------ 35
+//**********************************************************
+===Buggy Code===
+int update_length = Math.min(length_by_path.get(Arrays.asList(i,j)),
+                            length_by_path.get(Arrays.asList(i,k)) + length_by_path.get(Arrays.asList(j,k)));
+
+===Patch Code===
+int update_length = Math.min(length_by_path.get(Arrays.asList(i,j)),
+                            length_by_path.get(Arrays.asList(i,k)) + length_by_path.get(Arrays.asList(k,j)));
+
+
+                
+                ====================== tbar_3 SHORTEST_PATH_LENGTHS_ ================================
+                
+                [PATCH 241]//**********************************************************
+//SHORTEST_PATH_LENGTHS.java ------ 35
+//**********************************************************
+===Buggy Code===
+int update_length = Math.min(length_by_path.get(Arrays.asList(i,j)),
+                            length_by_path.get(Arrays.asList(i,k)) + length_by_path.get(Arrays.asList(j,k)));
+
+===Patch Code===
+int update_length = Math.min(length_by_path.get(Arrays.asList(i,j)),
+                            length_by_path.get(Arrays.asList(i,k)) + length_by_path.get(Arrays.asList(k,j)));
+
+
+                

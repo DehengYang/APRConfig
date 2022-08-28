@@ -1,0 +1,51 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_87/defects4j_Closure_87/defects4j_Closure_87/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java /tmp/fixed/defects4j_Closure_87/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_87/defects4j_Closure_87/defects4j_Closure_87/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java	2021-08-27 06:57:34.165505483 +0800
++++ /tmp/fixed/defects4j_Closure_87/src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java	2021-08-27 06:57:47.598048513 +0800
+@@ -520,17 +520,29 @@
+     if (n.getType() == Token.BLOCK) {
+       if (n.hasOneChild()) {
+         Node maybeExpr = n.getFirstChild();
++        if (maybeExpr.getType() == Token.EXPR_RESULT) {
+           // IE has a bug where event handlers behave differently when
+           // their return value is used vs. when their return value is in
+           // an EXPR_RESULT. It's pretty freaking weird. See:
+           // http://code.google.com/p/closure-compiler/issues/detail?id=291
+           // We try to detect this case, and not fold EXPR_RESULTs
+           // into other expressions.
++          if (maybeExpr.getFirstChild().getType() == Token.CALL) {
++            Node calledFn = maybeExpr.getFirstChild().getFirstChild();
+ 
+             // We only have to worry about methods with an implicit 'this'
+             // param, or this doesn't happen.
++            if (calledFn.getType() == Token.GETELEM) {
++              return false;
++            } else if (calledFn.getType() == Token.GETPROP &&
++                       calledFn.getLastChild().getString().startsWith("on")) {
++              return false;
++            }
++          }
+ 
+-          return NodeUtil.isExpressionNode(maybeExpr);
++          return true;
++        }
++        return false;
+       }
+     }
+ 
+
+
+                
+                ====================== simfix_2 Closure_87 ================================
+                
+                [PATCH 788] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_87/defects4j_Closure_87/defects4j_Closure_87/src//com/google/javascript/jscomp/Compiler.java, range: <1223,1227>, original: if(options==null){
+initOptions(new CompilerOptions());
+}
+, patch: if(options.syntheticBlockStartMarker!=null){
+initOptions(new CompilerOptions());
+}
+
+
+                

@@ -1,0 +1,83 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_33/defects4j_Math_33/defects4j_Math_33/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java /tmp/fixed/defects4j_Math_33/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_33/defects4j_Math_33/defects4j_Math_33/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java	2021-09-01 18:50:23.407260526 +0800
++++ /tmp/fixed/defects4j_Math_33/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java	2021-09-01 18:50:40.303868492 +0800
+@@ -335,7 +335,7 @@
+         // positive cost non-artificial variables
+         for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {
+             final double entry = tableau.getEntry(0, i);
+-            if (Precision.compareTo(entry, 0d, maxUlps) > 0) {
++            if (Precision.compareTo(entry, 0d, epsilon) > 0) {
+                 columnsToDrop.add(i);
+             }
+         }
+
+
+                
+                ====================== dynamoth_1 Math_33 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java
++++ b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java
+@@ -338,3 +338,5 @@
+if (Precision.compareTo(entry, 0d, maxUlps) > 0) {
+-                columnsToDrop.add(i);
++                if (this.restrictToNonNegative == this.isOptimal()) {
++                    columnsToDrop.add(i);
++                }
+}
+
+
+
+
+                
+                ====================== nopol_1 Math_33 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java
++++ b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java
+@@ -338,3 +338,5 @@
+if (Precision.compareTo(entry, 0d, maxUlps) > 0) {
+-                columnsToDrop.add(i);
++                if ((2) != (org.apache.commons.math3.optimization.linear.SimplexTableau.this.numArtificialVariables)) {
++                    columnsToDrop.add(i);
++                }
+}
+
+
+
+
+                
+                ====================== simfix_1 Math_33 ================================
+                
+                [PATCH 55] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_33/defects4j_Math_33/defects4j_Math_33/src/main/java//org/apache/commons/math3/optimization/linear/SimplexTableau.java, range: <338,340>, original: if(Precision.compareTo(entry,0.0,maxUlps)>0){
+columnsToDrop.add(i);
+}
+, patch: if(Precision.compareTo(entry,0.0,epsilon)>0){
+columnsToDrop.add(i);
+}
+
+
+                
+                ====================== simfix_2 Math_33 ================================
+                
+                [PATCH 55] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_33/defects4j_Math_33/defects4j_Math_33/src/main/java//org/apache/commons/math3/optimization/linear/SimplexTableau.java, range: <338,340>, original: if(Precision.compareTo(entry,0.0,maxUlps)>0){
+columnsToDrop.add(i);
+}
+, patch: if(Precision.compareTo(entry,0.0,epsilon)>0){
+columnsToDrop.add(i);
+}
+
+
+                
+                ====================== simfix_3 Math_33 ================================
+                
+                [PATCH 55] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_33/defects4j_Math_33/defects4j_Math_33/src/main/java//org/apache/commons/math3/optimization/linear/SimplexTableau.java, range: <338,340>, original: if(Precision.compareTo(entry,0.0,maxUlps)>0){
+columnsToDrop.add(i);
+}
+, patch: if(Precision.compareTo(entry,0.0,epsilon)>0){
+columnsToDrop.add(i);
+}
+
+
+                

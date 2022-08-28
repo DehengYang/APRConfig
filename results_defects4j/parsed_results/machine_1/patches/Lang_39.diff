@@ -1,0 +1,149 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_39/defects4j_Lang_39/defects4j_Lang_39/src/java/org/apache/commons/lang3/StringUtils.java /tmp/fixed/defects4j_Lang_39/src/java/org/apache/commons/lang3/StringUtils.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_39/defects4j_Lang_39/defects4j_Lang_39/src/java/org/apache/commons/lang3/StringUtils.java	2021-08-29 22:41:36.553035150 +0800
++++ /tmp/fixed/defects4j_Lang_39/src/java/org/apache/commons/lang3/StringUtils.java	2021-08-29 22:41:47.497486231 +0800
+@@ -3673,6 +3673,9 @@
+ 
+         // count the replacement text elements that are larger than their corresponding text being replaced
+         for (int i = 0; i < searchList.length; i++) {
++            if (searchList[i] == null || replacementList[i] == null) {
++                continue;
++            }
+             int greater = replacementList[i].length() - searchList[i].length();
+             if (greater > 0) {
+                 increase += 3 * greater; // assume 3 matches
+
+
+                
+                ====================== dynamoth_1 Lang_39 ================================
+                
+                --- a/src/java/org/apache/commons/lang3/StringUtils.java
++++ b/src/java/org/apache/commons/lang3/StringUtils.java
+@@ -3674,6 +3674,8 @@
+// count the replacement text elements that are larger than their corresponding text being replaced
+-        for (int i = 0; i < searchList.length; i++) {
+-            int greater = replacementList[i].length() - searchList[i].length();
+-            if (greater > 0) {
+-                increase += 3 * greater; // assume 3 matches
++        if (false) {
++            for (int i = 0; i < searchList.length; i++) {
++                int greater = replacementList[i].length() - searchList[i].length();
++                if (greater > 0) {
++                    increase += 3 * greater; // assume 3 matches
++                }
+}
+
+
+
+
+                
+                ====================== nopol_1 Lang_39 ================================
+                
+                --- a/src/java/org/apache/commons/lang3/StringUtils.java
++++ b/src/java/org/apache/commons/lang3/StringUtils.java
+@@ -3674,6 +3674,8 @@
+// count the replacement text elements that are larger than their corresponding text being replaced
+-        for (int i = 0; i < searchList.length; i++) {
+-            int greater = replacementList[i].length() - searchList[i].length();
+-            if (greater > 0) {
+-                increase += 3 * greater; // assume 3 matches
++        if (repeat) {
++            for (int i = 0; i < searchList.length; i++) {
++                int greater = replacementList[i].length() - searchList[i].length();
++                if (greater > 0) {
++                    increase += 3 * greater; // assume 3 matches
++                }
+}
+
+
+
+
+                
+                ====================== simfix_2 Lang_39 ================================
+                
+                [PATCH 1296] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_39/defects4j_Lang_39/defects4j_Lang_39/src/java//org/apache/commons/lang3/StringUtils.java, range: <3675,3680>, original: for(int i=0;i<searchList.length;i++){
+int greater=replacementList[i].length()-searchList[i].length();
+if(greater>0){
+increase+=3*greater;
+}
+}
+, patch: for(int i=0;i<searchList.length;i++){
+if(noMoreMatchesForReplIndex[i]||searchList[i]==null||searchList[i].length()==0||replacementList[i]==null){
+continue;
+}
+int greater=replacementList[i].length()-searchList[i].length();
+if(greater>0){
+increase+=3*greater;
+}
+}
+
+
+                
+                ====================== simfix_3 Lang_39 ================================
+                
+                [PATCH 1296] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_39/defects4j_Lang_39/defects4j_Lang_39/src/java//org/apache/commons/lang3/StringUtils.java, range: <3675,3680>, original: for(int i=0;i<searchList.length;i++){
+int greater=replacementList[i].length()-searchList[i].length();
+if(greater>0){
+increase+=3*greater;
+}
+}
+, patch: for(int i=0;i<searchList.length;i++){
+if(noMoreMatchesForReplIndex[i]||searchList[i]==null||searchList[i].length()==0||replacementList[i]==null){
+continue;
+}
+int greater=replacementList[i].length()-searchList[i].length();
+if(greater>0){
+increase+=3*greater;
+}
+}
+
+
+                
+                ====================== tbar_1 Lang_39 ================================
+                
+                [PATCH 1376]//**********************************************************
+//org/apache/commons/lang3/StringUtils.java ------ 3675
+//**********************************************************
+===Buggy Code===
+for (int i = 0; i < searchList.length; i++) {
+            int greater = replacementList[i].length() - searchList[i].length();
+            if (greater > 0) {
+                increase += 3 * greater; // assume 3 matches
+            }
+        }
+
+===Patch Code===
+for (int i = 0; i==searchList.length; i++) {
+            int greater = replacementList[i].length() - searchList[i].length();
+            if (greater > 0) {
+                increase += 3 * greater; // assume 3 matches
+            }
+        }
+
+
+                
+                ====================== tbar_2 Lang_39 ================================
+                
+                [PATCH 1376]//**********************************************************
+//org/apache/commons/lang3/StringUtils.java ------ 3675
+//**********************************************************
+===Buggy Code===
+for (int i = 0; i < searchList.length; i++) {
+            int greater = replacementList[i].length() - searchList[i].length();
+            if (greater > 0) {
+                increase += 3 * greater; // assume 3 matches
+            }
+        }
+
+===Patch Code===
+for (int i = 0; i==searchList.length; i++) {
+            int greater = replacementList[i].length() - searchList[i].length();
+            if (greater > 0) {
+                increase += 3 * greater; // assume 3 matches
+            }
+        }
+
+
+                

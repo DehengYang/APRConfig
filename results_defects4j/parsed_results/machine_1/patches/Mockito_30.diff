@@ -1,0 +1,41 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_30/defects4j_Mockito_30/defects4j_Mockito_30/src/org/mockito/exceptions/Reporter.java /tmp/fixed/defects4j_Mockito_30/src/org/mockito/exceptions/Reporter.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_30/defects4j_Mockito_30/defects4j_Mockito_30/src/org/mockito/exceptions/Reporter.java	2021-09-08 04:36:23.340952465 +0800
++++ /tmp/fixed/defects4j_Mockito_30/src/org/mockito/exceptions/Reporter.java	2021-09-08 04:36:41.177554362 +0800
+@@ -435,10 +435,11 @@
+                 ));
+     }
+ 
+-    public void smartNullPointerException(Location location) {
++    public void smartNullPointerException(Object obj, Location location) {
+         throw new SmartNullPointerException(join(
+                 "You have a NullPointerException here:",
+                 new Location(),
++                obj,
+                 "Because this method was *not* stubbed correctly:",
+                 location,
+                 ""
+diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_30/defects4j_Mockito_30/defects4j_Mockito_30/src/org/mockito/internal/stubbing/defaultanswers/ReturnsSmartNulls.java /tmp/fixed/defects4j_Mockito_30/src/org/mockito/internal/stubbing/defaultanswers/ReturnsSmartNulls.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_30/defects4j_Mockito_30/defects4j_Mockito_30/src/org/mockito/internal/stubbing/defaultanswers/ReturnsSmartNulls.java	2021-09-08 04:36:23.292950845 +0800
++++ /tmp/fixed/defects4j_Mockito_30/src/org/mockito/internal/stubbing/defaultanswers/ReturnsSmartNulls.java	2021-09-08 04:36:41.177554362 +0800
+@@ -53,7 +53,7 @@
+                 return "SmartNull returned by unstubbed " + formatMethodCall()  + " method on mock";
+             }
+ 
+-            new Reporter().smartNullPointerException(location);
++            new Reporter().smartNullPointerException(obj, location);
+             return null;
+         }
+ 
+
+
+                
+                ====================== simfix_3 Mockito_30 ================================
+                
+                [PATCH 540] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_30/defects4j_Mockito_30/defects4j_Mockito_30/src//org/mockito/internal/util/ObjectMethodsGuru.java, range: <27,27>, original: return method.getName().equals("equals")&&method.getParameterTypes().length==1&&method.getParameterTypes()[0]==Object.class;
+, patch: return method.getName().equals("hashCode")&&method.getParameterTypes().length==0;
+
+
+                

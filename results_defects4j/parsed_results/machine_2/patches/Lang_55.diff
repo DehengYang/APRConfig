@@ -1,0 +1,51 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_55/defects4j_Lang_55/defects4j_Lang_55/src/java/org/apache/commons/lang/time/StopWatch.java /tmp/fixed/defects4j_Lang_55/src/java/org/apache/commons/lang/time/StopWatch.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_55/defects4j_Lang_55/defects4j_Lang_55/src/java/org/apache/commons/lang/time/StopWatch.java	2021-08-26 08:18:44.747001054 +0800
++++ /tmp/fixed/defects4j_Lang_55/src/java/org/apache/commons/lang/time/StopWatch.java	2021-08-26 08:18:57.659462815 +0800
+@@ -115,7 +115,9 @@
+         if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {
+             throw new IllegalStateException("Stopwatch is not running. ");
+         }
++        if(this.runningState == STATE_RUNNING) {
+             stopTime = System.currentTimeMillis();
++        }
+         this.runningState = STATE_STOPPED;
+     }
+ 
+
+
+                
+                ====================== dynamoth_1 Lang_55 ================================
+                
+                --- a/src/java/org/apache/commons/lang/time/StopWatch.java
++++ b/src/java/org/apache/commons/lang/time/StopWatch.java
+@@ -117,3 +117,5 @@
+}
+-            stopTime = System.currentTimeMillis();
++            if (this.runningState == 1) {
++                stopTime = System.currentTimeMillis();
++            }
+this.runningState = STATE_STOPPED;
+
+
+
+
+                
+                ====================== nopol_1 Lang_55 ================================
+                
+                --- a/src/java/org/apache/commons/lang/time/StopWatch.java
++++ b/src/java/org/apache/commons/lang/time/StopWatch.java
+@@ -117,3 +117,5 @@
+}
+-            stopTime = System.currentTimeMillis();
++            if (org.apache.commons.lang.time.StopWatch.this.stopTime < 10) {
++                stopTime = System.currentTimeMillis();
++            }
+this.runningState = STATE_STOPPED;
+
+
+
+
+                

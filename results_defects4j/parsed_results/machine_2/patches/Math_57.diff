@@ -1,0 +1,136 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_57/defects4j_Math_57/defects4j_Math_57/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java /tmp/fixed/defects4j_Math_57/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_57/defects4j_Math_57/defects4j_Math_57/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java	2021-08-26 13:20:33.530224902 +0800
++++ /tmp/fixed/defects4j_Math_57/src/main/java/org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java	2021-08-26 13:20:47.326718153 +0800
+@@ -172,7 +172,7 @@
+         while (resultSet.size() < k) {
+             // For each data point x, compute D(x), the distance between x and
+             // the nearest center that has already been chosen.
+-            int sum = 0;
++            double sum = 0;
+             for (int i = 0; i < pointSet.size(); i++) {
+                 final T p = pointSet.get(i);
+                 final Cluster<T> nearest = getNearestCluster(resultSet, p);
+
+
+                
+                ====================== dynamoth_1 Math_57 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/stat/clustering/EuclideanIntegerPoint.java
++++ b/src/main/java/org/apache/commons/math/stat/clustering/EuclideanIntegerPoint.java
+@@ -85,3 +85,5 @@
+if (point[i] != otherPoint[i]) {
+-                return false;
++                if (otherPoint.length != 1) {
++                    return false;
++                }
+}
+
+
+
+
+                
+                ====================== simfix_1 Math_57 ================================
+                
+                [PATCH 112] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_57/defects4j_Math_57/defects4j_Math_57/src/main/java//org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java, range: <175,182>, original: int sum=0;
+for(int i=0;i<pointSet.size();i++){
+ final T p=pointSet.get(i);
+ final Cluster<T> nearest=getNearestCluster(resultSet,p);
+ final double d=p.distanceFrom(nearest.getCenter());
+sum+=d*d;
+dx2[i]=sum;
+}
+, patch: double sum=0;
+for(int i=0;i<pointSet.size();i++){
+ final T p=pointSet.get(i);
+ final Cluster<T> nearest=getNearestCluster(resultSet,p);
+ final double d=p.distanceFrom(nearest.getCenter());
+sum+=d*d;
+dx2[i]=sum;
+}
+
+
+                
+                ====================== simfix_2 Math_57 ================================
+                
+                [PATCH 112] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_57/defects4j_Math_57/defects4j_Math_57/src/main/java//org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java, range: <175,182>, original: int sum=0;
+for(int i=0;i<pointSet.size();i++){
+ final T p=pointSet.get(i);
+ final Cluster<T> nearest=getNearestCluster(resultSet,p);
+ final double d=p.distanceFrom(nearest.getCenter());
+sum+=d*d;
+dx2[i]=sum;
+}
+, patch: double sum=0;
+for(int i=0;i<pointSet.size();i++){
+ final T p=pointSet.get(i);
+ final Cluster<T> nearest=getNearestCluster(resultSet,p);
+ final double d=p.distanceFrom(nearest.getCenter());
+sum+=d*d;
+dx2[i]=sum;
+}
+
+
+                
+                ====================== simfix_3 Math_57 ================================
+                
+                [PATCH 112] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_57/defects4j_Math_57/defects4j_Math_57/src/main/java//org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java, range: <175,182>, original: int sum=0;
+for(int i=0;i<pointSet.size();i++){
+ final T p=pointSet.get(i);
+ final Cluster<T> nearest=getNearestCluster(resultSet,p);
+ final double d=p.distanceFrom(nearest.getCenter());
+sum+=d*d;
+dx2[i]=sum;
+}
+, patch: double sum=0;
+for(int i=0;i<pointSet.size();i++){
+ final T p=pointSet.get(i);
+ final Cluster<T> nearest=getNearestCluster(resultSet,p);
+ final double d=p.distanceFrom(nearest.getCenter());
+sum+=d*d;
+dx2[i]=sum;
+}
+
+
+                
+                ====================== tbar_1 Math_57 ================================
+                
+                [PATCH 7]//**********************************************************
+//org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java ------ 175
+//**********************************************************
+===Buggy Code===
+int sum = 0;
+
+===Patch Code===
+double sum = 0;
+
+
+                
+                ====================== tbar_2 Math_57 ================================
+                
+                [PATCH 7]//**********************************************************
+//org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java ------ 175
+//**********************************************************
+===Buggy Code===
+int sum = 0;
+
+===Patch Code===
+double sum = 0;
+
+
+                
+                ====================== tbar_3 Math_57 ================================
+                
+                [PATCH 7]//**********************************************************
+//org/apache/commons/math/stat/clustering/KMeansPlusPlusClusterer.java ------ 175
+//**********************************************************
+===Buggy Code===
+int sum = 0;
+
+===Patch Code===
+double sum = 0;
+
+
+                

@@ -1,0 +1,62 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_95/defects4j_Math_95/defects4j_Math_95/src/java/org/apache/commons/math/distribution/FDistributionImpl.java /tmp/fixed/defects4j_Math_95/src/java/org/apache/commons/math/distribution/FDistributionImpl.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_95/defects4j_Math_95/defects4j_Math_95/src/java/org/apache/commons/math/distribution/FDistributionImpl.java	2021-08-27 06:43:08.202544395 +0800
++++ /tmp/fixed/defects4j_Math_95/src/java/org/apache/commons/math/distribution/FDistributionImpl.java	2021-08-27 06:43:18.770976799 +0800
+@@ -141,10 +141,12 @@
+      * @return initial domain value
+      */
+     protected double getInitialDomain(double p) {
+-        double ret;
++        double ret = 1.0;
+         double d = getDenominatorDegreesOfFreedom();
++        if (d > 2.0) {
+             // use mean
+             ret = d / (d - 2.0);
++        }
+         return ret;
+     }
+     
+
+
+                
+                ====================== tbar_1 Math_95 ================================
+                
+                [PATCH 56]//**********************************************************
+//org/apache/commons/math/distribution/FDistributionImpl.java ------ 147
+//**********************************************************
+===Buggy Code===
+ret = d / (d - 2.0);
+
+===Patch Code===
+ret = d / (d + 2.0);
+
+
+                
+                ====================== tbar_2 Math_95 ================================
+                
+                [PATCH 56]//**********************************************************
+//org/apache/commons/math/distribution/FDistributionImpl.java ------ 147
+//**********************************************************
+===Buggy Code===
+ret = d / (d - 2.0);
+
+===Patch Code===
+ret = d / (d + 2.0);
+
+
+                
+                ====================== tbar_3 Math_95 ================================
+                
+                [PATCH 56]//**********************************************************
+//org/apache/commons/math/distribution/FDistributionImpl.java ------ 147
+//**********************************************************
+===Buggy Code===
+ret = d / (d - 2.0);
+
+===Patch Code===
+ret = d / (d + 2.0);
+
+
+                

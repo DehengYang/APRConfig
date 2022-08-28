@@ -1,0 +1,88 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_29/defects4j_Closure_29/defects4j_Closure_29/src/com/google/javascript/jscomp/InlineObjectLiterals.java /tmp/fixed/defects4j_Closure_29/src/com/google/javascript/jscomp/InlineObjectLiterals.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_29/defects4j_Closure_29/defects4j_Closure_29/src/com/google/javascript/jscomp/InlineObjectLiterals.java	2021-09-02 08:51:02.294947009 +0800
++++ /tmp/fixed/defects4j_Closure_29/src/com/google/javascript/jscomp/InlineObjectLiterals.java	2021-09-02 08:51:31.288068238 +0800
+@@ -154,6 +154,7 @@
+      */
+     private boolean isInlinableObject(List<Reference> refs) {
+       boolean ret = false;
++      Set<String> validProperties = Sets.newHashSet();
+       for (Reference ref : refs) {
+         Node name = ref.getNode();
+         Node parent = ref.getParent();
+@@ -178,6 +179,14 @@
+           // We short-circuit this problem by bailing out if we see a reference
+           // to a property that isn't defined on the object literal. This
+           // isn't a perfect algorithm, but it should catch most cases.
++          String propName = parent.getLastChild().getString();
++          if (!validProperties.contains(propName)) {
++            if (NodeUtil.isVarOrSimpleAssignLhs(parent, gramps)) {
++              validProperties.add(propName);
++            } else {
++              return false;
++            }
++          }
+           continue;
+         }
+ 
+@@ -213,6 +222,7 @@
+             return false;
+           }
+ 
++          validProperties.add(child.getString());
+ 
+           Node childVal = child.getFirstChild();
+           // Check if childVal is the parent of any of the passed in
+
+
+                
+                ====================== dynamoth_2 Closure_29 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1429,7 +1429,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (this.isAdd()) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Closure_29 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1429,7 +1429,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (this.isAdd()) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                

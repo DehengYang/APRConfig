@@ -1,0 +1,68 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_34/defects4j_Mockito_34/defects4j_Mockito_34/src/org/mockito/internal/invocation/InvocationMatcher.java /tmp/fixed/defects4j_Mockito_34/src/org/mockito/internal/invocation/InvocationMatcher.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_34/defects4j_Mockito_34/defects4j_Mockito_34/src/org/mockito/internal/invocation/InvocationMatcher.java	2021-10-22 22:35:45.128162470 +0800
++++ /tmp/fixed/defects4j_Mockito_34/src/org/mockito/internal/invocation/InvocationMatcher.java	2021-10-22 22:35:55.080535807 +0800
+@@ -103,7 +103,7 @@
+     public void captureArgumentsFrom(Invocation i) {
+         int k = 0;
+         for (Matcher m : matchers) {
+-            if (m instanceof CapturesArguments) {
++            if (m instanceof CapturesArguments && i.getArguments().length > k) {
+                 ((CapturesArguments) m).captureFrom(i.getArguments()[k]);
+             }
+             k++;
+
+
+                
+                ====================== dynamoth_1 Mockito_34 ================================
+                
+                --- a/src/org/mockito/internal/invocation/InvocationMatcher.java
++++ b/src/org/mockito/internal/invocation/InvocationMatcher.java
+@@ -105,4 +105,6 @@
+for (Matcher m : matchers) {
+-            if (m instanceof CapturesArguments) {
+-                ((CapturesArguments) m).captureFrom(i.getArguments()[k]);
++            if (k != i.getArgumentsCount()) {
++                if (m instanceof CapturesArguments) {
++                    ((CapturesArguments) m).captureFrom(i.getArguments()[k]);
++                }
+}
+
+
+
+
+                
+                ====================== dynamoth_2 Mockito_34 ================================
+                
+                --- a/src/org/mockito/internal/invocation/InvocationMatcher.java
++++ b/src/org/mockito/internal/invocation/InvocationMatcher.java
+@@ -106,3 +106,5 @@
+if (m instanceof CapturesArguments) {
+-                ((CapturesArguments) m).captureFrom(i.getArguments()[k]);
++                if (i.getArgumentsCount() != 0) {
++                    ((CapturesArguments) m).captureFrom(i.getArguments()[k]);
++                }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Mockito_34 ================================
+                
+                --- a/src/org/mockito/internal/invocation/InvocationMatcher.java
++++ b/src/org/mockito/internal/invocation/InvocationMatcher.java
+@@ -106,3 +106,5 @@
+if (m instanceof CapturesArguments) {
+-                ((CapturesArguments) m).captureFrom(i.getArguments()[k]);
++                if (i.getArgumentsCount() != 0) {
++                    ((CapturesArguments) m).captureFrom(i.getArguments()[k]);
++                }
+}
+
+
+
+
+                

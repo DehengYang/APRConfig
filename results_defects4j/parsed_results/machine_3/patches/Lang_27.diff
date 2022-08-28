@@ -1,0 +1,84 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_27/defects4j_Lang_27/defects4j_Lang_27/src/main/java/org/apache/commons/lang3/math/NumberUtils.java /tmp/fixed/defects4j_Lang_27/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_27/defects4j_Lang_27/defects4j_Lang_27/src/main/java/org/apache/commons/lang3/math/NumberUtils.java	2021-09-07 11:30:32.866162369 +0800
++++ /tmp/fixed/defects4j_Lang_27/src/main/java/org/apache/commons/lang3/math/NumberUtils.java	2021-09-07 11:30:46.150503379 +0800
+@@ -476,7 +476,7 @@
+         if (decPos > -1) {
+ 
+             if (expPos > -1) {
+-                if (expPos < decPos) {
++                if (expPos < decPos || expPos > str.length()) {
+                     throw new NumberFormatException(str + " is not a valid number.");
+                 }
+                 dec = str.substring(decPos + 1, expPos);
+@@ -486,6 +486,9 @@
+             mant = str.substring(0, decPos);
+         } else {
+             if (expPos > -1) {
++                if (expPos > str.length()) {
++                    throw new NumberFormatException(str + " is not a valid number.");
++                }
+                 mant = str.substring(0, expPos);
+             } else {
+                 mant = str;
+
+
+                
+                ====================== dynamoth_2 Lang_27 ================================
+                
+                --- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
++++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+@@ -487,3 +487,3 @@
+} else {
+-            if (expPos > -1) {
++            if ((decPos != expPos) && (expPos <= str.length())) {
+mant = str.substring(0, expPos);
+
+
+
+
+                
+                ====================== dynamoth_3 Lang_27 ================================
+                
+                --- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
++++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+@@ -487,3 +487,3 @@
+} else {
+-            if (expPos > -1) {
++            if ((decPos != expPos) && (expPos <= str.length())) {
+mant = str.substring(0, expPos);
+
+
+
+
+                
+                ====================== nopol_2 Lang_27 ================================
+                
+                --- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
++++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+@@ -487,3 +487,3 @@
+} else {
+-            if (expPos > -1) {
++            if ((expPos > (-1)) && (!(str.length() <= expPos))) {
+mant = str.substring(0, expPos);
+
+
+
+
+                
+                ====================== nopol_3 Lang_27 ================================
+                
+                --- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
++++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+@@ -487,3 +487,3 @@
+} else {
+-            if (expPos > -1) {
++            if ((expPos > (-1)) && (!(str.length() <= expPos))) {
+mant = str.substring(0, expPos);
+
+
+
+
+                

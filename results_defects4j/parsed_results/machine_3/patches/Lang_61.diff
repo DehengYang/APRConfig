@@ -1,0 +1,44 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_61/defects4j_Lang_61/defects4j_Lang_61/src/java/org/apache/commons/lang/text/StrBuilder.java /tmp/fixed/defects4j_Lang_61/src/java/org/apache/commons/lang/text/StrBuilder.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_61/defects4j_Lang_61/defects4j_Lang_61/src/java/org/apache/commons/lang/text/StrBuilder.java	2021-09-02 08:56:35.504212014 +0800
++++ /tmp/fixed/defects4j_Lang_61/src/java/org/apache/commons/lang/text/StrBuilder.java	2021-09-02 08:56:51.069915728 +0800
+@@ -1773,7 +1773,7 @@
+             return -1;
+         }
+         char[] thisBuf = buffer;
+-        int len = thisBuf.length - strLen;
++        int len = size - strLen + 1;
+         outer:
+         for (int i = startIndex; i < len; i++) {
+             for (int j = 0; j < strLen; j++) {
+
+
+                
+                ====================== tbar_1 Lang_61 ================================
+                
+                [PATCH 2489]//**********************************************************
+//org/apache/commons/lang/text/StrBuilder.java ------ 1114
+//**********************************************************
+===Buggy Code===
+System.arraycopy(buffer, endIndex, buffer, startIndex, size - endIndex);
+
+===Patch Code===
+System.arraycopy(buffer, endIndex, buffer, startIndex, capacity() - endIndex);
+
+
+                
+                ====================== tbar_2 Lang_61 ================================
+                
+                [PATCH 2489]//**********************************************************
+//org/apache/commons/lang/text/StrBuilder.java ------ 1114
+//**********************************************************
+===Buggy Code===
+System.arraycopy(buffer, endIndex, buffer, startIndex, size - endIndex);
+
+===Patch Code===
+System.arraycopy(buffer, endIndex, buffer, startIndex, capacity() - endIndex);
+
+
+                

@@ -1,0 +1,31 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_6/defects4j_Lang_6/defects4j_Lang_6/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java /tmp/fixed/defects4j_Lang_6/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_6/defects4j_Lang_6/defects4j_Lang_6/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java	2021-09-30 13:12:15.027720718 +0800
++++ /tmp/fixed/defects4j_Lang_6/src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java	2021-09-30 13:12:30.144329520 +0800
+@@ -92,7 +92,7 @@
+ //          // contract with translators is that they have to understand codepoints 
+ //          // and they just took care of a surrogate pair
+             for (int pt = 0; pt < consumed; pt++) {
+-                pos += Character.charCount(Character.codePointAt(input, pos));
++                pos += Character.charCount(Character.codePointAt(input, pt));
+             }
+         }
+     }
+
+
+                
+                ====================== tbar_2 Lang_6 ================================
+                
+                [PATCH 1970]//**********************************************************
+//org/apache/commons/lang3/text/translate/CharSequenceTranslator.java ------ 95
+//**********************************************************
+===Buggy Code===
+pos += Character.charCount(Character.codePointAt(input, pos));
+
+===Patch Code===
+pos += Character.charCount(Character.codePointAt(input, pt));
+
+
+                

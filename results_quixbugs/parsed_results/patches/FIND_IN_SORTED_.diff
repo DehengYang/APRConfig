@@ -1,0 +1,141 @@
+
+                ====================== human-written patch ================================
+                
+                --- /mnt/data/bias_validation_2021/datasets/QuixBugs/java_programs/FIND_IN_SORTED.java	2020-05-12 16:47:29.334528000 +0800
++++ /mnt/data/bias_validation_2021/datasets/QuixBugs/correct_java_programs/FIND_IN_SORTED.java	2020-05-12 16:47:29.466534000 +0800
+@@ -1,4 +1,5 @@
+-package java_programs;
++package correct_java_programs;
++
+ /*
+  * To change this template, choose Tools | Templates
+  * and open the template in the editor.
+@@ -17,7 +18,7 @@
+         if (x < arr[mid]) {
+             return binsearch(arr, x, start, mid);
+         } else if (x > arr[mid]) {
+-            return binsearch(arr, x, mid, end);
++            return binsearch(arr, x, mid+1, end);
+         } else {
+             return mid;
+         }
+
+
+                
+                ====================== nopol_1 FIND_IN_SORTED_ ================================
+                
+                --- a/src/main/java/FIND_IN_SORTED.java
++++ b/src/main/java/FIND_IN_SORTED.java
+@@ -16,3 +16,3 @@
+int mid = start + (end - start) / 2; // check this is floor division
+-        if (x < arr[mid]) {
++        if (((!(2 < mid)) || ((arr[mid]) <= arr.length)) && ((x) != ((arr[mid])))) {
+return binsearch(arr, x, start, mid);
+
+
+
+
+                
+                ====================== nopol_2 FIND_IN_SORTED_ ================================
+                
+                --- a/src/main/java/FIND_IN_SORTED.java
++++ b/src/main/java/FIND_IN_SORTED.java
+@@ -16,3 +16,3 @@
+int mid = start + (end - start) / 2; // check this is floor division
+-        if (x < arr[mid]) {
++        if (((!(2 < mid)) || ((arr[mid]) <= arr.length)) && ((x) != ((arr[mid])))) {
+return binsearch(arr, x, start, mid);
+
+
+
+
+                
+                ====================== nopol_3 FIND_IN_SORTED_ ================================
+                
+                --- a/src/main/java/FIND_IN_SORTED.java
++++ b/src/main/java/FIND_IN_SORTED.java
+@@ -16,3 +16,3 @@
+int mid = start + (end - start) / 2; // check this is floor division
+-        if (x < arr[mid]) {
++        if (((!(2 < mid)) || ((arr[mid]) <= arr.length)) && ((x) != ((arr[mid])))) {
+return binsearch(arr, x, start, mid);
+
+
+
+
+                
+                ====================== tbar_1 FIND_IN_SORTED_ ================================
+                
+                [PATCH 259]//**********************************************************
+//FIND_IN_SORTED.java ------ 17
+//**********************************************************
+===Buggy Code===
+if (x < arr[mid]) {
+            return binsearch(arr, x, start, mid);
+        } else if (x > arr[mid]) {
+            return binsearch(arr, x, mid, end);
+        } else {
+            return mid;
+        }
+
+===Patch Code===
+if (mid == start || (x < arr[mid])) {
+            return binsearch(arr, x, start, mid);
+        } else if (x > arr[mid]) {
+            return binsearch(arr, x, mid, end);
+        } else {
+            return mid;
+        }
+
+
+                
+                ====================== tbar_2 FIND_IN_SORTED_ ================================
+                
+                [PATCH 259]//**********************************************************
+//FIND_IN_SORTED.java ------ 17
+//**********************************************************
+===Buggy Code===
+if (x < arr[mid]) {
+            return binsearch(arr, x, start, mid);
+        } else if (x > arr[mid]) {
+            return binsearch(arr, x, mid, end);
+        } else {
+            return mid;
+        }
+
+===Patch Code===
+if (mid == start || (x < arr[mid])) {
+            return binsearch(arr, x, start, mid);
+        } else if (x > arr[mid]) {
+            return binsearch(arr, x, mid, end);
+        } else {
+            return mid;
+        }
+
+
+                
+                ====================== tbar_3 FIND_IN_SORTED_ ================================
+                
+                [PATCH 259]//**********************************************************
+//FIND_IN_SORTED.java ------ 17
+//**********************************************************
+===Buggy Code===
+if (x < arr[mid]) {
+            return binsearch(arr, x, start, mid);
+        } else if (x > arr[mid]) {
+            return binsearch(arr, x, mid, end);
+        } else {
+            return mid;
+        }
+
+===Patch Code===
+if (mid == start || (x < arr[mid])) {
+            return binsearch(arr, x, start, mid);
+        } else if (x > arr[mid]) {
+            return binsearch(arr, x, mid, end);
+        } else {
+            return mid;
+        }
+
+
+                

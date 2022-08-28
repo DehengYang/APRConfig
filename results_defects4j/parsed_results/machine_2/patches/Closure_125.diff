@@ -1,0 +1,46 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_125/defects4j_Closure_125/defects4j_Closure_125/src/com/google/javascript/jscomp/TypeCheck.java /tmp/fixed/defects4j_Closure_125/src/com/google/javascript/jscomp/TypeCheck.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_125/defects4j_Closure_125/defects4j_Closure_125/src/com/google/javascript/jscomp/TypeCheck.java	2021-09-07 10:07:43.226836902 +0800
++++ /tmp/fixed/defects4j_Closure_125/src/com/google/javascript/jscomp/TypeCheck.java	2021-09-07 10:08:05.143699893 +0800
+@@ -1658,7 +1658,7 @@
+     JSType type = getJSType(constructor).restrictByNotNullOrUndefined();
+     if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {
+       FunctionType fnType = type.toMaybeFunctionType();
+-      if (fnType != null) {
++      if (fnType != null && fnType.hasInstanceType()) {
+         visitParameterList(t, n, fnType);
+         ensureTyped(t, n, fnType.getInstanceType());
+       } else {
+
+
+                
+                ====================== nopol_2 Closure_125 ================================
+                
+                --- a/src/com/google/javascript/rhino/jstype/FunctionType.java
++++ b/src/com/google/javascript/rhino/jstype/FunctionType.java
+@@ -779,3 +779,3 @@
+return leastSuper ? that : this;
+-    } else if (functionInstance.isEquivalentTo(this)) {
++    } else if ((com.google.javascript.rhino.jstype.FunctionType.this.propAccess!=null) && ((that.source!=null) || (!(com.google.javascript.rhino.jstype.FunctionType.this.prototypeSlot!=null)))) {
+return leastSuper ? this : that;
+
+
+
+
+                
+                ====================== nopol_3 Closure_125 ================================
+                
+                --- a/src/com/google/javascript/rhino/jstype/FunctionType.java
++++ b/src/com/google/javascript/rhino/jstype/FunctionType.java
+@@ -779,3 +779,3 @@
+return leastSuper ? that : this;
+-    } else if (functionInstance.isEquivalentTo(this)) {
++    } else if ((com.google.javascript.rhino.jstype.FunctionType.this.propAccess!=null) && ((that.source!=null) || (!(com.google.javascript.rhino.jstype.FunctionType.this.prototypeSlot!=null)))) {
+return leastSuper ? this : that;
+
+
+
+
+                

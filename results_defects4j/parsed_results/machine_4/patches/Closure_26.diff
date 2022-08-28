@@ -1,0 +1,83 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_26/defects4j_Closure_26/defects4j_Closure_26/src/com/google/javascript/jscomp/ProcessCommonJSModules.java /tmp/fixed/defects4j_Closure_26/src/com/google/javascript/jscomp/ProcessCommonJSModules.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_26/defects4j_Closure_26/defects4j_Closure_26/src/com/google/javascript/jscomp/ProcessCommonJSModules.java	2021-09-02 08:46:37.372701876 +0800
++++ /tmp/fixed/defects4j_Closure_26/src/com/google/javascript/jscomp/ProcessCommonJSModules.java	2021-09-02 08:47:06.369823259 +0800
+@@ -125,6 +125,7 @@
+       AbstractPostOrderCallback {
+ 
+     private int scriptNodeCount = 0;
++    private Set<String> modulesWithExports = Sets.newHashSet();
+ 
+     @Override
+     public void visit(NodeTraversal t, Node n, Node parent) {
+@@ -204,6 +205,9 @@
+      */
+     private void emitOptionalModuleExportsOverride(Node script,
+         String moduleName) {
++      if (!modulesWithExports.contains(moduleName)) {
++        return;
++      }
+ 
+       Node moduleExportsProp = IR.getprop(IR.name(moduleName),
+           IR.string("module$exports"));
+@@ -225,6 +229,7 @@
+       Node exports = prop.getChildAtIndex(1);
+       exports.putProp(Node.ORIGINALNAME_PROP, "exports");
+       exports.setString("module$exports");
++      modulesWithExports.add(moduleName);
+     }
+ 
+     /**
+
+
+                
+                ====================== dynamoth_2 Closure_26 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1429,7 +1429,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (this.isAdd()) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Closure_26 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1429,7 +1429,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (this.isAdd()) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                

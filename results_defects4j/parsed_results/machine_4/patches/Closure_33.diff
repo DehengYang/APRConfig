@@ -1,0 +1,51 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_33/defects4j_Closure_33/defects4j_Closure_33/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java /tmp/fixed/defects4j_Closure_33/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_33/defects4j_Closure_33/defects4j_Closure_33/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java	2021-09-02 09:29:33.488507381 +0800
++++ /tmp/fixed/defects4j_Closure_33/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java	2021-09-02 09:30:09.201892294 +0800
+@@ -554,6 +554,9 @@
+   @Override
+   public void matchConstraint(ObjectType constraintObj) {
+     // We only want to match contraints on anonymous types.
++    if (hasReferenceName()) {
++      return;
++    }
+ 
+     // Handle the case where the constraint object is a record type.
+     //
+
+
+                
+                ====================== dynamoth_2 Closure_33 ================================
+                
+                --- a/src/com/google/javascript/rhino/jstype/RecordType.java
++++ b/src/com/google/javascript/rhino/jstype/RecordType.java
+@@ -260,3 +260,5 @@
+if (!propA.isSubtype(propB)) {
+-            return false;
++            if (propB.isStringValueType() == false) {
++              return false;
++            }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Closure_33 ================================
+                
+                --- a/src/com/google/javascript/rhino/jstype/RecordType.java
++++ b/src/com/google/javascript/rhino/jstype/RecordType.java
+@@ -260,3 +260,5 @@
+if (!propA.isSubtype(propB)) {
+-            return false;
++            if (propB.isStringValueType() == false) {
++              return false;
++            }
+}
+
+
+
+
+                

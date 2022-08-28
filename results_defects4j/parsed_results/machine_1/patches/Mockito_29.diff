@@ -1,0 +1,128 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_29/defects4j_Mockito_29/defects4j_Mockito_29/src/org/mockito/internal/matchers/Same.java /tmp/fixed/defects4j_Mockito_29/src/org/mockito/internal/matchers/Same.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_29/defects4j_Mockito_29/defects4j_Mockito_29/src/org/mockito/internal/matchers/Same.java	2021-09-07 20:31:47.516314055 +0800
++++ /tmp/fixed/defects4j_Mockito_29/src/org/mockito/internal/matchers/Same.java	2021-09-07 20:32:00.964767546 +0800
+@@ -26,7 +26,7 @@
+     public void describeTo(Description description) {
+         description.appendText("same(");
+         appendQuoting(description);
+-        description.appendText(wanted.toString());
++        description.appendText(wanted == null ? "null" : wanted.toString());
+         appendQuoting(description);
+         description.appendText(")");
+     }
+
+
+                
+                ====================== dynamoth_1 Mockito_29 ================================
+                
+                --- a/src/org/mockito/internal/matchers/Same.java
++++ b/src/org/mockito/internal/matchers/Same.java
+@@ -28,3 +28,5 @@
+appendQuoting(description);
+-        description.appendText(wanted.toString());
++        if (this.wanted != null) {
++            description.appendText(wanted.toString());
++        }
+appendQuoting(description);
+
+
+
+
+                
+                ====================== dynamoth_2 Mockito_29 ================================
+                
+                --- a/src/org/mockito/internal/matchers/Same.java
++++ b/src/org/mockito/internal/matchers/Same.java
+@@ -28,3 +28,5 @@
+appendQuoting(description);
+-        description.appendText(wanted.toString());
++        if (this.wanted != null) {
++            description.appendText(wanted.toString());
++        }
+appendQuoting(description);
+
+
+
+
+                
+                ====================== dynamoth_3 Mockito_29 ================================
+                
+                --- a/src/org/mockito/internal/matchers/Same.java
++++ b/src/org/mockito/internal/matchers/Same.java
+@@ -28,3 +28,5 @@
+appendQuoting(description);
+-        description.appendText(wanted.toString());
++        if (this.wanted != null) {
++            description.appendText(wanted.toString());
++        }
+appendQuoting(description);
+
+
+
+
+                
+                ====================== simfix_1 Mockito_29 ================================
+                
+                [PATCH 549] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_29/defects4j_Mockito_29/defects4j_Mockito_29/src//org/mockito/internal/util/ObjectMethodsGuru.java, range: <27,27>, original: return method.getName().equals("equals")&&method.getParameterTypes().length==1&&method.getParameterTypes()[0]==Object.class;
+, patch: return method.getName().equals("hashCode")&&method.getParameterTypes().length==0;
+
+
+                
+                ====================== simfix_3 Mockito_29 ================================
+                
+                [PATCH 549] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_29/defects4j_Mockito_29/defects4j_Mockito_29/src//org/mockito/internal/util/ObjectMethodsGuru.java, range: <27,27>, original: return method.getName().equals("equals")&&method.getParameterTypes().length==1&&method.getParameterTypes()[0]==Object.class;
+, patch: return method.getName().equals("hashCode")&&method.getParameterTypes().length==0;
+
+
+                
+                ====================== tbar_1 Mockito_29 ================================
+                
+                [PATCH 79]//**********************************************************
+//org/mockito/Matchers.java ------ 525
+//**********************************************************
+===Buggy Code===
+return (T) reportMatcher(new Same(value)).<T>returnFor(value);
+
+===Patch Code===
+if (value == null) {
+	    return null;
+	}
+return (T) reportMatcher(new Same(value)).<T>returnFor(value);
+
+
+                
+                ====================== tbar_2 Mockito_29 ================================
+                
+                [PATCH 79]//**********************************************************
+//org/mockito/Matchers.java ------ 525
+//**********************************************************
+===Buggy Code===
+return (T) reportMatcher(new Same(value)).<T>returnFor(value);
+
+===Patch Code===
+if (value == null) {
+	    return null;
+	}
+return (T) reportMatcher(new Same(value)).<T>returnFor(value);
+
+
+                
+                ====================== tbar_3 Mockito_29 ================================
+                
+                //**********************************************************
+//org/mockito/Matchers.java ------ 525
+//**********************************************************
+===Buggy Code===
+return (T) reportMatcher(new Same(value)).<T>returnFor(value);
+
+===Patch Code===
+if (value == null) {
+	    return null;
+	}
+return (T) reportMatcher(new Same(value)).<T>returnFor(value);
+
+
+                

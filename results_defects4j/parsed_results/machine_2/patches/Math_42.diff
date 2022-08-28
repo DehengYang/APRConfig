@@ -1,0 +1,55 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_42/defects4j_Math_42/defects4j_Math_42/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java /tmp/fixed/defects4j_Math_42/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_42/defects4j_Math_42/defects4j_Math_42/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java	2021-08-31 15:54:27.515822879 +0800
++++ /tmp/fixed/defects4j_Math_42/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java	2021-08-31 15:54:50.296637251 +0800
+@@ -407,10 +407,12 @@
+             continue;
+           }
+           Integer basicRow = getBasicRow(colIndex);
++          if (basicRow != null && basicRow == 0) {
+               // if the basic row is found to be the objective function row
+               // set the coefficient to 0 -> this case handles unconstrained 
+               // variables that are still part of the objective function
+-          if (basicRows.contains(basicRow)) {
++              coefficients[i] = 0;
++          } else if (basicRows.contains(basicRow)) {
+               // if multiple variables can take a given value
+               // then we choose the first and set the rest equal to 0
+               coefficients[i] = 0 - (restrictToNonNegative ? 0 : mostNegative);
+
+
+                
+                ====================== dynamoth_1 Math_42 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
++++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
+@@ -346,3 +346,5 @@
+if (getBasicRow(col) == null) {
+-            columnsToDrop.add(col);
++            if (this.numSlackVariables != 0) {
++                columnsToDrop.add(col);
++            }
+}
+
+
+
+
+                
+                ====================== nopol_1 Math_42 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
++++ b/src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
+@@ -346,3 +346,5 @@
+if (getBasicRow(col) == null) {
+-            columnsToDrop.add(col);
++            if (0 < org.apache.commons.math.optimization.linear.SimplexTableau.this.numSlackVariables) {
++                columnsToDrop.add(col);
++            }
+}
+
+
+
+
+                

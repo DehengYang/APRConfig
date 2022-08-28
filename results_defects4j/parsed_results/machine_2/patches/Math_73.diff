@@ -1,0 +1,78 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_73/defects4j_Math_73/defects4j_Math_73/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java /tmp/fixed/defects4j_Math_73/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_73/defects4j_Math_73/defects4j_Math_73/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java	2021-08-29 17:42:17.653629372 +0800
++++ /tmp/fixed/defects4j_Math_73/src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java	2021-08-29 17:42:36.290297268 +0800
+@@ -133,6 +133,10 @@
+             return solve(f, initial, yInitial, max, yMax, initial, yInitial);
+         }
+ 
++        if (yMin * yMax > 0) {
++            throw MathRuntimeException.createIllegalArgumentException(
++                  NON_BRACKETING_MESSAGE, min, max, yMin, yMax);
++        }
+ 
+         // full Brent algorithm starting with provided initial guess
+         return solve(f, min, yMin, max, yMax, initial, yInitial);
+
+
+                
+                ====================== nopol_1 Math_73 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverImpl.java
++++ b/src/main/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverImpl.java
+@@ -224,6 +224,6 @@
+protected void verifySequence(final double lower, final double initial, final double upper) {
+-        if (!isSequence(lower, initial, upper)) {
++        if ((!(lower < initial)) || ((org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl.this.result <= lower) && (1 == lower))) {
+throw MathRuntimeException.createIllegalArgumentException(
+-                    "invalid interval, initial value parameters:  lower={0}, initial={1}, upper={2}",
+-                    lower, initial, upper);
++            "invalid interval, initial value parameters:  lower={0}, initial={1}, upper={2}",
++            lower, initial, upper);
+}
+
+
+
+
+                
+                ====================== simfix_1 Math_73 ================================
+                
+                [PATCH 4] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_73/defects4j_Math_73/defects4j_Math_73/src/main/java//org/apache/commons/math/analysis/solvers/BrentSolver.java, range: <132,138>, original: if(yInitial*yMax<0){
+return solve(f,initial,yInitial,max,yMax,initial,yInitial);
+}
+return solve(f,min,yMin,max,yMax,initial,yInitial);
+, patch: if(yInitial*yMax<0){
+return solve(f,initial,yInitial,max,yMax,initial,yInitial);
+}
+return solve(f,min,initial);
+
+
+                
+                ====================== simfix_2 Math_73 ================================
+                
+                [PATCH 4] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_73/defects4j_Math_73/defects4j_Math_73/src/main/java//org/apache/commons/math/analysis/solvers/BrentSolver.java, range: <132,138>, original: if(yInitial*yMax<0){
+return solve(f,initial,yInitial,max,yMax,initial,yInitial);
+}
+return solve(f,min,yMin,max,yMax,initial,yInitial);
+, patch: if(yInitial*yMax<0){
+return solve(f,initial,yInitial,max,yMax,initial,yInitial);
+}
+return solve(f,min,initial);
+
+
+                
+                ====================== simfix_3 Math_73 ================================
+                
+                [PATCH 4] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_73/defects4j_Math_73/defects4j_Math_73/src/main/java//org/apache/commons/math/analysis/solvers/BrentSolver.java, range: <132,138>, original: if(yInitial*yMax<0){
+return solve(f,initial,yInitial,max,yMax,initial,yInitial);
+}
+return solve(f,min,yMin,max,yMax,initial,yInitial);
+, patch: if(yInitial*yMax<0){
+return solve(f,initial,yInitial,max,yMax,initial,yInitial);
+}
+return solve(f,min,initial);
+
+
+                

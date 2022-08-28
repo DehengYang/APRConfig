@@ -1,0 +1,57 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_12/defects4j_Chart_12/defects4j_Chart_12/source/org/jfree/chart/plot/MultiplePiePlot.java /tmp/fixed/defects4j_Chart_12/source/org/jfree/chart/plot/MultiplePiePlot.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_12/defects4j_Chart_12/defects4j_Chart_12/source/org/jfree/chart/plot/MultiplePiePlot.java	2021-08-25 08:06:39.602011006 +0800
++++ /tmp/fixed/defects4j_Chart_12/source/org/jfree/chart/plot/MultiplePiePlot.java	2021-08-25 08:06:53.858598100 +0800
+@@ -142,7 +142,7 @@
+      */
+     public MultiplePiePlot(CategoryDataset dataset) {
+         super();
+-        this.dataset = dataset;
++        setDataset(dataset);
+         PiePlot piePlot = new PiePlot(null);
+         this.pieChart = new JFreeChart(piePlot);
+         this.pieChart.removeLegend();
+
+
+                
+                ====================== tbar_1 Chart_12 ================================
+                
+                [PATCH 39]//**********************************************************
+//org/jfree/data/general/AbstractDataset.java ------ 161
+//**********************************************************
+===Buggy Code===
+return list.contains(listener);
+
+===Patch Code===
+return list != null || list.contains(listener);
+
+
+                
+                ====================== tbar_2 Chart_12 ================================
+                
+                [PATCH 39]//**********************************************************
+//org/jfree/data/general/AbstractDataset.java ------ 161
+//**********************************************************
+===Buggy Code===
+return list.contains(listener);
+
+===Patch Code===
+return list != null || list.contains(listener);
+
+
+                
+                ====================== tbar_3 Chart_12 ================================
+                
+                [PATCH 39]//**********************************************************
+//org/jfree/data/general/AbstractDataset.java ------ 161
+//**********************************************************
+===Buggy Code===
+return list.contains(listener);
+
+===Patch Code===
+return list != null || list.contains(listener);
+
+
+                

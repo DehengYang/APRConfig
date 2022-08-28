@@ -1,0 +1,104 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_43/defects4j_Lang_43/defects4j_Lang_43/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java /tmp/fixed/defects4j_Lang_43/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_43/defects4j_Lang_43/defects4j_Lang_43/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java	2021-08-30 10:05:49.156849041 +0800
++++ /tmp/fixed/defects4j_Lang_43/src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java	2021-08-30 10:06:00.677323549 +0800
+@@ -419,6 +419,7 @@
+         int start = pos.getIndex();
+         char[] c = pattern.toCharArray();
+         if (escapingOn && c[start] == QUOTE) {
++            next(pos);
+             return appendTo == null ? null : appendTo.append(QUOTE);
+         }
+         int lastHold = start;
+
+
+                
+                ====================== simfix_1 Lang_43 ================================
+                
+                [PATCH 6] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_43/defects4j_Lang_43/defects4j_Lang_43/src/java//org/apache/commons/lang/text/ExtendedMessageFormat.java, range: <419,423>, original: int start=pos.getIndex();
+char[] c=pattern.toCharArray();
+if(escapingOn&&c[start]==QUOTE){
+return appendTo==null?null:appendTo.append(QUOTE);
+}
+, patch: int start=pos.getIndex();
+char[] c=pattern.toCharArray();
+if(escapingOn&&c[start]==QUOTE){
+next(pos);
+return appendTo==null?null:appendTo.append(QUOTE);
+}
+
+
+                
+                ====================== simfix_2 Lang_43 ================================
+                
+                [PATCH 6] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_43/defects4j_Lang_43/defects4j_Lang_43/src/java//org/apache/commons/lang/text/ExtendedMessageFormat.java, range: <419,423>, original: int start=pos.getIndex();
+char[] c=pattern.toCharArray();
+if(escapingOn&&c[start]==QUOTE){
+return appendTo==null?null:appendTo.append(QUOTE);
+}
+, patch: int start=pos.getIndex();
+char[] c=pattern.toCharArray();
+if(escapingOn&&c[start]==QUOTE){
+next(pos);
+return appendTo==null?null:appendTo.append(QUOTE);
+}
+
+
+                
+                ====================== simfix_3 Lang_43 ================================
+                
+                [PATCH 6] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_43/defects4j_Lang_43/defects4j_Lang_43/src/java//org/apache/commons/lang/text/ExtendedMessageFormat.java, range: <419,423>, original: int start=pos.getIndex();
+char[] c=pattern.toCharArray();
+if(escapingOn&&c[start]==QUOTE){
+return appendTo==null?null:appendTo.append(QUOTE);
+}
+, patch: int start=pos.getIndex();
+char[] c=pattern.toCharArray();
+if(escapingOn&&c[start]==QUOTE){
+next(pos);
+return appendTo==null?null:appendTo.append(QUOTE);
+}
+
+
+                
+                ====================== tbar_1 Lang_43 ================================
+                
+                [PATCH 26]//**********************************************************
+//org/apache/commons/lang/text/ExtendedMessageFormat.java ------ 158
+//**********************************************************
+===Buggy Code===
+appendQuotedString(pattern, pos, stripCustom, true);
+
+===Patch Code===
+appendQuotedString(pattern, pos, stripCustom, false);
+
+
+                
+                ====================== tbar_2 Lang_43 ================================
+                
+                [PATCH 26]//**********************************************************
+//org/apache/commons/lang/text/ExtendedMessageFormat.java ------ 158
+//**********************************************************
+===Buggy Code===
+appendQuotedString(pattern, pos, stripCustom, true);
+
+===Patch Code===
+appendQuotedString(pattern, pos, stripCustom, false);
+
+
+                
+                ====================== tbar_3 Lang_43 ================================
+                
+                [PATCH 26]//**********************************************************
+//org/apache/commons/lang/text/ExtendedMessageFormat.java ------ 158
+//**********************************************************
+===Buggy Code===
+appendQuotedString(pattern, pos, stripCustom, true);
+
+===Patch Code===
+appendQuotedString(pattern, pos, stripCustom, false);
+
+
+                

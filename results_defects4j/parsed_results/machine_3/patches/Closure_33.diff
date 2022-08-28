@@ -1,0 +1,53 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_33/defects4j_Closure_33/defects4j_Closure_33/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java /tmp/fixed/defects4j_Closure_33/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_33/defects4j_Closure_33/defects4j_Closure_33/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java	2021-08-30 02:22:02.280808627 +0800
++++ /tmp/fixed/defects4j_Closure_33/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java	2021-08-30 02:22:26.301790995 +0800
+@@ -554,6 +554,9 @@
+   @Override
+   public void matchConstraint(ObjectType constraintObj) {
+     // We only want to match contraints on anonymous types.
++    if (hasReferenceName()) {
++      return;
++    }
+ 
+     // Handle the case where the constraint object is a record type.
+     //
+
+
+                
+                ====================== dynamoth_1 Closure_33 ================================
+                
+                --- a/src/com/google/javascript/rhino/jstype/RecordType.java
++++ b/src/com/google/javascript/rhino/jstype/RecordType.java
+@@ -260,3 +260,5 @@
+if (!propA.isSubtype(propB)) {
+-            return false;
++            if (propB.isStringValueType() == false) {
++              return false;
++            }
+}
+
+
+
+
+                
+                ====================== nopol_1 Closure_33 ================================
+                
+                --- a/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java
++++ b/src/com/google/javascript/rhino/jstype/PrototypeObjectType.java
+@@ -572,4 +572,6 @@
+if (!hasProperty(prop)) {
+-            typeToInfer = getNativeType(JSTypeNative.VOID_TYPE)
+-                .getLeastSupertype(propType);
++            if (com.google.javascript.rhino.jstype.PrototypeObjectType.this.prettyPrint) {
++              typeToInfer = getNativeType(JSTypeNative.VOID_TYPE)
++              .getLeastSupertype(propType);
++            }
+}
+
+
+
+
+                

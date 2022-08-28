@@ -1,0 +1,24 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_7/defects4j_Mockito_7/defects4j_Mockito_7/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java /tmp/fixed/defects4j_Mockito_7/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_7/defects4j_Mockito_7/defects4j_Mockito_7/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java	2021-08-27 18:31:03.812733985 +0800
++++ /tmp/fixed/defects4j_Mockito_7/src/org/mockito/internal/util/reflection/GenericMetadataSupport.java	2021-08-27 18:32:20.387831973 +0800
+@@ -376,6 +376,7 @@
+             for (Type type : typeVariable.getBounds()) {
+                 registerTypeVariablesOn(type);
+             }
++            registerTypeParametersOn(new TypeVariable[] { typeVariable });
+             registerTypeVariablesOn(getActualTypeArgumentFor(typeVariable));
+         }
+ 
+
+
+                
+                ====================== simfix_1 Mockito_7 ================================
+                
+                [PATCH 1182] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_7/defects4j_Mockito_7/defects4j_Mockito_7/src//org/mockito/internal/util/ObjectMethodsGuru.java, range: <28,30>, original: return method.getName().equals("equals")&&method.getParameterTypes().length==1&&method.getParameterTypes()[0]==Object.class;
+, patch: return method.getName().equals("hashCode")&&method.getParameterTypes().length==0;
+
+
+                

@@ -1,0 +1,48 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_20/defects4j_Time_20/defects4j_Time_20/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java /tmp/fixed/defects4j_Time_20/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_20/defects4j_Time_20/defects4j_Time_20/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java	2021-09-02 11:12:56.354784639 +0800
++++ /tmp/fixed/defects4j_Time_20/src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java	2021-09-02 11:13:16.679512827 +0800
+@@ -2539,12 +2539,18 @@
+ 
+         public int parseInto(DateTimeParserBucket bucket, String text, int position) {
+             String str = text.substring(position);
++            String best = null;
+             for (String id : ALL_IDS) {
+                 if (str.startsWith(id)) {
+-                    bucket.setZone(DateTimeZone.forID(id));
+-                    return position + id.length();
++                	if (best == null || id.length() > best.length()) {
++                		best = id;
++                	}
+                 }
+             }
++            if (best != null) {
++                bucket.setZone(DateTimeZone.forID(best));
++                return position + best.length();
++            }
+             return ~position;
+         }
+     }
+
+
+                
+                ====================== simfix_2 Time_20 ================================
+                
+                [PATCH 1586] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_20/defects4j_Time_20/defects4j_Time_20/src/main/java//org/joda/time/format/DateTimeFormat.java, range: <587,592>, original: if(peek==c){
+buf.append(c);
+i++;
+}else {
+break;
+}
+, patch: i=~i;
+if(peek==c){
+buf.append(c);
+i++;
+}else {
+break;
+}
+
+
+                

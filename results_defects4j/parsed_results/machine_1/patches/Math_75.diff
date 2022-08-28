@@ -1,0 +1,39 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_75/defects4j_Math_75/defects4j_Math_75/src/main/java/org/apache/commons/math/stat/Frequency.java /tmp/fixed/defects4j_Math_75/src/main/java/org/apache/commons/math/stat/Frequency.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_75/defects4j_Math_75/defects4j_Math_75/src/main/java/org/apache/commons/math/stat/Frequency.java	2021-10-26 01:00:44.008444205 +0800
++++ /tmp/fixed/defects4j_Math_75/src/main/java/org/apache/commons/math/stat/Frequency.java	2021-10-26 01:00:55.016861096 +0800
+@@ -300,7 +300,7 @@
+      */
+     @Deprecated
+     public double getPct(Object v) {
+-        return getCumPct((Comparable<?>) v);
++        return getPct((Comparable<?>) v);
+     }
+ 
+     /**
+
+
+                
+                ====================== simfix_1 Math_75 ================================
+                
+                [PATCH 8] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_75/defects4j_Math_75/defects4j_Math_75/src/main/java//org/apache/commons/math/stat/Frequency.java, range: <303,303>, original: return getCumPct((Comparable<?>)v);
+, patch: return getPct((Comparable<?>)v);
+
+
+                
+                ====================== simfix_2 Math_75 ================================
+                
+                [PATCH 8] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_75/defects4j_Math_75/defects4j_Math_75/src/main/java//org/apache/commons/math/stat/Frequency.java, range: <303,303>, original: return getCumPct((Comparable<?>)v);
+, patch: return getPct((Comparable<?>)v);
+
+
+                
+                ====================== simfix_3 Math_75 ================================
+                
+                [PATCH 8] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_75/defects4j_Math_75/defects4j_Math_75/src/main/java//org/apache/commons/math/stat/Frequency.java, range: <303,303>, original: return getCumPct((Comparable<?>)v);
+, patch: return getPct((Comparable<?>)v);
+
+
+                

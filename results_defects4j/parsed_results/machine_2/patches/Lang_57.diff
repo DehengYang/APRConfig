@@ -1,0 +1,57 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_57/defects4j_Lang_57/defects4j_Lang_57/src/java/org/apache/commons/lang/LocaleUtils.java /tmp/fixed/defects4j_Lang_57/src/java/org/apache/commons/lang/LocaleUtils.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_57/defects4j_Lang_57/defects4j_Lang_57/src/java/org/apache/commons/lang/LocaleUtils.java	2021-08-26 14:43:16.963674911 +0800
++++ /tmp/fixed/defects4j_Lang_57/src/java/org/apache/commons/lang/LocaleUtils.java	2021-08-26 14:43:33.616269911 +0800
+@@ -220,7 +220,7 @@
+      * @return true if the locale is a known locale
+      */
+     public static boolean isAvailableLocale(Locale locale) {
+-        return cAvailableLocaleSet.contains(locale);
++        return availableLocaleList().contains(locale);
+     }
+ 
+     //-----------------------------------------------------------------------
+
+
+                
+                ====================== tbar_1 Lang_57 ================================
+                
+                [PATCH 37]//**********************************************************
+//org/apache/commons/lang/LocaleUtils.java ------ 223
+//**********************************************************
+===Buggy Code===
+return cAvailableLocaleSet.contains(locale);
+
+===Patch Code===
+return availableLocaleList().contains(locale);
+
+
+                
+                ====================== tbar_2 Lang_57 ================================
+                
+                [PATCH 37]//**********************************************************
+//org/apache/commons/lang/LocaleUtils.java ------ 223
+//**********************************************************
+===Buggy Code===
+return cAvailableLocaleSet.contains(locale);
+
+===Patch Code===
+return availableLocaleList().contains(locale);
+
+
+                
+                ====================== tbar_3 Lang_57 ================================
+                
+                [PATCH 37]//**********************************************************
+//org/apache/commons/lang/LocaleUtils.java ------ 223
+//**********************************************************
+===Buggy Code===
+return cAvailableLocaleSet.contains(locale);
+
+===Patch Code===
+return availableLocaleList().contains(locale);
+
+
+                

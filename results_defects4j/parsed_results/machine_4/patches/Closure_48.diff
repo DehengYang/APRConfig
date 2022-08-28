@@ -1,0 +1,76 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_48/defects4j_Closure_48/defects4j_Closure_48/src/com/google/javascript/jscomp/TypedScopeCreator.java /tmp/fixed/defects4j_Closure_48/src/com/google/javascript/jscomp/TypedScopeCreator.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_48/defects4j_Closure_48/defects4j_Closure_48/src/com/google/javascript/jscomp/TypedScopeCreator.java	2021-09-07 23:21:36.610838666 +0800
++++ /tmp/fixed/defects4j_Closure_48/src/com/google/javascript/jscomp/TypedScopeCreator.java	2021-09-07 23:22:08.272037763 +0800
+@@ -1518,11 +1518,14 @@
+             || FunctionTypeBuilder.isFunctionTypeDeclaration(info));
+       }
+ 
+-      if (inferred) {
++      if (inferred && rhsValue != null && rhsValue.isFunction()) {
+         // Determining declaration for #2
+-        inferred = !(rhsValue != null &&
+-            rhsValue.isFunction() &&
+-            (info != null || !scope.isDeclared(qName, false)));
++        if (info != null) {
++          inferred = false;
++        } else if (!scope.isDeclared(qName, false) &&
++                   n.isUnscopedQualifiedName()) {
++          inferred = false;
++        }
+       }
+ 
+       if (!inferred) {
+
+
+                
+                ====================== dynamoth_1 Closure_48 ================================
+                
+                --- a/src/com/google/javascript/jscomp/TypedScopeCreator.java
++++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java
+@@ -1440,3 +1440,5 @@
+// Determining type for #5
+-        valueType = rhsValue.getJSType();
++        if (false) {
++          valueType = rhsValue.getJSType();
++        }
+}
+
+
+
+
+                
+                ====================== dynamoth_2 Closure_48 ================================
+                
+                --- a/src/com/google/javascript/jscomp/TypedScopeCreator.java
++++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java
+@@ -1440,3 +1440,5 @@
+// Determining type for #5
+-        valueType = rhsValue.getJSType();
++        if (false) {
++          valueType = rhsValue.getJSType();
++        }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Closure_48 ================================
+                
+                --- a/src/com/google/javascript/jscomp/TypedScopeCreator.java
++++ b/src/com/google/javascript/jscomp/TypedScopeCreator.java
+@@ -1440,3 +1440,5 @@
+// Determining type for #5
+-        valueType = rhsValue.getJSType();
++        if (false) {
++          valueType = rhsValue.getJSType();
++        }
+}
+
+
+
+
+                

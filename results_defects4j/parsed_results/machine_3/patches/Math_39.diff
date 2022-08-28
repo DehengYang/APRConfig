@@ -1,0 +1,36 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_39/defects4j_Math_39/defects4j_Math_39/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java /tmp/fixed/defects4j_Math_39/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_39/defects4j_Math_39/defects4j_Math_39/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java	2021-09-02 09:09:02.589946840 +0800
++++ /tmp/fixed/defects4j_Math_39/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java	2021-09-02 09:09:25.268427350 +0800
+@@ -247,6 +247,15 @@
+         }
+ 
+         stepSize = hNew;
++        if (forward) {
++            if (stepStart + stepSize >= t) {
++                stepSize = t - stepStart;
++            }
++        } else {
++            if (stepStart + stepSize <= t) {
++                stepSize = t - stepStart;
++            }
++        }
+ 
+         // next stages
+         for (int k = 1; k < stages; ++k) {
+
+
+                
+                ====================== simfix_1 Math_39 ================================
+                
+                [PATCH 1365] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_39/defects4j_Math_39/defects4j_Math_39/src/main/java//org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java, range: <236,238>, original: for(int i=0;i<scale.length;++i){
+scale[i]=scalAbsoluteTolerance+scalRelativeTolerance*FastMath.abs(y[i]);
+}
+, patch: for(int i=0;i<scalRelativeTolerance;++i){
+scale[i]=scalAbsoluteTolerance+scalRelativeTolerance*FastMath.abs(y[i]);
+}
+
+
+                

@@ -1,0 +1,63 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_11/defects4j_Math_11/defects4j_Math_11/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java /tmp/fixed/defects4j_Math_11/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_11/defects4j_Math_11/defects4j_Math_11/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java	2021-09-03 13:58:21.392915653 +0800
++++ /tmp/fixed/defects4j_Math_11/src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java	2021-09-03 13:58:49.519982989 +0800
+@@ -180,7 +180,7 @@
+             throw new DimensionMismatchException(vals.length, dim);
+         }
+ 
+-        return FastMath.pow(2 * FastMath.PI, -dim / 2) *
++        return FastMath.pow(2 * FastMath.PI, -0.5 * dim) *
+             FastMath.pow(covarianceMatrixDeterminant, -0.5) *
+             getExponentTerm(vals);
+     }
+
+
+                
+                ====================== simfix_2 Math_11 ================================
+                
+                [PATCH 1613] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_11/defects4j_Math_11/defects4j_Math_11/src/main/java//org/apache/commons/math3/distribution/MultivariateNormalDistribution.java, range: <235,237>, original: for(int i=0;i<preMultiplied.length;i++){
+sum+=preMultiplied[i]*centered[i];
+}
+, patch: for(int i=0;i<=preMultiplied.length;i++){
+sum+=preMultiplied[i]*centered[i];
+}
+
+
+                
+                ====================== tbar_1 Math_11 ================================
+                
+                [PATCH 36]//**********************************************************
+//org/apache/commons/math3/distribution/MultivariateNormalDistribution.java ------ 183
+//**********************************************************
+===Buggy Code===
+return FastMath.pow(2 * FastMath.PI, -dim / 2) *
+            FastMath.pow(covarianceMatrixDeterminant, -0.5) *
+            getExponentTerm(vals);
+
+===Patch Code===
+return FastMath.pow(2 * FastMath.PI, -dim / 2d) *
+            FastMath.pow(covarianceMatrixDeterminant, -0.5) *
+            getExponentTerm(vals);
+
+
+                
+                ====================== tbar_2 Math_11 ================================
+                
+                [PATCH 36]//**********************************************************
+//org/apache/commons/math3/distribution/MultivariateNormalDistribution.java ------ 183
+//**********************************************************
+===Buggy Code===
+return FastMath.pow(2 * FastMath.PI, -dim / 2) *
+            FastMath.pow(covarianceMatrixDeterminant, -0.5) *
+            getExponentTerm(vals);
+
+===Patch Code===
+return FastMath.pow(2 * FastMath.PI, -dim / 2d) *
+            FastMath.pow(covarianceMatrixDeterminant, -0.5) *
+            getExponentTerm(vals);
+
+
+                

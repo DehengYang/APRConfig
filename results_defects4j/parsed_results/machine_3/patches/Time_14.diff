@@ -1,0 +1,78 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_14/defects4j_Time_14/defects4j_Time_14/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java /tmp/fixed/defects4j_Time_14/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_14/defects4j_Time_14/defects4j_Time_14/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java	2021-09-07 11:13:37.472097454 +0800
++++ /tmp/fixed/defects4j_Time_14/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java	2021-09-07 11:13:56.916596365 +0800
+@@ -206,7 +206,12 @@
+         if (valueToAdd == 0) {
+             return values;
+         }
++        if (partial.size() > 0 && partial.getFieldType(0).equals(DateTimeFieldType.monthOfYear()) && fieldIndex == 0) {
+             // month is largest field and being added to, such as month-day
++            int curMonth0 = partial.getValue(0) - 1;
++            int newMonth = ((curMonth0 + (valueToAdd % 12) + 12) % 12) + 1;
++            return set(partial, 0, values, newMonth);
++        }
+         if (DateTimeUtils.isContiguous(partial)) {
+             long instant = 0L;
+             for (int i = 0, isize = partial.size(); i < isize; i++) {
+
+
+                
+                ====================== dynamoth_2 Time_14 ================================
+                
+                --- a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java
++++ b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java
+@@ -209,3 +209,3 @@
+// month is largest field and being added to, such as month-day
+-        if (DateTimeUtils.isContiguous(partial)) {
++        if (partial.getValue((int) 1) <= this.iMax) {
+long instant = 0L;
+
+
+
+
+                
+                ====================== dynamoth_3 Time_14 ================================
+                
+                --- a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java
++++ b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java
+@@ -209,3 +209,3 @@
+// month is largest field and being added to, such as month-day
+-        if (DateTimeUtils.isContiguous(partial)) {
++        if (partial.getValue((int) 1) <= this.iMax) {
+long instant = 0L;
+
+
+
+
+                
+                ====================== nopol_2 Time_14 ================================
+                
+                --- a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java
++++ b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java
+@@ -209,3 +209,3 @@
+// month is largest field and being added to, such as month-day
+-        if (DateTimeUtils.isContiguous(partial)) {
++        if ((org.joda.time.chrono.BasicMonthOfYearDateTimeField.MIN <= fieldIndex) || ((!(1 == valueToAdd)) && ((valueToAdd) != (-1)))) {
+long instant = 0L;
+
+
+
+
+                
+                ====================== nopol_3 Time_14 ================================
+                
+                --- a/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java
++++ b/src/main/java/org/joda/time/chrono/BasicMonthOfYearDateTimeField.java
+@@ -209,3 +209,3 @@
+// month is largest field and being added to, such as month-day
+-        if (DateTimeUtils.isContiguous(partial)) {
++        if ((org.joda.time.chrono.BasicMonthOfYearDateTimeField.MIN <= fieldIndex) || ((!(1 == valueToAdd)) && ((valueToAdd) != (-1)))) {
+long instant = 0L;
+
+
+
+
+                

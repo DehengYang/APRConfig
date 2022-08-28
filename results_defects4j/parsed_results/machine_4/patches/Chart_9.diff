@@ -1,0 +1,60 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_9/defects4j_Chart_9/defects4j_Chart_9/source/org/jfree/data/time/TimeSeries.java /tmp/fixed/defects4j_Chart_9/source/org/jfree/data/time/TimeSeries.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_9/defects4j_Chart_9/defects4j_Chart_9/source/org/jfree/data/time/TimeSeries.java	2021-10-22 22:54:19.468268173 +0800
++++ /tmp/fixed/defects4j_Chart_9/source/org/jfree/data/time/TimeSeries.java	2021-10-22 22:54:31.400634818 +0800
+@@ -941,7 +941,7 @@
+             endIndex = -(endIndex + 1); // this is first item AFTER end period
+             endIndex = endIndex - 1;    // so this is last item BEFORE end
+         }
+-        if (endIndex < 0) {
++        if ((endIndex < 0)  || (endIndex < startIndex)) {
+             emptyRange = true;
+         }
+         if (emptyRange) {
+
+
+                
+                ====================== dynamoth_1 Chart_9 ================================
+                
+                --- a/source/org/jfree/data/time/TimeSeries.java
++++ b/source/org/jfree/data/time/TimeSeries.java
+@@ -943,3 +943,3 @@
+}
+-        if (endIndex < 0) {
++        if ((emptyRange == this.equals((java.lang.Object) start)) && (endIndex < startIndex)) {
+emptyRange = true;
+
+
+
+
+                
+                ====================== dynamoth_2 Chart_9 ================================
+                
+                --- a/source/org/jfree/data/time/TimeSeries.java
++++ b/source/org/jfree/data/time/TimeSeries.java
+@@ -943,3 +943,3 @@
+}
+-        if (endIndex < 0) {
++        if ((emptyRange == this.equals((java.lang.Object) start)) && (endIndex < startIndex)) {
+emptyRange = true;
+
+
+
+
+                
+                ====================== dynamoth_3 Chart_9 ================================
+                
+                --- a/source/org/jfree/data/time/TimeSeries.java
++++ b/source/org/jfree/data/time/TimeSeries.java
+@@ -943,3 +943,3 @@
+}
+-        if (endIndex < 0) {
++        if ((emptyRange == this.equals((java.lang.Object) start)) && (endIndex < startIndex)) {
+emptyRange = true;
+
+
+
+
+                

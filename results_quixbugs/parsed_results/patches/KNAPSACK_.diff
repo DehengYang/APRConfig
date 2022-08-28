@@ -1,0 +1,95 @@
+
+                ====================== human-written patch ================================
+                
+                --- /mnt/data/bias_validation_2021/datasets/QuixBugs/java_programs/KNAPSACK.java	2020-05-12 16:47:29.366529000 +0800
++++ /mnt/data/bias_validation_2021/datasets/QuixBugs/correct_java_programs/KNAPSACK.java	2020-05-12 16:47:29.482535000 +0800
+@@ -1,6 +1,7 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ import java.lang.*;
++
+ /*
+  * To change this template, choose Tools | Templates
+  * and open the template in the editor.
+@@ -27,7 +28,7 @@
+                 if (i == 0 || j == 0) {
+                     memo[i][j] = 0;
+                 }
+-                else if (weight < j) {
++                else if (weight <= j) {
+                     memo[i][j] = Math.max(memo[i - 1][j], value + memo[i - 1][j - weight]);
+                 }
+                 else {
+
+
+                
+                ====================== tbar_1 KNAPSACK_ ================================
+                
+                [PATCH 383]//**********************************************************
+//KNAPSACK.java ------ 30
+//**********************************************************
+===Buggy Code===
+if (weight < j) {
+                    memo[i][j] = Math.max(memo[i - 1][j], value + memo[i - 1][j - weight]);
+                }
+                else {
+                    memo[i][j] = memo [i-1][j];
+                }
+
+===Patch Code===
+if (weight<=j) {
+                    memo[i][j] = Math.max(memo[i - 1][j], value + memo[i - 1][j - weight]);
+                }
+                else {
+                    memo[i][j] = memo [i-1][j];
+                }
+
+
+                
+                ====================== tbar_2 KNAPSACK_ ================================
+                
+                [PATCH 383]//**********************************************************
+//KNAPSACK.java ------ 30
+//**********************************************************
+===Buggy Code===
+if (weight < j) {
+                    memo[i][j] = Math.max(memo[i - 1][j], value + memo[i - 1][j - weight]);
+                }
+                else {
+                    memo[i][j] = memo [i-1][j];
+                }
+
+===Patch Code===
+if (weight<=j) {
+                    memo[i][j] = Math.max(memo[i - 1][j], value + memo[i - 1][j - weight]);
+                }
+                else {
+                    memo[i][j] = memo [i-1][j];
+                }
+
+
+                
+                ====================== tbar_3 KNAPSACK_ ================================
+                
+                [PATCH 383]//**********************************************************
+//KNAPSACK.java ------ 30
+//**********************************************************
+===Buggy Code===
+if (weight < j) {
+                    memo[i][j] = Math.max(memo[i - 1][j], value + memo[i - 1][j - weight]);
+                }
+                else {
+                    memo[i][j] = memo [i-1][j];
+                }
+
+===Patch Code===
+if (weight<=j) {
+                    memo[i][j] = Math.max(memo[i - 1][j], value + memo[i - 1][j - weight]);
+                }
+                else {
+                    memo[i][j] = memo [i-1][j];
+                }
+
+
+                

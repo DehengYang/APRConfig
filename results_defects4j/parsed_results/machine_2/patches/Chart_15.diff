@@ -1,0 +1,86 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_15/defects4j_Chart_15/defects4j_Chart_15/source/org/jfree/chart/plot/PiePlot.java /tmp/fixed/defects4j_Chart_15/source/org/jfree/chart/plot/PiePlot.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_15/defects4j_Chart_15/defects4j_Chart_15/source/org/jfree/chart/plot/PiePlot.java	2021-09-02 04:28:55.616832334 +0800
++++ /tmp/fixed/defects4j_Chart_15/source/org/jfree/chart/plot/PiePlot.java	2021-09-02 04:29:15.349540615 +0800
+@@ -1375,6 +1375,9 @@
+      * @return The percent.
+      */
+     public double getMaximumExplodePercent() {
++        if (this.dataset == null) {
++            return 0.0;
++        }
+         double result = 0.0;
+         Iterator iterator = this.dataset.getKeys().iterator();
+         while (iterator.hasNext()) {
+@@ -2048,8 +2051,10 @@
+      
+         PiePlotState state = new PiePlotState(info);
+         state.setPassesRequired(2);
++        if (this.dataset != null) {
+             state.setTotal(DatasetUtilities.calculatePieDatasetTotal(
+                     plot.getDataset()));
++        }
+         state.setLatestAngle(plot.getStartAngle());
+         return state;
+         
+
+
+                
+                ====================== simfix_1 Chart_15 ================================
+                
+                [PATCH 4736] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_15/defects4j_Chart_15/defects4j_Chart_15/source//org/jfree/chart/title/TextTitle.java, range: <564,574>, original: if(params instanceof EntityBlockParams){
+EntityBlockParams p=(EntityBlockParams)params;
+if(p.getGenerateEntities()){
+entity=new ChartEntity(area,this.toolTipText,this.urlText);
+}
+}
+area=trimBorder(area);
+if(this.backgroundPaint!=null){
+g2.setPaint(this.backgroundPaint);
+g2.fill(area);
+}
+, patch: if(params instanceof EntityBlockParams){
+EntityBlockParams p=(EntityBlockParams)params;
+if(p.getGenerateEntities()){
+entity=new ChartEntity(area,this.toolTipText,this.urlText);
+}
+}
+area=trimBorder(area);
+g2.setFont(getFont());
+if(this.backgroundPaint!=null){
+g2.setPaint(this.backgroundPaint);
+g2.fill(area);
+}
+
+
+                
+                ====================== simfix_2 Chart_15 ================================
+                
+                [PATCH 4736] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_15/defects4j_Chart_15/defects4j_Chart_15/source//org/jfree/chart/title/TextTitle.java, range: <564,574>, original: if(params instanceof EntityBlockParams){
+EntityBlockParams p=(EntityBlockParams)params;
+if(p.getGenerateEntities()){
+entity=new ChartEntity(area,this.toolTipText,this.urlText);
+}
+}
+area=trimBorder(area);
+if(this.backgroundPaint!=null){
+g2.setPaint(this.backgroundPaint);
+g2.fill(area);
+}
+, patch: if(params instanceof EntityBlockParams){
+EntityBlockParams p=(EntityBlockParams)params;
+if(p.getGenerateEntities()){
+entity=new ChartEntity(area,this.toolTipText,this.urlText);
+}
+}
+area=trimBorder(area);
+g2.setFont(getFont());
+if(this.backgroundPaint!=null){
+g2.setPaint(this.backgroundPaint);
+g2.fill(area);
+}
+
+
+                

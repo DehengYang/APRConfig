@@ -1,0 +1,31 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_90/defects4j_Closure_90/defects4j_Closure_90/src/com/google/javascript/jscomp/FunctionTypeBuilder.java /tmp/fixed/defects4j_Closure_90/src/com/google/javascript/jscomp/FunctionTypeBuilder.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_90/defects4j_Closure_90/defects4j_Closure_90/src/com/google/javascript/jscomp/FunctionTypeBuilder.java	2021-09-07 02:12:34.122260008 +0800
++++ /tmp/fixed/defects4j_Closure_90/src/com/google/javascript/jscomp/FunctionTypeBuilder.java	2021-09-07 02:12:50.206802768 +0800
+@@ -181,7 +181,7 @@
+       // create interfaces JSType, ObjectType, FunctionType etc and have
+       // separate implementation instead of the class hierarchy, so that
+       // union types can also be object types, etc.
+-      if (!type.isSubtype(
++      if (!type.restrictByNotNullOrUndefined().isSubtype(
+               typeRegistry.getNativeType(OBJECT_TYPE))) {
+         reportWarning(THIS_TYPE_NON_OBJECT, type.toString());
+         return false;
+diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_90/defects4j_Closure_90/defects4j_Closure_90/src/com/google/javascript/rhino/jstype/FunctionType.java /tmp/fixed/defects4j_Closure_90/src/com/google/javascript/rhino/jstype/FunctionType.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_90/defects4j_Closure_90/defects4j_Closure_90/src/com/google/javascript/rhino/jstype/FunctionType.java	2021-09-07 02:12:34.122260008 +0800
++++ /tmp/fixed/defects4j_Closure_90/src/com/google/javascript/rhino/jstype/FunctionType.java	2021-09-07 02:12:50.206802768 +0800
+@@ -877,6 +877,9 @@
+     // mean "nullable Foo". For certain tags (like @extends) we de-nullify
+     // the name for them.
+     JSType maybeTypeOfThis = safeResolve(typeOfThis, t, scope);
++    if (maybeTypeOfThis != null) {
++      maybeTypeOfThis = maybeTypeOfThis.restrictByNotNullOrUndefined();
++    }
+     if (maybeTypeOfThis instanceof ObjectType) {
+       typeOfThis = (ObjectType) maybeTypeOfThis;
+     }
+
+
+                

@@ -1,0 +1,49 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_15/defects4j_Lang_15/defects4j_Lang_15/src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java /tmp/fixed/defects4j_Lang_15/src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_15/defects4j_Lang_15/defects4j_Lang_15/src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java	2021-09-02 05:26:05.547882282 +0800
++++ /tmp/fixed/defects4j_Lang_15/src/main/java/org/apache/commons/lang3/reflect/TypeUtils.java	2021-09-02 05:26:25.500595833 +0800
+@@ -216,9 +216,9 @@
+                 toClass, typeVarAssigns);
+ 
+         // now to check each type argument
+-        for (Map.Entry<TypeVariable<?>, Type> entry : toTypeVarAssigns.entrySet()) {
+-            Type toTypeArg = entry.getValue();
+-            Type fromTypeArg = fromTypeVarAssigns.get(entry.getKey());
++        for (TypeVariable<?> var : toTypeVarAssigns.keySet()) {
++            Type toTypeArg = unrollVariableAssignments(var, toTypeVarAssigns);
++            Type fromTypeArg = unrollVariableAssignments(var, fromTypeVarAssigns);
+ 
+             // parameters must either be absent from the subject type, within
+             // the bounds of the wildcard type, or be an exact match to the
+@@ -672,7 +672,7 @@
+                 : new HashMap<TypeVariable<?>, Type>(subtypeVarAssigns);
+ 
+         // has target class been reached?
+-        if (cls.getTypeParameters().length > 0 || toClass.equals(cls)) {
++        if (toClass.equals(cls)) {
+             return typeVarAssigns;
+         }
+ 
+
+
+                
+                ====================== simfix_2 Lang_15 ================================
+                
+                [PATCH 1496] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_15/defects4j_Lang_15/defects4j_Lang_15/src/main/java//org/apache/commons/lang3/text/translate/CharSequenceTranslator.java, range: <86,91>, original: if(consumed==0){
+char[] c=Character.toChars(Character.codePointAt(input,pos));
+out.write(c);
+pos+=c.length;
+continue;
+}
+, patch: out.write("&#");
+if(consumed==len){
+char[] c=Character.toChars(Character.codePointAt(input,pos));
+out.write(c);
+pos+=c.length;
+continue;
+}
+
+
+                

@@ -1,0 +1,25 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_11/defects4j_Closure_11/defects4j_Closure_11/src/com/google/javascript/jscomp/TypeCheck.java /tmp/fixed/defects4j_Closure_11/src/com/google/javascript/jscomp/TypeCheck.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_11/defects4j_Closure_11/defects4j_Closure_11/src/com/google/javascript/jscomp/TypeCheck.java	2021-09-02 09:34:17.455519208 +0800
++++ /tmp/fixed/defects4j_Closure_11/src/com/google/javascript/jscomp/TypeCheck.java	2021-09-02 09:34:50.448798640 +0800
+@@ -1311,8 +1311,6 @@
+ 
+     if (childType.isDict()) {
+       report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, "'.'", "dict");
+-    } else if (n.getJSType() != null && parent.isAssign()) {
+-      return;
+     } else if (validator.expectNotNullOrUndefined(t, n, childType,
+         "No properties on this expression", getNativeType(OBJECT_TYPE))) {
+       checkPropertyAccess(childType, property.getString(), t, n);
+
+
+                
+                ====================== simfix_2 Closure_11 ================================
+                
+                [PATCH 5133] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_11/defects4j_Closure_11/defects4j_Closure_11/src//com/google/javascript/rhino/jstype/NoObjectType.java, range: <138,138>, original: return getNativeType(JSTypeNative.NO_TYPE);
+, patch: return getNativeType(JSTypeNative.STRING_TYPE);
+
+
+                

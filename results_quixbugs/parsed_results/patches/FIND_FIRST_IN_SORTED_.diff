@@ -1,0 +1,122 @@
+
+                ====================== human-written patch ================================
+                
+                --- /mnt/data/bias_validation_2021/datasets/QuixBugs/java_programs/FIND_FIRST_IN_SORTED.java	2020-05-12 16:47:29.386530000 +0800
++++ /mnt/data/bias_validation_2021/datasets/QuixBugs/correct_java_programs/FIND_FIRST_IN_SORTED.java	2020-05-12 16:47:29.490535000 +0800
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ 
+ /*
+@@ -16,7 +16,7 @@
+         int lo = 0;
+         int hi = arr.length;
+ 
+-        while (lo <= hi) {
++        while (lo < hi) {
+             int mid = (lo + hi) / 2; // check if this is floor division
+ 
+             if (x == arr[mid] && (mid == 0 || x != arr[mid-1])) {
+
+
+                
+                ====================== tbar_1 FIND_FIRST_IN_SORTED_ ================================
+                
+                [PATCH 32]//**********************************************************
+//FIND_FIRST_IN_SORTED.java ------ 19
+//**********************************************************
+===Buggy Code===
+while (lo <= hi) {
+            int mid = (lo + hi) / 2; // check if this is floor division
+
+            if (x == arr[mid] && (mid == 0 || x != arr[mid-1])) {
+                return mid;
+            } else if (x <= arr[mid]) {
+                hi = mid;
+            } else {
+                lo = mid + 1;
+            }
+        }
+
+===Patch Code===
+while (lo!=hi) {
+            int mid = (lo + hi) / 2; // check if this is floor division
+
+            if (x == arr[mid] && (mid == 0 || x != arr[mid-1])) {
+                return mid;
+            } else if (x <= arr[mid]) {
+                hi = mid;
+            } else {
+                lo = mid + 1;
+            }
+        }
+
+
+                
+                ====================== tbar_2 FIND_FIRST_IN_SORTED_ ================================
+                
+                [PATCH 32]//**********************************************************
+//FIND_FIRST_IN_SORTED.java ------ 19
+//**********************************************************
+===Buggy Code===
+while (lo <= hi) {
+            int mid = (lo + hi) / 2; // check if this is floor division
+
+            if (x == arr[mid] && (mid == 0 || x != arr[mid-1])) {
+                return mid;
+            } else if (x <= arr[mid]) {
+                hi = mid;
+            } else {
+                lo = mid + 1;
+            }
+        }
+
+===Patch Code===
+while (lo!=hi) {
+            int mid = (lo + hi) / 2; // check if this is floor division
+
+            if (x == arr[mid] && (mid == 0 || x != arr[mid-1])) {
+                return mid;
+            } else if (x <= arr[mid]) {
+                hi = mid;
+            } else {
+                lo = mid + 1;
+            }
+        }
+
+
+                
+                ====================== tbar_3 FIND_FIRST_IN_SORTED_ ================================
+                
+                [PATCH 32]//**********************************************************
+//FIND_FIRST_IN_SORTED.java ------ 19
+//**********************************************************
+===Buggy Code===
+while (lo <= hi) {
+            int mid = (lo + hi) / 2; // check if this is floor division
+
+            if (x == arr[mid] && (mid == 0 || x != arr[mid-1])) {
+                return mid;
+            } else if (x <= arr[mid]) {
+                hi = mid;
+            } else {
+                lo = mid + 1;
+            }
+        }
+
+===Patch Code===
+while (lo!=hi) {
+            int mid = (lo + hi) / 2; // check if this is floor division
+
+            if (x == arr[mid] && (mid == 0 || x != arr[mid-1])) {
+                return mid;
+            } else if (x <= arr[mid]) {
+                hi = mid;
+            } else {
+                lo = mid + 1;
+            }
+        }
+
+
+                

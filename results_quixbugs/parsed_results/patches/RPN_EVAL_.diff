@@ -1,0 +1,62 @@
+
+                ====================== human-written patch ================================
+                
+                --- /mnt/data/bias_validation_2021/datasets/QuixBugs/java_programs/RPN_EVAL.java	2020-05-12 16:47:29.362529000 +0800
++++ /mnt/data/bias_validation_2021/datasets/QuixBugs/correct_java_programs/RPN_EVAL.java	2020-05-12 16:47:29.478535000 +0800
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ import java.util.function.BinaryOperator;
+ 
+@@ -31,7 +31,7 @@
+                 Double b = (Double) stack.pop();
+ 		Double c = 0.0;
+ 		BinaryOperator<Double> bin_op = op.get(token);
+-		c = bin_op.apply(a,b);
++		c = bin_op.apply(b,a);
+                 stack.push(c);
+             }
+         }
+
+
+                
+                ====================== tbar_1 RPN_EVAL_ ================================
+                
+                [PATCH 221]//**********************************************************
+//RPN_EVAL.java ------ 34
+//**********************************************************
+===Buggy Code===
+c = bin_op.apply(a,b);
+
+===Patch Code===
+c = bin_op.apply(b,a);
+
+
+                
+                ====================== tbar_2 RPN_EVAL_ ================================
+                
+                [PATCH 221]//**********************************************************
+//RPN_EVAL.java ------ 34
+//**********************************************************
+===Buggy Code===
+c = bin_op.apply(a,b);
+
+===Patch Code===
+c = bin_op.apply(b,a);
+
+
+                
+                ====================== tbar_3 RPN_EVAL_ ================================
+                
+                [PATCH 221]//**********************************************************
+//RPN_EVAL.java ------ 34
+//**********************************************************
+===Buggy Code===
+c = bin_op.apply(a,b);
+
+===Patch Code===
+c = bin_op.apply(b,a);
+
+
+                

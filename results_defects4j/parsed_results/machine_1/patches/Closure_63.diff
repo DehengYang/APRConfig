@@ -1,0 +1,99 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_63/defects4j_Closure_63/defects4j_Closure_63/src/com/google/javascript/jscomp/LightweightMessageFormatter.java /tmp/fixed/defects4j_Closure_63/src/com/google/javascript/jscomp/LightweightMessageFormatter.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_63/defects4j_Closure_63/defects4j_Closure_63/src/com/google/javascript/jscomp/LightweightMessageFormatter.java	2021-10-25 22:56:58.071580627 +0800
++++ /tmp/fixed/defects4j_Closure_63/src/com/google/javascript/jscomp/LightweightMessageFormatter.java	2021-10-25 22:57:15.420238264 +0800
+@@ -95,7 +95,7 @@
+       // charno == sourceExpert.length() means something is missing
+       // at the end of the line
+       if (excerpt.equals(LINE)
+-          && 0 <= charno && charno < sourceExcerpt.length()) {
++          && 0 <= charno && charno <= sourceExcerpt.length()) {
+         for (int i = 0; i < charno; i++) {
+           char c = sourceExcerpt.charAt(i);
+           if (Character.isWhitespace(c)) {
+
+
+                
+                ====================== simfix_1 Closure_63 ================================
+                
+                [PATCH 750] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_63/defects4j_Closure_63/defects4j_Closure_63/src//com/google/javascript/jscomp/LightweightMessageFormatter.java, range: <97,108>, original: if(excerpt.equals(LINE)&&0<=charno&&charno<sourceExcerpt.length()){
+for(int i=0;i<charno;i++){
+char c=sourceExcerpt.charAt(i);
+if(Character.isWhitespace(c)){
+b.append(c);
+}else {
+b.append(' ');
+}
+}
+b.append("^\n");
+}
+, patch: if(excerpt.equals(LINE)&&0<=charno&&charno<=sourceExcerpt.length()){
+for(int i=0;i<charno;i++){
+char c=sourceExcerpt.charAt(i);
+if(Character.isWhitespace(c)){
+b.append(c);
+}else {
+b.append(' ');
+}
+}
+b.append("^\n");
+}
+
+
+                
+                ====================== simfix_2 Closure_63 ================================
+                
+                [PATCH 750] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_63/defects4j_Closure_63/defects4j_Closure_63/src//com/google/javascript/jscomp/LightweightMessageFormatter.java, range: <97,108>, original: if(excerpt.equals(LINE)&&0<=charno&&charno<sourceExcerpt.length()){
+for(int i=0;i<charno;i++){
+char c=sourceExcerpt.charAt(i);
+if(Character.isWhitespace(c)){
+b.append(c);
+}else {
+b.append(' ');
+}
+}
+b.append("^\n");
+}
+, patch: if(excerpt.equals(LINE)&&0<=charno&&charno<=sourceExcerpt.length()){
+for(int i=0;i<charno;i++){
+char c=sourceExcerpt.charAt(i);
+if(Character.isWhitespace(c)){
+b.append(c);
+}else {
+b.append(' ');
+}
+}
+b.append("^\n");
+}
+
+
+                
+                ====================== simfix_3 Closure_63 ================================
+                
+                 file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_63/defects4j_Closure_63/defects4j_Closure_63/src//com/google/javascript/jscomp/LightweightMessageFormatter.java, range: <97,108>, original: if(excerpt.equals(LINE)&&0<=charno&&charno<sourceExcerpt.length()){
+for(int i=0;i<charno;i++){
+char c=sourceExcerpt.charAt(i);
+if(Character.isWhitespace(c)){
+b.append(c);
+}else {
+b.append(' ');
+}
+}
+b.append("^\n");
+}
+, patch: if(excerpt.equals(LINE)&&0<=charno&&charno<=sourceExcerpt.length()){
+for(int i=0;i<charno;i++){
+char c=sourceExcerpt.charAt(i);
+if(Character.isWhitespace(c)){
+b.append(c);
+}else {
+b.append(' ');
+}
+}
+b.append("^\n");
+}
+
+
+                

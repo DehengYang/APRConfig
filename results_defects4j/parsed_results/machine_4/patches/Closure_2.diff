@@ -1,0 +1,71 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_2/defects4j_Closure_2/defects4j_Closure_2/src/com/google/javascript/jscomp/TypeCheck.java /tmp/fixed/defects4j_Closure_2/src/com/google/javascript/jscomp/TypeCheck.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_2/defects4j_Closure_2/defects4j_Closure_2/src/com/google/javascript/jscomp/TypeCheck.java	2021-09-02 03:52:28.466959634 +0800
++++ /tmp/fixed/defects4j_Closure_2/src/com/google/javascript/jscomp/TypeCheck.java	2021-09-02 03:52:57.400070505 +0800
+@@ -1569,9 +1569,13 @@
+       ObjectType interfaceType) {
+     ObjectType implicitProto = interfaceType.getImplicitPrototype();
+     Set<String> currentPropertyNames;
++    if (implicitProto == null) {
+       // This can be the case if interfaceType is proxy to a non-existent
+       // object (which is a bad type annotation, but shouldn't crash).
++      currentPropertyNames = ImmutableSet.of();
++    } else {
+       currentPropertyNames = implicitProto.getOwnPropertyNames();
++    }
+     for (String name : currentPropertyNames) {
+       ObjectType oType = properties.get(name);
+       if (oType != null) {
+
+
+                
+                ====================== dynamoth_2 Closure_2 ================================
+                
+                --- a/src/com/google/javascript/jscomp/TypeCheck.java
++++ b/src/com/google/javascript/jscomp/TypeCheck.java
+@@ -1661,7 +1661,9 @@
+= new HashMap<String, ObjectType>();
+-        for (ObjectType interfaceType : functionType.getExtendedInterfaces()) {
+-          currentProperties.clear();
+-          checkInterfaceConflictProperties(t, n, functionPrivateName,
+-              properties, currentProperties, interfaceType);
+-          properties.putAll(currentProperties);
++        if (this.typedCount != 0) {
++          for (ObjectType interfaceType : functionType.getExtendedInterfaces()) {
++            currentProperties.clear();
++            checkInterfaceConflictProperties(t, n, functionPrivateName,
++            properties, currentProperties, interfaceType);
++            properties.putAll(currentProperties);
++          }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Closure_2 ================================
+                
+                --- a/src/com/google/javascript/jscomp/TypeCheck.java
++++ b/src/com/google/javascript/jscomp/TypeCheck.java
+@@ -1661,7 +1661,9 @@
+= new HashMap<String, ObjectType>();
+-        for (ObjectType interfaceType : functionType.getExtendedInterfaces()) {
+-          currentProperties.clear();
+-          checkInterfaceConflictProperties(t, n, functionPrivateName,
+-              properties, currentProperties, interfaceType);
+-          properties.putAll(currentProperties);
++        if (this.typedCount != 0) {
++          for (ObjectType interfaceType : functionType.getExtendedInterfaces()) {
++            currentProperties.clear();
++            checkInterfaceConflictProperties(t, n, functionPrivateName,
++            properties, currentProperties, interfaceType);
++            properties.putAll(currentProperties);
++          }
+}
+
+
+
+
+                

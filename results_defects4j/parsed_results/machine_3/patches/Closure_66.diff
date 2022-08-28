@@ -1,0 +1,35 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_66/defects4j_Closure_66/defects4j_Closure_66/src/com/google/javascript/jscomp/TypeCheck.java /tmp/fixed/defects4j_Closure_66/src/com/google/javascript/jscomp/TypeCheck.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_66/defects4j_Closure_66/defects4j_Closure_66/src/com/google/javascript/jscomp/TypeCheck.java	2021-08-30 03:36:39.203930872 +0800
++++ /tmp/fixed/defects4j_Closure_66/src/com/google/javascript/jscomp/TypeCheck.java	2021-08-30 03:36:58.264710612 +0800
+@@ -513,7 +513,9 @@
+         // Object literal keys are handled with OBJECTLIT
+         if (!NodeUtil.isObjectLitKey(n, n.getParent())) {
+           ensureTyped(t, n, STRING_TYPE);
++        } else {
+           // Object literal keys are not typeable
++          typeable = false;
+         }
+         break;
+ 
+
+
+                
+                ====================== dynamoth_1 Closure_66 ================================
+                
+                --- a/src/com/google/javascript/jscomp/TypeCheck.java
++++ b/src/com/google/javascript/jscomp/TypeCheck.java
+@@ -821,3 +821,5 @@
+if (type == null) {
+-      nullCount++;
++      if (false) {
++        nullCount++;
++      }
+} else if (type.isUnknownType()) {
+
+
+
+
+                

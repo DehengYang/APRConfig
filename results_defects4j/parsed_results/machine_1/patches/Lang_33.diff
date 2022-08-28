@@ -1,0 +1,96 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_33/defects4j_Lang_33/defects4j_Lang_33/src/main/java/org/apache/commons/lang3/ClassUtils.java /tmp/fixed/defects4j_Lang_33/src/main/java/org/apache/commons/lang3/ClassUtils.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_33/defects4j_Lang_33/defects4j_Lang_33/src/main/java/org/apache/commons/lang3/ClassUtils.java	2021-08-29 03:14:13.593467900 +0800
++++ /tmp/fixed/defects4j_Lang_33/src/main/java/org/apache/commons/lang3/ClassUtils.java	2021-08-29 03:14:25.837972343 +0800
+@@ -907,7 +907,7 @@
+         }
+         Class<?>[] classes = new Class[array.length];
+         for (int i = 0; i < array.length; i++) {
+-            classes[i] = array[i].getClass();
++            classes[i] = array[i] == null ? null : array[i].getClass();
+         }
+         return classes;
+     }
+
+
+                
+                ====================== simfix_1 Lang_33 ================================
+                
+                [PATCH 42] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_33/defects4j_Lang_33/defects4j_Lang_33/src/main/java//org/apache/commons/lang3/ClassUtils.java, range: <909,911>, original: for(int i=0;i<array.length;i++){
+classes[i]=array[i].getClass();
+}
+, patch: for(int i=0;i<array.length;i++){
+classes[i]=array[i]==null?null:array[i].getClass();
+}
+
+
+                
+                ====================== simfix_2 Lang_33 ================================
+                
+                [PATCH 42] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_33/defects4j_Lang_33/defects4j_Lang_33/src/main/java//org/apache/commons/lang3/ClassUtils.java, range: <909,911>, original: for(int i=0;i<array.length;i++){
+classes[i]=array[i].getClass();
+}
+, patch: for(int i=0;i<array.length;i++){
+classes[i]=array[i]==null?null:array[i].getClass();
+}
+
+
+                
+                ====================== simfix_3 Lang_33 ================================
+                
+                [PATCH 42] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_33/defects4j_Lang_33/defects4j_Lang_33/src/main/java//org/apache/commons/lang3/ClassUtils.java, range: <909,911>, original: for(int i=0;i<array.length;i++){
+classes[i]=array[i].getClass();
+}
+, patch: for(int i=0;i<array.length;i++){
+classes[i]=array[i]==null?null:array[i].getClass();
+}
+
+
+                
+                ====================== tbar_1 Lang_33 ================================
+                
+                [PATCH 52]//**********************************************************
+//org/apache/commons/lang3/ClassUtils.java ------ 910
+//**********************************************************
+===Buggy Code===
+classes[i] = array[i].getClass();
+
+===Patch Code===
+if (classes == null) continue;
+	if (array[i] == null) continue;
+	classes[i] = array[i].getClass();
+
+
+                
+                ====================== tbar_2 Lang_33 ================================
+                
+                [PATCH 52]//**********************************************************
+//org/apache/commons/lang3/ClassUtils.java ------ 910
+//**********************************************************
+===Buggy Code===
+classes[i] = array[i].getClass();
+
+===Patch Code===
+if (classes == null) continue;
+	if (array[i] == null) continue;
+	classes[i] = array[i].getClass();
+
+
+                
+                ====================== tbar_3 Lang_33 ================================
+                
+                [PATCH 52]//**********************************************************
+//org/apache/commons/lang3/ClassUtils.java ------ 910
+//**********************************************************
+===Buggy Code===
+classes[i] = array[i].getClass();
+
+===Patch Code===
+if (classes == null) continue;
+	if (array[i] == null) continue;
+	classes[i] = array[i].getClass();
+
+
+                

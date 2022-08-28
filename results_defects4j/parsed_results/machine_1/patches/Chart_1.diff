@@ -1,0 +1,115 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_1/defects4j_Chart_1/defects4j_Chart_1/source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java /tmp/fixed/defects4j_Chart_1/source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_1/defects4j_Chart_1/defects4j_Chart_1/source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java	2021-08-30 21:33:20.961284921 +0800
++++ /tmp/fixed/defects4j_Chart_1/source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java	2021-08-30 21:33:37.113951028 +0800
+@@ -1794,7 +1794,7 @@
+         }
+         int index = this.plot.getIndexOf(this);
+         CategoryDataset dataset = this.plot.getDataset(index);
+-        if (dataset != null) {
++        if (dataset == null) {
+             return result;
+         }
+         int seriesCount = dataset.getRowCount();
+
+
+                
+                ====================== dynamoth_1 Chart_1 ================================
+                
+                --- a/source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
++++ b/source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
+@@ -1796,4 +1796,6 @@
+CategoryDataset dataset = this.plot.getDataset(index);
+-        if (dataset != null) {
+-            return result;
++        if (false) {
++            if (dataset != null) {
++                return result;
++            }
+}
+
+
+
+
+                
+                ====================== simfix_1 Chart_1 ================================
+                
+                [PATCH 631] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_1/defects4j_Chart_1/defects4j_Chart_1/source//org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java, range: <1795,1799>, original: int index=this.plot.getIndexOf(this);
+CategoryDataset dataset=this.plot.getDataset(index);
+if(dataset!=null){
+return result;
+}
+, patch: int index=this.plot.getIndexOf(this);
+CategoryDataset dataset=this.plot.getDataset(index);
+if(dataset==null){
+return result;
+}
+
+
+                
+                ====================== simfix_2 Chart_1 ================================
+                
+                [PATCH 631] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_1/defects4j_Chart_1/defects4j_Chart_1/source//org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java, range: <1795,1799>, original: int index=this.plot.getIndexOf(this);
+CategoryDataset dataset=this.plot.getDataset(index);
+if(dataset!=null){
+return result;
+}
+, patch: int index=this.plot.getIndexOf(this);
+CategoryDataset dataset=this.plot.getDataset(index);
+if(dataset==null){
+return result;
+}
+
+
+                
+                ====================== simfix_3 Chart_1 ================================
+                
+                [PATCH 631] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_1/defects4j_Chart_1/defects4j_Chart_1/source//org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java, range: <1795,1799>, original: int index=this.plot.getIndexOf(this);
+CategoryDataset dataset=this.plot.getDataset(index);
+if(dataset!=null){
+return result;
+}
+, patch: int index=this.plot.getIndexOf(this);
+CategoryDataset dataset=this.plot.getDataset(index);
+if(dataset==null){
+return result;
+}
+
+
+                
+                ====================== tbar_1 Chart_1 ================================
+                
+                [PATCH 2905]//**********************************************************
+//org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java ------ 1797
+//**********************************************************
+===Buggy Code===
+if (dataset != null) {
+            return result;
+        }
+
+===Patch Code===
+if (dataset == null) {
+            return result;
+        }
+
+
+                
+                ====================== tbar_2 Chart_1 ================================
+                
+                [PATCH 2905]//**********************************************************
+//org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java ------ 1797
+//**********************************************************
+===Buggy Code===
+if (dataset != null) {
+            return result;
+        }
+
+===Patch Code===
+if (dataset == null) {
+            return result;
+        }
+
+
+                

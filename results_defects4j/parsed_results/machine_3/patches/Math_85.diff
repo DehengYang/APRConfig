@@ -1,0 +1,131 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_85/defects4j_Math_85/defects4j_Math_85/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java /tmp/fixed/defects4j_Math_85/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_85/defects4j_Math_85/defects4j_Math_85/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java	2021-08-25 14:10:45.643034121 +0800
++++ /tmp/fixed/defects4j_Math_85/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java	2021-08-25 14:10:59.471599843 +0800
+@@ -195,7 +195,7 @@
+         } while ((fa * fb > 0.0) && (numIterations < maximumIterations) && 
+                 ((a > lowerBound) || (b < upperBound)));
+    
+-        if (fa * fb >= 0.0 ) {
++        if (fa * fb > 0.0 ) {
+             throw new ConvergenceException(
+                       "number of iterations={0}, maximum iterations={1}, " +
+                       "initial={2}, lower bound={3}, upper bound={4}, final a value={5}, " +
+
+
+                
+                ====================== dynamoth_1 Math_85 ================================
+                
+                --- a/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java
++++ b/src/java/org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java
+@@ -198,8 +198,10 @@
+if (fa * fb >= 0.0 ) {
+-            throw new ConvergenceException(
+-                      "number of iterations={0}, maximum iterations={1}, " +
+-                      "initial={2}, lower bound={3}, upper bound={4}, final a value={5}, " +
+-                      "final b value={6}, f(a)={7}, f(b)={8}",
+-                      numIterations, maximumIterations, initial,
+-                      lowerBound, upperBound, a, b, fa, fb);
++            if (false) {
++                throw new ConvergenceException(
++                "number of iterations={0}, maximum iterations={1}, " +
++                "initial={2}, lower bound={3}, upper bound={4}, final a value={5}, " +
++                "final b value={6}, f(a)={7}, f(b)={8}",
++                numIterations, maximumIterations, initial,
++                lowerBound, upperBound, a, b, fa, fb);
++            }
+}
+
+
+
+
+                
+                ====================== simfix_1 Math_85 ================================
+                
+                [PATCH 121] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_85/defects4j_Math_85/defects4j_Math_85/src/java//org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java, range: <198,205>, original: if(fa*fb>=0.0){
+throw new ConvergenceException("number of iterations={0}, maximum iterations={1}, "+"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, ",numIterations,maximumIterations,initial,lowerBound,upperBound,a,b,fa,fb);
+}
+, patch: if(fa*upperBound>=0.0){
+throw new ConvergenceException("number of iterations={0}, maximum iterations={1}, "+"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, ",numIterations,maximumIterations,initial,lowerBound,upperBound,a,b,fa,fb);
+}
+
+
+                
+                ====================== simfix_2 Math_85 ================================
+                
+                [PATCH 121] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_85/defects4j_Math_85/defects4j_Math_85/src/java//org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java, range: <198,205>, original: if(fa*fb>=0.0){
+throw new ConvergenceException("number of iterations={0}, maximum iterations={1}, "+"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, ",numIterations,maximumIterations,initial,lowerBound,upperBound,a,b,fa,fb);
+}
+, patch: if(fa*upperBound>=0.0){
+throw new ConvergenceException("number of iterations={0}, maximum iterations={1}, "+"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, ",numIterations,maximumIterations,initial,lowerBound,upperBound,a,b,fa,fb);
+}
+
+
+                
+                ====================== simfix_3 Math_85 ================================
+                
+                [PATCH 121] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_85/defects4j_Math_85/defects4j_Math_85/src/java//org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java, range: <198,205>, original: if(fa*fb>=0.0){
+throw new ConvergenceException("number of iterations={0}, maximum iterations={1}, "+"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, ",numIterations,maximumIterations,initial,lowerBound,upperBound,a,b,fa,fb);
+}
+, patch: if(fa*upperBound>=0.0){
+throw new ConvergenceException("number of iterations={0}, maximum iterations={1}, "+"initial={2}, lower bound={3}, upper bound={4}, final a value={5}, ",numIterations,maximumIterations,initial,lowerBound,upperBound,a,b,fa,fb);
+}
+
+
+                
+                ====================== tbar_1 Math_85 ================================
+                
+                [PATCH 108]//**********************************************************
+//org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java ------ 199
+//**********************************************************
+===Buggy Code===
+throw new ConvergenceException(
+                      "number of iterations={0}, maximum iterations={1}, " +
+                      "initial={2}, lower bound={3}, upper bound={4}, final a value={5}, " +
+                      "final b value={6}, f(a)={7}, f(b)={8}",
+                      numIterations, maximumIterations, initial,
+                      lowerBound, upperBound, a, b, fa, fb);
+
+===Patch Code===
+
+
+
+                
+                ====================== tbar_2 Math_85 ================================
+                
+                [PATCH 108]//**********************************************************
+//org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java ------ 199
+//**********************************************************
+===Buggy Code===
+throw new ConvergenceException(
+                      "number of iterations={0}, maximum iterations={1}, " +
+                      "initial={2}, lower bound={3}, upper bound={4}, final a value={5}, " +
+                      "final b value={6}, f(a)={7}, f(b)={8}",
+                      numIterations, maximumIterations, initial,
+                      lowerBound, upperBound, a, b, fa, fb);
+
+===Patch Code===
+
+
+
+                
+                ====================== tbar_3 Math_85 ================================
+                
+                [PATCH 108]//**********************************************************
+//org/apache/commons/math/analysis/solvers/UnivariateRealSolverUtils.java ------ 199
+//**********************************************************
+===Buggy Code===
+throw new ConvergenceException(
+                      "number of iterations={0}, maximum iterations={1}, " +
+                      "initial={2}, lower bound={3}, upper bound={4}, final a value={5}, " +
+                      "final b value={6}, f(a)={7}, f(b)={8}",
+                      numIterations, maximumIterations, initial,
+                      lowerBound, upperBound, a, b, fa, fb);
+
+===Patch Code===
+
+
+
+                

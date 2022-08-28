@@ -1,0 +1,124 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_2/defects4j_Math_2/defects4j_Math_2/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java /tmp/fixed/defects4j_Math_2/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_2/defects4j_Math_2/defects4j_Math_2/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java	2021-09-02 16:14:58.409831081 +0800
++++ /tmp/fixed/defects4j_Math_2/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java	2021-09-02 16:15:21.840397392 +0800
+@@ -265,7 +265,7 @@
+      * size {@code n}, the mean is {@code n * m / N}.
+      */
+     public double getNumericalMean() {
+-        return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();
++        return getSampleSize() * (getNumberOfSuccesses() / (double) getPopulationSize());
+     }
+ 
+     /**
+
+
+                
+                ====================== dynamoth_2 Math_2 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java
++++ b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java
+@@ -278,5 +278,7 @@
+public double getNumericalVariance() {
+-        if (!numericalVarianceIsCalculated) {
+-            numericalVariance = calculateNumericalVariance();
+-            numericalVarianceIsCalculated = true;
++        if (this.numberOfSuccesses == this.getSupportUpperBound()) {
++            if (!numericalVarianceIsCalculated) {
++                numericalVariance = calculateNumericalVariance();
++                numericalVarianceIsCalculated = true;
++            }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Math_2 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java
++++ b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java
+@@ -278,5 +278,7 @@
+public double getNumericalVariance() {
+-        if (!numericalVarianceIsCalculated) {
+-            numericalVariance = calculateNumericalVariance();
+-            numericalVarianceIsCalculated = true;
++        if (this.numberOfSuccesses == this.getSupportUpperBound()) {
++            if (!numericalVarianceIsCalculated) {
++                numericalVariance = calculateNumericalVariance();
++                numericalVarianceIsCalculated = true;
++            }
+}
+
+
+
+
+                
+                ====================== nopol_2 Math_2 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/distribution/AbstractIntegerDistribution.java
++++ b/src/main/java/org/apache/commons/math3/distribution/AbstractIntegerDistribution.java
+@@ -136,4 +136,6 @@
+tmp = mu + k * sigma;
+-            if (tmp < upper) {
+-                upper = ((int) Math.ceil(tmp)) - 1;
++            if (sigma == mu) {
++                if (tmp < upper) {
++                    upper = ((int) Math.ceil(tmp)) - 1;
++                }
+}
+
+
+
+
+                
+                ====================== nopol_3 Math_2 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/distribution/AbstractIntegerDistribution.java
++++ b/src/main/java/org/apache/commons/math3/distribution/AbstractIntegerDistribution.java
+@@ -136,4 +136,6 @@
+tmp = mu + k * sigma;
+-            if (tmp < upper) {
+-                upper = ((int) Math.ceil(tmp)) - 1;
++            if (lower == sigma) {
++                if (tmp < upper) {
++                    upper = ((int) Math.ceil(tmp)) - 1;
++                }
+}
+
+
+
+
+                
+                ====================== tbar_1 Math_2 ================================
+                
+                [PATCH 71]//**********************************************************
+//org/apache/commons/math3/distribution/HypergeometricDistribution.java ------ 293
+//**********************************************************
+===Buggy Code===
+final double m = getNumberOfSuccesses();
+        final double n = getSampleSize();
+
+===Patch Code===
+final int m = getNumberOfSuccesses();
+        final int n = getSampleSize();
+
+
+                
+                ====================== tbar_2 Math_2 ================================
+                
+                [PATCH 71]//**********************************************************
+//org/apache/commons/math3/distribution/HypergeometricDistribution.java ------ 293
+//**********************************************************
+===Buggy Code===
+final double m = getNumberOfSuccesses();
+        final double n = getSampleSize();
+
+===Patch Code===
+final int m = getNumberOfSuccesses();
+        final int n = getSampleSize();
+
+
+                

@@ -1,0 +1,16 @@
+1. A critical review of" automatic patch generation learned from human-written patches": Essay on the problem statement and the evaluation of automatic software repair
+2. An analysis of patch plausibility and correctness for generate-and-validate patch generation systems
+3. Is the cure worse than the disease? overfitting in automated program repair
+4. How to Measure the Performance of Automated Program Repair & The strength of random search on automated program repair
+5. Do automated program repair techniques repair hard and important bugs?
+6. On reliability of patch correctness assessment
+7. You cannot fix what you cannot find! an investigation of fault localization bias in benchmarking automated program repair systems
+8. Attention please: Consider Mockito when evaluating newly proposed automated program repair techniques
+9. Flakime: Laboratory-controlled test flakiness impact assessment. a case study on mutation testing and program repair
+10. Empirical review of Java program repair tools: a large-scale experiment on 2,141 bugs and 23,551 repair attempts
+11. On the Efficiency of Test Suite based Program Repair: A Systematic Assessment of 16 Automated Repair Systems for Java Programs
+12. Understanding the Non-Repairability Factors of Automated Program Repair Techniques
+13. A critical review on the evaluation of automated program repair systems
+14. On the Impact of Flaky Tests in Automated Program Repair
+15. How Does Regression Test Selection Affect Program Repair? An Extensive Study on 2 Million Patches
+16. Is the Ground Truth Really Accurate? Dataset Purification for Automated Program Repair

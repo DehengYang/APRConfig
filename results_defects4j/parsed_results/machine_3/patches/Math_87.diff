@@ -1,0 +1,41 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_87/defects4j_Math_87/defects4j_Math_87/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java /tmp/fixed/defects4j_Math_87/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_87/defects4j_Math_87/defects4j_Math_87/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java	2021-08-25 21:51:36.610486093 +0800
++++ /tmp/fixed/defects4j_Math_87/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java	2021-08-25 21:51:50.167040843 +0800
+@@ -272,12 +272,10 @@
+     private Integer getBasicRow(final int col) {
+         Integer row = null;
+         for (int i = getNumObjectiveFunctions(); i < getHeight(); i++) {
+-            if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {
+-                if (row == null) {
++            if (MathUtils.equals(getEntry(i, col), 1.0, epsilon) && (row == null)) {
+                 row = i;
+-                } else {
++            } else if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {
+                 return null;
+-                }
+             }
+         }
+         return row;
+
+
+                
+                ====================== dynamoth_1 Math_87 ================================
+                
+                --- a/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
++++ b/src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java
+@@ -160,4 +160,6 @@
+if (!restrictToNonNegative) {
+-                        matrix[row][getSlackVariableOffset() - 1] =
++                        if (this.numSlackVariables != 1) {
++                            matrix[row][getSlackVariableOffset() - 1] =
+getInvertedCoeffiecientSum(constraint.getCoefficients());
++                        }
+}
+
+
+
+
+                

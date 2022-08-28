@@ -1,0 +1,72 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_8/defects4j_Closure_8/defects4j_Closure_8/src/com/google/javascript/jscomp/CollapseVariableDeclarations.java /tmp/fixed/defects4j_Closure_8/src/com/google/javascript/jscomp/CollapseVariableDeclarations.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_8/defects4j_Closure_8/defects4j_Closure_8/src/com/google/javascript/jscomp/CollapseVariableDeclarations.java	2021-09-07 12:08:16.675637749 +0800
++++ /tmp/fixed/defects4j_Closure_8/src/com/google/javascript/jscomp/CollapseVariableDeclarations.java	2021-09-07 12:08:52.272829766 +0800
+@@ -201,10 +201,14 @@
+       Var var = s.getVar(lhs.getString());
+       return var != null
+           && var.getScope() == s
++          && !isNamedParameter(var)
+           && !blacklistedVars.contains(var);
+     }
+   }
+ 
++  private boolean isNamedParameter(Var v) {
++    return v.getParentNode().isParamList();
++  }
+ 
+   private void applyCollapses() {
+     for (Collapse collapse : collapses) {
+
+
+                
+                ====================== nopol_2 Closure_8 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1410,7 +1410,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (com.google.javascript.rhino.Node.this.type < com.google.javascript.rhino.Node.OPT_ARG_NAME) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                
+                ====================== nopol_3 Closure_8 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1410,7 +1410,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (com.google.javascript.rhino.Node.this.type < com.google.javascript.rhino.Node.OPT_ARG_NAME) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                

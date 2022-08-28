@@ -1,0 +1,58 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_65/defects4j_Math_65/defects4j_Math_65/src/main/java/org/apache/commons/math/optimization/general/AbstractLeastSquaresOptimizer.java /tmp/fixed/defects4j_Math_65/src/main/java/org/apache/commons/math/optimization/general/AbstractLeastSquaresOptimizer.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_65/defects4j_Math_65/defects4j_Math_65/src/main/java/org/apache/commons/math/optimization/general/AbstractLeastSquaresOptimizer.java	2021-09-05 18:23:19.868084494 +0800
++++ /tmp/fixed/defects4j_Math_65/src/main/java/org/apache/commons/math/optimization/general/AbstractLeastSquaresOptimizer.java	2021-09-05 18:23:39.024578446 +0800
+@@ -237,12 +237,7 @@
+      * @return RMS value
+      */
+     public double getRMS() {
+-        double criterion = 0;
+-        for (int i = 0; i < rows; ++i) {
+-            final double residual = residuals[i];
+-            criterion += residual * residual * residualsWeights[i];
+-        }
+-        return Math.sqrt(criterion / rows);
++        return Math.sqrt(getChiSquare() / rows);
+     }
+ 
+     /**
+@@ -255,7 +250,7 @@
+         double chiSquare = 0;
+         for (int i = 0; i < rows; ++i) {
+             final double residual = residuals[i];
+-            chiSquare += residual * residual / residualsWeights[i];
++            chiSquare += residual * residual * residualsWeights[i];
+         }
+         return chiSquare;
+     }
+
+
+                
+                ====================== tbar_1 Math_65 ================================
+                
+                [PATCH 139]//**********************************************************
+//org/apache/commons/math/optimization/general/AbstractLeastSquaresOptimizer.java ------ 258
+//**********************************************************
+===Buggy Code===
+chiSquare += residual * residual / residualsWeights[i];
+
+===Patch Code===
+chiSquare += residual * residual * residualsWeights[i];
+
+
+                
+                ====================== tbar_2 Math_65 ================================
+                
+                [PATCH 139]//**********************************************************
+//org/apache/commons/math/optimization/general/AbstractLeastSquaresOptimizer.java ------ 258
+//**********************************************************
+===Buggy Code===
+chiSquare += residual * residual / residualsWeights[i];
+
+===Patch Code===
+chiSquare += residual * residual * residualsWeights[i];
+
+
+                

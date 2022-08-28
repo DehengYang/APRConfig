@@ -1,0 +1,95 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_32/defects4j_Math_32/defects4j_Math_32/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java /tmp/fixed/defects4j_Math_32/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_32/defects4j_Math_32/defects4j_Math_32/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java	2021-09-01 16:01:02.015708618 +0800
++++ /tmp/fixed/defects4j_Math_32/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java	2021-09-01 16:01:18.440296064 +0800
+@@ -133,7 +133,7 @@
+ 
+         if (v.length == 0) {
+             final BSPTree<Euclidean2D> tree = getTree(false);
+-            if ((Boolean) tree.getAttribute()) {
++            if (tree.getCut() == null && (Boolean) tree.getAttribute()) {
+                 // the instance covers the whole space
+                 setSize(Double.POSITIVE_INFINITY);
+                 setBarycenter(Vector2D.NaN);
+
+
+                
+                ====================== dynamoth_1 Math_32 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java
++++ b/src/main/java/org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java
+@@ -135,3 +135,3 @@
+final BSPTree<Euclidean2D> tree = getTree(false);
+-            if ((Boolean) tree.getAttribute()) {
++            if (false) {
+// the instance covers the whole space
+
+
+
+
+                
+                ====================== tbar_1 Math_32 ================================
+                
+                [PATCH 21]//**********************************************************
+//org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java ------ 136
+//**********************************************************
+===Buggy Code===
+if ((Boolean) tree.getAttribute()) {
+                // the instance covers the whole space
+                setSize(Double.POSITIVE_INFINITY);
+                setBarycenter(Vector2D.NaN);
+            } else {
+                setSize(0);
+                setBarycenter(new Vector2D(0, 0));
+            }
+
+===Patch Code===
+setSize(0);
+                setBarycenter(new Vector2D(0, 0));
+
+
+                
+                ====================== tbar_2 Math_32 ================================
+                
+                [PATCH 21]//**********************************************************
+//org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java ------ 136
+//**********************************************************
+===Buggy Code===
+if ((Boolean) tree.getAttribute()) {
+                // the instance covers the whole space
+                setSize(Double.POSITIVE_INFINITY);
+                setBarycenter(Vector2D.NaN);
+            } else {
+                setSize(0);
+                setBarycenter(new Vector2D(0, 0));
+            }
+
+===Patch Code===
+setSize(0);
+                setBarycenter(new Vector2D(0, 0));
+
+
+                
+                ====================== tbar_3 Math_32 ================================
+                
+                [PATCH 21]//**********************************************************
+//org/apache/commons/math3/geometry/euclidean/twod/PolygonsSet.java ------ 136
+//**********************************************************
+===Buggy Code===
+if ((Boolean) tree.getAttribute()) {
+                // the instance covers the whole space
+                setSize(Double.POSITIVE_INFINITY);
+                setBarycenter(Vector2D.NaN);
+            } else {
+                setSize(0);
+                setBarycenter(new Vector2D(0, 0));
+            }
+
+===Patch Code===
+setSize(0);
+                setBarycenter(new Vector2D(0, 0));
+
+
+                

@@ -1,0 +1,115 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_45/defects4j_Lang_45/defects4j_Lang_45/src/java/org/apache/commons/lang/WordUtils.java /tmp/fixed/defects4j_Lang_45/src/java/org/apache/commons/lang/WordUtils.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_45/defects4j_Lang_45/defects4j_Lang_45/src/java/org/apache/commons/lang/WordUtils.java	2021-08-30 13:40:12.822765360 +0800
++++ /tmp/fixed/defects4j_Lang_45/src/java/org/apache/commons/lang/WordUtils.java	2021-08-30 13:40:23.911222339 +0800
+@@ -613,6 +613,9 @@
+ 
+         // if the lower value is greater than the length of the string,
+         // set to the length of the string
++        if (lower > str.length()) {
++            lower = str.length();    
++        }
+         // if the upper value is -1 (i.e. no limit) or is greater
+         // than the length of the string, set to the length of the string
+         if (upper == -1 || upper > str.length()) {
+
+
+                
+                ====================== simfix_1 Lang_45 ================================
+                
+                [PATCH 420] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_45/defects4j_Lang_45/defects4j_Lang_45/src/java//org/apache/commons/lang/WordUtils.java, range: <622,627>, original: if(upper<lower){
+upper=lower;
+}
+StringBuffer result=new StringBuffer();
+int index=StringUtils.indexOf(str," ",lower);
+, patch: if((lower+(upper-3))<lower){
+upper=lower;
+}
+StringBuffer result=new StringBuffer();
+int index=StringUtils.indexOf(str," ",lower);
+
+
+                
+                ====================== simfix_2 Lang_45 ================================
+                
+                [PATCH 420] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_45/defects4j_Lang_45/defects4j_Lang_45/src/java//org/apache/commons/lang/WordUtils.java, range: <622,627>, original: if(upper<lower){
+upper=lower;
+}
+StringBuffer result=new StringBuffer();
+int index=StringUtils.indexOf(str," ",lower);
+, patch: if((lower+(upper-3))<lower){
+upper=lower;
+}
+StringBuffer result=new StringBuffer();
+int index=StringUtils.indexOf(str," ",lower);
+
+
+                
+                ====================== simfix_3 Lang_45 ================================
+                
+                [PATCH 420] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_45/defects4j_Lang_45/defects4j_Lang_45/src/java//org/apache/commons/lang/WordUtils.java, range: <622,627>, original: if(upper<lower){
+upper=lower;
+}
+StringBuffer result=new StringBuffer();
+int index=StringUtils.indexOf(str," ",lower);
+, patch: if((lower+(upper-3))<lower){
+upper=lower;
+}
+StringBuffer result=new StringBuffer();
+int index=StringUtils.indexOf(str," ",lower);
+
+
+                
+                ====================== tbar_1 Lang_45 ================================
+                
+                [PATCH 198]//**********************************************************
+//org/apache/commons/lang/WordUtils.java ------ 622
+//**********************************************************
+===Buggy Code===
+if (upper < lower) {
+            upper = lower;
+        }
+
+===Patch Code===
+if ((upper < lower) && (upper != str.length())) {
+            upper = lower;
+        }
+
+
+                
+                ====================== tbar_2 Lang_45 ================================
+                
+                [PATCH 198]//**********************************************************
+//org/apache/commons/lang/WordUtils.java ------ 622
+//**********************************************************
+===Buggy Code===
+if (upper < lower) {
+            upper = lower;
+        }
+
+===Patch Code===
+if ((upper < lower) && (upper != str.length())) {
+            upper = lower;
+        }
+
+
+                
+                ====================== tbar_3 Lang_45 ================================
+                
+                [PATCH 198]//**********************************************************
+//org/apache/commons/lang/WordUtils.java ------ 622
+//**********************************************************
+===Buggy Code===
+if (upper < lower) {
+            upper = lower;
+        }
+
+===Patch Code===
+if ((upper < lower) && (upper != str.length())) {
+            upper = lower;
+        }
+
+
+                

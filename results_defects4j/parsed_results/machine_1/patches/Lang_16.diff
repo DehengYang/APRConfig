@@ -1,0 +1,54 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_16/defects4j_Lang_16/defects4j_Lang_16/src/main/java/org/apache/commons/lang3/math/NumberUtils.java /tmp/fixed/defects4j_Lang_16/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_16/defects4j_Lang_16/defects4j_Lang_16/src/main/java/org/apache/commons/lang3/math/NumberUtils.java	2021-08-25 07:09:34.208976931 +0800
++++ /tmp/fixed/defects4j_Lang_16/src/main/java/org/apache/commons/lang3/math/NumberUtils.java	2021-08-25 07:09:47.185511239 +0800
+@@ -455,7 +455,7 @@
+             // a wrong value.
+             return null;
+         }
+-        if (str.startsWith("0x") || str.startsWith("-0x")) {
++        if (str.startsWith("0x") || str.startsWith("-0x") || str.startsWith("0X") || str.startsWith("-0X")) {
+             return createInteger(str);
+         }   
+         char lastChar = str.charAt(str.length() - 1);
+
+
+                
+                ====================== simfix_1 Lang_16 ================================
+                
+                [PATCH 1497] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_16/defects4j_Lang_16/defects4j_Lang_16/src/main/java//org/apache/commons/lang3/math/NumberUtils.java, range: <448,450>, original: if(StringUtils.isBlank(str)){
+throw new NumberFormatException("A blank string is not a valid number");
+}
+, patch: str=str.toLowerCase();
+if(StringUtils.isBlank(str)){
+throw new NumberFormatException("A blank string is not a valid number");
+}
+
+
+                
+                ====================== simfix_2 Lang_16 ================================
+                
+                [PATCH 1497] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_16/defects4j_Lang_16/defects4j_Lang_16/src/main/java//org/apache/commons/lang3/math/NumberUtils.java, range: <448,450>, original: if(StringUtils.isBlank(str)){
+throw new NumberFormatException("A blank string is not a valid number");
+}
+, patch: str=str.toLowerCase();
+if(StringUtils.isBlank(str)){
+throw new NumberFormatException("A blank string is not a valid number");
+}
+
+
+                
+                ====================== simfix_3 Lang_16 ================================
+                
+                [PATCH 1497] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_16/defects4j_Lang_16/defects4j_Lang_16/src/main/java//org/apache/commons/lang3/math/NumberUtils.java, range: <448,450>, original: if(StringUtils.isBlank(str)){
+throw new NumberFormatException("A blank string is not a valid number");
+}
+, patch: str=str.toLowerCase();
+if(StringUtils.isBlank(str)){
+throw new NumberFormatException("A blank string is not a valid number");
+}
+
+
+                

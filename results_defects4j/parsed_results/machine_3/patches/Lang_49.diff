@@ -1,0 +1,30 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_49/defects4j_Lang_49/defects4j_Lang_49/src/java/org/apache/commons/lang/math/Fraction.java /tmp/fixed/defects4j_Lang_49/src/java/org/apache/commons/lang/math/Fraction.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_49/defects4j_Lang_49/defects4j_Lang_49/src/java/org/apache/commons/lang/math/Fraction.java	2021-09-03 12:32:37.276391061 +0800
++++ /tmp/fixed/defects4j_Lang_49/src/java/org/apache/commons/lang/math/Fraction.java	2021-09-03 12:32:53.150128184 +0800
+@@ -463,6 +463,9 @@
+      * @return a new reduced fraction instance, or this if no simplification possible
+      */
+     public Fraction reduce() {
++        if (numerator == 0) {
++            return equals(ZERO) ? this : ZERO;
++        }
+         int gcd = greatestCommonDivisor(Math.abs(numerator), denominator);
+         if (gcd == 1) {
+             return this;
+
+
+                
+                ====================== simfix_2 Lang_49 ================================
+                
+                [PATCH 70] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_49/defects4j_Lang_49/defects4j_Lang_49/src/java//org/apache/commons/lang/math/Fraction.java, range: <142,144>, original: if(denominator==0){
+throw new ArithmeticException("The denominator must not be zero");
+}
+, patch: if(denominator==0){
+throw new ArithmeticException("The denominator must not be negative");
+}
+
+
+                

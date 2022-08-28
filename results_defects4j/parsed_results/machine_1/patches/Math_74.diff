@@ -1,0 +1,43 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_74/defects4j_Math_74/defects4j_Math_74/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java /tmp/fixed/defects4j_Math_74/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_74/defects4j_Math_74/defects4j_Math_74/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java	2021-10-01 12:29:16.675029485 +0800
++++ /tmp/fixed/defects4j_Math_74/src/main/java/org/apache/commons/math/ode/nonstiff/EmbeddedRungeKuttaIntegrator.java	2021-10-01 12:29:29.435578303 +0800
+@@ -242,12 +242,15 @@
+         }
+ 
+         if (firstTime) {
+-          final double[] scale;
++          final double[] scale = new double[y0.length];
+           if (vecAbsoluteTolerance == null) {
+-              scale = new double[y0.length];
+-              java.util.Arrays.fill(scale, scalAbsoluteTolerance);
++              for (int i = 0; i < scale.length; ++i) {
++                scale[i] = scalAbsoluteTolerance + scalRelativeTolerance * Math.abs(y[i]);
++              }
+             } else {
+-              scale = vecAbsoluteTolerance;
++              for (int i = 0; i < scale.length; ++i) {
++                scale[i] = vecAbsoluteTolerance[i] + vecRelativeTolerance[i] * Math.abs(y[i]);
++              }
+             }
+           hNew = initializeStep(equations, forward, getOrder(), scale,
+                                 stepStart, y, yDotK[0], yTmp, yDotK[1]);
+
+
+                
+                ====================== dynamoth_2 Math_74 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/ode/nonstiff/AdaptiveStepsizeIntegrator.java
++++ b/src/main/java/org/apache/commons/math/ode/nonstiff/AdaptiveStepsizeIntegrator.java
+@@ -256,3 +256,3 @@
+}
+-    if (h > getMaxStep()) {
++    if (scale.length == 1) {
+h = getMaxStep();
+
+
+
+
+                

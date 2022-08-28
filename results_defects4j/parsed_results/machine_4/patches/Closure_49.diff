@@ -1,0 +1,112 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_49/defects4j_Closure_49/defects4j_Closure_49/src/com/google/javascript/jscomp/MakeDeclaredNamesUnique.java /tmp/fixed/defects4j_Closure_49/src/com/google/javascript/jscomp/MakeDeclaredNamesUnique.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_49/defects4j_Closure_49/defects4j_Closure_49/src/com/google/javascript/jscomp/MakeDeclaredNamesUnique.java	2021-09-08 01:40:17.473790183 +0800
++++ /tmp/fixed/defects4j_Closure_49/src/com/google/javascript/jscomp/MakeDeclaredNamesUnique.java	2021-09-08 01:40:51.491078552 +0800
+@@ -88,14 +88,6 @@
+       renamer = nameStack.peek().forChildScope();
+     }
+ 
+-    if (declarationRoot.getType() == Token.FUNCTION) {
+-      for (Node c = declarationRoot.getFirstChild().getNext().getFirstChild(); c != null; c = c.getNext()) {
+-        String name = c.getString();
+-        renamer.addDeclaredName(name);
+-      }
+-      Node functionBody = declarationRoot.getLastChild();
+-      findDeclaredNames(functionBody, null, renamer);
+-    }  else 
+     if (declarationRoot.getType() != Token.FUNCTION) {
+       // Add the block declarations
+       findDeclaredNames(declarationRoot, null, renamer);
+@@ -127,11 +119,22 @@
+             renamer.addDeclaredName(name);
+           }
+ 
++          nameStack.push(renamer);
++        }
++        break;
+ 
++      case Token.LP: {
++          Renamer renamer = nameStack.peek().forChildScope();
+ 
+           // Add the function parameters
++          for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {
++            String name = c.getString();
++            renamer.addDeclaredName(name);
++          }
+ 
+           // Add the function body declarations
++          Node functionBody = n.getNext();
++          findDeclaredNames(functionBody, null, renamer);
+ 
+           nameStack.push(renamer);
+         }
+@@ -170,13 +173,16 @@
+ 
+       case Token.FUNCTION:
+         // Remove the function body scope
++        nameStack.pop();
+         // Remove function recursive name (if any).
+         nameStack.pop();
+         break;
+ 
++      case Token.LP:
+         // Note: The parameters and function body variables live in the
+         // same scope, we introduce the scope when in the "shouldTraverse"
+         // visit of LP, but remove it when when we exit the function above.
++        break;
+ 
+       case Token.CATCH:
+         // Remove catch except name from the stack of names.
+
+
+                
+                ====================== dynamoth_2 Closure_49 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1566,7 +1566,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (this.getChildCount() == 0) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Closure_49 ================================
+                
+                --- a/src/com/google/javascript/rhino/Node.java
++++ b/src/com/google/javascript/rhino/Node.java
+@@ -1566,7 +1566,9 @@
+if (diff != null) {
+-        return "Node tree inequality:" +
+-            "\nTree1:\n" + toStringTree() +
+-            "\n\nTree2:\n" + node2.toStringTree() +
+-            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+-            "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        if (this.getChildCount() == 0) {
++          return "Node tree inequality:" +
++          "\nTree1:\n" + toStringTree() +
++          "\n\nTree2:\n" + node2.toStringTree() +
++          "\n\nSubtree1: " + diff.nodeA.toStringTree() +
++          "\n\nSubtree2: " + diff.nodeB.toStringTree();
++        }
+}
+
+
+
+
+                

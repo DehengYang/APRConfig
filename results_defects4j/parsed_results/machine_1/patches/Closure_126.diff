@@ -1,0 +1,46 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_126/defects4j_Closure_126/defects4j_Closure_126/src/com/google/javascript/jscomp/MinimizeExitPoints.java /tmp/fixed/defects4j_Closure_126/src/com/google/javascript/jscomp/MinimizeExitPoints.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_126/defects4j_Closure_126/defects4j_Closure_126/src/com/google/javascript/jscomp/MinimizeExitPoints.java	2021-09-05 17:46:22.574976606 +0800
++++ /tmp/fixed/defects4j_Closure_126/src/com/google/javascript/jscomp/MinimizeExitPoints.java	2021-09-05 17:46:56.316123119 +0800
+@@ -138,10 +138,6 @@
+        * can cause problems if it changes the completion type of the finally
+        * block. See ECMA 262 Sections 8.9 & 12.14
+        */
+-      if (NodeUtil.hasFinally(n)) {
+-        Node finallyBlock = n.getLastChild();
+-        tryMinimizeExits(finallyBlock, exitType, labelName);
+-      }
+     }
+ 
+     // Just a 'label'.
+
+
+                
+                ====================== tbar_1 Closure_126 ================================
+                
+                [PATCH 39]//**********************************************************
+//com/google/javascript/jscomp/MinimizeExitPoints.java ------ 142
+//**********************************************************
+===Buggy Code===
+Node finallyBlock = n.getLastChild();
+
+===Patch Code===
+Node finallyBlock = n.getFirstChild();
+
+
+                
+                ====================== tbar_2 Closure_126 ================================
+                
+                [PATCH 39]//**********************************************************
+//com/google/javascript/jscomp/MinimizeExitPoints.java ------ 142
+//**********************************************************
+===Buggy Code===
+Node finallyBlock = n.getLastChild();
+
+===Patch Code===
+Node finallyBlock = n.getFirstChild();
+
+
+                

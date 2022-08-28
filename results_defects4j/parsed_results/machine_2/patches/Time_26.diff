@@ -1,0 +1,103 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_26/defects4j_Time_26/defects4j_Time_26/src/main/java/org/joda/time/chrono/ZonedChronology.java /tmp/fixed/defects4j_Time_26/src/main/java/org/joda/time/chrono/ZonedChronology.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_26/defects4j_Time_26/defects4j_Time_26/src/main/java/org/joda/time/chrono/ZonedChronology.java	2021-09-02 23:28:17.148033721 +0800
++++ /tmp/fixed/defects4j_Time_26/src/main/java/org/joda/time/chrono/ZonedChronology.java	2021-09-02 23:28:35.560694614 +0800
+@@ -433,7 +433,7 @@
+             } else {
+                long localInstant = iZone.convertUTCToLocal(instant);
+                localInstant = iField.add(localInstant, value);
+-               return iZone.convertLocalToUTC(localInstant, false);
++               return iZone.convertLocalToUTC(localInstant, false, instant);
+             }
+         }
+ 
+@@ -445,7 +445,7 @@
+             } else {
+                long localInstant = iZone.convertUTCToLocal(instant);
+                localInstant = iField.add(localInstant, value);
+-               return iZone.convertLocalToUTC(localInstant, false);
++               return iZone.convertLocalToUTC(localInstant, false, instant);
+             }
+         }
+ 
+@@ -457,14 +457,14 @@
+             } else {
+                 long localInstant = iZone.convertUTCToLocal(instant);
+                 localInstant = iField.addWrapField(localInstant, value);
+-                return iZone.convertLocalToUTC(localInstant, false);
++                return iZone.convertLocalToUTC(localInstant, false, instant);
+             }
+         }
+ 
+         public long set(long instant, int value) {
+             long localInstant = iZone.convertUTCToLocal(instant);
+             localInstant = iField.set(localInstant, value);
+-            long result = iZone.convertLocalToUTC(localInstant, false);
++            long result = iZone.convertLocalToUTC(localInstant, false, instant);
+             if (get(result) != value) {
+                 throw new IllegalFieldValueException(iField.getType(), new Integer(value),
+                     "Illegal instant due to time zone offset transition: " +
+@@ -478,7 +478,7 @@
+             // cannot verify that new value stuck because set may be lenient
+             long localInstant = iZone.convertUTCToLocal(instant);
+             localInstant = iField.set(localInstant, text, locale);
+-            return iZone.convertLocalToUTC(localInstant, false);
++            return iZone.convertLocalToUTC(localInstant, false, instant);
+         }
+ 
+         public int getDifference(long minuendInstant, long subtrahendInstant) {
+@@ -525,7 +525,7 @@
+             } else {
+                 long localInstant = iZone.convertUTCToLocal(instant);
+                 localInstant = iField.roundFloor(localInstant);
+-                return iZone.convertLocalToUTC(localInstant, false);
++                return iZone.convertLocalToUTC(localInstant, false, instant);
+             }
+         }
+ 
+@@ -537,7 +537,7 @@
+             } else {
+                 long localInstant = iZone.convertUTCToLocal(instant);
+                 localInstant = iField.roundCeiling(localInstant);
+-                return iZone.convertLocalToUTC(localInstant, false);
++                return iZone.convertLocalToUTC(localInstant, false, instant);
+             }
+         }
+ 
+
+
+                
+                ====================== simfix_1 Time_26 ================================
+                
+                [PATCH 3328] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_26/defects4j_Time_26/defects4j_Time_26/src/main/java//org/joda/time/format/FormatUtils.java, range: <68,70>, original: for(;size>2;size--){
+buf.append('0');
+}
+, patch: for(;size>2;size--){
+size++;
+buf.append('0');
+}
+
+
+                
+                ====================== simfix_2 Time_26 ================================
+                
+                [PATCH 2425] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_26/defects4j_Time_26/defects4j_Time_26/src/main/java//org/joda/time/format/DateTimeFormatterBuilder.java, range: <1909,1916>, original: long scaled=fractionData[0];
+int maxDigits=(int)fractionData[1];
+if((scaled&0x7fffffff)==scaled){
+str=Integer.toString((int)scaled);
+}else {
+str=Long.toString(scaled);
+}
+, patch: long scaled=fractionData[0];
+int maxDigits=(int)fractionData[1];
+iMaxDigits-=iMaxDigits*DateTimeConstants.MILLIS_PER_SECOND;
+if((scaled&0x7fffffff)==scaled){
+str=Integer.toString((int)scaled);
+}else {
+str=Long.toString(scaled);
+}
+
+
+                

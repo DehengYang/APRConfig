@@ -1,0 +1,63 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_24/defects4j_Math_24/defects4j_Math_24/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java /tmp/fixed/defects4j_Math_24/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_24/defects4j_Math_24/defects4j_Math_24/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java	2021-08-30 16:26:20.258435534 +0800
++++ /tmp/fixed/defects4j_Math_24/src/main/java/org/apache/commons/math3/optimization/univariate/BrentOptimizer.java	2021-08-30 16:26:38.539089520 +0800
+@@ -227,7 +227,7 @@
+ 
+                 if (checker != null) {
+                     if (checker.converged(iter, previous, current)) {
+-                        return current;
++                        return best(current, previous, isMinim);
+                     }
+                 }
+ 
+@@ -264,7 +264,7 @@
+                     }
+                 }
+             } else { // Default termination (Brent's criterion).
+-                return current;
++                return best(current, previous, isMinim);
+             }
+             ++iter;
+         }
+
+
+                
+                ====================== dynamoth_1 Math_24 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/analysis/FunctionUtils.java
++++ b/src/main/java/org/apache/commons/math3/analysis/FunctionUtils.java
+@@ -144,4 +144,6 @@
+double r = f[0].value(x);
+-                for (int i = 1; i < f.length; i++) {
+-                    r += f[i].value(x);
++                if (0 <= r) {
++                    for (int i = 1; i < f.length; i++) {
++                        r += f[i].value(x);
++                    }
+}
+
+
+
+
+                
+                ====================== nopol_1 Math_24 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/analysis/FunctionUtils.java
++++ b/src/main/java/org/apache/commons/math3/analysis/FunctionUtils.java
+@@ -144,4 +144,6 @@
+double r = f[0].value(x);
+-                for (int i = 1; i < f.length; i++) {
+-                    r += f[i].value(x);
++                if (0 < r) {
++                    for (int i = 1; i < f.length; i++) {
++                        r += f[i].value(x);
++                    }
+}
+
+
+
+
+                

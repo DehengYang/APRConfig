@@ -1,0 +1,57 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_96/defects4j_Math_96/defects4j_Math_96/src/java/org/apache/commons/math/complex/Complex.java /tmp/fixed/defects4j_Math_96/src/java/org/apache/commons/math/complex/Complex.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_96/defects4j_Math_96/defects4j_Math_96/src/java/org/apache/commons/math/complex/Complex.java	2021-08-27 10:57:25.226572908 +0800
++++ /tmp/fixed/defects4j_Math_96/src/java/org/apache/commons/math/complex/Complex.java	2021-08-27 10:57:36.163020260 +0800
+@@ -255,7 +255,7 @@
+                 if (rhs.isNaN()) {
+                     ret = this.isNaN();
+                 } else {
+-                    ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary())); 
++                    ret = (real == rhs.real) && (imaginary == rhs.imaginary); 
+                 }
+             } catch (ClassCastException ex) {
+                 // ignore exception
+
+
+                
+                ====================== tbar_1 Math_96 ================================
+                
+                [PATCH 186]//**********************************************************
+//org/apache/commons/math/complex/Complex.java ------ 258
+//**********************************************************
+===Buggy Code===
+ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary()));
+
+===Patch Code===
+ret = (Double.doubleToRawLongBits(real)>=Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary()));
+
+
+                
+                ====================== tbar_2 Math_96 ================================
+                
+                [PATCH 186]//**********************************************************
+//org/apache/commons/math/complex/Complex.java ------ 258
+//**********************************************************
+===Buggy Code===
+ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary()));
+
+===Patch Code===
+ret = (Double.doubleToRawLongBits(real)>=Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary()));
+
+
+                
+                ====================== tbar_3 Math_96 ================================
+                
+                [PATCH 186]//**********************************************************
+//org/apache/commons/math/complex/Complex.java ------ 258
+//**********************************************************
+===Buggy Code===
+ret = (Double.doubleToRawLongBits(real) == Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary()));
+
+===Patch Code===
+ret = (Double.doubleToRawLongBits(real)>=Double.doubleToRawLongBits(rhs.getReal())) && (Double.doubleToRawLongBits(imaginary) == Double.doubleToRawLongBits(rhs.getImaginary()));
+
+
+                

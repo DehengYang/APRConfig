@@ -1,0 +1,45 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_24/defects4j_Time_24/defects4j_Time_24/src/main/java/org/joda/time/format/DateTimeParserBucket.java /tmp/fixed/defects4j_Time_24/src/main/java/org/joda/time/format/DateTimeParserBucket.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_24/defects4j_Time_24/defects4j_Time_24/src/main/java/org/joda/time/format/DateTimeParserBucket.java	2021-09-02 19:39:30.711395698 +0800
++++ /tmp/fixed/defects4j_Time_24/src/main/java/org/joda/time/format/DateTimeParserBucket.java	2021-09-02 19:39:52.584181559 +0800
+@@ -352,6 +352,11 @@
+             for (int i = 0; i < count; i++) {
+                 millis = savedFields[i].set(millis, resetFields);
+             }
++            if (resetFields) {
++                for (int i = 0; i < count; i++) {
++                    millis = savedFields[i].set(millis, i == (count - 1));
++                }
++            }
+         } catch (IllegalFieldValueException e) {
+             if (text != null) {
+                 e.prependMessage("Cannot parse \"" + text + '"');
+
+
+                
+                ====================== simfix_1 Time_24 ================================
+                
+                [PATCH 3318] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_24/defects4j_Time_24/defects4j_Time_24/src/main/java//org/joda/time/format/FormatUtils.java, range: <63,65>, original: for(;size>1;size--){
+buf.append('0');
+}
+, patch: for(;size>1;size--){
+size++;
+buf.append('0');
+}
+
+
+                
+                ====================== simfix_2 Time_24 ================================
+                
+                [PATCH 3318] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_24/defects4j_Time_24/defects4j_Time_24/src/main/java//org/joda/time/format/FormatUtils.java, range: <63,65>, original: for(;size>1;size--){
+buf.append('0');
+}
+, patch: for(;size>1;size--){
+size++;
+buf.append('0');
+}
+
+
+                

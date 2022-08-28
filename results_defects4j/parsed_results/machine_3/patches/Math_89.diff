@@ -1,0 +1,75 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_89/defects4j_Math_89/defects4j_Math_89/src/java/org/apache/commons/math/stat/Frequency.java /tmp/fixed/defects4j_Math_89/src/java/org/apache/commons/math/stat/Frequency.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_89/defects4j_Math_89/defects4j_Math_89/src/java/org/apache/commons/math/stat/Frequency.java	2021-08-26 06:41:50.307936720 +0800
++++ /tmp/fixed/defects4j_Math_89/src/java/org/apache/commons/math/stat/Frequency.java	2021-08-26 06:42:05.948576837 +0800
+@@ -107,7 +107,11 @@
+      */
+     @Deprecated
+     public void addValue(Object v) {
++        if (v instanceof Comparable<?>){
+             addValue((Comparable<?>) v);            
++        } else {
++            throw new IllegalArgumentException("Object must implement Comparable");
++        }
+     }
+     
+     /**
+
+
+                
+                ====================== tbar_1 Math_89 ================================
+                
+                [PATCH 14]//**********************************************************
+//org/apache/commons/math/stat/Frequency.java ------ 110
+//**********************************************************
+===Buggy Code===
+addValue((Comparable<?>) v);
+
+===Patch Code===
+if (v instanceof Comparable<?>) {
+	addValue((Comparable<?>) v);
+	} else {
+	throw new IllegalArgumentException("Illegal argument: v");
+}
+
+
+
+                
+                ====================== tbar_2 Math_89 ================================
+                
+                [PATCH 14]//**********************************************************
+//org/apache/commons/math/stat/Frequency.java ------ 110
+//**********************************************************
+===Buggy Code===
+addValue((Comparable<?>) v);
+
+===Patch Code===
+if (v instanceof Comparable<?>) {
+	addValue((Comparable<?>) v);
+	} else {
+	throw new IllegalArgumentException("Illegal argument: v");
+}
+
+
+
+                
+                ====================== tbar_3 Math_89 ================================
+                
+                [PATCH 14]//**********************************************************
+//org/apache/commons/math/stat/Frequency.java ------ 110
+//**********************************************************
+===Buggy Code===
+addValue((Comparable<?>) v);
+
+===Patch Code===
+if (v instanceof Comparable<?>) {
+	addValue((Comparable<?>) v);
+	} else {
+	throw new IllegalArgumentException("Illegal argument: v");
+}
+
+
+
+                

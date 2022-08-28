@@ -1,0 +1,128 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_21/defects4j_Closure_21/defects4j_Closure_21/src/com/google/javascript/jscomp/CheckSideEffects.java /tmp/fixed/defects4j_Closure_21/src/com/google/javascript/jscomp/CheckSideEffects.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_21/defects4j_Closure_21/defects4j_Closure_21/src/com/google/javascript/jscomp/CheckSideEffects.java	2021-09-05 20:46:47.322125950 +0800
++++ /tmp/fixed/defects4j_Closure_21/src/com/google/javascript/jscomp/CheckSideEffects.java	2021-09-05 20:47:16.267117160 +0800
+@@ -98,7 +98,7 @@
+     // Do not try to remove a block or an expr result. We already handle
+     // these cases when we visit the child, and the peephole passes will
+     // fix up the tree in more clever ways when these are removed.
+-    if (n.isExprResult()) {
++    if (n.isExprResult() || n.isBlock()) {
+       return;
+     }
+ 
+@@ -110,24 +110,7 @@
+ 
+     boolean isResultUsed = NodeUtil.isExpressionResultUsed(n);
+     boolean isSimpleOp = NodeUtil.isSimpleOperatorType(n.getType());
+-    if (parent.getType() == Token.COMMA) {
+-      if (isResultUsed) {
+-        return;
+-      }
+-      if (n == parent.getLastChild()) {
+-        for (Node an : parent.getAncestors()) {
+-          int ancestorType = an.getType();
+-          if (ancestorType == Token.COMMA) continue;
+-          if (ancestorType != Token.EXPR_RESULT && ancestorType != Token.BLOCK) return;
+-          else break;
+-        }
+-      }
+-    } else if (parent.getType() != Token.EXPR_RESULT && parent.getType() != Token.BLOCK) {
+-      if (! (parent.getType() == Token.FOR && parent.getChildCount() == 4 && (n == parent.getFirstChild() || n == parent.getFirstChild().getNext().getNext()))) {
+-        return;
+-      }
+-    }
+-    if (
++    if (!isResultUsed &&
+         (isSimpleOp || !NodeUtil.mayHaveSideEffects(n, t.getCompiler()))) {
+       String msg = "This code lacks side-effects. Is there a bug?";
+       if (n.isString()) {
+
+
+                
+                ====================== nopol_2 Closure_21 ================================
+                
+                --- a/src/com/google/javascript/jscomp/CheckSideEffects.java
++++ b/src/com/google/javascript/jscomp/CheckSideEffects.java
+@@ -117,7 +117,9 @@
+if (n == parent.getLastChild()) {
+-        for (Node an : parent.getAncestors()) {
+-          int ancestorType = an.getType();
+-          if (ancestorType == Token.COMMA) continue;
+-          if (ancestorType != Token.EXPR_RESULT && ancestorType != Token.BLOCK) return;
+-          else break;
++        if (com.google.javascript.jscomp.CheckSideEffects.PROTECTOR_FN.length()==0) {
++          for (Node an : parent.getAncestors()) {
++            int ancestorType = an.getType();
++            if (ancestorType == Token.COMMA) continue;
++            if (ancestorType != Token.EXPR_RESULT && ancestorType != Token.BLOCK) return;
++            else break;
++          }
+}
+
+
+
+
+                
+                ====================== nopol_3 Closure_21 ================================
+                
+                --- a/src/com/google/javascript/jscomp/CheckSideEffects.java
++++ b/src/com/google/javascript/jscomp/CheckSideEffects.java
+@@ -117,7 +117,9 @@
+if (n == parent.getLastChild()) {
+-        for (Node an : parent.getAncestors()) {
+-          int ancestorType = an.getType();
+-          if (ancestorType == Token.COMMA) continue;
+-          if (ancestorType != Token.EXPR_RESULT && ancestorType != Token.BLOCK) return;
+-          else break;
++        if (com.google.javascript.jscomp.CheckSideEffects.PROTECTOR_FN.length()==0) {
++          for (Node an : parent.getAncestors()) {
++            int ancestorType = an.getType();
++            if (ancestorType == Token.COMMA) continue;
++            if (ancestorType != Token.EXPR_RESULT && ancestorType != Token.BLOCK) return;
++            else break;
++          }
+}
+
+
+
+
+                
+                ====================== tbar_1 Closure_21 ================================
+                
+                [PATCH 178]//**********************************************************
+//com/google/javascript/jscomp/CheckSideEffects.java ------ 118
+//**********************************************************
+===Buggy Code===
+for (Node an : parent.getAncestors()) {
+          int ancestorType = an.getType();
+          if (ancestorType == Token.COMMA) continue;
+          if (ancestorType != Token.EXPR_RESULT && ancestorType != Token.BLOCK) return;
+          else break;
+        }
+
+===Patch Code===
+
+
+
+                
+                ====================== tbar_2 Closure_21 ================================
+                
+                [PATCH 178]//**********************************************************
+//com/google/javascript/jscomp/CheckSideEffects.java ------ 118
+//**********************************************************
+===Buggy Code===
+for (Node an : parent.getAncestors()) {
+          int ancestorType = an.getType();
+          if (ancestorType == Token.COMMA) continue;
+          if (ancestorType != Token.EXPR_RESULT && ancestorType != Token.BLOCK) return;
+          else break;
+        }
+
+===Patch Code===
+
+
+
+                

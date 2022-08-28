@@ -1,0 +1,51 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_17/defects4j_Chart_17/defects4j_Chart_17/source/org/jfree/data/time/TimeSeries.java /tmp/fixed/defects4j_Chart_17/source/org/jfree/data/time/TimeSeries.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_17/defects4j_Chart_17/defects4j_Chart_17/source/org/jfree/data/time/TimeSeries.java	2021-08-25 18:51:18.627929569 +0800
++++ /tmp/fixed/defects4j_Chart_17/source/org/jfree/data/time/TimeSeries.java	2021-08-25 18:51:32.244491105 +0800
+@@ -854,7 +854,8 @@
+      *         subclasses may differ.
+      */
+     public Object clone() throws CloneNotSupportedException {
+-        Object clone = createCopy(0, getItemCount() - 1);
++        TimeSeries clone = (TimeSeries) super.clone();
++        clone.data = (List) ObjectUtilities.deepClone(this.data);
+         return clone;
+     }
+ 
+
+
+                
+                ====================== dynamoth_1 Chart_17 ================================
+                
+                --- a/source/org/jfree/data/time/TimeSeries.java
++++ b/source/org/jfree/data/time/TimeSeries.java
+@@ -879,3 +879,5 @@
+if (end < start) {
+-            throw new IllegalArgumentException("Requires start <= end.");
++            if (end == 0) {
++                throw new IllegalArgumentException("Requires start <= end.");
++            }
+}
+
+
+
+
+                
+                ====================== nopol_1 Chart_17 ================================
+                
+                --- a/source/org/jfree/data/time/TimeSeries.java
++++ b/source/org/jfree/data/time/TimeSeries.java
+@@ -879,3 +879,5 @@
+if (end < start) {
+-            throw new IllegalArgumentException("Requires start <= end.");
++            if (org.jfree.data.time.TimeSeries.DEFAULT_RANGE_DESCRIPTION.length() == org.jfree.data.time.TimeSeries.this.data.size()) {
++                throw new IllegalArgumentException("Requires start <= end.");
++            }
+}
+
+
+
+
+                

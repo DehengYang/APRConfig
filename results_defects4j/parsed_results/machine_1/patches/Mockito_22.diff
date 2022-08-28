@@ -1,0 +1,33 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_22/defects4j_Mockito_22/defects4j_Mockito_22/src/org/mockito/internal/matchers/Equality.java /tmp/fixed/defects4j_Mockito_22/src/org/mockito/internal/matchers/Equality.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Mockito_22/defects4j_Mockito_22/defects4j_Mockito_22/src/org/mockito/internal/matchers/Equality.java	2021-09-07 09:55:51.671318731 +0800
++++ /tmp/fixed/defects4j_Mockito_22/src/org/mockito/internal/matchers/Equality.java	2021-09-07 09:56:13.620053540 +0800
+@@ -10,7 +10,9 @@
+ public class Equality {
+ 
+     public static boolean areEqual(Object o1, Object o2) {
+-        if (o1 == null || o2 == null) {
++        if (o1 == o2 ) {
++            return true;
++	} else if (o1 == null || o2 == null) {
+             return o1 == null && o2 == null;
+         } else if (isArray(o1)) {
+             return isArray(o2) && areArraysEqual(o1, o2);
+
+
+                
+                ====================== tbar_1 Mockito_22 ================================
+                
+                [PATCH 1136]//**********************************************************
+//org/mockito/MockitoAnnotations.java ------ 103
+//**********************************************************
+===Buggy Code===
+clazz = clazz.getSuperclass();
+
+===Patch Code===
+
+
+
+                

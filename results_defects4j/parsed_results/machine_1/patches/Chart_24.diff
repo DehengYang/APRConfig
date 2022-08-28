@@ -1,0 +1,63 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_24/defects4j_Chart_24/defects4j_Chart_24/source/org/jfree/chart/renderer/GrayPaintScale.java /tmp/fixed/defects4j_Chart_24/source/org/jfree/chart/renderer/GrayPaintScale.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_24/defects4j_Chart_24/defects4j_Chart_24/source/org/jfree/chart/renderer/GrayPaintScale.java	2021-08-26 17:32:13.803797559 +0800
++++ /tmp/fixed/defects4j_Chart_24/source/org/jfree/chart/renderer/GrayPaintScale.java	2021-08-26 17:32:30.420484482 +0800
+@@ -123,7 +123,7 @@
+     public Paint getPaint(double value) {
+         double v = Math.max(value, this.lowerBound);
+         v = Math.min(v, this.upperBound);
+-        int g = (int) ((value - this.lowerBound) / (this.upperBound 
++        int g = (int) ((v - this.lowerBound) / (this.upperBound 
+                 - this.lowerBound) * 255.0);
+         return new Color(g, g, g);
+     }
+
+
+                
+                ====================== tbar_1 Chart_24 ================================
+                
+                [PATCH 43]//**********************************************************
+//org/jfree/chart/renderer/GrayPaintScale.java ------ 126
+//**********************************************************
+===Buggy Code===
+int g = (int) ((value - this.lowerBound) / (this.upperBound 
+                - this.lowerBound) * 255.0);
+
+===Patch Code===
+int g = (int) ((v - this.lowerBound) / (this.upperBound 
+                - this.lowerBound) * 255.0);
+
+
+                
+                ====================== tbar_2 Chart_24 ================================
+                
+                [PATCH 43]//**********************************************************
+//org/jfree/chart/renderer/GrayPaintScale.java ------ 126
+//**********************************************************
+===Buggy Code===
+int g = (int) ((value - this.lowerBound) / (this.upperBound 
+                - this.lowerBound) * 255.0);
+
+===Patch Code===
+int g = (int) ((v - this.lowerBound) / (this.upperBound 
+                - this.lowerBound) * 255.0);
+
+
+                
+                ====================== tbar_3 Chart_24 ================================
+                
+                [PATCH 43]//**********************************************************
+//org/jfree/chart/renderer/GrayPaintScale.java ------ 126
+//**********************************************************
+===Buggy Code===
+int g = (int) ((value - this.lowerBound) / (this.upperBound 
+                - this.lowerBound) * 255.0);
+
+===Patch Code===
+int g = (int) ((v - this.lowerBound) / (this.upperBound 
+                - this.lowerBound) * 255.0);
+
+
+                

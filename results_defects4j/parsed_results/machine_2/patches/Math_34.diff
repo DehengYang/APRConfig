@@ -1,0 +1,56 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_34/defects4j_Math_34/defects4j_Math_34/src/main/java/org/apache/commons/math3/genetics/ListPopulation.java /tmp/fixed/defects4j_Math_34/src/main/java/org/apache/commons/math3/genetics/ListPopulation.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_34/defects4j_Math_34/defects4j_Math_34/src/main/java/org/apache/commons/math3/genetics/ListPopulation.java	2021-09-01 21:54:00.482768968 +0800
++++ /tmp/fixed/defects4j_Math_34/src/main/java/org/apache/commons/math3/genetics/ListPopulation.java	2021-09-01 21:54:16.635347910 +0800
+@@ -206,6 +206,6 @@
+      * @return chromosome iterator
+      */
+     public Iterator<Chromosome> iterator() {
+-        return chromosomes.iterator();
++        return getChromosomes().iterator();
+     }
+ }
+
+
+                
+                ====================== tbar_1 Math_34 ================================
+                
+                [PATCH 1]//**********************************************************
+//org/apache/commons/math3/genetics/ListPopulation.java ------ 209
+//**********************************************************
+===Buggy Code===
+return chromosomes.iterator();
+
+===Patch Code===
+return getChromosomes().iterator();
+
+
+                
+                ====================== tbar_2 Math_34 ================================
+                
+                [PATCH 1]//**********************************************************
+//org/apache/commons/math3/genetics/ListPopulation.java ------ 209
+//**********************************************************
+===Buggy Code===
+return chromosomes.iterator();
+
+===Patch Code===
+return getChromosomes().iterator();
+
+
+                
+                ====================== tbar_3 Math_34 ================================
+                
+                [PATCH 1]//**********************************************************
+//org/apache/commons/math3/genetics/ListPopulation.java ------ 209
+//**********************************************************
+===Buggy Code===
+return chromosomes.iterator();
+
+===Patch Code===
+return getChromosomes().iterator();
+
+
+                

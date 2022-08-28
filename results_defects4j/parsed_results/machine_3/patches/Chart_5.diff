@@ -1,0 +1,82 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_5/defects4j_Chart_5/defects4j_Chart_5/source/org/jfree/data/xy/XYSeries.java /tmp/fixed/defects4j_Chart_5/source/org/jfree/data/xy/XYSeries.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Chart_5/defects4j_Chart_5/defects4j_Chart_5/source/org/jfree/data/xy/XYSeries.java	2021-09-07 11:18:25.659494989 +0800
++++ /tmp/fixed/defects4j_Chart_5/source/org/jfree/data/xy/XYSeries.java	2021-09-07 11:18:44.647982424 +0800
+@@ -541,11 +541,15 @@
+         if (x == null) {
+             throw new IllegalArgumentException("Null 'x' argument.");
+         }
++        if (this.allowDuplicateXValues) {
++            add(x, y);
++            return null;
++        }
+ 
+         // if we get to here, we know that duplicate X values are not permitted
+         XYDataItem overwritten = null;
+         int index = indexOf(x);
+-        if (index >= 0 && !this.allowDuplicateXValues) {
++        if (index >= 0) {
+             XYDataItem existing = (XYDataItem) this.data.get(index);
+             try {
+                 overwritten = (XYDataItem) existing.clone();
+
+
+                
+                ====================== dynamoth_2 Chart_5 ================================
+                
+                --- a/source/org/jfree/data/xy/XYSeries.java
++++ b/source/org/jfree/data/xy/XYSeries.java
+@@ -562,3 +562,3 @@
+// append the value to the list...
+-            if (this.autoSort) {
++            if (false) {
+this.data.add(-index - 1, new XYDataItem(x, y));
+
+
+
+
+                
+                ====================== dynamoth_3 Chart_5 ================================
+                
+                --- a/source/org/jfree/data/xy/XYSeries.java
++++ b/source/org/jfree/data/xy/XYSeries.java
+@@ -562,3 +562,3 @@
+// append the value to the list...
+-            if (this.autoSort) {
++            if (false) {
+this.data.add(-index - 1, new XYDataItem(x, y));
+
+
+
+
+                
+                ====================== nopol_2 Chart_5 ================================
+                
+                --- a/source/org/jfree/data/xy/XYSeries.java
++++ b/source/org/jfree/data/xy/XYSeries.java
+@@ -562,3 +562,3 @@
+// append the value to the list...
+-            if (this.autoSort) {
++            if (overwritten!=null) {
+this.data.add(-index - 1, new XYDataItem(x, y));
+
+
+
+
+                
+                ====================== nopol_3 Chart_5 ================================
+                
+                --- a/source/org/jfree/data/xy/XYSeries.java
++++ b/source/org/jfree/data/xy/XYSeries.java
+@@ -562,3 +562,3 @@
+// append the value to the list...
+-            if (this.autoSort) {
++            if (overwritten!=null) {
+this.data.add(-index - 1, new XYDataItem(x, y));
+
+
+
+
+                

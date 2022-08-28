@@ -1,0 +1,116 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_33/defects4j_Math_33/defects4j_Math_33/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java /tmp/fixed/defects4j_Math_33/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_33/defects4j_Math_33/defects4j_Math_33/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java	2021-09-06 11:05:16.231269655 +0800
++++ /tmp/fixed/defects4j_Math_33/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java	2021-09-06 11:05:36.399786532 +0800
+@@ -335,7 +335,7 @@
+         // positive cost non-artificial variables
+         for (int i = getNumObjectiveFunctions(); i < getArtificialVariableOffset(); i++) {
+             final double entry = tableau.getEntry(0, i);
+-            if (Precision.compareTo(entry, 0d, maxUlps) > 0) {
++            if (Precision.compareTo(entry, 0d, epsilon) > 0) {
+                 columnsToDrop.add(i);
+             }
+         }
+
+
+                
+                ====================== dynamoth_2 Math_33 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java
++++ b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java
+@@ -338,3 +338,5 @@
+if (Precision.compareTo(entry, 0d, maxUlps) > 0) {
+-                columnsToDrop.add(i);
++                if (this.restrictToNonNegative == this.isOptimal()) {
++                    columnsToDrop.add(i);
++                }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 Math_33 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java
++++ b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java
+@@ -338,3 +338,5 @@
+if (Precision.compareTo(entry, 0d, maxUlps) > 0) {
+-                columnsToDrop.add(i);
++                if (this.restrictToNonNegative == this.isOptimal()) {
++                    columnsToDrop.add(i);
++                }
+}
+
+
+
+
+                
+                ====================== nopol_2 Math_33 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java
++++ b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java
+@@ -338,3 +338,5 @@
+if (Precision.compareTo(entry, 0d, maxUlps) > 0) {
+-                columnsToDrop.add(i);
++                if ((2) != (org.apache.commons.math3.optimization.linear.SimplexTableau.this.numArtificialVariables)) {
++                    columnsToDrop.add(i);
++                }
+}
+
+
+
+
+                
+                ====================== nopol_3 Math_33 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java
++++ b/src/main/java/org/apache/commons/math3/optimization/linear/SimplexTableau.java
+@@ -338,3 +338,5 @@
+if (Precision.compareTo(entry, 0d, maxUlps) > 0) {
+-                columnsToDrop.add(i);
++                if ((2) != (org.apache.commons.math3.optimization.linear.SimplexTableau.this.numArtificialVariables)) {
++                    columnsToDrop.add(i);
++                }
+}
+
+
+
+
+                
+                ====================== tbar_1 Math_33 ================================
+                
+                [PATCH 993]//**********************************************************
+//org/apache/commons/math3/optimization/linear/SimplexTableau.java ------ 338
+//**********************************************************
+===Buggy Code===
+if (Precision.compareTo(entry, 0d, maxUlps) > 0) {
+                columnsToDrop.add(i);
+            }
+
+===Patch Code===
+if (entry > this.epsilon && (Precision.compareTo(entry, 0d, maxUlps) > 0)) {
+                columnsToDrop.add(i);
+            }
+
+
+                
+                ====================== tbar_2 Math_33 ================================
+                
+                [PATCH 993]//**********************************************************
+//org/apache/commons/math3/optimization/linear/SimplexTableau.java ------ 338
+//**********************************************************
+===Buggy Code===
+if (Precision.compareTo(entry, 0d, maxUlps) > 0) {
+                columnsToDrop.add(i);
+            }
+
+===Patch Code===
+if (entry > this.epsilon && (Precision.compareTo(entry, 0d, maxUlps) > 0)) {
+                columnsToDrop.add(i);
+            }
+
+
+                

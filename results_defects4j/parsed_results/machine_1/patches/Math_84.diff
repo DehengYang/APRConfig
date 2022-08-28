@@ -1,0 +1,80 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_84/defects4j_Math_84/defects4j_Math_84/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java /tmp/fixed/defects4j_Math_84/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_84/defects4j_Math_84/defects4j_Math_84/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java	2021-09-06 09:48:59.151921303 +0800
++++ /tmp/fixed/defects4j_Math_84/src/main/java/org/apache/commons/math/optimization/direct/MultiDirectional.java	2021-09-06 09:49:17.196529478 +0800
+@@ -61,6 +61,7 @@
+     protected void iterateSimplex(final Comparator<RealPointValuePair> comparator)
+         throws FunctionEvaluationException, OptimizationException, IllegalArgumentException {
+ 
++        final RealConvergenceChecker checker = getConvergenceChecker();
+         while (true) {
+ 
+             incrementIterationsCounter();
+@@ -89,8 +90,16 @@
+             final RealPointValuePair contracted = evaluateNewSimplex(original, gamma, comparator);
+             if (comparator.compare(contracted, best) < 0) {
+                 // accept the contracted simplex
++                return;
++            }
+ 
+             // check convergence
++            final int iter = getIterations();
++            boolean converged = true;
++            for (int i = 0; i < simplex.length; ++i) {
++                converged &= checker.converged(iter, original[i], simplex[i]);
++            }
++            if (converged) {
+                 return;
+             }
+ 
+
+
+                
+                ====================== tbar_1 Math_84 ================================
+                
+                [PATCH 112]//**********************************************************
+//org/apache/commons/math/optimization/direct/MultiDirectional.java ------ 90
+//**********************************************************
+===Buggy Code===
+if (comparator.compare(contracted, best) < 0) {
+                // accept the contracted simplex
+
+            // check convergence
+                return;
+            }
+
+===Patch Code===
+if (comparator.compare(contracted, best)==0) {
+                // accept the contracted simplex
+
+            // check convergence
+                return;
+            }
+
+
+                
+                ====================== tbar_2 Math_84 ================================
+                
+                [PATCH 112]//**********************************************************
+//org/apache/commons/math/optimization/direct/MultiDirectional.java ------ 90
+//**********************************************************
+===Buggy Code===
+if (comparator.compare(contracted, best) < 0) {
+                // accept the contracted simplex
+
+            // check convergence
+                return;
+            }
+
+===Patch Code===
+if (comparator.compare(contracted, best)==0) {
+                // accept the contracted simplex
+
+            // check convergence
+                return;
+            }
+
+
+                

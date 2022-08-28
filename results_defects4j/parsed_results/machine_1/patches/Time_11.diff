@@ -1,0 +1,85 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_11/defects4j_Time_11/defects4j_Time_11/src/main/java/org/joda/time/tz/ZoneInfoCompiler.java /tmp/fixed/defects4j_Time_11/src/main/java/org/joda/time/tz/ZoneInfoCompiler.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_11/defects4j_Time_11/defects4j_Time_11/src/main/java/org/joda/time/tz/ZoneInfoCompiler.java	2021-08-27 13:38:22.921200041 +0800
++++ /tmp/fixed/defects4j_Time_11/src/main/java/org/joda/time/tz/ZoneInfoCompiler.java	2021-08-27 13:38:47.874228167 +0800
+@@ -65,10 +65,11 @@
+ 
+     static Chronology cLenientISO;
+ 
+-    static ThreadLocal<Boolean> cVerbose = new ThreadLocal<Boolean>();
+-    static {
+-        cVerbose.set(Boolean.FALSE);
+-    }
++    static ThreadLocal<Boolean> cVerbose = new ThreadLocal<Boolean>() {
++        protected Boolean initialValue() {
++            return Boolean.FALSE;
++        }
++    };
+ 
+     /**
+      * Gets a flag indicating that verbose logging is required.
+
+
+                
+                ====================== dynamoth_1 Time_11 ================================
+                
+                --- a/src/main/java/org/joda/time/tz/DateTimeZoneBuilder.java
++++ b/src/main/java/org/joda/time/tz/DateTimeZoneBuilder.java
+@@ -1459,5 +1459,7 @@
+.equals(tailZone.iEndRecurrence.getNameKey())) {
+-                    if (ZoneInfoCompiler.verbose()) {
+-                        System.out.println("Fixing duplicate recurrent name key - " +
+-                                           tailZone.iStartRecurrence.getNameKey());
++                    if (false) {
++                        if (ZoneInfoCompiler.verbose()) {
++                            System.out.println("Fixing duplicate recurrent name key - " +
++                            tailZone.iStartRecurrence.getNameKey());
++                        }
+}
+
+
+
+
+                
+                ====================== nopol_1 Time_11 ================================
+                
+                --- a/src/main/java/org/joda/time/tz/DateTimeZoneBuilder.java
++++ b/src/main/java/org/joda/time/tz/DateTimeZoneBuilder.java
+@@ -1457,7 +1457,6 @@
+if (tailZone != null) {
+-                if (tailZone.iStartRecurrence.getNameKey()
+-                    .equals(tailZone.iEndRecurrence.getNameKey())) {
++                if (transitions.isEmpty()) {
+if (ZoneInfoCompiler.verbose()) {
+System.out.println("Fixing duplicate recurrent name key - " +
+-                                           tailZone.iStartRecurrence.getNameKey());
++                        tailZone.iStartRecurrence.getNameKey());
+}
+@@ -1465,12 +1464,12 @@
+tailZone = new DSTZone(
+-                            tailZone.getID(),
+-                            tailZone.iStandardOffset,
+-                            tailZone.iStartRecurrence.renameAppend("-Summer"),
+-                            tailZone.iEndRecurrence);
++                        tailZone.getID(),
++                        tailZone.iStandardOffset,
++                        tailZone.iStartRecurrence.renameAppend("-Summer"),
++                        tailZone.iEndRecurrence);
+} else {
+tailZone = new DSTZone(
+-                            tailZone.getID(),
+-                            tailZone.iStandardOffset,
+-                            tailZone.iStartRecurrence,
+-                            tailZone.iEndRecurrence.renameAppend("-Summer"));
++                        tailZone.getID(),
++                        tailZone.iStandardOffset,
++                        tailZone.iStartRecurrence,
++                        tailZone.iEndRecurrence.renameAppend("-Summer"));
+}
+
+
+
+
+                

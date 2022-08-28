@@ -1,0 +1,96 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_55/defects4j_Lang_55/defects4j_Lang_55/src/java/org/apache/commons/lang/time/StopWatch.java /tmp/fixed/defects4j_Lang_55/src/java/org/apache/commons/lang/time/StopWatch.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_55/defects4j_Lang_55/defects4j_Lang_55/src/java/org/apache/commons/lang/time/StopWatch.java	2021-09-05 13:30:16.834657415 +0800
++++ /tmp/fixed/defects4j_Lang_55/src/java/org/apache/commons/lang/time/StopWatch.java	2021-09-05 13:30:33.755095012 +0800
+@@ -115,7 +115,9 @@
+         if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {
+             throw new IllegalStateException("Stopwatch is not running. ");
+         }
++        if(this.runningState == STATE_RUNNING) {
+             stopTime = System.currentTimeMillis();
++        }
+         this.runningState = STATE_STOPPED;
+     }
+ 
+
+
+                
+                ====================== dynamoth_2 Lang_55 ================================
+                
+                --- a/src/java/org/apache/commons/lang/time/StopWatch.java
++++ b/src/java/org/apache/commons/lang/time/StopWatch.java
+@@ -117,3 +117,5 @@
+}
+-            stopTime = System.currentTimeMillis();
++            if (this.runningState == 1) {
++                stopTime = System.currentTimeMillis();
++            }
+this.runningState = STATE_STOPPED;
+
+
+
+
+                
+                ====================== dynamoth_3 Lang_55 ================================
+                
+                --- a/src/java/org/apache/commons/lang/time/StopWatch.java
++++ b/src/java/org/apache/commons/lang/time/StopWatch.java
+@@ -117,3 +117,5 @@
+}
+-            stopTime = System.currentTimeMillis();
++            if (this.runningState == 1) {
++                stopTime = System.currentTimeMillis();
++            }
+this.runningState = STATE_STOPPED;
+
+
+
+
+                
+                ====================== nopol_2 Lang_55 ================================
+                
+                --- a/src/java/org/apache/commons/lang/time/StopWatch.java
++++ b/src/java/org/apache/commons/lang/time/StopWatch.java
+@@ -117,3 +117,5 @@
+}
+-            stopTime = System.currentTimeMillis();
++            if (org.apache.commons.lang.time.StopWatch.this.stopTime < 10) {
++                stopTime = System.currentTimeMillis();
++            }
+this.runningState = STATE_STOPPED;
+
+
+
+
+                
+                ====================== nopol_3 Lang_55 ================================
+                
+                --- a/src/java/org/apache/commons/lang/time/StopWatch.java
++++ b/src/java/org/apache/commons/lang/time/StopWatch.java
+@@ -117,3 +117,5 @@
+}
+-            stopTime = System.currentTimeMillis();
++            if (org.apache.commons.lang.time.StopWatch.this.stopTime < 10) {
++                stopTime = System.currentTimeMillis();
++            }
+this.runningState = STATE_STOPPED;
+
+
+
+
+                
+                ====================== tbar_2 Lang_55 ================================
+                
+                [PATCH 827]//**********************************************************
+//org/apache/commons/lang/time/StopWatch.java ------ 118
+//**********************************************************
+===Buggy Code===
+stopTime = System.currentTimeMillis();
+
+===Patch Code===
+stopTime &= System.currentTimeMillis();
+
+
+                

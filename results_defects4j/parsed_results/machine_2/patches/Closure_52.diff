@@ -1,0 +1,39 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_52/defects4j_Closure_52/defects4j_Closure_52/src/com/google/javascript/jscomp/CodeGenerator.java /tmp/fixed/defects4j_Closure_52/src/com/google/javascript/jscomp/CodeGenerator.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Closure_52/defects4j_Closure_52/defects4j_Closure_52/src/com/google/javascript/jscomp/CodeGenerator.java	2021-09-05 11:51:25.249587498 +0800
++++ /tmp/fixed/defects4j_Closure_52/src/com/google/javascript/jscomp/CodeGenerator.java	2021-09-05 11:52:01.410823801 +0800
+@@ -742,7 +742,7 @@
+         return false;
+       }
+     }
+-    return len > 0;
++    return len > 0 && s.charAt(0) != '0';
+   }
+ 
+   static double getSimpleNumber(String s) {
+
+
+                
+                ====================== tbar_2 Closure_52 ================================
+                
+                [PATCH 81]//**********************************************************
+//com/google/javascript/rhino/Node.java ------ 1567
+//**********************************************************
+===Buggy Code===
+return "Node tree inequality:" +
+            "\nTree1:\n" + toStringTree() +
+            "\n\nTree2:\n" + node2.toStringTree() +
+            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+            "\n\nSubtree2: " + diff.nodeB.toStringTree();
+
+===Patch Code===
+return "Node tree inequality:" +
+            "\nTree1:\n" + toStringTree() +
+            "\n\nTree2:\n" + node2.getJsDocBuilderForNode() +
+            "\n\nSubtree1: " + diff.nodeA.toStringTree() +
+            "\n\nSubtree2: " + diff.nodeB.toStringTree();
+
+
+                

@@ -1,0 +1,72 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_21/defects4j_Time_21/defects4j_Time_21/src/main/java/org/joda/time/tz/DefaultNameProvider.java /tmp/fixed/defects4j_Time_21/src/main/java/org/joda/time/tz/DefaultNameProvider.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_21/defects4j_Time_21/defects4j_Time_21/src/main/java/org/joda/time/tz/DefaultNameProvider.java	2021-09-02 14:03:18.117159154 +0800
++++ /tmp/fixed/defects4j_Time_21/src/main/java/org/joda/time/tz/DefaultNameProvider.java	2021-09-02 14:03:39.685931039 +0800
+@@ -63,22 +63,32 @@
+         if (byNameKeyCache == null) {
+             byIdCache.put(id, byNameKeyCache = createCache());
+             
++            String[][] zoneStringsEn = DateTimeUtils.getDateFormatSymbols(Locale.ENGLISH).getZoneStrings();
++            String[] setEn = null;
++            for (String[] strings : zoneStringsEn) {
++              if (strings != null && strings.length == 5 && id.equals(strings[0])) {
++                setEn = strings;
++                break;
++              }
++            }
+             String[][] zoneStringsLoc = DateTimeUtils.getDateFormatSymbols(locale).getZoneStrings();
+             String[] setLoc = null;
+             for (String[] strings : zoneStringsLoc) {
+               if (strings != null && strings.length == 5 && id.equals(strings[0])) {
+                 setLoc = strings;
++                break;
++              }
++            }
+             
+-              byNameKeyCache.put(setLoc[2], new String[] {setLoc[2], setLoc[1]});
++            if (setEn != null && setLoc != null) {
++              byNameKeyCache.put(setEn[2], new String[] {setLoc[2], setLoc[1]});
+               // need to handle case where summer and winter have the same
+               // abbreviation, such as EST in Australia [1716305]
+               // we handle this by appending "-Summer", cf ZoneInfoCompiler
+-              if (setLoc[2].equals(setLoc[4])) {
+-                  byNameKeyCache.put(setLoc[4] + "-Summer", new String[] {setLoc[4], setLoc[3]});
++              if (setEn[2].equals(setEn[4])) {
++                  byNameKeyCache.put(setEn[4] + "-Summer", new String[] {setLoc[4], setLoc[3]});
+               } else {
+-                  byNameKeyCache.put(setLoc[4], new String[] {setLoc[4], setLoc[3]});
+-              }
+-                break;
++                  byNameKeyCache.put(setEn[4], new String[] {setLoc[4], setLoc[3]});
+               }
+             }
+         }
+
+
+                
+                ====================== simfix_1 Time_21 ================================
+                
+                [PATCH 4748] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_21/defects4j_Time_21/defects4j_Time_21/src/main/java//org/joda/time/format/FormatUtils.java, range: <63,65>, original: for(;size>1;size--){
+buf.append('0');
+}
+, patch: for(;size>1;size--){
+size++;
+buf.append('0');
+}
+
+
+                
+                ====================== simfix_2 Time_21 ================================
+                
+                [PATCH 4748] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Time_21/defects4j_Time_21/defects4j_Time_21/src/main/java//org/joda/time/format/FormatUtils.java, range: <63,65>, original: for(;size>1;size--){
+buf.append('0');
+}
+, patch: for(;size>1;size--){
+size++;
+buf.append('0');
+}
+
+
+                

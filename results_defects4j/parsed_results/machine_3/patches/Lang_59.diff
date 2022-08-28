@@ -1,0 +1,80 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_59/defects4j_Lang_59/defects4j_Lang_59/src/java/org/apache/commons/lang/text/StrBuilder.java /tmp/fixed/defects4j_Lang_59/src/java/org/apache/commons/lang/text/StrBuilder.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_59/defects4j_Lang_59/defects4j_Lang_59/src/java/org/apache/commons/lang/text/StrBuilder.java	2021-09-02 05:00:40.374960662 +0800
++++ /tmp/fixed/defects4j_Lang_59/src/java/org/apache/commons/lang/text/StrBuilder.java	2021-09-02 05:00:55.528609507 +0800
+@@ -881,7 +881,7 @@
+             String str = (obj == null ? getNullText() : obj.toString());
+             int strLen = str.length();
+             if (strLen >= width) {
+-                str.getChars(0, strLen, buffer, size);
++                str.getChars(0, width, buffer, size);
+             } else {
+                 int padLen = width - strLen;
+                 str.getChars(0, strLen, buffer, size);
+
+
+                
+                ====================== simfix_1 Lang_59 ================================
+                
+                [PATCH 3790] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_59/defects4j_Lang_59/defects4j_Lang_59/src/java//org/apache/commons/lang/text/StrBuilder.java, range: <228,232>, original: if(capacity>buffer.length){
+char[] old=buffer;
+buffer=new char[capacity];
+System.arraycopy(old,0,buffer,0,size);
+}
+, patch: if(capacity>buffer.length){
+char[] old=buffer;
+buffer=new char[capacity];
+ensureCapacity(capacity+CAPACITY);
+System.arraycopy(old,0,buffer,0,CAPACITY);
+}
+
+
+                
+                ====================== simfix_2 Lang_59 ================================
+                
+                [PATCH 149] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_59/defects4j_Lang_59/defects4j_Lang_59/src/java//org/apache/commons/lang/LocaleUtils.java, range: <274,282>, original: for(int i=0;i<locales.size();i++){
+Locale locale=(Locale)locales.get(i);
+if(languageCode.equals(locale.getLanguage())&&locale.getCountry().length()!=0&&locale.getVariant().length()==0){
+countries.add(locale);
+}
+}
+countries=Collections.unmodifiableList(countries);
+, patch: countries=new ArrayList();
+for(int i=0;i<locales.size();i++){
+Locale locale=(Locale)locales.get(i);
+if(languageCode.equals(locale.getLanguage())&&locale.getCountry().length()!=0&&locale.getVariant().length()==0){
+countries.add(locale);
+}
+}
+countries=Collections.unmodifiableList(countries);
+
+
+                
+                ====================== tbar_1 Lang_59 ================================
+                
+                [PATCH 599]//**********************************************************
+//org/apache/commons/lang/text/StrBuilder.java ------ 884
+//**********************************************************
+===Buggy Code===
+str.getChars(0, strLen, buffer, size);
+
+===Patch Code===
+str.getChars(0, width, buffer, size);
+
+
+                
+                ====================== tbar_2 Lang_59 ================================
+                
+                [PATCH 599]//**********************************************************
+//org/apache/commons/lang/text/StrBuilder.java ------ 884
+//**********************************************************
+===Buggy Code===
+str.getChars(0, strLen, buffer, size);
+
+===Patch Code===
+str.getChars(0, width, buffer, size);
+
+
+                

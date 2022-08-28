@@ -1,0 +1,85 @@
+
+                ====================== human-written patch ================================
+                
+                --- /mnt/data/bias_validation_2021/datasets/QuixBugs/java_programs/DETECT_CYCLE.java	2020-05-12 16:47:29.374530000 +0800
++++ /mnt/data/bias_validation_2021/datasets/QuixBugs/correct_java_programs/DETECT_CYCLE.java	2020-05-12 16:47:29.486535000 +0800
+@@ -1,10 +1,12 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ /*
+  * To change this template, choose Tools | Templates
+  * and open the template in the editor.
+  */
+ 
++import java_programs.Node;
++
+ /**
+  *
+  * @author derricklin
+@@ -15,7 +17,7 @@
+         Node tortoise = node;
+ 
+         while (true) {
+-            if (hare.getSuccessor() == null)
++            if (null==hare ||hare.getSuccessor() == null)
+                 return false;
+ 
+             tortoise = tortoise.getSuccessor();
+
+
+                
+                ====================== tbar_1 DETECT_CYCLE_ ================================
+                
+                [PATCH 52]//**********************************************************
+//DETECT_CYCLE.java ------ 24
+//**********************************************************
+===Buggy Code===
+if (hare == tortoise)
+                return true;
+
+===Patch Code===
+if (hare == null) {
+	    return false;
+	}
+if (hare == tortoise)
+                return true;
+
+
+                
+                ====================== tbar_2 DETECT_CYCLE_ ================================
+                
+                [PATCH 52]//**********************************************************
+//DETECT_CYCLE.java ------ 24
+//**********************************************************
+===Buggy Code===
+if (hare == tortoise)
+                return true;
+
+===Patch Code===
+if (hare == null) {
+	    return false;
+	}
+if (hare == tortoise)
+                return true;
+
+
+                
+                ====================== tbar_3 DETECT_CYCLE_ ================================
+                
+                [PATCH 52]//**********************************************************
+//DETECT_CYCLE.java ------ 24
+//**********************************************************
+===Buggy Code===
+if (hare == tortoise)
+                return true;
+
+===Patch Code===
+if (hare == null) {
+	    return false;
+	}
+if (hare == tortoise)
+                return true;
+
+
+                

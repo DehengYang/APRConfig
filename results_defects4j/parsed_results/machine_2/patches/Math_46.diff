@@ -1,0 +1,43 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_46/defects4j_Math_46/defects4j_Math_46/src/main/java/org/apache/commons/math/complex/Complex.java /tmp/fixed/defects4j_Math_46/src/main/java/org/apache/commons/math/complex/Complex.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_46/defects4j_Math_46/defects4j_Math_46/src/main/java/org/apache/commons/math/complex/Complex.java	2021-09-01 11:55:50.520297936 +0800
++++ /tmp/fixed/defects4j_Math_46/src/main/java/org/apache/commons/math/complex/Complex.java	2021-09-01 11:56:06.176857617 +0800
+@@ -257,7 +257,7 @@
+ 
+         if (divisor.isZero) {
+             // return isZero ? NaN : INF; // See MATH-657
+-            return isZero ? NaN : INF;
++            return NaN;
+         }
+ 
+         if (divisor.isInfinite() && !isInfinite()) {
+@@ -294,7 +294,7 @@
+         }
+         if (divisor == 0d) {
+             // return isZero ? NaN : INF; // See MATH-657
+-            return isZero ? NaN : INF;
++            return NaN;
+         }
+         if (Double.isInfinite(divisor)) {
+             return !isInfinite() ? ZERO : NaN;
+
+
+                
+                ====================== dynamoth_1 Math_46 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/complex/Complex.java
++++ b/src/main/java/org/apache/commons/math/complex/Complex.java
+@@ -259,3 +259,5 @@
+// return isZero ? NaN : INF; // See MATH-657
+-            return isZero ? NaN : INF;
++            if (this.imaginary == this.real) {
++                return isZero ? NaN : INF;
++            }
+}
+
+
+
+
+                

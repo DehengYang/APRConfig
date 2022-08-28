@@ -1,0 +1,55 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_28/defects4j_Lang_28/defects4j_Lang_28/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java /tmp/fixed/defects4j_Lang_28/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_28/defects4j_Lang_28/defects4j_Lang_28/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java	2021-09-03 00:37:47.273735607 +0800
++++ /tmp/fixed/defects4j_Lang_28/src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java	2021-09-03 00:38:02.370277323 +0800
+@@ -60,7 +60,13 @@
+                 return 0;
+             }
+ 
++            if(entityValue > 0xFFFF) {
++                char[] chrs = Character.toChars(entityValue);
++                out.write(chrs[0]);
++                out.write(chrs[1]);
++            } else {
+                 out.write(entityValue);
++            }
+             return 2 + (end - start) + (isHex ? 1 : 0) + 1;
+         }
+         return 0;
+
+
+                
+                ====================== simfix_1 Lang_28 ================================
+                
+                [PATCH 411] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_28/defects4j_Lang_28/defects4j_Lang_28/src/main/java//org/apache/commons/lang3/text/translate/CharSequenceTranslator.java, range: <94,99>, original: if(i<sz-2){
+i+=Character.charCount(Character.codePointAt(input,i));
+}else {
+i++;
+}
+, patch: i--;
+if(i<sz-2){
+i+=Character.charCount(Character.codePointAt(input,i));
+}else {
+i++;
+}
+
+
+                
+                ====================== simfix_2 Lang_28 ================================
+                
+                [PATCH 412] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_28/defects4j_Lang_28/defects4j_Lang_28/src/main/java//org/apache/commons/lang3/text/translate/CharSequenceTranslator.java, range: <94,99>, original: if(i<sz-2){
+i+=Character.charCount(Character.codePointAt(input,i));
+}else {
+i++;
+}
+, patch: i--;
+if(sz<sz-2){
+i+=Character.charCount(Character.codePointAt(input,i));
+}else {
+i++;
+}
+
+
+                

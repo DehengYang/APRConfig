@@ -1,0 +1,44 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_40/defects4j_Math_40/defects4j_Math_40/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java /tmp/fixed/defects4j_Math_40/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_40/defects4j_Math_40/defects4j_Math_40/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java	2021-09-01 14:39:41.168653541 +0800
++++ /tmp/fixed/defects4j_Math_40/src/main/java/org/apache/commons/math/analysis/solvers/BracketingNthOrderBrentSolver.java	2021-09-01 14:39:57.185228722 +0800
+@@ -232,10 +232,16 @@
+             double targetY;
+             if (agingA >= MAXIMAL_AGING) {
+                 // we keep updating the high bracket, try to compensate this
+-                targetY = -REDUCTION_FACTOR * yB;
++                final int p = agingA - MAXIMAL_AGING;
++                final double weightA = (1 << p) - 1;
++                final double weightB = p + 1;
++                targetY = (weightA * yA - weightB * REDUCTION_FACTOR * yB) / (weightA + weightB);
+             } else if (agingB >= MAXIMAL_AGING) {
+                 // we keep updating the low bracket, try to compensate this
+-                targetY = -REDUCTION_FACTOR * yA;
++                final int p = agingB - MAXIMAL_AGING;
++                final double weightA = p + 1;
++                final double weightB = (1 << p) - 1;
++                targetY = (weightB * yB - weightA * REDUCTION_FACTOR * yA) / (weightA + weightB);
+             } else {
+                 // bracketing is balanced, try to find the root itself
+                 targetY = 0;
+
+
+                
+                ====================== dynamoth_1 Math_40 ================================
+                
+                --- a/src/main/java/org/apache/commons/math/analysis/solvers/BaseAbstractUnivariateRealSolver.java
++++ b/src/main/java/org/apache/commons/math/analysis/solvers/BaseAbstractUnivariateRealSolver.java
+@@ -295,3 +295,5 @@
+} catch (MaxCountExceededException e) {
+-            throw new TooManyEvaluationsException(e.getMax());
++            if (this.DEFAULT_RELATIVE_ACCURACY == this.relativeAccuracy) {
++                throw new TooManyEvaluationsException(e.getMax());
++            }
+}
+
+
+
+
+                

@@ -1,0 +1,56 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_2/defects4j_Math_2/defects4j_Math_2/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java /tmp/fixed/defects4j_Math_2/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_2/defects4j_Math_2/defects4j_Math_2/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java	2021-08-28 03:35:04.274152891 +0800
++++ /tmp/fixed/defects4j_Math_2/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java	2021-08-28 03:35:28.363015592 +0800
+@@ -265,7 +265,7 @@
+      * size {@code n}, the mean is {@code n * m / N}.
+      */
+     public double getNumericalMean() {
+-        return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();
++        return getSampleSize() * (getNumberOfSuccesses() / (double) getPopulationSize());
+     }
+ 
+     /**
+
+
+                
+                ====================== dynamoth_1 Math_2 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java
++++ b/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java
+@@ -278,5 +278,7 @@
+public double getNumericalVariance() {
+-        if (!numericalVarianceIsCalculated) {
+-            numericalVariance = calculateNumericalVariance();
+-            numericalVarianceIsCalculated = true;
++        if (this.numberOfSuccesses == this.getSupportUpperBound()) {
++            if (!numericalVarianceIsCalculated) {
++                numericalVariance = calculateNumericalVariance();
++                numericalVarianceIsCalculated = true;
++            }
+}
+
+
+
+
+                
+                ====================== nopol_1 Math_2 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/distribution/AbstractIntegerDistribution.java
++++ b/src/main/java/org/apache/commons/math3/distribution/AbstractIntegerDistribution.java
+@@ -136,4 +136,6 @@
+tmp = mu + k * sigma;
+-            if (tmp < upper) {
+-                upper = ((int) Math.ceil(tmp)) - 1;
++            if (sigma == lower) {
++                if (tmp < upper) {
++                    upper = ((int) Math.ceil(tmp)) - 1;
++                }
+}
+
+
+
+
+                

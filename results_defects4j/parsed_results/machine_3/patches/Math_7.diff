@@ -1,0 +1,98 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_7/defects4j_Math_7/defects4j_Math_7/src/main/java/org/apache/commons/math3/ode/AbstractIntegrator.java /tmp/fixed/defects4j_Math_7/src/main/java/org/apache/commons/math3/ode/AbstractIntegrator.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_7/defects4j_Math_7/defects4j_Math_7/src/main/java/org/apache/commons/math3/ode/AbstractIntegrator.java	2021-09-03 03:07:25.321219217 +0800
++++ /tmp/fixed/defects4j_Math_7/src/main/java/org/apache/commons/math3/ode/AbstractIntegrator.java	2021-09-03 03:07:57.396701848 +0800
+@@ -343,8 +343,10 @@
+                 final double[] eventY = interpolator.getInterpolatedState().clone();
+ 
+                 // advance all event states to current time
+-                currentEvent.stepAccepted(eventT, eventY);
+-                isLastStep = currentEvent.stop();
++                for (final EventState state : eventsStates) {
++                    state.stepAccepted(eventT, eventY);
++                    isLastStep = isLastStep || state.stop();
++                }
+ 
+                 // handle the first part of the step, up to the event
+                 for (final StepHandler handler : stepHandlers) {
+@@ -354,22 +356,19 @@
+                 if (isLastStep) {
+                     // the event asked to stop integration
+                     System.arraycopy(eventY, 0, y, 0, y.length);
+-                    for (final EventState remaining : occuringEvents) {
+-                        remaining.stepAccepted(eventT, eventY);
+-                    }
+                     return eventT;
+                 }
+ 
+-                boolean needReset = currentEvent.reset(eventT, eventY);
++                boolean needReset = false;
++                for (final EventState state : eventsStates) {
++                    needReset =  needReset || state.reset(eventT, eventY);
++                }
+                 if (needReset) {
+                     // some event handler has triggered changes that
+                     // invalidate the derivatives, we need to recompute them
+                     System.arraycopy(eventY, 0, y, 0, y.length);
+                     computeDerivatives(eventT, y, yDot);
+                     resetOccurred = true;
+-                    for (final EventState remaining : occuringEvents) {
+-                        remaining.stepAccepted(eventT, eventY);
+-                    }
+                     return eventT;
+                 }
+ 
+
+
+                
+                ====================== nopol_2 Math_7 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/ode/AbstractIntegrator.java
++++ b/src/main/java/org/apache/commons/math3/ode/AbstractIntegrator.java
+@@ -350,3 +350,5 @@
+for (final StepHandler handler : stepHandlers) {
+-                    handler.handleStep(interpolator, isLastStep);
++                    if (orderingSign == org.apache.commons.math3.ode.AbstractIntegrator.this.stepHandlers.size()) {
++                        handler.handleStep(interpolator, isLastStep);
++                    }
+}
+
+
+
+
+                
+                ====================== nopol_3 Math_7 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/ode/AbstractIntegrator.java
++++ b/src/main/java/org/apache/commons/math3/ode/AbstractIntegrator.java
+@@ -350,3 +350,5 @@
+for (final StepHandler handler : stepHandlers) {
+-                    handler.handleStep(interpolator, isLastStep);
++                    if (orderingSign == org.apache.commons.math3.ode.AbstractIntegrator.this.stepHandlers.size()) {
++                        handler.handleStep(interpolator, isLastStep);
++                    }
+}
+
+
+
+
+                
+                ====================== tbar_1 Math_7 ================================
+                
+                [PATCH 795]//**********************************************************
+//org/apache/commons/math3/ode/AbstractIntegrator.java ------ 127
+//**********************************************************
+===Buggy Code===
+addEventHandler(handler, maxCheckInterval, convergence,
+                        maxIterationCount,
+                        new BracketingNthOrderBrentSolver(convergence, 5));
+
+===Patch Code===
+addEventHandler(handler, this.stepStart, convergence,
+                        maxIterationCount,
+                        new BracketingNthOrderBrentSolver(convergence, 5));
+
+
+                

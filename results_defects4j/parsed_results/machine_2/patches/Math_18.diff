@@ -1,0 +1,76 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_18/defects4j_Math_18/defects4j_Math_18/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java /tmp/fixed/defects4j_Math_18/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Math_18/defects4j_Math_18/defects4j_Math_18/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java	2021-08-25 14:55:03.933489878 +0800
++++ /tmp/fixed/defects4j_Math_18/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java	2021-08-25 14:55:23.810201033 +0800
+@@ -929,7 +929,7 @@
+             double[] res = new double[x.length];
+             for (int i = 0; i < x.length; i++) {
+                 double diff = boundaries[1][i] - boundaries[0][i];
+-                res[i] = (x[i] - boundaries[0][i]) / diff;
++                res[i] = x[i] / diff;
+             }
+             return res;
+         }
+@@ -955,7 +955,7 @@
+             double[] res = new double[x.length];
+             for (int i = 0; i < x.length; i++) {
+                 double diff = boundaries[1][i] - boundaries[0][i];
+-                res[i] = diff * x[i] + boundaries[0][i];
++                res[i] = diff * x[i];
+             }
+             return res;
+         }
+@@ -987,12 +987,14 @@
+                 return true;
+             }
+ 
++            final double[] bLoEnc = encode(boundaries[0]);
++            final double[] bHiEnc = encode(boundaries[1]);
+ 
+             for (int i = 0; i < x.length; i++) {
+-                if (x[i] < 0) {
++                if (x[i] < bLoEnc[i]) {
+                     return false;
+                 }
+-                if (x[i] > 1.0) {
++                if (x[i] > bHiEnc[i]) {
+                     return false;
+                 }
+             }
+
+
+                
+                ====================== dynamoth_1 Math_18 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java
++++ b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java
+@@ -513,3 +513,5 @@
+!Double.isInfinite(uB[i])) {
+-                hasFiniteBounds = true;
++                if (i == this.mu) {
++                    hasFiniteBounds = true;
++                }
+break;
+
+
+
+
+                
+                ====================== nopol_1 Math_18 ================================
+                
+                --- a/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java
++++ b/src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java
+@@ -513,3 +513,5 @@
+!Double.isInfinite(uB[i])) {
+-                hasFiniteBounds = true;
++                if (org.apache.commons.math3.optimization.direct.CMAESOptimizer.this.checkFeasableCount == org.apache.commons.math3.optimization.direct.CMAESOptimizer.this.iterations) {
++                    hasFiniteBounds = true;
++                }
+break;
+
+
+
+
+                

@@ -1,0 +1,68 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_8/defects4j_Lang_8/defects4j_Lang_8/src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java /tmp/fixed/defects4j_Lang_8/src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java
+--- /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_8/defects4j_Lang_8/defects4j_Lang_8/src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java	2021-09-02 21:42:59.133352813 +0800
++++ /tmp/fixed/defects4j_Lang_8/src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java	2021-09-02 21:43:17.758020930 +0800
+@@ -1095,7 +1095,6 @@
+     private static class TimeZoneNameRule implements Rule {
+         private final Locale mLocale;
+         private final int mStyle;
+-        private final TimeZone zone;
+         private final String mStandard;
+         private final String mDaylight;
+ 
+@@ -1109,7 +1108,6 @@
+         TimeZoneNameRule(TimeZone timeZone, Locale locale, int style) {
+             mLocale = locale;
+             mStyle = style;
+-            zone = timeZone;
+             
+             mStandard = getTimeZoneDisplay(timeZone, false, style, locale);
+             mDaylight = getTimeZoneDisplay(timeZone, true, style, locale);
+@@ -1131,6 +1129,7 @@
+          */
+         @Override
+         public void appendTo(StringBuffer buffer, Calendar calendar) {
++            TimeZone zone = calendar.getTimeZone();
+             if (zone.useDaylightTime()
+                     && calendar.get(Calendar.DST_OFFSET) != 0) {
+                 buffer.append(getTimeZoneDisplay(zone, true, mStyle, mLocale));
+
+
+                
+                ====================== simfix_1 Lang_8 ================================
+                
+                [PATCH 2471] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_8/defects4j_Lang_8/defects4j_Lang_8/src/main/java//org/apache/commons/lang3/time/FastDatePrinter.java, range: <335,341>, original: if(!inLiteral&&(c>='A'&&c<='Z'||c>='a'&&c<='z')){
+i--;
+break;
+}else {
+buf.append(c);
+}
+, patch: if(!inLiteral&&(c>='A'&&c<='Z'||c>='a'&&c<='z')){
+i--;
+break;
+}else {
+buf.append(c);
+buf.append(c);
+}
+
+
+                
+                ====================== simfix_2 Lang_8 ================================
+                
+                [PATCH 2475] file: /mnt/data/bias_validation_2021/execution_framework/../results_defects4j/defects4j_Lang_8/defects4j_Lang_8/defects4j_Lang_8/src/main/java//org/apache/commons/lang3/time/FastDatePrinter.java, range: <335,341>, original: if(!inLiteral&&(c>='A'&&c<='Z'||c>='a'&&c<='z')){
+i--;
+break;
+}else {
+buf.append(c);
+}
+, patch: if(!inLiteral&&c!='\''){
+i--;
+break;
+}else {
+buf.append(c);
+}
+
+
+                
