@@ -1,0 +1,115 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_197674087-198523383/bears_INRIA-spoon_197674087-198523383/src/main/java/spoon/support/visitor/java/JavaReflectionTreeBuilder.java /tmp/fixed/bears_INRIA-spoon_197674087-198523383/src/main/java/spoon/support/visitor/java/JavaReflectionTreeBuilder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_197674087-198523383/bears_INRIA-spoon_197674087-198523383/src/main/java/spoon/support/visitor/java/JavaReflectionTreeBuilder.java	2022-04-22 07:35:56.364800928 +0800
++++ /tmp/fixed/bears_INRIA-spoon_197674087-198523383/src/main/java/spoon/support/visitor/java/JavaReflectionTreeBuilder.java	2022-04-22 07:36:31.734380961 +0800
+@@ -245,6 +245,7 @@
+ 		ctMethod.setSimpleName(method.getName());
+ 		ctMethod.setBody(factory.Core().createBlock());
+ 		setModifier(ctMethod, method.getModifiers());
++		ctMethod.setDefaultMethod(method.isDefault());
+ 
+ 		enter(new ExecutableRuntimeBuilderContext(ctMethod));
+ 		super.visitMethod(method);
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_197674087-198523383/bears_INRIA-spoon_197674087-198523383/src/main/java/spoon/support/visitor/java/reflect/RtMethod.java /tmp/fixed/bears_INRIA-spoon_197674087-198523383/src/main/java/spoon/support/visitor/java/reflect/RtMethod.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_197674087-198523383/bears_INRIA-spoon_197674087-198523383/src/main/java/spoon/support/visitor/java/reflect/RtMethod.java	2022-04-22 07:35:56.364800928 +0800
++++ /tmp/fixed/bears_INRIA-spoon_197674087-198523383/src/main/java/spoon/support/visitor/java/reflect/RtMethod.java	2022-04-22 07:36:31.734380961 +0800
+@@ -17,12 +17,15 @@
+ package spoon.support.visitor.java.reflect;
+ 
+ import java.lang.annotation.Annotation;
++import java.lang.reflect.InvocationTargetException;
+ import java.lang.reflect.Method;
+ import java.lang.reflect.TypeVariable;
+ import java.util.ArrayList;
+ import java.util.Arrays;
+ import java.util.List;
+ 
++import spoon.SpoonException;
++
+ public class RtMethod {
+ 	private Class<?> clazz;
+ 	private String name;
+@@ -34,9 +37,10 @@
+ 	private Annotation[] annotations;
+ 	private Annotation[][] parameterAnnotations;
+ 	private boolean isVarArgs;
++	private boolean isDefault;
+ 
+ 	public RtMethod(Class<?> clazz, String name, Class<?> returnType, TypeVariable<Method>[] typeParameters, Class<?>[] parameterTypes, Class<?>[] exceptionTypes, int modifiers, Annotation[] annotations,
+-			Annotation[][] parameterAnnotations, boolean isVarArgs) {
++			Annotation[][] parameterAnnotations, boolean isVarArgs, boolean isDefault) {
+ 		this.clazz = clazz;
+ 		this.name = name;
+ 		this.returnType = returnType;
+@@ -47,6 +51,7 @@
+ 		this.annotations = annotations;
+ 		this.parameterAnnotations = parameterAnnotations;
+ 		this.isVarArgs = isVarArgs;
++		this.isDefault = isDefault;
+ 	}
+ 
+ 	public Class<?> getDeclaringClass() {
+@@ -89,6 +94,10 @@
+ 		return isVarArgs;
+ 	}
+ 
++	public boolean isDefault() {
++		return isDefault;
++	}
++
+ 	@Override
+ 	public boolean equals(Object o) {
+ 		if (this == o) {
+@@ -120,7 +129,34 @@
+ 	public static RtMethod create(Method method) {
+ 		return new RtMethod(method.getDeclaringClass(), method.getName(), method.getReturnType(),
+ 				method.getTypeParameters(), method.getParameterTypes(), method.getExceptionTypes(), method.getModifiers(),
+-				method.getDeclaredAnnotations(), method.getParameterAnnotations(), method.isVarArgs());
++				method.getDeclaredAnnotations(), method.getParameterAnnotations(), method.isVarArgs(),
++				//spoon is compatible with Java 7, so compilation fails here
++				//method.isDefault());
++				_java8_isDefault(method));
++	}
++
++	private static Method _method_isDefault;
++	static {
++		try {
++			_method_isDefault = Method.class.getMethod("isDefault");
++		} catch (NoSuchMethodException | SecurityException e) {
++			//spoon is running with java 7 JDK
++			_method_isDefault = null;
++		}
++	}
++
++	private static boolean _java8_isDefault(Method method) {
++		if (_method_isDefault == null) {
++			//spoon is running with java 7 JDK, all methods are not default, because java 7 does not have default methods
++			return false;
++		}
++		try {
++			return (Boolean) _method_isDefault.invoke(method);
++		} catch (IllegalAccessException | IllegalArgumentException e) {
++			throw new SpoonException("Calling of Java8 Method#isDefault() failed", e);
++		} catch (InvocationTargetException e) {
++			throw new SpoonException("Calling of Java8 Method#isDefault() failed", e.getTargetException());
++		}
+ 	}
+ 
+ 	public static <T> RtMethod[] methodsOf(Class<T> clazz) {
+
+
+                
+                ====================== simfix_2 INRIA-spoon_197674087-198523383 ================================
+                
+                [PATCH 580] file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_197674087-198523383/bears_INRIA-spoon_197674087-198523383/src/main/java//spoon/support/visitor/java/JavaReflectionTreeBuilder.java, range: <167,170>, original: super.visitInterface(clazz);
+exit();
+contexts.peek().addType(ctInterface);
+, patch: System.exit(-1);
+super.visitInterface(clazz);
+exit();
+contexts.peek().addType(ctInterface);
+
+
+                

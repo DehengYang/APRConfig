@@ -1,0 +1,62 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_debezium-debezium_351465554-354212780/bears_debezium-debezium_351465554-354212780/debezium-connector-mysql/src/main/java/io/debezium/connector/mysql/MySqlDdlParser.java /tmp/fixed/bears_debezium-debezium_351465554-354212780/debezium-connector-mysql/src/main/java/io/debezium/connector/mysql/MySqlDdlParser.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_debezium-debezium_351465554-354212780/bears_debezium-debezium_351465554-354212780/debezium-connector-mysql/src/main/java/io/debezium/connector/mysql/MySqlDdlParser.java	2022-04-25 00:13:58.962899904 +0800
++++ /tmp/fixed/bears_debezium-debezium_351465554-354212780/debezium-connector-mysql/src/main/java/io/debezium/connector/mysql/MySqlDdlParser.java	2022-04-25 00:14:29.312093989 +0800
+@@ -622,7 +622,9 @@
+                     tokens.rewind(defnStart);
+                 }
+             }
+-            if (tokens.canConsume("CONSTRAINT", TokenStream.ANY_VALUE, "UNIQUE") || tokens.canConsume("UNIQUE")) {
++            if (tokens.canConsume("CONSTRAINT", TokenStream.ANY_VALUE, "UNIQUE")
++                    || tokens.canConsume("CONSTRAINT", "UNIQUE")
++                    || tokens.canConsume("UNIQUE")) {
+                 tokens.canConsumeAnyOf("KEY", "INDEX");
+                 try {
+                     if (!tokens.matches('(')) {
+
+
+                
+                ====================== tbar_1 debezium-debezium_351465554-354212780 ================================
+                
+                //**********************************************************
+//io/debezium/connector/mysql/MySqlDdlParser.java ------ 815
+//**********************************************************
+===Buggy Code===
+String dataTypeName = parseDomainName(start);
+
+===Patch Code===
+String dataTypeName = parseDomainName(start);
+	parseCreateUnknown(start);
+
+
+                
+                ====================== tbar_2 debezium-debezium_351465554-354212780 ================================
+                
+                //**********************************************************
+//io/debezium/connector/mysql/MySqlDdlParser.java ------ 815
+//**********************************************************
+===Buggy Code===
+String dataTypeName = parseDomainName(start);
+
+===Patch Code===
+String dataTypeName = parseDomainName(start);
+	parseCreateUnknown(start);
+
+
+                
+                ====================== tbar_3 debezium-debezium_351465554-354212780 ================================
+                
+                //**********************************************************
+//io/debezium/connector/mysql/MySqlDdlParser.java ------ 815
+//**********************************************************
+===Buggy Code===
+String dataTypeName = parseDomainName(start);
+
+===Patch Code===
+String dataTypeName = parseDomainName(start);
+	parseCreateUnknown(start);
+
+
+                

@@ -1,0 +1,71 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_192604168-192969999/bears_INRIA-spoon_192604168-192969999/src/main/java/spoon/reflect/visitor/chain/CtQueryImpl.java /tmp/fixed/bears_INRIA-spoon_192604168-192969999/src/main/java/spoon/reflect/visitor/chain/CtQueryImpl.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_192604168-192969999/bears_INRIA-spoon_192604168-192969999/src/main/java/spoon/reflect/visitor/chain/CtQueryImpl.java	2022-05-19 19:08:00.860722289 +0800
++++ /tmp/fixed/bears_INRIA-spoon_192604168-192969999/src/main/java/spoon/reflect/visitor/chain/CtQueryImpl.java	2022-05-19 19:08:37.109875824 +0800
+@@ -279,7 +279,12 @@
+ 		}
+ 
+ 		private boolean isFailOnCCE() {
+-			return getStep().isFailOnCCE();
++			AbstractStep step = getStep();
++			if (step == null) {
++				//it is final consumer. Never throw CCE on final forEach consumer
++				return false;
++			}
++			return step.isFailOnCCE();
+ 		}
+ 
+ 		private AbstractStep getStep() {
+
+
+                
+                ====================== dynamoth_1 INRIA-spoon_192604168-192969999 ================================
+                
+                --- a/src/main/java/spoon/reflect/visitor/chain/CtQueryImpl.java
++++ b/src/main/java/spoon/reflect/visitor/chain/CtQueryImpl.java
+@@ -260,3 +260,5 @@
+} catch (ClassCastException e) {
+-						onClassCastException(this, e, input);
++						if (false) {
++							onClassCastException(this, e, input);
++						}
+}
+
+
+
+
+                
+                ====================== dynamoth_2 INRIA-spoon_192604168-192969999 ================================
+                
+                --- a/src/main/java/spoon/reflect/visitor/chain/CtQueryImpl.java
++++ b/src/main/java/spoon/reflect/visitor/chain/CtQueryImpl.java
+@@ -260,3 +260,5 @@
+} catch (ClassCastException e) {
+-						onClassCastException(this, e, input);
++						if (false) {
++							onClassCastException(this, e, input);
++						}
+}
+
+
+
+
+                
+                ====================== dynamoth_3 INRIA-spoon_192604168-192969999 ================================
+                
+                --- a/src/main/java/spoon/reflect/visitor/chain/CtQueryImpl.java
++++ b/src/main/java/spoon/reflect/visitor/chain/CtQueryImpl.java
+@@ -260,3 +260,5 @@
+} catch (ClassCastException e) {
+-						onClassCastException(this, e, input);
++						if (false) {
++							onClassCastException(this, e, input);
++						}
+}
+
+
+
+
+                

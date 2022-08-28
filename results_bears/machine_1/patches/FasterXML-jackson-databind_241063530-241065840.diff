@@ -1,0 +1,46 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_241063530-241065840/bears_FasterXML-jackson-databind_241063530-241065840/src/main/java/com/fasterxml/jackson/databind/type/ResolvedRecursiveType.java /tmp/fixed/bears_FasterXML-jackson-databind_241063530-241065840/src/main/java/com/fasterxml/jackson/databind/type/ResolvedRecursiveType.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_241063530-241065840/bears_FasterXML-jackson-databind_241063530-241065840/src/main/java/com/fasterxml/jackson/databind/type/ResolvedRecursiveType.java	2022-04-26 19:56:22.458813630 +0800
++++ /tmp/fixed/bears_FasterXML-jackson-databind_241063530-241065840/src/main/java/com/fasterxml/jackson/databind/type/ResolvedRecursiveType.java	2022-04-26 19:56:59.616476558 +0800
+@@ -25,6 +25,14 @@
+         }
+         _referencedType = ref;
+     }
++   
++    @Override
++    public JavaType getSuperClass() {
++    	if (_referencedType != null) {
++    		return _referencedType.getSuperClass();
++    	}
++    	return super.getSuperClass();
++    }
+ 
+     public JavaType getSelfReferencedType() { return _referencedType; }
+ 
+
+
+                
+                ====================== simfix_1 FasterXML-jackson-databind_241063530-241065840 ================================
+                
+                 file: /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_241063530-241065840/bears_FasterXML-jackson-databind_241063530-241065840/src/main/java//com/fasterxml/jackson/databind/type/ClassStack.java, range: <66,68>, original: if(curr._current==cls){
+return curr;
+}
+, patch: if(curr._current==_current){
+return curr;
+}
+
+
+                
+                ====================== simfix_2 FasterXML-jackson-databind_241063530-241065840 ================================
+                
+                [PATCH 794] file: /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_241063530-241065840/bears_FasterXML-jackson-databind_241063530-241065840/src/main/java//com/fasterxml/jackson/databind/type/ClassStack.java, range: <66,68>, original: if(curr._current==cls){
+return curr;
+}
+, patch: if(curr._current==_current){
+return curr;
+}
+
+
+                

@@ -1,0 +1,56 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_233864732-233868407/bears_traccar-traccar_233864732-233868407/src/org/traccar/protocol/StarLinkProtocolDecoder.java /tmp/fixed/bears_traccar-traccar_233864732-233868407/src/org/traccar/protocol/StarLinkProtocolDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_233864732-233868407/bears_traccar-traccar_233864732-233868407/src/org/traccar/protocol/StarLinkProtocolDecoder.java	2022-04-23 21:54:20.797225274 +0800
++++ /tmp/fixed/bears_traccar-traccar_233864732-233868407/src/org/traccar/protocol/StarLinkProtocolDecoder.java	2022-04-23 21:55:04.559182390 +0800
+@@ -100,6 +100,9 @@
+         int event = 0;
+ 
+         for (int i = 0; i < Math.min(data.length, dataTags.length); i++) {
++            if (data[i].isEmpty()) {
++                continue;
++            }
+             switch (dataTags[i]) {
+                 case "#EDT#":
+                     position.setDeviceTime(dateFormat.parse(data[i]));
+@@ -180,6 +183,10 @@
+             }
+         }
+ 
++        if (position.getFixTime() == null) {
++            getLastLocation(position, null);
++        }
++
+         if (lac != null && cid != null) {
+             position.setNetwork(new Network(CellTower.fromLacCid(lac, cid)));
+         }
+
+
+                
+                ====================== tbar_1 traccar-traccar_233864732-233868407 ================================
+                
+                [PATCH 1029]//**********************************************************
+//org/traccar/helper/PatternBuilder.java ------ 48
+//**********************************************************
+===Buggy Code===
+s = s.replace("dddd", "d{4}").replace("ddd", "d{3}").replace("dd", "d{2}");
+
+===Patch Code===
+s = toString().replace("dddd", "d{4}").replace("ddd", "d{3}").replace("dd", "d{2}");
+
+
+                
+                ====================== tbar_3 traccar-traccar_233864732-233868407 ================================
+                
+                [PATCH 1048]//**********************************************************
+//org/traccar/helper/PatternBuilder.java ------ 49
+//**********************************************************
+===Buggy Code===
+s = s.replace("xxxx", "x{4}").replace("xxx", "x{3}").replace("xx", "x{2}");
+
+===Patch Code===
+s = toString().replace("xxxx", "x{4}").replace("xxx", "x{3}").replace("xx", "x{2}");
+
+
+                

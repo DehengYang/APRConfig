@@ -1,0 +1,57 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/src/main/java/hu/oe/nik/szfmv/visualization/Dashboard.java /tmp/fixed/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/src/main/java/hu/oe/nik/szfmv/visualization/Dashboard.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/src/main/java/hu/oe/nik/szfmv/visualization/Dashboard.java	2022-04-25 10:25:29.643716180 +0800
++++ /tmp/fixed/bears_SzFMV2018-Tavasz-AutomatedCar_351742666-351759763/src/main/java/hu/oe/nik/szfmv/visualization/Dashboard.java	2022-04-25 10:25:37.916032367 +0800
+@@ -56,7 +56,7 @@
+         breakProgressBar.setValue(inputPacket.getBreakPedalPosition());
+         speedAngle = calculateSpeedometer(0);
+         rpmAngle = calculateTachometer(0);
+-        paintComponent(getGraphics());
++        repaint();
+     }
+ 
+     /**
+
+
+                
+                ====================== tbar_1 SzFMV2018-Tavasz-AutomatedCar_351742666-351759763 ================================
+                
+                [PATCH 129]//**********************************************************
+//hu/oe/nik/szfmv/visualization/Dashboard.java ------ 59
+//**********************************************************
+===Buggy Code===
+paintComponent(getGraphics());
+
+===Patch Code===
+
+
+
+                
+                ====================== tbar_2 SzFMV2018-Tavasz-AutomatedCar_351742666-351759763 ================================
+                
+                [PATCH 129]//**********************************************************
+//hu/oe/nik/szfmv/visualization/Dashboard.java ------ 59
+//**********************************************************
+===Buggy Code===
+paintComponent(getGraphics());
+
+===Patch Code===
+
+
+
+                
+                ====================== tbar_3 SzFMV2018-Tavasz-AutomatedCar_351742666-351759763 ================================
+                
+                [PATCH 129]//**********************************************************
+//hu/oe/nik/szfmv/visualization/Dashboard.java ------ 59
+//**********************************************************
+===Buggy Code===
+paintComponent(getGraphics());
+
+===Patch Code===
+
+
+
+                

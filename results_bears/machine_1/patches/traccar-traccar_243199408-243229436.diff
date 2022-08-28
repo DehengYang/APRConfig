@@ -1,0 +1,118 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_243199408-243229436/bears_traccar-traccar_243199408-243229436/src/org/traccar/FilterHandler.java /tmp/fixed/bears_traccar-traccar_243199408-243229436/src/org/traccar/FilterHandler.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_243199408-243229436/bears_traccar-traccar_243199408-243229436/src/org/traccar/FilterHandler.java	2022-04-24 19:34:46.694566171 +0800
++++ /tmp/fixed/bears_traccar-traccar_243199408-243229436/src/org/traccar/FilterHandler.java	2022-04-24 19:35:26.592350142 +0800
+@@ -84,7 +84,9 @@
+     }
+ 
+     private boolean filterInvalid(Position position) {
+-        return filterInvalid && !position.getValid();
++        return filterInvalid && (!position.getValid()
++           || position.getLatitude() > 90 || position.getLongitude() > 180
++           || position.getLatitude() < -90 || position.getLongitude() < -180);
+     }
+ 
+     private boolean filterZero(Position position) {
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_243199408-243229436/bears_traccar-traccar_243199408-243229436/src/org/traccar/protocol/WondexProtocolDecoder.java /tmp/fixed/bears_traccar-traccar_243199408-243229436/src/org/traccar/protocol/WondexProtocolDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_243199408-243229436/bears_traccar-traccar_243199408-243229436/src/org/traccar/protocol/WondexProtocolDecoder.java	2022-04-24 19:34:46.702566528 +0800
++++ /tmp/fixed/bears_traccar-traccar_243199408-243229436/src/org/traccar/protocol/WondexProtocolDecoder.java	2022-04-24 19:35:26.608350857 +0800
+@@ -78,7 +78,6 @@
+             position.setProtocol(getProtocolName());
+             position.setDeviceId(deviceSession.getDeviceId());
+             getLastLocation(position, new Date());
+-            position.setValid(false);
+             position.set(Position.KEY_RESULT, buf.toString(StandardCharsets.US_ASCII));
+ 
+             return position;
+@@ -106,9 +105,8 @@
+             position.setCourse(parser.nextDouble(0));
+             position.setAltitude(parser.nextDouble(0));
+ 
+-            int satellites = parser.nextInt(0);
+-            position.setValid(satellites >= 3);
+-            position.set(Position.KEY_SATELLITES, satellites);
++            position.setValid(true);
++            position.set(Position.KEY_SATELLITES, parser.nextInt(0));
+ 
+             position.set(Position.KEY_EVENT, parser.next());
+             position.set(Position.KEY_BATTERY, parser.nextDouble());
+
+
+                
+                ====================== simfix_1 traccar-traccar_243199408-243229436 ================================
+                
+                [PATCH 224] file: /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_243199408-243229436/bears_traccar-traccar_243199408-243229436/src//org/traccar/protocol/WondexProtocolDecoder.java, range: <115,117>, original: if(parser.hasNext()){
+position.set(Position.KEY_ODOMETER,parser.nextDouble(0)*1000);
+}
+, patch: position.setValid(true);
+if(parser.hasNext()){
+position.set(Position.KEY_ODOMETER,parser.nextDouble(0)*1000);
+}
+
+
+                
+                ====================== simfix_2 traccar-traccar_243199408-243229436 ================================
+                
+                [PATCH 224] file: /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_243199408-243229436/bears_traccar-traccar_243199408-243229436/src//org/traccar/protocol/WondexProtocolDecoder.java, range: <115,117>, original: if(parser.hasNext()){
+position.set(Position.KEY_ODOMETER,parser.nextDouble(0)*1000);
+}
+, patch: position.setValid(true);
+if(parser.hasNext()){
+position.set(Position.KEY_ODOMETER,parser.nextDouble(0)*1000);
+}
+
+
+                
+                ====================== simfix_3 traccar-traccar_243199408-243229436 ================================
+                
+                [PATCH 224] file: /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_243199408-243229436/bears_traccar-traccar_243199408-243229436/src//org/traccar/protocol/WondexProtocolDecoder.java, range: <115,117>, original: if(parser.hasNext()){
+position.set(Position.KEY_ODOMETER,parser.nextDouble(0)*1000);
+}
+, patch: position.setValid(true);
+if(parser.hasNext()){
+position.set(Position.KEY_ODOMETER,parser.nextDouble(0)*1000);
+}
+
+
+                
+                ====================== tbar_1 traccar-traccar_243199408-243229436 ================================
+                
+                [PATCH 568]//**********************************************************
+//org/traccar/protocol/WondexProtocolDecoder.java ------ 110
+//**********************************************************
+===Buggy Code===
+position.setValid(satellites >= 3);
+
+===Patch Code===
+position.setValid(satellites!=3);
+
+
+                
+                ====================== tbar_2 traccar-traccar_243199408-243229436 ================================
+                
+                [PATCH 568]//**********************************************************
+//org/traccar/protocol/WondexProtocolDecoder.java ------ 110
+//**********************************************************
+===Buggy Code===
+position.setValid(satellites >= 3);
+
+===Patch Code===
+position.setValid(satellites!=3);
+
+
+                
+                ====================== tbar_3 traccar-traccar_243199408-243229436 ================================
+                
+                [PATCH 568]//**********************************************************
+//org/traccar/protocol/WondexProtocolDecoder.java ------ 110
+//**********************************************************
+===Buggy Code===
+position.setValid(satellites >= 3);
+
+===Patch Code===
+position.setValid(satellites!=3);
+
+
+                

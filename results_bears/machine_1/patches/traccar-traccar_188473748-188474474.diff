@@ -1,0 +1,75 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_188473748-188474474/bears_traccar-traccar_188473748-188474474/src/org/traccar/protocol/GoSafeProtocolDecoder.java /tmp/fixed/bears_traccar-traccar_188473748-188474474/src/org/traccar/protocol/GoSafeProtocolDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_188473748-188474474/bears_traccar-traccar_188473748-188474474/src/org/traccar/protocol/GoSafeProtocolDecoder.java	2022-04-20 14:53:46.337447941 +0800
++++ /tmp/fixed/bears_traccar-traccar_188473748-188474474/src/org/traccar/protocol/GoSafeProtocolDecoder.java	2022-04-20 14:54:28.663338121 +0800
+@@ -156,7 +156,7 @@
+ 
+         position.set(Position.KEY_HDOP, parser.next());
+ 
+-        if (parser.hasNext(4)) {
++        if (parser.hasNext(5)) {
+             position.setNetwork(new Network(CellTower.from(
+                     parser.nextInt(), parser.nextInt(), parser.nextInt(16), parser.nextInt(16), parser.nextInt())));
+         }
+
+
+                
+                ====================== tbar_1 traccar-traccar_188473748-188474474 ================================
+                
+                [PATCH 907]//**********************************************************
+//org/traccar/protocol/GoSafeProtocolDecoder.java ------ 159
+//**********************************************************
+===Buggy Code===
+if (parser.hasNext(4)) {
+            position.setNetwork(new Network(CellTower.from(
+                    parser.nextInt(), parser.nextInt(), parser.nextInt(16), parser.nextInt(16), parser.nextInt())));
+        }
+
+===Patch Code===
+if ((parser.hasNext(4)) || (parser.hasNext())) {
+            position.setNetwork(new Network(CellTower.from(
+                    parser.nextInt(), parser.nextInt(), parser.nextInt(16), parser.nextInt(16), parser.nextInt())));
+        }
+
+
+                
+                ====================== tbar_2 traccar-traccar_188473748-188474474 ================================
+                
+                [PATCH 907]//**********************************************************
+//org/traccar/protocol/GoSafeProtocolDecoder.java ------ 159
+//**********************************************************
+===Buggy Code===
+if (parser.hasNext(4)) {
+            position.setNetwork(new Network(CellTower.from(
+                    parser.nextInt(), parser.nextInt(), parser.nextInt(16), parser.nextInt(16), parser.nextInt())));
+        }
+
+===Patch Code===
+if ((parser.hasNext(4)) || (parser.hasNext())) {
+            position.setNetwork(new Network(CellTower.from(
+                    parser.nextInt(), parser.nextInt(), parser.nextInt(16), parser.nextInt(16), parser.nextInt())));
+        }
+
+
+                
+                ====================== tbar_3 traccar-traccar_188473748-188474474 ================================
+                
+                [PATCH 907]//**********************************************************
+//org/traccar/protocol/GoSafeProtocolDecoder.java ------ 159
+//**********************************************************
+===Buggy Code===
+if (parser.hasNext(4)) {
+            position.setNetwork(new Network(CellTower.from(
+                    parser.nextInt(), parser.nextInt(), parser.nextInt(16), parser.nextInt(16), parser.nextInt())));
+        }
+
+===Patch Code===
+if ((parser.hasNext(4)) || (parser.hasNext())) {
+            position.setNetwork(new Network(CellTower.from(
+                    parser.nextInt(), parser.nextInt(), parser.nextInt(16), parser.nextInt(16), parser.nextInt())));
+        }
+
+
+                

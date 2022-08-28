@@ -1,0 +1,62 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_273118899-273136493/bears_traccar-traccar_273118899-273136493/src/org/traccar/protocol/EelinkProtocolDecoder.java /tmp/fixed/bears_traccar-traccar_273118899-273136493/src/org/traccar/protocol/EelinkProtocolDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_273118899-273136493/bears_traccar-traccar_273118899-273136493/src/org/traccar/protocol/EelinkProtocolDecoder.java	2022-04-27 00:27:11.933994921 +0800
++++ /tmp/fixed/bears_traccar-traccar_273118899-273136493/src/org/traccar/protocol/EelinkProtocolDecoder.java	2022-04-27 00:28:03.368296008 +0800
+@@ -160,7 +160,9 @@
+ 
+             if (statusType == 0x01 || statusType == 0x02 || statusType == 0x03) {
+                 buf.readUnsignedInt(); // device time
+-                decodeStatus(position, buf.readUnsignedShort());
++                if (buf.readableBytes() >= 2) {
++                    decodeStatus(position, buf.readUnsignedShort());
++                }
+             }
+ 
+         }
+
+
+                
+                ====================== tbar_1 traccar-traccar_273118899-273136493 ================================
+                
+                [PATCH 449]//**********************************************************
+//org/traccar/protocol/EelinkProtocolDecoder.java ------ 129
+//**********************************************************
+===Buggy Code===
+position.setNetwork(new Network(CellTower.from(
+                buf.readUnsignedShort(), buf.readUnsignedShort(), buf.readUnsignedShort(), buf.readUnsignedMedium())));
+
+===Patch Code===
+position.setNetwork(new Network());
+
+
+                
+                ====================== tbar_2 traccar-traccar_273118899-273136493 ================================
+                
+                [PATCH 449]//**********************************************************
+//org/traccar/protocol/EelinkProtocolDecoder.java ------ 129
+//**********************************************************
+===Buggy Code===
+position.setNetwork(new Network(CellTower.from(
+                buf.readUnsignedShort(), buf.readUnsignedShort(), buf.readUnsignedShort(), buf.readUnsignedMedium())));
+
+===Patch Code===
+position.setNetwork(new Network());
+
+
+                
+                ====================== tbar_3 traccar-traccar_273118899-273136493 ================================
+                
+                [PATCH 449]//**********************************************************
+//org/traccar/protocol/EelinkProtocolDecoder.java ------ 129
+//**********************************************************
+===Buggy Code===
+position.setNetwork(new Network(CellTower.from(
+                buf.readUnsignedShort(), buf.readUnsignedShort(), buf.readUnsignedShort(), buf.readUnsignedMedium())));
+
+===Patch Code===
+position.setNetwork(new Network());
+
+
+                

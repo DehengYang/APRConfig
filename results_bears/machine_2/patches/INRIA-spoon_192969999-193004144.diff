@@ -1,0 +1,92 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_192969999-193004144/bears_INRIA-spoon_192969999-193004144/src/main/java/spoon/support/reflect/reference/CtTypeReferenceImpl.java /tmp/fixed/bears_INRIA-spoon_192969999-193004144/src/main/java/spoon/support/reflect/reference/CtTypeReferenceImpl.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_192969999-193004144/bears_INRIA-spoon_192969999-193004144/src/main/java/spoon/support/reflect/reference/CtTypeReferenceImpl.java	2022-05-19 19:08:15.645192766 +0800
++++ /tmp/fixed/bears_INRIA-spoon_192969999-193004144/src/main/java/spoon/support/reflect/reference/CtTypeReferenceImpl.java	2022-05-19 19:08:52.838376342 +0800
+@@ -465,7 +465,14 @@
+ 	public Collection<CtExecutableReference<?>> getDeclaredExecutables() {
+ 		CtType<T> t = getDeclaration();
+ 		if (t == null) {
+-			return RtHelper.getAllExecutables(getActualClass(), getFactory());
++			try {
++				return RtHelper.getAllExecutables(getActualClass(), getFactory());
++			} catch (final SpoonClassNotFoundException e) {
++				if (getFactory().getEnvironment().getNoClasspath()) {
++					return Collections.emptyList();
++				}
++				throw e;
++			}
+ 		} else {
+ 			return t.getDeclaredExecutables();
+ 		}
+@@ -508,12 +515,19 @@
+ 		if (t != null) {
+ 			return t.getSuperclass();
+ 		} else {
+-			Class<T> c = getActualClass();
+-			Class<?> sc = c.getSuperclass();
+-			if (sc == null) {
+-				return null;
++			try {
++				Class<T> c = getActualClass();
++				Class<?> sc = c.getSuperclass();
++				if (sc == null) {
++					return null;
++				}
++				return getFactory().Type().createReference(sc);
++			} catch (final SpoonClassNotFoundException e) {
++				if (getFactory().getEnvironment().getNoClasspath()) {
++					return null;
++				}
++				throw e;
+ 			}
+-			return getFactory().Type().createReference(sc);
+ 		}
+ 	}
+ 
+
+
+                
+                ====================== dynamoth_1 INRIA-spoon_192969999-193004144 ================================
+                
+                --- a/src/main/java/spoon/support/reflect/reference/CtExecutableReferenceImpl.java
++++ b/src/main/java/spoon/support/reflect/reference/CtExecutableReferenceImpl.java
+@@ -391,3 +391,3 @@
+CtTypeReference<Object> objectType = getFactory().Type().createReference(Object.class);
+-		if (st == null) {
++		if (true) {
+return getOverloadedExecutable(objectType, objectType);
+
+
+
+
+                
+                ====================== dynamoth_2 INRIA-spoon_192969999-193004144 ================================
+                
+                --- a/src/main/java/spoon/support/reflect/reference/CtExecutableReferenceImpl.java
++++ b/src/main/java/spoon/support/reflect/reference/CtExecutableReferenceImpl.java
+@@ -391,3 +391,3 @@
+CtTypeReference<Object> objectType = getFactory().Type().createReference(Object.class);
+-		if (st == null) {
++		if (true) {
+return getOverloadedExecutable(objectType, objectType);
+
+
+
+
+                
+                ====================== dynamoth_3 INRIA-spoon_192969999-193004144 ================================
+                
+                --- a/src/main/java/spoon/support/reflect/reference/CtExecutableReferenceImpl.java
++++ b/src/main/java/spoon/support/reflect/reference/CtExecutableReferenceImpl.java
+@@ -391,3 +391,3 @@
+CtTypeReference<Object> objectType = getFactory().Type().createReference(Object.class);
+-		if (st == null) {
++		if (true) {
+return getOverloadedExecutable(objectType, objectType);
+
+
+
+
+                

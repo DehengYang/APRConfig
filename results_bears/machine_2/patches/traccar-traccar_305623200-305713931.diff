@@ -1,0 +1,151 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_305623200-305713931/bears_traccar-traccar_305623200-305713931/src/org/traccar/protocol/Jt600FrameDecoder.java /tmp/fixed/bears_traccar-traccar_305623200-305713931/src/org/traccar/protocol/Jt600FrameDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_305623200-305713931/bears_traccar-traccar_305623200-305713931/src/org/traccar/protocol/Jt600FrameDecoder.java	2022-05-20 02:44:15.344741964 +0800
++++ /tmp/fixed/bears_traccar-traccar_305623200-305713931/src/org/traccar/protocol/Jt600FrameDecoder.java	2022-05-20 02:44:36.485394192 +0800
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright 2012 - 2016 Anton Tananaev (anton@traccar.org)
++ * Copyright 2012 - 2017 Anton Tananaev (anton@traccar.org)
+  *
+  * Licensed under the Apache License, Version 2.0 (the "License");
+  * you may not use this file except in compliance with the License.
+@@ -37,7 +37,7 @@
+         if (type == '$') {
+             boolean longFormat = buf.getUnsignedByte(buf.readerIndex() + 1) == 0x75;
+             int length = buf.getUnsignedShort(buf.readerIndex() + (longFormat ? 8 : 7)) + 10;
+-            if (length >= buf.readableBytes()) {
++            if (length <= buf.readableBytes()) {
+                 return buf.readBytes(length);
+             }
+         } else if (type == '(') {
+
+
+                
+                ====================== dynamoth_1 traccar-traccar_305623200-305713931 ================================
+                
+                --- a/src/org/traccar/protocol/Jt600FrameDecoder.java
++++ b/src/org/traccar/protocol/Jt600FrameDecoder.java
+@@ -39,3 +39,3 @@
+int length = buf.getUnsignedShort(buf.readerIndex() + (longFormat ? 8 : 7)) + 10;
+-            if (length >= buf.readableBytes()) {
++            if (true) {
+return buf.readBytes(length);
+
+
+
+
+                
+                ====================== dynamoth_2 traccar-traccar_305623200-305713931 ================================
+                
+                --- a/src/org/traccar/protocol/Jt600FrameDecoder.java
++++ b/src/org/traccar/protocol/Jt600FrameDecoder.java
+@@ -39,3 +39,3 @@
+int length = buf.getUnsignedShort(buf.readerIndex() + (longFormat ? 8 : 7)) + 10;
+-            if (length >= buf.readableBytes()) {
++            if (true) {
+return buf.readBytes(length);
+
+
+
+
+                
+                ====================== dynamoth_3 traccar-traccar_305623200-305713931 ================================
+                
+                --- a/src/org/traccar/protocol/Jt600FrameDecoder.java
++++ b/src/org/traccar/protocol/Jt600FrameDecoder.java
+@@ -39,3 +39,3 @@
+int length = buf.getUnsignedShort(buf.readerIndex() + (longFormat ? 8 : 7)) + 10;
+-            if (length >= buf.readableBytes()) {
++            if (true) {
+return buf.readBytes(length);
+
+
+
+
+                
+                ====================== simfix_1 traccar-traccar_305623200-305713931 ================================
+                
+                [PATCH 94] file: /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_305623200-305713931/bears_traccar-traccar_305623200-305713931/src//org/traccar/protocol/Jt600FrameDecoder.java, range: <40,42>, original: if(length>=buf.readableBytes()){
+return buf.readBytes(length);
+}
+, patch: if(buf.readableBytes()>=length){
+return buf.readBytes(length);
+}
+
+
+                
+                ====================== simfix_2 traccar-traccar_305623200-305713931 ================================
+                
+                [PATCH 94] file: /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_305623200-305713931/bears_traccar-traccar_305623200-305713931/src//org/traccar/protocol/Jt600FrameDecoder.java, range: <40,42>, original: if(length>=buf.readableBytes()){
+return buf.readBytes(length);
+}
+, patch: if(buf.readableBytes()>=length){
+return buf.readBytes(length);
+}
+
+
+                
+                ====================== simfix_3 traccar-traccar_305623200-305713931 ================================
+                
+                [PATCH 94] file: /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_305623200-305713931/bears_traccar-traccar_305623200-305713931/src//org/traccar/protocol/Jt600FrameDecoder.java, range: <40,42>, original: if(length>=buf.readableBytes()){
+return buf.readBytes(length);
+}
+, patch: if(buf.readableBytes()>=length){
+return buf.readBytes(length);
+}
+
+
+                
+                ====================== tbar_1 traccar-traccar_305623200-305713931 ================================
+                
+                [PATCH 94]//**********************************************************
+//org/traccar/protocol/Jt600FrameDecoder.java ------ 40
+//**********************************************************
+===Buggy Code===
+if (length >= buf.readableBytes()) {
+                return buf.readBytes(length);
+            }
+
+===Patch Code===
+if (length<=buf.readableBytes()) {
+                return buf.readBytes(length);
+            }
+
+
+                
+                ====================== tbar_2 traccar-traccar_305623200-305713931 ================================
+                
+                [PATCH 94]//**********************************************************
+//org/traccar/protocol/Jt600FrameDecoder.java ------ 40
+//**********************************************************
+===Buggy Code===
+if (length >= buf.readableBytes()) {
+                return buf.readBytes(length);
+            }
+
+===Patch Code===
+if (length<=buf.readableBytes()) {
+                return buf.readBytes(length);
+            }
+
+
+                
+                ====================== tbar_3 traccar-traccar_305623200-305713931 ================================
+                
+                [PATCH 94]//**********************************************************
+//org/traccar/protocol/Jt600FrameDecoder.java ------ 40
+//**********************************************************
+===Buggy Code===
+if (length >= buf.readableBytes()) {
+                return buf.readBytes(length);
+            }
+
+===Patch Code===
+if (length<=buf.readableBytes()) {
+                return buf.readBytes(length);
+            }
+
+
+                

@@ -1,0 +1,119 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_198464113-198488474/bears_traccar-traccar_198464113-198488474/src/org/traccar/protocol/Gl200ProtocolDecoder.java /tmp/fixed/bears_traccar-traccar_198464113-198488474/src/org/traccar/protocol/Gl200ProtocolDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_198464113-198488474/bears_traccar-traccar_198464113-198488474/src/org/traccar/protocol/Gl200ProtocolDecoder.java	2022-05-20 13:45:57.052728315 +0800
++++ /tmp/fixed/bears_traccar-traccar_198464113-198488474/src/org/traccar/protocol/Gl200ProtocolDecoder.java	2022-05-20 13:46:16.561345909 +0800
+@@ -32,6 +32,7 @@
+ import java.net.SocketAddress;
+ import java.util.LinkedList;
+ import java.util.List;
++import java.util.regex.Matcher;
+ import java.util.regex.Pattern;
+ 
+ public class Gl200ProtocolDecoder extends BaseProtocolDecoder {
+@@ -237,11 +238,13 @@
+             .number("(d{15}|x{14}),")            // imei
+             .expression("[^,]*,")                // device name
+             .number("(d+),")                     // count
+-            .groupBegin()
+-            .number("(x{12}),")                  // bssid
+-            .number("(-?d+),,,,")                // rssi
+-            .groupEnd("+")
+-            .any()
++            .number("((?:x{12},-?d+,,,,)+),,,,") // wifi
++            .number("(d{1,3}),")                 // battery
++            .number("(dddd)(dd)(dd)")            // date
++            .number("(dd)(dd)(dd)").optional(2)  // time
++            .text(",")
++            .number("(xxxx)")                    // count number
++            .text("$").optional()
+             .compile();
+ 
+     private static final Pattern PATTERN = new PatternBuilder()
+@@ -620,12 +623,18 @@
+ 
+         Network network = new Network();
+ 
+-        int count = parser.nextInt();
+-        for (int i = 0; i < count; i++) {
+-            String mac = parser.next().replaceAll("(..)", "$1:");
+-            network.addWifiAccessPoint(WifiAccessPoint.from(mac.substring(0, mac.length() - 1), parser.nextInt()));
++        parser.nextInt(); // count
++        Matcher matcher = Pattern.compile("([0-9a-fA-F]{12}),(-?\\d+),,,,").matcher(parser.next());
++        while (matcher.find()) {
++            String mac = matcher.group(1).replaceAll("(..)", "$1:");
++            network.addWifiAccessPoint(WifiAccessPoint.from(
++                    mac.substring(0, mac.length() - 1), Integer.parseInt(matcher.group(2))));
+         }
+ 
++        position.setNetwork(network);
++
++        position.set(Position.KEY_BATTERY, parser.nextInt());
++
+         return position;
+     }
+ 
+
+
+                
+                ====================== dynamoth_1 traccar-traccar_198464113-198488474 ================================
+                
+                --- a/src/org/traccar/protocol/Gl200ProtocolDecoder.java
++++ b/src/org/traccar/protocol/Gl200ProtocolDecoder.java
+@@ -623,5 +623,7 @@
+int count = parser.nextInt();
+-        for (int i = 0; i < count; i++) {
+-            String mac = parser.next().replaceAll("(..)", "$1:");
+-            network.addWifiAccessPoint(WifiAccessPoint.from(mac.substring(0, mac.length() - 1), parser.nextInt()));
++        if (false) {
++            for (int i = 0; i < count; i++) {
++                String mac = parser.next().replaceAll("(..)", "$1:");
++                network.addWifiAccessPoint(WifiAccessPoint.from(mac.substring(0, mac.length() - 1), parser.nextInt()));
++            }
+}
+
+
+
+
+                
+                ====================== dynamoth_2 traccar-traccar_198464113-198488474 ================================
+                
+                --- a/src/org/traccar/protocol/Gl200ProtocolDecoder.java
++++ b/src/org/traccar/protocol/Gl200ProtocolDecoder.java
+@@ -623,5 +623,7 @@
+int count = parser.nextInt();
+-        for (int i = 0; i < count; i++) {
+-            String mac = parser.next().replaceAll("(..)", "$1:");
+-            network.addWifiAccessPoint(WifiAccessPoint.from(mac.substring(0, mac.length() - 1), parser.nextInt()));
++        if (false) {
++            for (int i = 0; i < count; i++) {
++                String mac = parser.next().replaceAll("(..)", "$1:");
++                network.addWifiAccessPoint(WifiAccessPoint.from(mac.substring(0, mac.length() - 1), parser.nextInt()));
++            }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 traccar-traccar_198464113-198488474 ================================
+                
+                --- a/src/org/traccar/protocol/Gl200ProtocolDecoder.java
++++ b/src/org/traccar/protocol/Gl200ProtocolDecoder.java
+@@ -623,5 +623,7 @@
+int count = parser.nextInt();
+-        for (int i = 0; i < count; i++) {
+-            String mac = parser.next().replaceAll("(..)", "$1:");
+-            network.addWifiAccessPoint(WifiAccessPoint.from(mac.substring(0, mac.length() - 1), parser.nextInt()));
++        if (false) {
++            for (int i = 0; i < count; i++) {
++                String mac = parser.next().replaceAll("(..)", "$1:");
++                network.addWifiAccessPoint(WifiAccessPoint.from(mac.substring(0, mac.length() - 1), parser.nextInt()));
++            }
+}
+
+
+
+
+                

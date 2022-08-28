@@ -1,0 +1,80 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_267371558-268530427/bears_traccar-traccar_267371558-268530427/src/org/traccar/protocol/Gl200TextProtocolDecoder.java /tmp/fixed/bears_traccar-traccar_267371558-268530427/src/org/traccar/protocol/Gl200TextProtocolDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_267371558-268530427/bears_traccar-traccar_267371558-268530427/src/org/traccar/protocol/Gl200TextProtocolDecoder.java	2022-04-26 12:40:14.907003805 +0800
++++ /tmp/fixed/bears_traccar-traccar_267371558-268530427/src/org/traccar/protocol/Gl200TextProtocolDecoder.java	2022-04-26 12:41:02.717143662 +0800
+@@ -614,7 +614,7 @@
+                 for (int i = 1; i <= deviceCount; i++) {
+                     index++; // id
+                     index++; // type
+-                    position.set(Position.PREFIX_TEMP + i, Short.parseShort(data[index++], 16) * 0.0625);
++                    position.set(Position.PREFIX_TEMP + i, (short) Integer.parseInt(data[index++], 16) * 0.0625);
+                 }
+             }
+         }
+
+
+                
+                ====================== tbar_1 traccar-traccar_267371558-268530427 ================================
+                
+                [PATCH 2239]//**********************************************************
+//org/traccar/protocol/Gl200TextProtocolDecoder.java ------ 601
+//**********************************************************
+===Buggy Code===
+position.set(Position.KEY_HOURS, parser.next());
+        position.set(Position.PREFIX_ADC + 1, parser.next());
+        position.set(Position.PREFIX_ADC + 2, parser.next());
+        position.set(Position.KEY_BATTERY_LEVEL, parser.nextInt());
+
+        decodeStatus(position, parser);
+
+        int index = 0;
+        String[] data = parser.next().split(",");
+
+===Patch Code===
+
+        position.set(Position.PREFIX_ADC + 1, parser.next());
+        position.set(Position.PREFIX_ADC + 2, parser.next());
+        position.set(Position.KEY_BATTERY_LEVEL, parser.nextInt());
+
+        decodeStatus(position, parser);
+
+        int index = 0;
+        String[] data = parser.next().split(",");
+	position.set(Position.KEY_HOURS, parser.next());
+
+
+
+                
+                ====================== tbar_2 traccar-traccar_267371558-268530427 ================================
+                
+                [PATCH 2239]//**********************************************************
+//org/traccar/protocol/Gl200TextProtocolDecoder.java ------ 601
+//**********************************************************
+===Buggy Code===
+position.set(Position.KEY_HOURS, parser.next());
+        position.set(Position.PREFIX_ADC + 1, parser.next());
+        position.set(Position.PREFIX_ADC + 2, parser.next());
+        position.set(Position.KEY_BATTERY_LEVEL, parser.nextInt());
+
+        decodeStatus(position, parser);
+
+        int index = 0;
+        String[] data = parser.next().split(",");
+
+===Patch Code===
+
+        position.set(Position.PREFIX_ADC + 1, parser.next());
+        position.set(Position.PREFIX_ADC + 2, parser.next());
+        position.set(Position.KEY_BATTERY_LEVEL, parser.nextInt());
+
+        decodeStatus(position, parser);
+
+        int index = 0;
+        String[] data = parser.next().split(",");
+	position.set(Position.KEY_HOURS, parser.next());
+
+
+
+                

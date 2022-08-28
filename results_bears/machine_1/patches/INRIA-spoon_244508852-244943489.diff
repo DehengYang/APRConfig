@@ -1,0 +1,45 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_244508852-244943489/bears_INRIA-spoon_244508852-244943489/src/main/java/spoon/support/reflect/reference/CtTypeParameterReferenceImpl.java /tmp/fixed/bears_INRIA-spoon_244508852-244943489/src/main/java/spoon/support/reflect/reference/CtTypeParameterReferenceImpl.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_244508852-244943489/bears_INRIA-spoon_244508852-244943489/src/main/java/spoon/support/reflect/reference/CtTypeParameterReferenceImpl.java	2022-04-21 03:35:56.846714384 +0800
++++ /tmp/fixed/bears_INRIA-spoon_244508852-244943489/src/main/java/spoon/support/reflect/reference/CtTypeParameterReferenceImpl.java	2022-04-21 03:36:37.280523693 +0800
+@@ -177,13 +177,18 @@
+ 
+ 		CtElement e = this;
+ 		CtElement parent = getParent();
++		if (parent instanceof CtTypeReference) {
++			if (parent.isParentInitialized() == false) {
++				return null;
++			}
++			parent = parent.getParent();
++		}
+ 		if (parent instanceof CtExecutableReference) {
+-
+-			CtElement parent2 = ((CtExecutableReference) parent).getDeclaration();
++			CtElement parent2 = ((CtExecutableReference) parent).getExecutableDeclaration();
+ 			if (parent2 instanceof CtMethod) {
+ 				e = parent2;
+ 			} else {
+-				e = ((CtExecutableReference<?>) parent).getDeclaringType().getTypeDeclaration();
++				e = e.getParent(CtFormalTypeDeclarer.class);
+ 			}
+ 		} else {
+ 			e = e.getParent(CtFormalTypeDeclarer.class);
+
+
+                
+                ====================== tbar_2 INRIA-spoon_244508852-244943489 ================================
+                
+                [PATCH 3576]//**********************************************************
+//spoon/Launcher.java ------ 789
+//**********************************************************
+===Buggy Code===
+return factory.getModel();
+
+===Patch Code===
+printUsage();
+	return factory.getModel();
+
+
+                

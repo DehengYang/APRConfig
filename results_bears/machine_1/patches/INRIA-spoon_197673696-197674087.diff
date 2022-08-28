@@ -1,0 +1,56 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_197673696-197674087/bears_INRIA-spoon_197673696-197674087/src/main/java/spoon/reflect/visitor/ImportScannerImpl.java /tmp/fixed/bears_INRIA-spoon_197673696-197674087/src/main/java/spoon/reflect/visitor/ImportScannerImpl.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_197673696-197674087/bears_INRIA-spoon_197673696-197674087/src/main/java/spoon/reflect/visitor/ImportScannerImpl.java	2022-04-21 20:59:26.996626923 +0800
++++ /tmp/fixed/bears_INRIA-spoon_197673696-197674087/src/main/java/spoon/reflect/visitor/ImportScannerImpl.java	2022-04-21 21:00:09.278518249 +0800
+@@ -255,6 +255,13 @@
+ 	 * Adds a type to the classImports.
+ 	 */
+ 	protected boolean addClassImport(CtTypeReference<?> ref) {
++		if (ref == null) {
++			return false;
++		}
++
++		if (targetType != null && targetType.getSimpleName().equals(ref.getSimpleName()) && !targetType.equals(ref)) {
++			return false;
++		}
+ 		if (classImports.containsKey(ref.getSimpleName())) {
+ 			return isImportedInClassImports(ref);
+ 		}
+@@ -277,6 +284,7 @@
+ 
+ 		// we want to be sure that we are not importing a class because a static field or method we already imported
+ 		// moreover we make exception for same package classes to avoid problems in FQN mode
++
+ 		if (targetType != null) {
+ 			try {
+ 				CtElement parent = ref.getParent();
+@@ -341,7 +349,6 @@
+ 				}
+ 			}
+ 		}
+-
+ 		//note: we must add the type refs from the same package too, to assure that isImported(typeRef) returns true for them
+ 		//these type refs are removed in #getClassImports()
+ 		classImports.put(ref.getSimpleName(), ref);
+
+
+                
+                ====================== tbar_2 INRIA-spoon_197673696-197674087 ================================
+                
+                [PATCH 2428]//**********************************************************
+//spoon/support/util/RtHelper.java ------ 154
+//**********************************************************
+===Buggy Code===
+if (Modifier.isPublic(mod)) {
+			set.add(ModifierKind.PUBLIC);
+		}
+
+===Patch Code===
+if ((Modifier.isPublic(mod)) && (Modifier.isFinal(mod))) {
+			set.add(ModifierKind.PUBLIC);
+		}
+
+
+                

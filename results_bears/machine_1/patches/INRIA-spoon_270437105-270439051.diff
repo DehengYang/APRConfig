@@ -1,0 +1,49 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_270437105-270439051/bears_INRIA-spoon_270437105-270439051/src/main/java/spoon/support/visitor/ProcessingVisitor.java /tmp/fixed/bears_INRIA-spoon_270437105-270439051/src/main/java/spoon/support/visitor/ProcessingVisitor.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_270437105-270439051/bears_INRIA-spoon_270437105-270439051/src/main/java/spoon/support/visitor/ProcessingVisitor.java	2022-04-27 01:53:28.313613235 +0800
++++ /tmp/fixed/bears_INRIA-spoon_270437105-270439051/src/main/java/spoon/support/visitor/ProcessingVisitor.java	2022-04-27 01:54:26.508218094 +0800
+@@ -45,10 +45,11 @@
+ 		if (!factory.getEnvironment().isProcessingStopped()
+ 				&& processor.getProcessedElementTypes() != null) {
+ 			for (Object o : processor.getProcessedElementTypes()) {
+-				if (((Class<?>) o).isAssignableFrom(e.getClass())) {
+-					return true;
++				if (!((Class<?>) o).isAssignableFrom(e.getClass())) {
++					return false;
+ 				}
+ 			}
++			return true;
+ 		}
+ 		return false;
+ 	}
+
+
+                
+                ====================== simfix_2 INRIA-spoon_270437105-270439051 ================================
+                
+                [PATCH 1139] file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_270437105-270439051/bears_INRIA-spoon_270437105-270439051/src/main/java//spoon/Launcher.java, range: <217,221>, original: opt2.setHelp("Define tabulation size.");
+jsap.registerParameter(opt2);
+opt2=new FlaggedOption("level");
+, patch: opt2.setDefault(OUTPUTDIR);
+opt2.setHelp("Define tabulation size.");
+jsap.registerParameter(opt2);
+opt2=new FlaggedOption("level");
+
+
+                
+                ====================== tbar_2 INRIA-spoon_270437105-270439051 ================================
+                
+                [PATCH 212]//**********************************************************
+//spoon/processing/AbstractProcessor.java ------ 66
+//**********************************************************
+===Buggy Code===
+processedElementTypes.add(elementType);
+
+===Patch Code===
+clearProcessedElementType();
+	processedElementTypes.add(elementType);
+
+
+                

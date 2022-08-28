@@ -1,0 +1,58 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_210079209-210080599/bears_INRIA-spoon_210079209-210080599/src/main/java/spoon/reflect/visitor/filter/PotentialVariableDeclarationFunction.java /tmp/fixed/bears_INRIA-spoon_210079209-210080599/src/main/java/spoon/reflect/visitor/filter/PotentialVariableDeclarationFunction.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_210079209-210080599/bears_INRIA-spoon_210079209-210080599/src/main/java/spoon/reflect/visitor/filter/PotentialVariableDeclarationFunction.java	2022-04-23 23:37:00.860754905 +0800
++++ /tmp/fixed/bears_INRIA-spoon_210079209-210080599/src/main/java/spoon/reflect/visitor/filter/PotentialVariableDeclarationFunction.java	2022-04-23 23:37:46.526797948 +0800
+@@ -70,7 +70,7 @@
+ 
+ 		CtElement scopeElement = input;
+ 		//Search input and then all parents until first CtPackage for element which may represents the declaration of this local variable
+-		while (scopeElement != null && !(scopeElement instanceof CtPackage)) {
++		while (scopeElement != null && !(scopeElement instanceof CtPackage) && scopeElement.isParentInitialized()) {
+ 			CtElement parent = scopeElement.getParent();
+ 			if (parent instanceof CtType<?>) {
+ 				if (includingFields) {
+
+
+                
+                ====================== tbar_1 INRIA-spoon_210079209-210080599 ================================
+                
+                [PATCH 63]//**********************************************************
+//spoon/reflect/visitor/filter/AllTypeMembersFunction.java ------ 65
+//**********************************************************
+===Buggy Code===
+final CtQuery q = input.map(new SuperInheritanceHierarchyFunction(distintSet == null ? new HashSet<String>() : distintSet).includingSelf(true));
+
+===Patch Code===
+final CtQuery q = input.map(new SuperInheritanceHierarchyFunction().includingSelf(true));
+
+
+                
+                ====================== tbar_2 INRIA-spoon_210079209-210080599 ================================
+                
+                [PATCH 189]//**********************************************************
+//spoon/support/reflect/declaration/CtElementImpl.java ------ 263
+//**********************************************************
+===Buggy Code===
+return factory.Query().createQuery(this).map(queryStep);
+
+===Patch Code===
+updateAllParentsBelow();
+	return factory.Query().createQuery(this).map(queryStep);
+
+
+                
+                ====================== tbar_3 INRIA-spoon_210079209-210080599 ================================
+                
+                [PATCH 63]//**********************************************************
+//spoon/reflect/visitor/filter/AllTypeMembersFunction.java ------ 65
+//**********************************************************
+===Buggy Code===
+final CtQuery q = input.map(new SuperInheritanceHierarchyFunction(distintSet == null ? new HashSet<String>() : distintSet).includingSelf(true));
+
+===Patch Code===
+final CtQuery q = input.map(new SuperInheritanceHierarchyFunction().includingSelf(true));
+
+
+                

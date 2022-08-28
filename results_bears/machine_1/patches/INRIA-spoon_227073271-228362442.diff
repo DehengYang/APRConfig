@@ -1,0 +1,40 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_227073271-228362442/bears_INRIA-spoon_227073271-228362442/src/main/java/spoon/support/reflect/declaration/CtAnnotationImpl.java /tmp/fixed/bears_INRIA-spoon_227073271-228362442/src/main/java/spoon/support/reflect/declaration/CtAnnotationImpl.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_227073271-228362442/bears_INRIA-spoon_227073271-228362442/src/main/java/spoon/support/reflect/declaration/CtAnnotationImpl.java	2022-04-27 14:41:52.458448793 +0800
++++ /tmp/fixed/bears_INRIA-spoon_227073271-228362442/src/main/java/spoon/support/reflect/declaration/CtAnnotationImpl.java	2022-04-27 14:42:19.659663724 +0800
+@@ -110,7 +110,8 @@
+ 			// Value should be converted to a CtNewArray.
+ 			res = getFactory().Core().createNewArray();
+ 			Object[] values = (Object[]) value;
+-			res.setType(getFactory().Type().createArrayReference(getFactory().Type().createReference(values[0].getClass())));
++
++			res.setType(getFactory().Type().createArrayReference(getFactory().Type().createReference(value.getClass().getComponentType())));
+ 			for (Object o : values) {
+ 				((CtNewArray) res).addElement(convertValueToExpression(o));
+ 			}
+
+
+                
+                ====================== simfix_2 INRIA-spoon_227073271-228362442 ================================
+                
+                [PATCH 3088] file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_227073271-228362442/bears_INRIA-spoon_227073271-228362442/src/main/java//spoon/Launcher.java, range: <104,112>, original: if(args.length!=0){
+this.run();
+if(this.jsapActualArgs.getBoolean("gui")){
+new SpoonModelTree(getFactory());
+}
+}else {
+this.printUsage();
+}
+, patch: if(args.length==0){
+this.run();
+if(this.jsapActualArgs.getBoolean("gui")){
+new SpoonModelTree(getFactory());
+}
+}else {
+this.printUsage();
+}
+
+
+                

@@ -1,0 +1,92 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_269449386-269490884/bears_traccar-traccar_269449386-269490884/src/org/traccar/protocol/Gt06ProtocolDecoder.java /tmp/fixed/bears_traccar-traccar_269449386-269490884/src/org/traccar/protocol/Gt06ProtocolDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_269449386-269490884/bears_traccar-traccar_269449386-269490884/src/org/traccar/protocol/Gt06ProtocolDecoder.java	2022-04-26 19:20:52.579487780 +0800
++++ /tmp/fixed/bears_traccar-traccar_269449386-269490884/src/org/traccar/protocol/Gt06ProtocolDecoder.java	2022-04-26 19:21:36.241442078 +0800
+@@ -182,6 +182,9 @@
+         }
+ 
+         if (length > 0) {
++            if (length > 12) {
++                length = 12;
++            }
+             buf.skipBytes(length - 12); // skip reserved
+         }
+ 
+@@ -202,7 +205,7 @@
+                 buf.readUnsignedShort(), buf.readUnsignedByte(), buf.readUnsignedShort(), buf.readUnsignedMedium())));
+ 
+         if (length > 0) {
+-            buf.skipBytes(length - 8);
++            buf.skipBytes(length - (hasLength ? 9 : 8));
+         }
+ 
+         return true;
+@@ -462,6 +465,7 @@
+ 
+             if (hasLbs(type)) {
+                 decodeLbs(position, buf, hasStatus(type));
++                buf.skipBytes(-1);
+             }
+ 
+             if (hasStatus(type)) {
+@@ -573,7 +577,9 @@
+                 getLastLocation(position, position.getDeviceTime());
+             }
+ 
+-            decodeLbs(position, buf, true);
++            if (decodeLbs(position, buf, true)) {
++                buf.skipBytes(1); //Extended data
++            }
+ 
+             buf.skipBytes(buf.readUnsignedByte()); // additional cell towers
+             buf.skipBytes(buf.readUnsignedByte()); // wifi access point
+
+
+                
+                ====================== tbar_1 traccar-traccar_269449386-269490884 ================================
+                
+                [PATCH 697]//**********************************************************
+//org/traccar/protocol/Gt06ProtocolDecoder.java ------ 101
+//**********************************************************
+===Buggy Code===
+return type == MSG_LBS || type == MSG_LBS_STATUS || type == MSG_GPS_LBS_1 || type == MSG_GPS_LBS_2
+                || type == MSG_GPS_LBS_STATUS_1 || type ==  MSG_GPS_LBS_STATUS_2 || type == MSG_GPS_LBS_STATUS_3;
+
+===Patch Code===
+return (type == MSG_LBS || type == MSG_LBS_STATUS || type == MSG_GPS_LBS_1 || type == MSG_GPS_LBS_2
+                || type == MSG_GPS_LBS_STATUS_1 || type ==  MSG_GPS_LBS_STATUS_2 || type == MSG_GPS_LBS_STATUS_3) && !(type != MSG_LOGIN);
+
+
+                
+                ====================== tbar_2 traccar-traccar_269449386-269490884 ================================
+                
+                [PATCH 697]//**********************************************************
+//org/traccar/protocol/Gt06ProtocolDecoder.java ------ 101
+//**********************************************************
+===Buggy Code===
+return type == MSG_LBS || type == MSG_LBS_STATUS || type == MSG_GPS_LBS_1 || type == MSG_GPS_LBS_2
+                || type == MSG_GPS_LBS_STATUS_1 || type ==  MSG_GPS_LBS_STATUS_2 || type == MSG_GPS_LBS_STATUS_3;
+
+===Patch Code===
+return (type == MSG_LBS || type == MSG_LBS_STATUS || type == MSG_GPS_LBS_1 || type == MSG_GPS_LBS_2
+                || type == MSG_GPS_LBS_STATUS_1 || type ==  MSG_GPS_LBS_STATUS_2 || type == MSG_GPS_LBS_STATUS_3) && !(type != MSG_LOGIN);
+
+
+                
+                ====================== tbar_3 traccar-traccar_269449386-269490884 ================================
+                
+                [PATCH 697]//**********************************************************
+//org/traccar/protocol/Gt06ProtocolDecoder.java ------ 101
+//**********************************************************
+===Buggy Code===
+return type == MSG_LBS || type == MSG_LBS_STATUS || type == MSG_GPS_LBS_1 || type == MSG_GPS_LBS_2
+                || type == MSG_GPS_LBS_STATUS_1 || type ==  MSG_GPS_LBS_STATUS_2 || type == MSG_GPS_LBS_STATUS_3;
+
+===Patch Code===
+return (type == MSG_LBS || type == MSG_LBS_STATUS || type == MSG_GPS_LBS_1 || type == MSG_GPS_LBS_2
+                || type == MSG_GPS_LBS_STATUS_1 || type ==  MSG_GPS_LBS_STATUS_2 || type == MSG_GPS_LBS_STATUS_3) && !(type != MSG_LOGIN);
+
+
+                

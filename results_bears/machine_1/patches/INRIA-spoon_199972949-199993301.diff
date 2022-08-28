@@ -1,0 +1,57 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_199972949-199993301/bears_INRIA-spoon_199972949-199993301/src/main/java/spoon/support/reflect/code/CtLambdaImpl.java /tmp/fixed/bears_INRIA-spoon_199972949-199993301/src/main/java/spoon/support/reflect/code/CtLambdaImpl.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_199972949-199993301/bears_INRIA-spoon_199972949-199993301/src/main/java/spoon/support/reflect/code/CtLambdaImpl.java	2022-04-22 19:30:01.760898150 +0800
++++ /tmp/fixed/bears_INRIA-spoon_199972949-199993301/src/main/java/spoon/support/reflect/code/CtLambdaImpl.java	2022-04-22 19:30:35.930427135 +0800
+@@ -109,7 +109,7 @@
+ 			lambdaExecutableMethod = lambdaTypeMethods.iterator().next();
+ 		} else {
+ 			for (CtMethod<?> method : lambdaTypeMethods) {
+-				if (method.isDefaultMethod() || method.hasModifier(ModifierKind.PRIVATE)) {
++				if (method.isDefaultMethod() || method.hasModifier(ModifierKind.PRIVATE) || method.hasModifier(ModifierKind.STATIC)) {
+ 					continue;
+ 				}
+ 				if (lambdaExecutableMethod != null) {
+
+
+                
+                ====================== tbar_1 INRIA-spoon_199972949-199993301 ================================
+                
+                [PATCH 16]//**********************************************************
+//spoon/support/reflect/code/CtLambdaImpl.java ------ 116
+//**********************************************************
+===Buggy Code===
+throw new SpoonException("The lambda can be based on interface, which has only one method. But " + lambdaTypeRef.getQualifiedName() + " has at least two: " + lambdaExecutableMethod.getSignature() + " and " + method.getSignature());
+
+===Patch Code===
+
+
+
+                
+                ====================== tbar_2 INRIA-spoon_199972949-199993301 ================================
+                
+                [PATCH 16]//**********************************************************
+//spoon/support/reflect/code/CtLambdaImpl.java ------ 116
+//**********************************************************
+===Buggy Code===
+throw new SpoonException("The lambda can be based on interface, which has only one method. But " + lambdaTypeRef.getQualifiedName() + " has at least two: " + lambdaExecutableMethod.getSignature() + " and " + method.getSignature());
+
+===Patch Code===
+
+
+
+                
+                ====================== tbar_3 INRIA-spoon_199972949-199993301 ================================
+                
+                //**********************************************************
+//spoon/support/reflect/code/CtLambdaImpl.java ------ 116
+//**********************************************************
+===Buggy Code===
+throw new SpoonException("The lambda can be based on interface, which has only one method. But " + lambdaTypeRef.getQualifiedName() + " has at least two: " + lambdaExecutableMethod.getSignature() + " and " + method.getSignature());
+
+===Patch Code===
+
+
+
+                

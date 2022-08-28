@@ -1,0 +1,48 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_239865488-239871875/bears_INRIA-spoon_239865488-239871875/src/main/java/spoon/reflect/factory/CodeFactory.java /tmp/fixed/bears_INRIA-spoon_239865488-239871875/src/main/java/spoon/reflect/factory/CodeFactory.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_239865488-239871875/bears_INRIA-spoon_239865488-239871875/src/main/java/spoon/reflect/factory/CodeFactory.java	2022-05-01 04:43:23.590459962 +0800
++++ /tmp/fixed/bears_INRIA-spoon_239865488-239871875/src/main/java/spoon/reflect/factory/CodeFactory.java	2022-05-01 04:43:59.100048506 +0800
+@@ -573,6 +573,10 @@
+ 		if (originalClass.isPrimitive()) {
+ 			return typeReference;
+ 		}
++		if (originalClass.getDeclaringClass() != null) {
++			// the inner class reference does not have package
++			return typeReference.setDeclaringType(createCtTypeReference(originalClass.getDeclaringClass()));
++		}
+ 		return typeReference.setPackage(createCtPackageReference(originalClass.getPackage()));
+ 	}
+ 
+
+
+                
+                ====================== tbar_1 INRIA-spoon_239865488-239871875 ================================
+                
+                [PATCH 6556]//**********************************************************
+//spoon/Launcher.java ------ 544
+//**********************************************************
+===Buggy Code===
+SpoonModelBuilder comp = new JDTBasedSpoonCompiler(factory);
+
+===Patch Code===
+printUsage();
+	SpoonModelBuilder comp = new JDTBasedSpoonCompiler(factory);
+
+
+                
+                ====================== tbar_2 INRIA-spoon_239865488-239871875 ================================
+                
+                [PATCH 6556]//**********************************************************
+//spoon/Launcher.java ------ 544
+//**********************************************************
+===Buggy Code===
+SpoonModelBuilder comp = new JDTBasedSpoonCompiler(factory);
+
+===Patch Code===
+printUsage();
+	SpoonModelBuilder comp = new JDTBasedSpoonCompiler(factory);
+
+
+                

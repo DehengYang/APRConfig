@@ -1,0 +1,29 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_237078306-237089137/bears_INRIA-spoon_237078306-237089137/src/main/java/spoon/reflect/visitor/ImportScannerImpl.java /tmp/fixed/bears_INRIA-spoon_237078306-237089137/src/main/java/spoon/reflect/visitor/ImportScannerImpl.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_237078306-237089137/bears_INRIA-spoon_237078306-237089137/src/main/java/spoon/reflect/visitor/ImportScannerImpl.java	2022-04-30 07:19:04.278291158 +0800
++++ /tmp/fixed/bears_INRIA-spoon_237078306-237089137/src/main/java/spoon/reflect/visitor/ImportScannerImpl.java	2022-04-30 07:19:25.403235584 +0800
+@@ -563,7 +563,7 @@
+ 	 * @return true if the ref should be imported.
+ 	 */
+ 	protected boolean isTypeInCollision(CtReference ref, boolean fqnMode) {
+-		if (targetType.getSimpleName().equals(ref.getSimpleName()) && !targetType.equals(ref)) {
++		if (targetType != null && targetType.getSimpleName().equals(ref.getSimpleName()) && !targetType.equals(ref)) {
+ 			return true;
+ 		}
+ 
+
+
+                
+                ====================== simfix_2 INRIA-spoon_237078306-237089137 ================================
+                
+                [PATCH 2796] file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_237078306-237089137/bears_INRIA-spoon_237078306-237089137/src/main/java//spoon/reflect/visitor/ImportScannerImpl.java, range: <566,568>, original: if(targetType.getSimpleName().equals(ref.getSimpleName())&&!targetType.equals(ref)){
+return true;
+}
+, patch: if(targetType!=null&&targetType.getSimpleName().equals(ref.getSimpleName())&&!targetType.equals(ref)){
+return true;
+}
+
+
+                

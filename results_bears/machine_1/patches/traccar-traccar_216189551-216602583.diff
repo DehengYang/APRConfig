@@ -1,0 +1,55 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_216189551-216602583/bears_traccar-traccar_216189551-216602583/src/org/traccar/protocol/TelicProtocolDecoder.java /tmp/fixed/bears_traccar-traccar_216189551-216602583/src/org/traccar/protocol/TelicProtocolDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_216189551-216602583/bears_traccar-traccar_216189551-216602583/src/org/traccar/protocol/TelicProtocolDecoder.java	2022-04-21 21:13:36.450624136 +0800
++++ /tmp/fixed/bears_traccar-traccar_216189551-216602583/src/org/traccar/protocol/TelicProtocolDecoder.java	2022-04-21 21:14:13.596285711 +0800
+@@ -53,8 +53,6 @@
+             .number("(d+)?,")                    // satellites
+             .expression("(?:[^,]*,){7}")
+             .number("(d+),")                     // battery
+-            .expression("[^,]*,")
+-            .number("(d+)?")                     // external
+             .any()
+             .compile();
+ 
+@@ -131,10 +129,6 @@
+ 
+         position.set(Position.KEY_BATTERY, parser.nextInt());
+ 
+-        if (parser.hasNext()) {
+-            position.set(Position.KEY_POWER, parser.nextInt());
+-        }
+-
+         return position;
+     }
+ 
+
+
+                
+                ====================== tbar_1 traccar-traccar_216189551-216602583 ================================
+                
+                [PATCH 218]//**********************************************************
+//org/traccar/helper/PatternBuilder.java ------ 49
+//**********************************************************
+===Buggy Code===
+s = s.replace("xxxx", "x{4}").replace("xxx", "x{3}").replace("xx", "x{2}");
+
+===Patch Code===
+s = toString().replace("xxxx", "x{4}").replace("xxx", "x{3}").replace("xx", "x{2}");
+
+
+                
+                ====================== tbar_3 traccar-traccar_216189551-216602583 ================================
+                
+                [PATCH 218]//**********************************************************
+//org/traccar/helper/PatternBuilder.java ------ 49
+//**********************************************************
+===Buggy Code===
+s = s.replace("xxxx", "x{4}").replace("xxx", "x{3}").replace("xx", "x{2}");
+
+===Patch Code===
+s = toString().replace("xxxx", "x{4}").replace("xxx", "x{3}").replace("xx", "x{2}");
+
+
+                

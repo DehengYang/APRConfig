@@ -1,0 +1,72 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_195646489-195752461/bears_FasterXML-jackson-databind_195646489-195752461/src/main/java/com/fasterxml/jackson/databind/introspect/POJOPropertiesCollector.java /tmp/fixed/bears_FasterXML-jackson-databind_195646489-195752461/src/main/java/com/fasterxml/jackson/databind/introspect/POJOPropertiesCollector.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_195646489-195752461/bears_FasterXML-jackson-databind_195646489-195752461/src/main/java/com/fasterxml/jackson/databind/introspect/POJOPropertiesCollector.java	2022-04-22 10:29:58.951569279 +0800
++++ /tmp/fixed/bears_FasterXML-jackson-databind_195646489-195752461/src/main/java/com/fasterxml/jackson/databind/introspect/POJOPropertiesCollector.java	2022-04-22 10:30:36.069228715 +0800
+@@ -4,6 +4,7 @@
+ import java.util.*;
+ 
+ import com.fasterxml.jackson.annotation.JsonAnySetter;
++import com.fasterxml.jackson.annotation.JsonProperty.Access;
+ import com.fasterxml.jackson.databind.*;
+ import com.fasterxml.jackson.databind.cfg.HandlerInstantiator;
+ import com.fasterxml.jackson.databind.cfg.MapperConfig;
+@@ -727,10 +728,14 @@
+ 
+         while (it.hasNext()) {
+             POJOPropertyBuilder prop = it.next();
+-            prop.removeNonVisible(inferMutators);
++            // 26-Jan-2017, tatu: [databind#935]: need to denote removal of
++            Access acc = prop.removeNonVisible(inferMutators);
++            if (!_forSerialization && (acc == Access.READ_ONLY)) {
++                _collectIgnorals(prop.getName());
++            }
+         }
+     }
+-        
++
+     /**
+      * Helper method called to add explicitly ignored properties to a list
+      * of known ignored properties; this helps in proper reporting of
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_195646489-195752461/bears_FasterXML-jackson-databind_195646489-195752461/src/main/java/com/fasterxml/jackson/databind/introspect/POJOPropertyBuilder.java /tmp/fixed/bears_FasterXML-jackson-databind_195646489-195752461/src/main/java/com/fasterxml/jackson/databind/introspect/POJOPropertyBuilder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_195646489-195752461/bears_FasterXML-jackson-databind_195646489-195752461/src/main/java/com/fasterxml/jackson/databind/introspect/POJOPropertyBuilder.java	2022-04-22 10:29:58.955569458 +0800
++++ /tmp/fixed/bears_FasterXML-jackson-databind_195646489-195752461/src/main/java/com/fasterxml/jackson/databind/introspect/POJOPropertyBuilder.java	2022-04-22 10:30:36.069228715 +0800
+@@ -641,7 +641,7 @@
+      * @param inferMutators Whether mutators can be "pulled in" by visible
+      *    accessors or not. 
+      */
+-    public void removeNonVisible(boolean inferMutators)
++    public JsonProperty.Access removeNonVisible(boolean inferMutators)
+     {
+         /* 07-Jun-2015, tatu: With 2.6, we will allow optional definition
+          *  of explicit access type for property; if not "AUTO", it will
+@@ -680,6 +680,7 @@
+                 _setters = _removeNonVisible(_setters);
+             }
+         }
++        return acc;
+     }
+ 
+     /**
+
+
+                
+                ====================== simfix_3 FasterXML-jackson-databind_195646489-195752461 ================================
+                
+                [PATCH 147] file: /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_195646489-195752461/bears_FasterXML-jackson-databind_195646489-195752461/src/main/java//com/fasterxml/jackson/databind/JsonMappingException.java, range: <523,528>, original: while(it.hasNext()){
+sb.append(it.next().toString());
+if(it.hasNext()){
+sb.append("->");
+}
+}
+, patch: while(it.hasNext()){
+sb.append(')');
+sb.append(it.next().toString());
+if(it.hasNext()){
+sb.append("->");
+}
+}
+
+
+                

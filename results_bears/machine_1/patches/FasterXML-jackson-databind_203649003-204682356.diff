@@ -1,0 +1,75 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_203649003-204682356/bears_FasterXML-jackson-databind_203649003-204682356/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/AsPropertyTypeDeserializer.java /tmp/fixed/bears_FasterXML-jackson-databind_203649003-204682356/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/AsPropertyTypeDeserializer.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_203649003-204682356/bears_FasterXML-jackson-databind_203649003-204682356/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/AsPropertyTypeDeserializer.java	2022-04-23 11:11:40.024801939 +0800
++++ /tmp/fixed/bears_FasterXML-jackson-databind_203649003-204682356/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/AsPropertyTypeDeserializer.java	2022-04-23 11:12:15.890405939 +0800
+@@ -153,6 +153,13 @@
+         // or, something for which "as-property" won't work, changed into "wrapper-array" type:
+         if (p.getCurrentToken() == JsonToken.START_ARRAY) {
+             return super.deserializeTypedFromAny(p, ctxt);
++        } else if (p.getCurrentToken() == JsonToken.VALUE_STRING) {
++            if (ctxt.isEnabled(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)) {
++                String str = p.getText().trim();
++                if (str.isEmpty()) {
++                    return null;
++                }
++            }
+         }
+         ctxt.reportWrongTokenException(p, JsonToken.FIELD_NAME,
+                 "missing property '"+_typePropertyName+"' that is to contain type id  (for class "+baseTypeName()+")");
+
+
+                
+                ====================== simfix_3 FasterXML-jackson-databind_203649003-204682356 ================================
+                
+                [PATCH 214] file: /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_203649003-204682356/bears_FasterXML-jackson-databind_203649003-204682356/src/main/java//com/fasterxml/jackson/databind/JsonMappingException.java, range: <519,528>, original: if(_path==null){
+return ;
+}
+Iterator<Reference> it=_path.iterator();
+while(it.hasNext()){
+sb.append(it.next().toString());
+if(it.hasNext()){
+sb.append("->");
+}
+}
+, patch: sb.append('.');
+if(_path==null){
+return ;
+}
+Iterator<Reference> it=_path.iterator();
+while(it.hasNext()){
+sb.append(it.next().toString());
+if(it.hasNext()){
+sb.append("->");
+}
+}
+
+
+                
+                ====================== tbar_1 FasterXML-jackson-databind_203649003-204682356 ================================
+                
+                [PATCH 326]//**********************************************************
+//com/fasterxml/jackson/databind/JsonMappingException.java ------ 130
+//**********************************************************
+===Buggy Code===
+int arrays = 0;
+
+===Patch Code===
+char arrays = 0;
+
+
+                
+                ====================== tbar_3 FasterXML-jackson-databind_203649003-204682356 ================================
+                
+                [PATCH 275]//**********************************************************
+//com/fasterxml/jackson/databind/JsonMappingException.java ------ 524
+//**********************************************************
+===Buggy Code===
+sb.append(it.next().toString());
+
+===Patch Code===
+
+
+
+                

@@ -1,0 +1,57 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_241091669-241205460/bears_INRIA-spoon_241091669-241205460/src/main/java/spoon/support/visitor/java/JavaReflectionTreeBuilder.java /tmp/fixed/bears_INRIA-spoon_241091669-241205460/src/main/java/spoon/support/visitor/java/JavaReflectionTreeBuilder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_241091669-241205460/bears_INRIA-spoon_241091669-241205460/src/main/java/spoon/support/visitor/java/JavaReflectionTreeBuilder.java	2022-04-20 15:26:34.121322314 +0800
++++ /tmp/fixed/bears_INRIA-spoon_241091669-241205460/src/main/java/spoon/support/visitor/java/JavaReflectionTreeBuilder.java	2022-04-20 15:27:16.747225591 +0800
+@@ -217,10 +217,20 @@
+ 	}
+ 
+ 	@Override
+-	public void visitAnnotation(Annotation annotation) {
++	public void visitAnnotation(final Annotation annotation) {
+ 		final CtAnnotation<Annotation> ctAnnotation = factory.Core().createAnnotation();
+ 
+-		enter(new AnnotationRuntimeBuilderContext(ctAnnotation));
++		enter(new AnnotationRuntimeBuilderContext(ctAnnotation) {
++			@Override
++			public void addMethod(CtMethod ctMethod) {
++				try {
++					Object value = annotation.getClass().getMethod(ctMethod.getSimpleName()).invoke(annotation);
++					ctAnnotation.addValue(ctMethod.getSimpleName(), value);
++				} catch (Exception ignore) {
++					ctAnnotation.addValue(ctMethod.getSimpleName(), "");
++				}
++			}
++		});
+ 		super.visitAnnotation(annotation);
+ 		exit();
+ 
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_241091669-241205460/bears_INRIA-spoon_241091669-241205460/src/main/java/spoon/support/visitor/java/JavaReflectionVisitorImpl.java /tmp/fixed/bears_INRIA-spoon_241091669-241205460/src/main/java/spoon/support/visitor/java/JavaReflectionVisitorImpl.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_241091669-241205460/bears_INRIA-spoon_241091669-241205460/src/main/java/spoon/support/visitor/java/JavaReflectionVisitorImpl.java	2022-04-20 15:26:34.121322314 +0800
++++ /tmp/fixed/bears_INRIA-spoon_241091669-241205460/src/main/java/spoon/support/visitor/java/JavaReflectionVisitorImpl.java	2022-04-20 15:27:16.751225769 +0800
+@@ -154,6 +154,9 @@
+ 	public void visitAnnotation(Annotation annotation) {
+ 		if (annotation.annotationType() != null) {
+ 			visitClassReference(annotation.annotationType());
++			for (RtMethod method : getDeclaredMethods(annotation.annotationType())) {
++				visitMethod(method);
++			}
+ 		}
+ 	}
+ 
+
+
+                
+                ====================== simfix_2 INRIA-spoon_241091669-241205460 ================================
+                
+                [PATCH 822] file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_241091669-241205460/bears_INRIA-spoon_241091669-241205460/src/main/java//spoon/support/visitor/java/JavaReflectionTreeBuilder.java, range: <168,171>, original: super.visitInterface(clazz);
+exit();
+contexts.peek().addType(ctInterface);
+, patch: System.exit(-1);
+super.visitInterface(clazz);
+exit();
+contexts.peek().addType(ctInterface);
+
+
+                

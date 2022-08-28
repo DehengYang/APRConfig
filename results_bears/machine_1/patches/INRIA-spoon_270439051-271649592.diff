@@ -1,0 +1,80 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_270439051-271649592/bears_INRIA-spoon_270439051-271649592/src/main/java/spoon/support/StandardEnvironment.java /tmp/fixed/bears_INRIA-spoon_270439051-271649592/src/main/java/spoon/support/StandardEnvironment.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_270439051-271649592/bears_INRIA-spoon_270439051-271649592/src/main/java/spoon/support/StandardEnvironment.java	2022-04-27 14:42:35.908389467 +0800
++++ /tmp/fixed/bears_INRIA-spoon_270439051-271649592/src/main/java/spoon/support/StandardEnvironment.java	2022-04-27 14:43:18.578295301 +0800
+@@ -353,11 +353,22 @@
+ 		if (aClassLoader instanceof URLClassLoader) {
+ 			final URL[] urls = ((URLClassLoader) aClassLoader).getURLs();
+ 			if (urls != null && urls.length > 0) {
+-				List<String> classpath = new ArrayList<>();
++				// Check that the URLs are only file URLs
++				boolean onlyFileURLs = true;
+ 				for (URL url : urls) {
+-					classpath.add(url.toString());
++					if (!url.getProtocol().equals("file")) {
++						onlyFileURLs = false;
++					}
++				}
++				if (onlyFileURLs) {
++					List<String> classpath = new ArrayList<>();
++					for (URL url : urls) {
++						classpath.add(url.getPath());
++					}
++					setSourceClasspath(classpath.toArray(new String[0]));
++				} else {
++					throw new SpoonException("Spoon does not support a URLClassLoader containing other resources than local file.");
+ 				}
+-				setSourceClasspath(classpath.toArray(new String[0]));
+ 			}
+ 			return;
+ 		}
+
+
+                
+                ====================== simfix_2 INRIA-spoon_270439051-271649592 ================================
+                
+                [PATCH 1139] file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_270439051-271649592/bears_INRIA-spoon_270439051-271649592/src/main/java//spoon/Launcher.java, range: <217,221>, original: opt2.setHelp("Define tabulation size.");
+jsap.registerParameter(opt2);
+opt2=new FlaggedOption("level");
+, patch: opt2.setDefault(OUTPUTDIR);
+opt2.setHelp("Define tabulation size.");
+jsap.registerParameter(opt2);
+opt2=new FlaggedOption("level");
+
+
+                
+                ====================== tbar_2 INRIA-spoon_270439051-271649592 ================================
+                
+                [PATCH 2107]//**********************************************************
+//spoon/Launcher.java ------ 215
+//**********************************************************
+===Buggy Code===
+opt2.setStringParser(JSAP.INTEGER_PARSER);
+			opt2.setDefault("4");
+			opt2.setHelp("Define tabulation size.");
+			jsap.registerParameter(opt2);
+
+			// Level logging.
+			opt2 = new FlaggedOption("level");
+			opt2.setLongFlag("level");
+			opt2.setHelp("Level of the ouput messages about what spoon is doing.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+
+===Patch Code===
+
+			opt2.setDefault("4");
+			opt2.setHelp("Define tabulation size.");
+			jsap.registerParameter(opt2);
+
+			// Level logging.
+			opt2 = new FlaggedOption("level");
+			opt2.setLongFlag("level");
+			opt2.setHelp("Level of the ouput messages about what spoon is doing.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+	opt2.setStringParser(JSAP.INTEGER_PARSER);
+
+
+
+                

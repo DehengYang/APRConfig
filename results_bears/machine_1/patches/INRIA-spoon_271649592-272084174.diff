@@ -1,0 +1,76 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_271649592-272084174/bears_INRIA-spoon_271649592-272084174/src/main/java/spoon/support/reflect/reference/CtTypeParameterReferenceImpl.java /tmp/fixed/bears_INRIA-spoon_271649592-272084174/src/main/java/spoon/support/reflect/reference/CtTypeParameterReferenceImpl.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_271649592-272084174/bears_INRIA-spoon_271649592-272084174/src/main/java/spoon/support/reflect/reference/CtTypeParameterReferenceImpl.java	2022-04-27 23:00:19.318176113 +0800
++++ /tmp/fixed/bears_INRIA-spoon_271649592-272084174/src/main/java/spoon/support/reflect/reference/CtTypeParameterReferenceImpl.java	2022-04-27 23:00:58.159911907 +0800
+@@ -190,12 +190,18 @@
+ 			parent = parent.getParent();
+ 		}
+ 		if (parent instanceof CtExecutableReference) {
+-			CtElement parent2 = ((CtExecutableReference) parent).getExecutableDeclaration();
+-			if (parent2 instanceof CtMethod) {
+-				e = parent2;
++			CtExecutableReference parentExec = (CtExecutableReference) parent;
++			if (!parentExec.getDeclaringType().equals(e)) {
++				CtElement parent2 = parentExec.getExecutableDeclaration();
++				if (parent2 instanceof CtMethod) {
++					e = parent2;
++				} else {
++					e = e.getParent(CtFormalTypeDeclarer.class);
++				}
+ 			} else {
+ 				e = e.getParent(CtFormalTypeDeclarer.class);
+ 			}
++
+ 		} else {
+ 			e = e.getParent(CtFormalTypeDeclarer.class);
+ 		}
+
+
+                
+                ====================== simfix_2 INRIA-spoon_271649592-272084174 ================================
+                
+                [PATCH 1139] file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_271649592-272084174/bears_INRIA-spoon_271649592-272084174/src/main/java//spoon/Launcher.java, range: <217,221>, original: opt2.setHelp("Define tabulation size.");
+jsap.registerParameter(opt2);
+opt2=new FlaggedOption("level");
+, patch: opt2.setDefault(OUTPUTDIR);
+opt2.setHelp("Define tabulation size.");
+jsap.registerParameter(opt2);
+opt2=new FlaggedOption("level");
+
+
+                
+                ====================== tbar_2 INRIA-spoon_271649592-272084174 ================================
+                
+                [PATCH 2107]//**********************************************************
+//spoon/Launcher.java ------ 215
+//**********************************************************
+===Buggy Code===
+opt2.setStringParser(JSAP.INTEGER_PARSER);
+			opt2.setDefault("4");
+			opt2.setHelp("Define tabulation size.");
+			jsap.registerParameter(opt2);
+
+			// Level logging.
+			opt2 = new FlaggedOption("level");
+			opt2.setLongFlag("level");
+			opt2.setHelp("Level of the ouput messages about what spoon is doing.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+
+===Patch Code===
+
+			opt2.setDefault("4");
+			opt2.setHelp("Define tabulation size.");
+			jsap.registerParameter(opt2);
+
+			// Level logging.
+			opt2 = new FlaggedOption("level");
+			opt2.setLongFlag("level");
+			opt2.setHelp("Level of the ouput messages about what spoon is doing.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+	opt2.setStringParser(JSAP.INTEGER_PARSER);
+
+
+
+                

@@ -1,0 +1,117 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_255051210-255052458/bears_traccar-traccar_255051210-255052458/src/org/traccar/BaseProtocolDecoder.java /tmp/fixed/bears_traccar-traccar_255051210-255052458/src/org/traccar/BaseProtocolDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_255051210-255052458/bears_traccar-traccar_255051210-255052458/src/org/traccar/BaseProtocolDecoder.java	2022-05-19 21:37:50.161232672 +0800
++++ /tmp/fixed/bears_traccar-traccar_255051210-255052458/src/org/traccar/BaseProtocolDecoder.java	2022-05-19 21:38:25.370341370 +0800
+@@ -106,7 +106,7 @@
+     }
+ 
+     public DeviceSession getDeviceSession(Channel channel, SocketAddress remoteAddress, String... uniqueIds) {
+-        if (channel.getPipeline().get(HttpRequestDecoder.class) != null
++        if (channel != null && channel.getPipeline().get(HttpRequestDecoder.class) != null
+                 || Context.getConfig().getBoolean("decoder.ignoreSessionCache")) {
+             long deviceId = findDeviceId(remoteAddress, uniqueIds);
+             if (deviceId != 0) {
+
+
+                
+                ====================== dynamoth_1 traccar-traccar_255051210-255052458 ================================
+                
+                --- a/src/org/traccar/BaseProtocolDecoder.java
++++ b/src/org/traccar/BaseProtocolDecoder.java
+@@ -108,12 +108,14 @@
+public DeviceSession getDeviceSession(Channel channel, SocketAddress remoteAddress, String... uniqueIds) {
+-        if (channel.getPipeline().get(HttpRequestDecoder.class) != null
+-                || Context.getConfig().getBoolean("decoder.ignoreSessionCache")) {
+-            long deviceId = findDeviceId(remoteAddress, uniqueIds);
+-            if (deviceId != 0) {
+-                if (Context.getConnectionManager() != null) {
+-                    Context.getConnectionManager().addActiveDevice(deviceId, protocol, channel, remoteAddress);
++        if (false) {
++            if (channel.getPipeline().get(HttpRequestDecoder.class) != null
++            || Context.getConfig().getBoolean("decoder.ignoreSessionCache")) {
++                long deviceId = findDeviceId(remoteAddress, uniqueIds);
++                if (deviceId != 0) {
++                    if (Context.getConnectionManager() != null) {
++                        Context.getConnectionManager().addActiveDevice(deviceId, protocol, channel, remoteAddress);
++                    }
++                    return new DeviceSession(deviceId);
++                } else {
++                    return null;
+}
+-                return new DeviceSession(deviceId);
+-            } else {
+-                return null;
+}
+
+
+
+
+                
+                ====================== dynamoth_2 traccar-traccar_255051210-255052458 ================================
+                
+                --- a/src/org/traccar/BaseProtocolDecoder.java
++++ b/src/org/traccar/BaseProtocolDecoder.java
+@@ -108,12 +108,14 @@
+public DeviceSession getDeviceSession(Channel channel, SocketAddress remoteAddress, String... uniqueIds) {
+-        if (channel.getPipeline().get(HttpRequestDecoder.class) != null
+-                || Context.getConfig().getBoolean("decoder.ignoreSessionCache")) {
+-            long deviceId = findDeviceId(remoteAddress, uniqueIds);
+-            if (deviceId != 0) {
+-                if (Context.getConnectionManager() != null) {
+-                    Context.getConnectionManager().addActiveDevice(deviceId, protocol, channel, remoteAddress);
++        if (false) {
++            if (channel.getPipeline().get(HttpRequestDecoder.class) != null
++            || Context.getConfig().getBoolean("decoder.ignoreSessionCache")) {
++                long deviceId = findDeviceId(remoteAddress, uniqueIds);
++                if (deviceId != 0) {
++                    if (Context.getConnectionManager() != null) {
++                        Context.getConnectionManager().addActiveDevice(deviceId, protocol, channel, remoteAddress);
++                    }
++                    return new DeviceSession(deviceId);
++                } else {
++                    return null;
+}
+-                return new DeviceSession(deviceId);
+-            } else {
+-                return null;
+}
+
+
+
+
+                
+                ====================== dynamoth_3 traccar-traccar_255051210-255052458 ================================
+                
+                --- a/src/org/traccar/BaseProtocolDecoder.java
++++ b/src/org/traccar/BaseProtocolDecoder.java
+@@ -108,12 +108,14 @@
+public DeviceSession getDeviceSession(Channel channel, SocketAddress remoteAddress, String... uniqueIds) {
+-        if (channel.getPipeline().get(HttpRequestDecoder.class) != null
+-                || Context.getConfig().getBoolean("decoder.ignoreSessionCache")) {
+-            long deviceId = findDeviceId(remoteAddress, uniqueIds);
+-            if (deviceId != 0) {
+-                if (Context.getConnectionManager() != null) {
+-                    Context.getConnectionManager().addActiveDevice(deviceId, protocol, channel, remoteAddress);
++        if (false) {
++            if (channel.getPipeline().get(HttpRequestDecoder.class) != null
++            || Context.getConfig().getBoolean("decoder.ignoreSessionCache")) {
++                long deviceId = findDeviceId(remoteAddress, uniqueIds);
++                if (deviceId != 0) {
++                    if (Context.getConnectionManager() != null) {
++                        Context.getConnectionManager().addActiveDevice(deviceId, protocol, channel, remoteAddress);
++                    }
++                    return new DeviceSession(deviceId);
++                } else {
++                    return null;
+}
+-                return new DeviceSession(deviceId);
+-            } else {
+-                return null;
+}
+
+
+
+
+                

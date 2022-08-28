@@ -1,0 +1,65 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_254745624-256471804/bears_INRIA-spoon_254745624-256471804/src/main/java/spoon/support/compiler/jdt/ReferenceBuilder.java /tmp/fixed/bears_INRIA-spoon_254745624-256471804/src/main/java/spoon/support/compiler/jdt/ReferenceBuilder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_254745624-256471804/bears_INRIA-spoon_254745624-256471804/src/main/java/spoon/support/compiler/jdt/ReferenceBuilder.java	2022-04-24 12:49:51.120255721 +0800
++++ /tmp/fixed/bears_INRIA-spoon_254745624-256471804/src/main/java/spoon/support/compiler/jdt/ReferenceBuilder.java	2022-04-24 12:50:32.846121188 +0800
+@@ -540,6 +540,10 @@
+ 			CtPackageReference packageReference = index >= 0 ? packageFactory.getOrCreate(concatSubArray(namesParameterized, index)).getReference() : packageFactory.topLevel();
+ 			inner.setPackage(packageReference);
+ 		}
++		if (!res.toString().replace(", ?", ",?").endsWith(CharOperation.toString(ref.getParameterizedTypeName()))) {
++			// verify that we did not match a class that have the same name in a different package
++			return this.jdtTreeBuilder.getFactory().Type().createReference(CharOperation.toString(ref.getParameterizedTypeName()));
++		}
+ 		return res;
+ 	}
+ 
+
+
+                
+                ====================== simfix_2 INRIA-spoon_254745624-256471804 ================================
+                
+                [PATCH 1135] file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_254745624-256471804/bears_INRIA-spoon_254745624-256471804/src/main/java//spoon/Launcher.java, range: <216,220>, original: opt2.setHelp("Define tabulation size.");
+jsap.registerParameter(opt2);
+opt2=new FlaggedOption("level");
+, patch: opt2.setDefault(OUTPUTDIR);
+opt2.setHelp("Define tabulation size.");
+jsap.registerParameter(opt2);
+opt2=new FlaggedOption("level");
+
+
+                
+                ====================== tbar_2 INRIA-spoon_254745624-256471804 ================================
+                
+                [PATCH 2107]//**********************************************************
+//spoon/Launcher.java ------ 214
+//**********************************************************
+===Buggy Code===
+opt2.setStringParser(JSAP.INTEGER_PARSER);
+			opt2.setDefault("4");
+			opt2.setHelp("Define tabulation size.");
+			jsap.registerParameter(opt2);
+
+			// Level logging.
+			opt2 = new FlaggedOption("level");
+			opt2.setLongFlag("level");
+			opt2.setHelp("Level of the ouput messages about what spoon is doing.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+
+===Patch Code===
+
+			opt2.setDefault("4");
+			opt2.setHelp("Define tabulation size.");
+			jsap.registerParameter(opt2);
+
+			// Level logging.
+			opt2 = new FlaggedOption("level");
+			opt2.setLongFlag("level");
+			opt2.setHelp("Level of the ouput messages about what spoon is doing.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+	opt2.setStringParser(JSAP.INTEGER_PARSER);
+
+
+
+                

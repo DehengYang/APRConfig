@@ -1,0 +1,17 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_debezium-debezium_324040188-324047191/bears_debezium-debezium_324040188-324047191/debezium-connector-mysql/src/main/java/io/debezium/connector/mysql/MySqlDdlParser.java /tmp/fixed/bears_debezium-debezium_324040188-324047191/debezium-connector-mysql/src/main/java/io/debezium/connector/mysql/MySqlDdlParser.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_debezium-debezium_324040188-324047191/bears_debezium-debezium_324040188-324047191/debezium-connector-mysql/src/main/java/io/debezium/connector/mysql/MySqlDdlParser.java	2022-04-25 01:19:47.321014325 +0800
++++ /tmp/fixed/bears_debezium-debezium_324040188-324047191/debezium-connector-mysql/src/main/java/io/debezium/connector/mysql/MySqlDdlParser.java	2022-04-25 01:20:36.102914104 +0800
+@@ -1225,6 +1225,7 @@
+                 }
+                 String columnName = parseColumnName();
+                 table.removeColumn(columnName);
++                tokens.canConsume("RESTRICT");
+             }
+         } else if (tokens.canConsume("ALTER")) {
+             if (!isNextTokenQuotedIdentifier()) {
+
+
+                

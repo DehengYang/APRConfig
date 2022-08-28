@@ -1,0 +1,84 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_233857275-234147085/bears_FasterXML-jackson-databind_233857275-234147085/src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java /tmp/fixed/bears_FasterXML-jackson-databind_233857275-234147085/src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_233857275-234147085/bears_FasterXML-jackson-databind_233857275-234147085/src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java	2022-06-01 20:46:06.583101528 +0800
++++ /tmp/fixed/bears_FasterXML-jackson-databind_233857275-234147085/src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java	2022-06-01 20:46:29.040042883 +0800
+@@ -13,6 +13,7 @@
+ import java.util.regex.Pattern;
+ 
+ import com.fasterxml.jackson.core.*;
++import com.fasterxml.jackson.core.util.VersionUtil;
+ import com.fasterxml.jackson.databind.DeserializationContext;
+ import com.fasterxml.jackson.databind.JavaType;
+ import com.fasterxml.jackson.databind.JsonMappingException;
+@@ -112,10 +113,10 @@
+             }
+             Exception cause = null;
+             try {
+-                T result = _deserialize(text, ctxt);
+-                if (result != null) {
+-                    return result;
+-                }
++                // 19-May-2017, tatu: Used to require non-null result (assuming `null`
++                //    indicated error; but that seems wrong. Should be able to return
++                //    `null` as value.
++                return _deserialize(text, ctxt);
+             } catch (IllegalArgumentException iae) {
+                 cause = iae;
+             } catch (MalformedURLException me) {
+@@ -277,7 +278,8 @@
+             case STD_STRING_BUILDER:
+                 return new StringBuilder(value);
+             }
+-            throw new IllegalArgumentException();
++            VersionUtil.throwInternal();
++            return null;
+         }
+ 
+         @Override
+
+
+                
+                ====================== dynamoth_1 FasterXML-jackson-databind_233857275-234147085 ================================
+                
+                --- a/src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java
++++ b/src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java
+@@ -115,3 +115,3 @@
+T result = _deserialize(text, ctxt);
+-                if (result != null) {
++                if (true) {
+return result;
+
+
+
+
+                
+                ====================== dynamoth_2 FasterXML-jackson-databind_233857275-234147085 ================================
+                
+                --- a/src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java
++++ b/src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java
+@@ -115,3 +115,3 @@
+T result = _deserialize(text, ctxt);
+-                if (result != null) {
++                if (true) {
+return result;
+
+
+
+
+                
+                ====================== dynamoth_3 FasterXML-jackson-databind_233857275-234147085 ================================
+                
+                --- a/src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java
++++ b/src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java
+@@ -115,3 +115,3 @@
+T result = _deserialize(text, ctxt);
+-                if (result != null) {
++                if (true) {
+return result;
+
+
+
+
+                

@@ -1,0 +1,62 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_192604168-192969999/bears_INRIA-spoon_192604168-192969999/src/main/java/spoon/reflect/visitor/chain/CtQueryImpl.java /tmp/fixed/bears_INRIA-spoon_192604168-192969999/src/main/java/spoon/reflect/visitor/chain/CtQueryImpl.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_192604168-192969999/bears_INRIA-spoon_192604168-192969999/src/main/java/spoon/reflect/visitor/chain/CtQueryImpl.java	2022-04-30 13:47:20.513947462 +0800
++++ /tmp/fixed/bears_INRIA-spoon_192604168-192969999/src/main/java/spoon/reflect/visitor/chain/CtQueryImpl.java	2022-04-30 13:47:47.111133969 +0800
+@@ -279,7 +279,12 @@
+ 		}
+ 
+ 		private boolean isFailOnCCE() {
+-			return getStep().isFailOnCCE();
++			AbstractStep step = getStep();
++			if (step == null) {
++				//it is final consumer. Never throw CCE on final forEach consumer
++				return false;
++			}
++			return step.isFailOnCCE();
+ 		}
+ 
+ 		private AbstractStep getStep() {
+
+
+                
+                ====================== tbar_1 INRIA-spoon_192604168-192969999 ================================
+                
+                [PATCH 10]//**********************************************************
+//spoon/reflect/visitor/chain/CtQueryImpl.java ------ 261
+//**********************************************************
+===Buggy Code===
+onClassCastException(this, e, input);
+
+===Patch Code===
+
+
+
+                
+                ====================== tbar_2 INRIA-spoon_192604168-192969999 ================================
+                
+                [PATCH 10]//**********************************************************
+//spoon/reflect/visitor/chain/CtQueryImpl.java ------ 261
+//**********************************************************
+===Buggy Code===
+onClassCastException(this, e, input);
+
+===Patch Code===
+
+
+
+                
+                ====================== tbar_3 INRIA-spoon_192604168-192969999 ================================
+                
+                //**********************************************************
+//spoon/reflect/visitor/chain/CtQueryImpl.java ------ 261
+//**********************************************************
+===Buggy Code===
+onClassCastException(this, e, input);
+
+===Patch Code===
+
+
+
+                

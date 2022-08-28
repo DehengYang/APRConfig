@@ -1,0 +1,106 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_277315604-277340707/bears_INRIA-spoon_277315604-277340707/src/main/java/spoon/template/Substitution.java /tmp/fixed/bears_INRIA-spoon_277315604-277340707/src/main/java/spoon/template/Substitution.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_277315604-277340707/bears_INRIA-spoon_277315604-277340707/src/main/java/spoon/template/Substitution.java	2022-04-28 21:18:06.002939835 +0800
++++ /tmp/fixed/bears_INRIA-spoon_277315604-277340707/src/main/java/spoon/template/Substitution.java	2022-04-28 21:18:45.560708718 +0800
+@@ -671,29 +671,31 @@
+ 			Parameter templateParamAnnotation = f.getAnnotation(Parameter.class);
+ 			if (templateParamAnnotation != null && !templateParamAnnotation.value().equals("")) {
+ 				String proxyName = templateParamAnnotation.value();
+-				// contract: if value, then the field type must be String
+-				if (!f.getType().equals(c.getFactory().Type().STRING)) {
+-					throw new TemplateException("proxy template parameter must be typed as String " +  f.getType().getQualifiedName());
+-				}
+-
+-				// contract: the name of the template parameter must correspond to the name of the field
+-				// as found, by Pavel, this is not good contract because it prevents easy refactoring of templates
+-				// we remove it but keep th commented code in case somebody would come up with this bad idae
+-//				if (!f.getSimpleName().equals("_" + f.getAnnotation(Parameter.class).value())) {
+-//					throw new TemplateException("the field name of a proxy template parameter must be called _" + f.getSimpleName());
+-//				}
++				// contract: if value, then the field type must be String or CtTypeReference
++				String fieldTypeQName = f.getType().getQualifiedName();
++				if (fieldTypeQName.equals(String.class.getName())) {
++					// contract: the name of the template parameter must correspond to the name of the field
++					// as found, by Pavel, this is not good contract because it prevents easy refactoring of templates
++					// we remove it but keep th commented code in case somebody would come up with this bad idae
++//					if (!f.getSimpleName().equals("_" + f.getAnnotation(Parameter.class).value())) {
++//						throw new TemplateException("the field name of a proxy template parameter must be called _" + f.getSimpleName());
++//					}
+ 
+-				// contract: if a proxy parameter is declared and named "x" (@Parameter("x")), then a type member named "x" must exist.
+-				boolean found = false;
+-				for (CtTypeMember member: c.getTypeMembers()) {
+-					if (member.getSimpleName().equals(proxyName)) {
+-						found = true;
++					// contract: if a proxy parameter is declared and named "x" (@Parameter("x")), then a type member named "x" must exist.
++					boolean found = false;
++					for (CtTypeMember member: c.getTypeMembers()) {
++						if (member.getSimpleName().equals(proxyName)) {
++							found = true;
++						}
+ 					}
++					if (!found) {
++						throw new TemplateException("if a proxy parameter is declared and named \"" + proxyName + "\", then a type member named \"\" + proxyName + \"\" must exist.");
++					}
++				} else if (fieldTypeQName.equals(CtTypeReference.class.getName())) {
++					//OK it is CtTypeReference
++				} else {
++					throw new TemplateException("proxy template parameter must be typed as String or CtTypeReference, but it is " + fieldTypeQName);
+ 				}
+-				if (!found) {
+-					throw new TemplateException("if a proxy parameter is declared and named \"" + proxyName + "\", then a type member named \"\" + proxyName + \"\" must exist.");
+-				}
+-
+ 			}
+ 		}
+ 	}
+
+
+                
+                ====================== simfix_2 INRIA-spoon_277315604-277340707 ================================
+                
+                [PATCH 1139] file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_277315604-277340707/bears_INRIA-spoon_277315604-277340707/src/main/java//spoon/Launcher.java, range: <217,221>, original: opt2.setHelp("Define tabulation size.");
+jsap.registerParameter(opt2);
+opt2=new FlaggedOption("level");
+, patch: opt2.setDefault(OUTPUTDIR);
+opt2.setHelp("Define tabulation size.");
+jsap.registerParameter(opt2);
+opt2=new FlaggedOption("level");
+
+
+                
+                ====================== tbar_2 INRIA-spoon_277315604-277340707 ================================
+                
+                [PATCH 2107]//**********************************************************
+//spoon/Launcher.java ------ 215
+//**********************************************************
+===Buggy Code===
+opt2.setStringParser(JSAP.INTEGER_PARSER);
+			opt2.setDefault("4");
+			opt2.setHelp("Define tabulation size.");
+			jsap.registerParameter(opt2);
+
+			// Level logging.
+			opt2 = new FlaggedOption("level");
+			opt2.setLongFlag("level");
+			opt2.setHelp("Level of the ouput messages about what spoon is doing.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+
+===Patch Code===
+
+			opt2.setDefault("4");
+			opt2.setHelp("Define tabulation size.");
+			jsap.registerParameter(opt2);
+
+			// Level logging.
+			opt2 = new FlaggedOption("level");
+			opt2.setLongFlag("level");
+			opt2.setHelp("Level of the ouput messages about what spoon is doing.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+	opt2.setStringParser(JSAP.INTEGER_PARSER);
+
+
+
+                

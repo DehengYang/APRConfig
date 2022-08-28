@@ -1,0 +1,133 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_195128524-195455832/bears_traccar-traccar_195128524-195455832/src/org/traccar/events/IgnitionEventHandler.java /tmp/fixed/bears_traccar-traccar_195128524-195455832/src/org/traccar/events/IgnitionEventHandler.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_195128524-195455832/bears_traccar-traccar_195128524-195455832/src/org/traccar/events/IgnitionEventHandler.java	2022-04-20 21:10:30.943697223 +0800
++++ /tmp/fixed/bears_traccar-traccar_195128524-195455832/src/org/traccar/events/IgnitionEventHandler.java	2022-04-20 21:11:12.353549418 +0800
+@@ -39,20 +39,21 @@
+ 
+         Collection<Event> result = null;
+ 
+-        boolean ignition = position.getBoolean(Position.KEY_IGNITION);
++        if (position.getAttributes().containsKey(Position.KEY_IGNITION)) {
++            boolean ignition = position.getBoolean(Position.KEY_IGNITION);
+ 
+-        boolean oldIgnition = false;
+-        Position lastPosition = Context.getIdentityManager().getLastPosition(position.getDeviceId());
+-        if (lastPosition != null) {
+-            oldIgnition = lastPosition.getBoolean(Position.KEY_IGNITION);
+-        }
++            Position lastPosition = Context.getIdentityManager().getLastPosition(position.getDeviceId());
++            if (lastPosition != null && lastPosition.getAttributes().containsKey(Position.KEY_IGNITION)) {
++                boolean oldIgnition = lastPosition.getBoolean(Position.KEY_IGNITION);
+ 
+-        if (ignition && !oldIgnition) {
+-            result = Collections.singleton(
+-                    new Event(Event.TYPE_IGNITION_ON, position.getDeviceId(), position.getId()));
+-        } else if (!ignition && oldIgnition) {
+-            result = Collections.singleton(
+-                    new Event(Event.TYPE_IGNITION_OFF, position.getDeviceId(), position.getId()));
++                if (ignition && !oldIgnition) {
++                    result = Collections.singleton(
++                            new Event(Event.TYPE_IGNITION_ON, position.getDeviceId(), position.getId()));
++                } else if (!ignition && oldIgnition) {
++                    result = Collections.singleton(
++                            new Event(Event.TYPE_IGNITION_OFF, position.getDeviceId(), position.getId()));
++                }
++            }
+         }
+         return result;
+     }
+
+
+                
+                ====================== simfix_1 traccar-traccar_195128524-195455832 ================================
+                
+                [PATCH 4] file: /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_195128524-195455832/bears_traccar-traccar_195128524-195455832/src//org/traccar/events/IgnitionEventHandler.java, range: <32,35>, original: Device device=Context.getIdentityManager().getDeviceById(position.getDeviceId());
+if(device==null){
+return null;
+}
+, patch: Device device=Context.getIdentityManager().getDeviceById(position.getDeviceId());
+if(device!=null){
+return null;
+}
+
+
+                
+                ====================== simfix_2 traccar-traccar_195128524-195455832 ================================
+                
+                [PATCH 4] file: /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_195128524-195455832/bears_traccar-traccar_195128524-195455832/src//org/traccar/events/IgnitionEventHandler.java, range: <32,35>, original: Device device=Context.getIdentityManager().getDeviceById(position.getDeviceId());
+if(device==null){
+return null;
+}
+, patch: Device device=Context.getIdentityManager().getDeviceById(position.getDeviceId());
+if(device!=null){
+return null;
+}
+
+
+                
+                ====================== simfix_3 traccar-traccar_195128524-195455832 ================================
+                
+                [PATCH 4] file: /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_195128524-195455832/bears_traccar-traccar_195128524-195455832/src//org/traccar/events/IgnitionEventHandler.java, range: <32,35>, original: Device device=Context.getIdentityManager().getDeviceById(position.getDeviceId());
+if(device==null){
+return null;
+}
+, patch: Device device=Context.getIdentityManager().getDeviceById(position.getDeviceId());
+if(device!=null){
+return null;
+}
+
+
+                
+                ====================== tbar_1 traccar-traccar_195128524-195455832 ================================
+                
+                [PATCH 9]//**********************************************************
+//org/traccar/events/IgnitionEventHandler.java ------ 33
+//**********************************************************
+===Buggy Code===
+if (device == null) {
+            return null;
+        }
+
+===Patch Code===
+if (device != null) {
+            return null;
+        }
+
+
+                
+                ====================== tbar_2 traccar-traccar_195128524-195455832 ================================
+                
+                [PATCH 9]//**********************************************************
+//org/traccar/events/IgnitionEventHandler.java ------ 33
+//**********************************************************
+===Buggy Code===
+if (device == null) {
+            return null;
+        }
+
+===Patch Code===
+if (device != null) {
+            return null;
+        }
+
+
+                
+                ====================== tbar_3 traccar-traccar_195128524-195455832 ================================
+                
+                [PATCH 9]//**********************************************************
+//org/traccar/events/IgnitionEventHandler.java ------ 33
+//**********************************************************
+===Buggy Code===
+if (device == null) {
+            return null;
+        }
+
+===Patch Code===
+if (device != null) {
+            return null;
+        }
+
+
+                

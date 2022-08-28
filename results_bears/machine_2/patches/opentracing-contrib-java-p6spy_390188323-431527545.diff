@@ -1,0 +1,104 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_opentracing-contrib-java-p6spy_390188323-431527545/bears_opentracing-contrib-java-p6spy_390188323-431527545/src/main/java/io/opentracing/contrib/p6spy/TracingP6SpyListener.java /tmp/fixed/bears_opentracing-contrib-java-p6spy_390188323-431527545/src/main/java/io/opentracing/contrib/p6spy/TracingP6SpyListener.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_opentracing-contrib-java-p6spy_390188323-431527545/bears_opentracing-contrib-java-p6spy_390188323-431527545/src/main/java/io/opentracing/contrib/p6spy/TracingP6SpyListener.java	2022-04-24 20:44:51.749785472 +0800
++++ /tmp/fixed/bears_opentracing-contrib-java-p6spy_390188323-431527545/src/main/java/io/opentracing/contrib/p6spy/TracingP6SpyListener.java	2022-04-24 20:45:13.574633743 +0800
+@@ -122,13 +122,17 @@
+ 
+     Tags.COMPONENT.set(span, "java-p6spy");
+     Tags.DB_STATEMENT.set(span, statementInformation.getSql());
+-    Tags.DB_TYPE.set(span, extractDbType(dbUrl));
+-    Tags.DB_INSTANCE.set(span, dbInstance);
+-    span.setTag("peer.address", dbUrl);
+-    if (peerName != null && !peerName.isEmpty()) {
++    if (!isNullOrEmpty(dbUrl)) {
++      span.setTag("peer.address", dbUrl);
++      Tags.DB_TYPE.set(span, extractDbType(dbUrl));
++    }
++    if (!isNullOrEmpty(dbInstance)) {
++      Tags.DB_INSTANCE.set(span, dbInstance);
++    }
++    if (!isNullOrEmpty(peerName)) {
+       Tags.PEER_SERVICE.set(span, peerName);
+     }
+-    if (dbUser != null && !dbUser.isEmpty()) {
++    if (!isNullOrEmpty(dbUser)) {
+       Tags.DB_USER.set(span, dbUser);
+     }
+   }
+@@ -138,9 +142,11 @@
+   }
+ 
+   private static String extractPeerService(String url) {
+-    Matcher matcher = URL_PEER_SERVICE_FINDER.matcher(url);
+-    if (matcher.find() && matcher.groupCount() == 1) {
+-      return matcher.group(1);
++    if (url != null) {
++      Matcher matcher = URL_PEER_SERVICE_FINDER.matcher(url);
++      if (matcher.find() && matcher.groupCount() == 1) {
++        return matcher.group(1);
++      }
+     }
+     return "";
+   }
+@@ -167,4 +173,8 @@
+     }
+     return OptionalBoolean.OPTION_NOT_FOUND;
+   }
++
++  private static boolean isNullOrEmpty(String s) {
++    return s == null || s.isEmpty();
++  }
+ }
+
+
+                
+                ====================== tbar_1 opentracing-contrib-java-p6spy_390188323-431527545 ================================
+                
+                [PATCH 120]//**********************************************************
+//io/opentracing/contrib/p6spy/TracingP6SpyListener.java ------ 112
+//**********************************************************
+===Buggy Code===
+final String extractedPeerName = extractPeerService(dbUrl);
+
+===Patch Code===
+if (dbUrl == null) {
+	    return;
+	}
+final String extractedPeerName = extractPeerService(dbUrl);
+
+
+                
+                ====================== tbar_2 opentracing-contrib-java-p6spy_390188323-431527545 ================================
+                
+                [PATCH 120]//**********************************************************
+//io/opentracing/contrib/p6spy/TracingP6SpyListener.java ------ 112
+//**********************************************************
+===Buggy Code===
+final String extractedPeerName = extractPeerService(dbUrl);
+
+===Patch Code===
+if (dbUrl == null) {
+	    return;
+	}
+final String extractedPeerName = extractPeerService(dbUrl);
+
+
+                
+                ====================== tbar_3 opentracing-contrib-java-p6spy_390188323-431527545 ================================
+                
+                [PATCH 120]//**********************************************************
+//io/opentracing/contrib/p6spy/TracingP6SpyListener.java ------ 112
+//**********************************************************
+===Buggy Code===
+final String extractedPeerName = extractPeerService(dbUrl);
+
+===Patch Code===
+if (dbUrl == null) {
+	    return;
+	}
+final String extractedPeerName = extractPeerService(dbUrl);
+
+
+                

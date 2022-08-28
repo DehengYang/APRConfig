@@ -1,0 +1,63 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_225874246-226678972/bears_traccar-traccar_225874246-226678972/src/org/traccar/protocol/L100ProtocolDecoder.java /tmp/fixed/bears_traccar-traccar_225874246-226678972/src/org/traccar/protocol/L100ProtocolDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_225874246-226678972/bears_traccar-traccar_225874246-226678972/src/org/traccar/protocol/L100ProtocolDecoder.java	2022-04-23 10:54:40.259207391 +0800
++++ /tmp/fixed/bears_traccar-traccar_225874246-226678972/src/org/traccar/protocol/L100ProtocolDecoder.java	2022-04-23 10:55:24.397180797 +0800
+@@ -40,8 +40,9 @@
+             .text("ATL")
+             .number("(d{15}),")                  // imei
+             .text("$GPRMC,")
+-            .number("(dd)(dd)(dd).(ddd),")       // time (hhmmss.sss)
+-            .expression("([AV]),")               // validity
++            .number("(dd)(dd)(dd)")              // time (hhmmss.sss)
++            .number(".(ddd)").optional()
++            .expression(",([AV]),")              // validity
+             .number("(dd)(dd.d+),")              // latitude
+             .expression("([NS]),")
+             .number("(ddd)(dd.d+),")             // longitude
+@@ -52,7 +53,7 @@
+             .any()
+             .text("#")
+             .number("([01]+),")                  // io status
+-            .number("(d+.d+|N.C),")              // adc
++            .number("(d+.?d*|N.C),")             // adc
+             .expression("[^,]*,")                // reserved
+             .expression("[^,]*,")                // reserved
+             .number("(d+.d+),")                  // odometer
+@@ -61,8 +62,8 @@
+             .number("(d+),")                     // gsm
+             .number("(d+),")                     // mcc
+             .number("(d+),")                     // mnc
+-            .number("(d+),")                     // lac
+-            .number("(d+)")                      // cid
++            .number("(x+),")                     // lac
++            .number("(x+)")                      // cid
+             .text("ATL")
+             .compile();
+ 
+@@ -111,7 +112,7 @@
+ 
+         int rssi = parser.nextInt(0);
+         position.setNetwork(new Network(CellTower.from(
+-                parser.nextInt(0), parser.nextInt(0), parser.nextInt(0), parser.nextInt(0), rssi)));
++                parser.nextInt(0), parser.nextInt(0), parser.nextHexInt(0), parser.nextHexInt(0), rssi)));
+ 
+         return position;
+     }
+
+
+                
+                ====================== tbar_1 traccar-traccar_225874246-226678972 ================================
+                
+                [PATCH 291]//**********************************************************
+//org/traccar/helper/PatternBuilder.java ------ 48
+//**********************************************************
+===Buggy Code===
+s = s.replace("dddd", "d{4}").replace("ddd", "d{3}").replace("dd", "d{2}");
+
+===Patch Code===
+s = toString().replace("dddd", "d{4}").replace("ddd", "d{3}").replace("dd", "d{2}");
+
+
+                

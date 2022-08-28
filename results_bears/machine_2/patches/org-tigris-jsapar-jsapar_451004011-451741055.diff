@@ -1,0 +1,79 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_org-tigris-jsapar-jsapar_451004011-451741055/bears_org-tigris-jsapar-jsapar_451004011-451741055/src/main/java/org/jsapar/compose/bean/BeanComposer.java /tmp/fixed/bears_org-tigris-jsapar-jsapar_451004011-451741055/src/main/java/org/jsapar/compose/bean/BeanComposer.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_org-tigris-jsapar-jsapar_451004011-451741055/bears_org-tigris-jsapar-jsapar_451004011-451741055/src/main/java/org/jsapar/compose/bean/BeanComposer.java	2022-05-19 21:44:14.000000000 +0800
++++ /tmp/fixed/bears_org-tigris-jsapar-jsapar_451004011-451741055/src/main/java/org/jsapar/compose/bean/BeanComposer.java	2022-05-19 21:44:31.213639914 +0800
+@@ -136,7 +136,7 @@
+ 
+         for (Cell cell : line) {
+             String sName = cell.getName();
+-            if (sName == null || sName.isEmpty())
++            if (sName == null || sName.isEmpty() || cell.isEmpty())
+                 continue;
+ 
+             try {
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_org-tigris-jsapar-jsapar_451004011-451741055/bears_org-tigris-jsapar-jsapar_451004011-451741055/src/main/java/org/jsapar/parse/bean/Bean2Cell.java /tmp/fixed/bears_org-tigris-jsapar-jsapar_451004011-451741055/src/main/java/org/jsapar/parse/bean/Bean2Cell.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_org-tigris-jsapar-jsapar_451004011-451741055/bears_org-tigris-jsapar-jsapar_451004011-451741055/src/main/java/org/jsapar/parse/bean/Bean2Cell.java	2022-05-19 21:44:14.000000000 +0800
++++ /tmp/fixed/bears_org-tigris-jsapar-jsapar_451004011-451741055/src/main/java/org/jsapar/parse/bean/Bean2Cell.java	2022-05-19 21:44:31.213639914 +0800
+@@ -228,6 +228,9 @@
+ 
+     public void assign(Object bean, Cell cell)
+             throws BeanComposeException, InvocationTargetException, IllegalAccessException, InstantiationException {
++        if(cell.isEmpty()) {
++            return;
++        }
+         if (isLeaf()) {
+             assignProperty(bean, cell);
+             return;
+
+
+                
+                ====================== dynamoth_1 org-tigris-jsapar-jsapar_451004011-451741055 ================================
+                
+                --- a/src/main/java/org/jsapar/parse/bean/Bean2Cell.java
++++ b/src/main/java/org/jsapar/parse/bean/Bean2Cell.java
+@@ -179,3 +179,5 @@
+Class paramType = setter.getParameterTypes()[0];
+-        setter.invoke(bean, customCast(paramType, cell));
++        if (this.isLeaf() != cell.isEmpty()) {
++            setter.invoke(bean, customCast(paramType, cell));
++        }
+}
+
+
+
+
+                
+                ====================== dynamoth_2 org-tigris-jsapar-jsapar_451004011-451741055 ================================
+                
+                --- a/src/main/java/org/jsapar/parse/bean/Bean2Cell.java
++++ b/src/main/java/org/jsapar/parse/bean/Bean2Cell.java
+@@ -179,3 +179,5 @@
+Class paramType = setter.getParameterTypes()[0];
+-        setter.invoke(bean, customCast(paramType, cell));
++        if (this.isLeaf() != cell.isEmpty()) {
++            setter.invoke(bean, customCast(paramType, cell));
++        }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 org-tigris-jsapar-jsapar_451004011-451741055 ================================
+                
+                --- a/src/main/java/org/jsapar/parse/bean/Bean2Cell.java
++++ b/src/main/java/org/jsapar/parse/bean/Bean2Cell.java
+@@ -179,3 +179,5 @@
+Class paramType = setter.getParameterTypes()[0];
+-        setter.invoke(bean, customCast(paramType, cell));
++        if (this.isLeaf() != cell.isEmpty()) {
++            setter.invoke(bean, customCast(paramType, cell));
++        }
+}
+
+
+
+
+                

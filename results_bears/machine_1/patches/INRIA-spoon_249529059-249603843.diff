@@ -1,0 +1,73 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_249529059-249603843/bears_INRIA-spoon_249529059-249603843/src/main/java/spoon/reflect/visitor/chain/CtQueryImpl.java /tmp/fixed/bears_INRIA-spoon_249529059-249603843/src/main/java/spoon/reflect/visitor/chain/CtQueryImpl.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_249529059-249603843/bears_INRIA-spoon_249529059-249603843/src/main/java/spoon/reflect/visitor/chain/CtQueryImpl.java	2022-04-24 03:51:27.235879480 +0800
++++ /tmp/fixed/bears_INRIA-spoon_249529059-249603843/src/main/java/spoon/reflect/visitor/chain/CtQueryImpl.java	2022-04-24 03:52:13.897966733 +0800
+@@ -339,9 +339,15 @@
+ 			try {
+ 				nextStep.accept(element);
+ 			} catch (ClassCastException e) {
+-				if (Launcher.LOGGER.isTraceEnabled()) {
+-					//log expected CCE ... there might be some unexpected too!
+-					Launcher.LOGGER.trace(e);
++				StackTraceElement[] stackEles = e.getStackTrace();
++				if (stackEles.length > 1 && stackEles[0].getClassName().equals(getClass().getName()) && stackEles[0].getMethodName().equals("accept")) {
++					if (Launcher.LOGGER.isTraceEnabled()) {
++						//log expected CCE ... there might be some unexpected too!
++						Launcher.LOGGER.trace(e);
++					}
++				} else {
++					//Do not ignore this exception it is not expected!
++					throw new SpoonException("Execution of query callback failed", e);
+ 				}
+ 			}
+ 		}
+
+
+                
+                ====================== simfix_2 INRIA-spoon_249529059-249603843 ================================
+                
+                [PATCH 1129] file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_249529059-249603843/bears_INRIA-spoon_249529059-249603843/src/main/java//spoon/Launcher.java, range: <216,220>, original: opt2.setHelp("Define tabulation size.");
+jsap.registerParameter(opt2);
+opt2=new FlaggedOption("level");
+, patch: opt2.setDefault(OUTPUTDIR);
+opt2.setHelp("Define tabulation size.");
+jsap.registerParameter(opt2);
+opt2=new FlaggedOption("level");
+
+
+                
+                ====================== tbar_2 INRIA-spoon_249529059-249603843 ================================
+                
+                [PATCH 2107]//**********************************************************
+//spoon/Launcher.java ------ 214
+//**********************************************************
+===Buggy Code===
+opt2.setStringParser(JSAP.INTEGER_PARSER);
+			opt2.setDefault("4");
+			opt2.setHelp("Define tabulation size.");
+			jsap.registerParameter(opt2);
+
+			// Level logging.
+			opt2 = new FlaggedOption("level");
+			opt2.setLongFlag("level");
+			opt2.setHelp("Level of the ouput messages about what spoon is doing. Default value is ALL level.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+
+===Patch Code===
+
+			opt2.setDefault("4");
+			opt2.setHelp("Define tabulation size.");
+			jsap.registerParameter(opt2);
+
+			// Level logging.
+			opt2 = new FlaggedOption("level");
+			opt2.setLongFlag("level");
+			opt2.setHelp("Level of the ouput messages about what spoon is doing. Default value is ALL level.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+	opt2.setStringParser(JSAP.INTEGER_PARSER);
+
+
+
+                

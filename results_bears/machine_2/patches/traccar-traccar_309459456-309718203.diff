@@ -1,0 +1,57 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_309459456-309718203/bears_traccar-traccar_309459456-309718203/src/org/traccar/protocol/EelinkProtocolEncoder.java /tmp/fixed/bears_traccar-traccar_309459456-309718203/src/org/traccar/protocol/EelinkProtocolEncoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_309459456-309718203/bears_traccar-traccar_309459456-309718203/src/org/traccar/protocol/EelinkProtocolEncoder.java	2022-04-24 21:34:01.488798669 +0800
++++ /tmp/fixed/bears_traccar-traccar_309459456-309718203/src/org/traccar/protocol/EelinkProtocolEncoder.java	2022-04-24 21:35:02.763206969 +0800
+@@ -65,7 +65,7 @@
+         if (connectionless) {
+             result.writeByte('E');
+             result.writeByte('L');
+-            result.writeShort(2 + 2 + 2 + buf.readableBytes()); // length
++            result.writeShort(2 + buf.readableBytes()); // length
+             result.writeShort(checksum(buf.toByteBuffer()));
+         }
+ 
+
+
+                
+                ====================== tbar_1 traccar-traccar_309459456-309718203 ================================
+                
+                [PATCH 298]//**********************************************************
+//org/traccar/protocol/EelinkProtocolEncoder.java ------ 68
+//**********************************************************
+===Buggy Code===
+result.writeShort(2 + 2 + 2 + buf.readableBytes());
+
+===Patch Code===
+result.writeShort(2 - 2 + 2 + buf.readableBytes());
+
+
+                
+                ====================== tbar_2 traccar-traccar_309459456-309718203 ================================
+                
+                [PATCH 298]//**********************************************************
+//org/traccar/protocol/EelinkProtocolEncoder.java ------ 68
+//**********************************************************
+===Buggy Code===
+result.writeShort(2 + 2 + 2 + buf.readableBytes());
+
+===Patch Code===
+result.writeShort(2 - 2 + 2 + buf.readableBytes());
+
+
+                
+                ====================== tbar_3 traccar-traccar_309459456-309718203 ================================
+                
+                [PATCH 298]//**********************************************************
+//org/traccar/protocol/EelinkProtocolEncoder.java ------ 68
+//**********************************************************
+===Buggy Code===
+result.writeShort(2 + 2 + 2 + buf.readableBytes());
+
+===Patch Code===
+result.writeShort(2 - 2 + 2 + buf.readableBytes());
+
+
+                

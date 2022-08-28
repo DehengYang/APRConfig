@@ -1,0 +1,61 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_spring-projects-spring-data-commons_289903133-292475109/bears_spring-projects-spring-data-commons_289903133-292475109/src/main/java/org/springframework/data/mapping/model/ClassGeneratingPropertyAccessorFactory.java /tmp/fixed/bears_spring-projects-spring-data-commons_289903133-292475109/src/main/java/org/springframework/data/mapping/model/ClassGeneratingPropertyAccessorFactory.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_spring-projects-spring-data-commons_289903133-292475109/bears_spring-projects-spring-data-commons_289903133-292475109/src/main/java/org/springframework/data/mapping/model/ClassGeneratingPropertyAccessorFactory.java	2022-04-29 08:34:53.507320417 +0800
++++ /tmp/fixed/bears_spring-projects-spring-data-commons_289903133-292475109/src/main/java/org/springframework/data/mapping/model/ClassGeneratingPropertyAccessorFactory.java	2022-04-29 08:35:51.393909845 +0800
+@@ -133,7 +133,10 @@
+ 	}
+ 
+ 	private static boolean isTypeInjectable(PersistentEntity<?, ?> entity) {
+-		return entity.getType().getClassLoader() != null && !entity.getType().getPackage().getName().startsWith("java");
++
++		Class<?> type = entity.getType();
++		return type.getClassLoader() != null
++				&& (type.getPackage() == null || !type.getPackage().getName().startsWith("java"));
+ 	}
+ 
+ 	private boolean hasUniquePropertyHashCodes(PersistentEntity<?, ?> entity) {
+
+
+                
+                ====================== simfix_1 spring-projects-spring-data-commons_289903133-292475109 ================================
+                
+                [PATCH 31] file: /mnt/data/bias_validation_2021/results_bears/bears_spring-projects-spring-data-commons_289903133-292475109/bears_spring-projects-spring-data-commons_289903133-292475109/src/main/java//org/springframework/data/mapping/model/ClassGeneratingPropertyAccessorFactory.java, range: <136,136>, original: return entity.getType().getClassLoader()!=null&&!entity.getType().getPackage().getName().startsWith("java");
+, patch: return ReflectionUtils.findMethod(entity.getType().getClassLoader().getClass(),"defineClass",String.class,byte[].class,Integer.TYPE,Integer.TYPE,ProtectionDomain.class)!=null;
+
+
+                
+                ====================== simfix_3 spring-projects-spring-data-commons_289903133-292475109 ================================
+                
+                 file: /mnt/data/bias_validation_2021/results_bears/bears_spring-projects-spring-data-commons_289903133-292475109/bears_spring-projects-spring-data-commons_289903133-292475109/src/main/java//org/springframework/data/mapping/model/ClassGeneratingPropertyAccessorFactory.java, range: <136,136>, original: return entity.getType().getClassLoader()!=null&&!entity.getType().getPackage().getName().startsWith("java");
+, patch: return ReflectionUtils.findMethod(entity.getType().getClassLoader().getClass(),"defineClass",String.class,byte[].class,Integer.TYPE,Integer.TYPE,ProtectionDomain.class)!=null;
+
+
+                
+                ====================== tbar_1 spring-projects-spring-data-commons_289903133-292475109 ================================
+                
+                [PATCH 281]//**********************************************************
+//org/springframework/data/mapping/model/ClassGeneratingPropertyAccessorFactory.java ------ 136
+//**********************************************************
+===Buggy Code===
+return entity.getType().getClassLoader() != null && !entity.getType().getPackage().getName().startsWith("java");
+
+===Patch Code===
+return entity.getType().getClassLoader() != null || !entity.getType().getPackage().getName().startsWith("java");
+
+
+                
+                ====================== tbar_3 spring-projects-spring-data-commons_289903133-292475109 ================================
+                
+                //**********************************************************
+//org/springframework/data/mapping/model/ClassGeneratingPropertyAccessorFactory.java ------ 136
+//**********************************************************
+===Buggy Code===
+return entity.getType().getClassLoader() != null && !entity.getType().getPackage().getName().startsWith("java");
+
+===Patch Code===
+return entity.getType().getClassLoader() != null || !entity.getType().getPackage().getName().startsWith("java");
+
+
+                

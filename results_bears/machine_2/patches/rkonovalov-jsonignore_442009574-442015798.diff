@@ -1,0 +1,114 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_rkonovalov-jsonignore_442009574-442015798/bears_rkonovalov-jsonignore_442009574-442015798/src/main/java/com/json/ignore/JsonIgnoreFields.java /tmp/fixed/bears_rkonovalov-jsonignore_442009574-442015798/src/main/java/com/json/ignore/JsonIgnoreFields.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_rkonovalov-jsonignore_442009574-442015798/bears_rkonovalov-jsonignore_442009574-442015798/src/main/java/com/json/ignore/JsonIgnoreFields.java	2022-05-19 19:11:35.755560758 +0800
++++ /tmp/fixed/bears_rkonovalov-jsonignore_442009574-442015798/src/main/java/com/json/ignore/JsonIgnoreFields.java	2022-05-19 19:11:49.259990501 +0800
+@@ -130,7 +130,7 @@
+     }
+ 
+     private boolean fieldAcceptable(Field field) {
+-        return field.getType().isPrimitive() || field.getType().isArray() || ignoredNames.contains(field.getName());
++        return /*field.getType().isPrimitive() ||*/ field.getType().isArray() || ignoredNames.contains(field.getName());
+     }
+ 
+     public void ignoreFields(Object object) throws IllegalAccessException {
+
+
+                
+                ====================== dynamoth_1 rkonovalov-jsonignore_442009574-442015798 ================================
+                
+                --- a/src/main/java/com/json/ignore/JsonIgnoreFields.java
++++ b/src/main/java/com/json/ignore/JsonIgnoreFields.java
+@@ -140,3 +140,3 @@
+for (Field field : clazz.getDeclaredFields()) {
+-            if (!fieldAcceptable(field) && fieldHasGetter(field, clazz)) {
++            if (this.isFieldIgnored((java.lang.reflect.Field) field, (java.lang.Class) clazz) || (this.fieldAcceptable((java.lang.reflect.Field) field) == this.isFieldIgnored((java.lang.reflect.Field) field, (java.lang.Class) clazz))) {
+field.setAccessible(true);
+@@ -152,3 +152,3 @@
+} else
+-                            ignoreFields(value);
++                        ignoreFields(value);
+}
+
+
+
+
+                
+                ====================== dynamoth_2 rkonovalov-jsonignore_442009574-442015798 ================================
+                
+                --- a/src/main/java/com/json/ignore/JsonIgnoreFields.java
++++ b/src/main/java/com/json/ignore/JsonIgnoreFields.java
+@@ -140,3 +140,3 @@
+for (Field field : clazz.getDeclaredFields()) {
+-            if (!fieldAcceptable(field) && fieldHasGetter(field, clazz)) {
++            if (this.isFieldIgnored((java.lang.reflect.Field) field, (java.lang.Class) clazz) || (this.fieldAcceptable((java.lang.reflect.Field) field) == this.isFieldIgnored((java.lang.reflect.Field) field, (java.lang.Class) clazz))) {
+field.setAccessible(true);
+@@ -152,3 +152,3 @@
+} else
+-                            ignoreFields(value);
++                        ignoreFields(value);
+}
+
+
+
+
+                
+                ====================== dynamoth_3 rkonovalov-jsonignore_442009574-442015798 ================================
+                
+                --- a/src/main/java/com/json/ignore/JsonIgnoreFields.java
++++ b/src/main/java/com/json/ignore/JsonIgnoreFields.java
+@@ -140,3 +140,3 @@
+for (Field field : clazz.getDeclaredFields()) {
+-            if (!fieldAcceptable(field) && fieldHasGetter(field, clazz)) {
++            if (this.isFieldIgnored((java.lang.reflect.Field) field, (java.lang.Class) clazz) || (this.fieldAcceptable((java.lang.reflect.Field) field) == this.isFieldIgnored((java.lang.reflect.Field) field, (java.lang.Class) clazz))) {
+field.setAccessible(true);
+@@ -152,3 +152,3 @@
+} else
+-                            ignoreFields(value);
++                        ignoreFields(value);
+}
+
+
+
+
+                
+                ====================== tbar_1 rkonovalov-jsonignore_442009574-442015798 ================================
+                
+                [PATCH 337]//**********************************************************
+//com/json/ignore/JsonIgnoreFields.java ------ 133
+//**********************************************************
+===Buggy Code===
+return field.getType().isPrimitive() || field.getType().isArray() || ignoredNames.contains(field.getName());
+
+===Patch Code===
+return field.getType().isPrimitive() && field.getType().isArray() || ignoredNames.contains(field.getName());
+
+
+                
+                ====================== tbar_2 rkonovalov-jsonignore_442009574-442015798 ================================
+                
+                [PATCH 337]//**********************************************************
+//com/json/ignore/JsonIgnoreFields.java ------ 133
+//**********************************************************
+===Buggy Code===
+return field.getType().isPrimitive() || field.getType().isArray() || ignoredNames.contains(field.getName());
+
+===Patch Code===
+return field.getType().isPrimitive() && field.getType().isArray() || ignoredNames.contains(field.getName());
+
+
+                
+                ====================== tbar_3 rkonovalov-jsonignore_442009574-442015798 ================================
+                
+                [PATCH 337]//**********************************************************
+//com/json/ignore/JsonIgnoreFields.java ------ 133
+//**********************************************************
+===Buggy Code===
+return field.getType().isPrimitive() || field.getType().isArray() || ignoredNames.contains(field.getName());
+
+===Patch Code===
+return field.getType().isPrimitive() && field.getType().isArray() || ignoredNames.contains(field.getName());
+
+
+                

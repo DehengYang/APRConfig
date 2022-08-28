@@ -1,0 +1,155 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_234113323-234113988/bears_INRIA-spoon_234113323-234113988/src/main/java/spoon/reflect/visitor/ImportScannerImpl.java /tmp/fixed/bears_INRIA-spoon_234113323-234113988/src/main/java/spoon/reflect/visitor/ImportScannerImpl.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_234113323-234113988/bears_INRIA-spoon_234113323-234113988/src/main/java/spoon/reflect/visitor/ImportScannerImpl.java	2022-04-29 14:09:37.173723309 +0800
++++ /tmp/fixed/bears_INRIA-spoon_234113323-234113988/src/main/java/spoon/reflect/visitor/ImportScannerImpl.java	2022-04-29 14:09:59.106704288 +0800
+@@ -73,6 +73,7 @@
+ 	protected CtTypeReference<?> targetType;
+ 	private Map<String, Boolean> namesPresentInJavaLang = new HashMap<>();
+ 	private Set<String> fieldAndMethodsNames = new HashSet<String>();
++	private Set<CtTypeReference> exploredReferences = new HashSet<>(); // list of explored references
+ 
+ 	@Override
+ 	public <T> void visitCtFieldRead(CtFieldRead<T> fieldRead) {
+@@ -248,10 +249,20 @@
+ 		}
+ 	}
+ 
++	private boolean isThereAnotherClassWithSameNameInAnotherPackage(CtTypeReference<?> ref) {
++		for (CtTypeReference typeref : this.exploredReferences) {
++			if (typeref.getSimpleName().equals(ref.getSimpleName()) && !typeref.getQualifiedName().equals(ref.getQualifiedName())) {
++				return true;
++			}
++		}
++		return false;
++	}
++
+ 	/**
+ 	 * Adds a type to the classImports.
+ 	 */
+ 	protected boolean addClassImport(CtTypeReference<?> ref) {
++		this.exploredReferences.add(ref);
+ 		if (ref == null) {
+ 			return false;
+ 		}
+@@ -279,6 +290,10 @@
+ 			return false;
+ 		}
+ 
++		if (this.isThereAnotherClassWithSameNameInAnotherPackage(ref)) {
++			return false;
++		}
++
+ 		// we want to be sure that we are not importing a class because a static field or method we already imported
+ 		// moreover we make exception for same package classes to avoid problems in FQN mode
+ 
+@@ -346,8 +361,7 @@
+ 				}
+ 			}
+ 		}
+-		//note: we must add the type refs from the same package too, to assure that isImported(typeRef) returns true for them
+-		//these type refs are removed in #getClassImports()
++
+ 		classImports.put(ref.getSimpleName(), ref);
+ 		return true;
+ 	}
+
+
+                
+                ====================== simfix_1 INRIA-spoon_234113323-234113988 ================================
+                
+                [PATCH 7] file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_234113323-234113988/bears_INRIA-spoon_234113323-234113988/src/main/java//spoon/Launcher.java, range: <656,659>, original: if(env.shouldCompile()){
+modelBuilder.compile(InputType.CTTYPES);
+}
+, patch: if(env.shouldCompile()){
+modelBuilder.compile(InputType.FILES);
+}
+
+
+                
+                ====================== simfix_2 INRIA-spoon_234113323-234113988 ================================
+                
+                [PATCH 7] file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_234113323-234113988/bears_INRIA-spoon_234113323-234113988/src/main/java//spoon/Launcher.java, range: <656,659>, original: if(env.shouldCompile()){
+modelBuilder.compile(InputType.CTTYPES);
+}
+, patch: if(env.shouldCompile()){
+modelBuilder.compile(InputType.FILES);
+}
+
+
+                
+                ====================== simfix_3 INRIA-spoon_234113323-234113988 ================================
+                
+                 file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_234113323-234113988/bears_INRIA-spoon_234113323-234113988/src/main/java//spoon/Launcher.java, range: <656,659>, original: if(env.shouldCompile()){
+modelBuilder.compile(InputType.CTTYPES);
+}
+, patch: if(env.shouldCompile()){
+modelBuilder.compile(InputType.FILES);
+}
+
+
+                
+                ====================== tbar_1 INRIA-spoon_234113323-234113988 ================================
+                
+                [PATCH 32]//**********************************************************
+//spoon/support/compiler/jdt/JDTBatchCompiler.java ------ 81
+//**********************************************************
+===Buggy Code===
+if (JDTBatchCompiler.this.jdtCompiler != null) {
+							JDTBatchCompiler.this.jdtCompiler.reportProblem(problem);
+						} else {
+							throw new SpoonException(problem.toString());
+						}
+
+===Patch Code===
+if ((JDTBatchCompiler.this.jdtCompiler != null) && (jdtCompiler.getEnvironment().getNoClasspath())) {
+							JDTBatchCompiler.this.jdtCompiler.reportProblem(problem);
+						} else {
+							throw new SpoonException(problem.toString());
+						}
+
+
+                
+                ====================== tbar_2 INRIA-spoon_234113323-234113988 ================================
+                
+                [PATCH 32]//**********************************************************
+//spoon/support/compiler/jdt/JDTBatchCompiler.java ------ 81
+//**********************************************************
+===Buggy Code===
+if (JDTBatchCompiler.this.jdtCompiler != null) {
+							JDTBatchCompiler.this.jdtCompiler.reportProblem(problem);
+						} else {
+							throw new SpoonException(problem.toString());
+						}
+
+===Patch Code===
+if ((JDTBatchCompiler.this.jdtCompiler != null) && (jdtCompiler.getEnvironment().getNoClasspath())) {
+							JDTBatchCompiler.this.jdtCompiler.reportProblem(problem);
+						} else {
+							throw new SpoonException(problem.toString());
+						}
+
+
+                
+                ====================== tbar_3 INRIA-spoon_234113323-234113988 ================================
+                
+                //**********************************************************
+//spoon/support/compiler/jdt/JDTBatchCompiler.java ------ 81
+//**********************************************************
+===Buggy Code===
+if (JDTBatchCompiler.this.jdtCompiler != null) {
+							JDTBatchCompiler.this.jdtCompiler.reportProblem(problem);
+						} else {
+							throw new SpoonException(problem.toString());
+						}
+
+===Patch Code===
+if ((JDTBatchCompiler.this.jdtCompiler != null) && (jdtCompiler.getEnvironment().getNoClasspath())) {
+							JDTBatchCompiler.this.jdtCompiler.reportProblem(problem);
+						} else {
+							throw new SpoonException(problem.toString());
+						}
+
+
+                

@@ -1,0 +1,123 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_322427143-322428590/bears_traccar-traccar_322427143-322428590/src/org/traccar/protocol/MeitrackProtocolDecoder.java /tmp/fixed/bears_traccar-traccar_322427143-322428590/src/org/traccar/protocol/MeitrackProtocolDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_322427143-322428590/bears_traccar-traccar_322427143-322428590/src/org/traccar/protocol/MeitrackProtocolDecoder.java	2022-05-20 13:41:29.524266946 +0800
++++ /tmp/fixed/bears_traccar-traccar_322427143-322428590/src/org/traccar/protocol/MeitrackProtocolDecoder.java	2022-05-20 13:41:51.284954649 +0800
+@@ -259,7 +259,7 @@
+             boolean started = data[0].charAt(0) == '0';
+             position.set("taximeterOn", started);
+             position.set("taximeterStart", data[1]);
+-            if (!started) {
++            if (data.length > 2) {
+                 position.set("taximeterEnd", data[2]);
+                 position.set("taximeterDistance", Integer.parseInt(data[3]));
+                 position.set("taximeterFare", Integer.parseInt(data[4]));
+
+
+                
+                ====================== dynamoth_1 traccar-traccar_322427143-322428590 ================================
+                
+                --- a/src/org/traccar/protocol/MeitrackProtocolDecoder.java
++++ b/src/org/traccar/protocol/MeitrackProtocolDecoder.java
+@@ -243,4 +243,6 @@
+
+-        if (parser.hasNext(2)) {
+-            decodeDataFields(position, parser.nextInt(), parser.next().split(","));
++        if (false) {
++            if (parser.hasNext(2)) {
++                decodeDataFields(position, parser.nextInt(), parser.next().split(","));
++            }
+}
+
+
+
+
+                
+                ====================== dynamoth_2 traccar-traccar_322427143-322428590 ================================
+                
+                --- a/src/org/traccar/protocol/MeitrackProtocolDecoder.java
++++ b/src/org/traccar/protocol/MeitrackProtocolDecoder.java
+@@ -243,4 +243,6 @@
+
+-        if (parser.hasNext(2)) {
+-            decodeDataFields(position, parser.nextInt(), parser.next().split(","));
++        if (false) {
++            if (parser.hasNext(2)) {
++                decodeDataFields(position, parser.nextInt(), parser.next().split(","));
++            }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 traccar-traccar_322427143-322428590 ================================
+                
+                --- a/src/org/traccar/protocol/MeitrackProtocolDecoder.java
++++ b/src/org/traccar/protocol/MeitrackProtocolDecoder.java
+@@ -243,4 +243,6 @@
+
+-        if (parser.hasNext(2)) {
+-            decodeDataFields(position, parser.nextInt(), parser.next().split(","));
++        if (false) {
++            if (parser.hasNext(2)) {
++                decodeDataFields(position, parser.nextInt(), parser.next().split(","));
++            }
+}
+
+
+
+
+                
+                ====================== tbar_1 traccar-traccar_322427143-322428590 ================================
+                
+                [PATCH 2918]//**********************************************************
+//org/traccar/protocol/MeitrackProtocolDecoder.java ------ 244
+//**********************************************************
+===Buggy Code===
+if (parser.hasNext(2)) {
+            decodeDataFields(position, parser.nextInt(), parser.next().split(","));
+        }
+
+===Patch Code===
+if ((parser.hasNext(2)) && !(parser.hasNext())) {
+            decodeDataFields(position, parser.nextInt(), parser.next().split(","));
+        }
+
+
+                
+                ====================== tbar_2 traccar-traccar_322427143-322428590 ================================
+                
+                [PATCH 2918]//**********************************************************
+//org/traccar/protocol/MeitrackProtocolDecoder.java ------ 244
+//**********************************************************
+===Buggy Code===
+if (parser.hasNext(2)) {
+            decodeDataFields(position, parser.nextInt(), parser.next().split(","));
+        }
+
+===Patch Code===
+if ((parser.hasNext(2)) && !(parser.hasNext())) {
+            decodeDataFields(position, parser.nextInt(), parser.next().split(","));
+        }
+
+
+                
+                ====================== tbar_3 traccar-traccar_322427143-322428590 ================================
+                
+                [PATCH 2918]//**********************************************************
+//org/traccar/protocol/MeitrackProtocolDecoder.java ------ 244
+//**********************************************************
+===Buggy Code===
+if (parser.hasNext(2)) {
+            decodeDataFields(position, parser.nextInt(), parser.next().split(","));
+        }
+
+===Patch Code===
+if ((parser.hasNext(2)) && !(parser.hasNext())) {
+            decodeDataFields(position, parser.nextInt(), parser.next().split(","));
+        }
+
+
+                

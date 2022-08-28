@@ -1,0 +1,18 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_AxonFramework-AxonFramework_451926440-451937647/bears_AxonFramework-AxonFramework_451926440-451937647/axon-server-connector/src/main/java/org/axonframework/axonserver/connector/ErrorCode.java /tmp/fixed/bears_AxonFramework-AxonFramework_451926440-451937647/axon-server-connector/src/main/java/org/axonframework/axonserver/connector/ErrorCode.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_AxonFramework-AxonFramework_451926440-451937647/bears_AxonFramework-AxonFramework_451926440-451937647/axon-server-connector/src/main/java/org/axonframework/axonserver/connector/ErrorCode.java	2022-04-24 22:40:54.949165790 +0800
++++ /tmp/fixed/bears_AxonFramework-AxonFramework_451926440-451937647/axon-server-connector/src/main/java/org/axonframework/axonserver/connector/ErrorCode.java	2022-04-24 22:42:29.004811258 +0800
+@@ -116,7 +116,7 @@
+      * @return the Axon Framework exception
+      */
+     public AxonException convert(Throwable throwable){
+-        return convert(null, throwable);
++        return convert("", throwable);
+     }
+ 
+     /**
+
+
+                

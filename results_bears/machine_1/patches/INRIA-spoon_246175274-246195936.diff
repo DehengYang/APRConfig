@@ -1,0 +1,194 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/annotations/MetamodelPropertyField.java /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/annotations/MetamodelPropertyField.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/annotations/MetamodelPropertyField.java	2022-04-22 11:11:19.862498644 +0800
++++ /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/annotations/MetamodelPropertyField.java	2022-04-22 11:11:55.864108466 +0800
+@@ -33,5 +33,5 @@
+ @Retention(RetentionPolicy.RUNTIME)
+ @Target({ ElementType.FIELD })
+ public @interface MetamodelPropertyField {
+-	CtRole role();
++	CtRole[] role();
+ }
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/code/CtCase.java /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/code/CtCase.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/code/CtCase.java	2022-04-22 11:11:19.862498644 +0800
++++ /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/code/CtCase.java	2022-04-22 11:11:55.864108466 +0800
+@@ -19,8 +19,7 @@
+ import spoon.reflect.annotations.PropertyGetter;
+ import spoon.reflect.annotations.PropertySetter;
+ 
+-import static spoon.reflect.path.CtRole.CASE;
+-
++import static spoon.reflect.path.CtRole.EXPRESSION;
+ 
+ /**
+  * This code element defines a case within a switch-case.
+@@ -40,13 +39,13 @@
+ 	/**
+ 	 * Gets the case expression.
+ 	 */
+-	@PropertyGetter(role = CASE)
++	@PropertyGetter(role = EXPRESSION)
+ 	CtExpression<S> getCaseExpression();
+ 
+ 	/**
+ 	 * Sets the case expression.
+ 	 */
+-	@PropertySetter(role = CASE)
++	@PropertySetter(role = EXPRESSION)
+ 	<T extends CtCase<S>> T setCaseExpression(CtExpression<S> caseExpression);
+ 
+ 	@Override
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/code/CtCatch.java /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/code/CtCatch.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/code/CtCatch.java	2022-04-22 11:11:19.862498644 +0800
++++ /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/code/CtCatch.java	2022-04-22 11:11:55.864108466 +0800
+@@ -46,7 +46,7 @@
+ 	 * Gets the catch's body.
+ 	 */
+ 	@Override
+-	@PropertySetter(role = BODY)
++	@PropertyGetter(role = BODY)
+ 	CtBlock<?> getBody();
+ 
+ 	@Override
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/code/CtConstructorCall.java /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/code/CtConstructorCall.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/code/CtConstructorCall.java	2022-04-22 11:11:19.862498644 +0800
++++ /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/code/CtConstructorCall.java	2022-04-22 11:11:55.864108466 +0800
+@@ -75,6 +75,6 @@
+ 
+ 	@Override
+ 	@DerivedProperty
+-	@PropertySetter(role = TYPE)
++	@PropertyGetter(role = TYPE)
+ 	CtTypeReference<T> getType();
+ }
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/code/CtNewClass.java /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/code/CtNewClass.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/code/CtNewClass.java	2022-04-22 11:11:19.862498644 +0800
++++ /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/code/CtNewClass.java	2022-04-22 11:11:55.864108466 +0800
+@@ -16,17 +16,17 @@
+  */
+ package spoon.reflect.code;
+ 
++import spoon.reflect.annotations.PropertyGetter;
++import spoon.reflect.annotations.PropertySetter;
+ import spoon.reflect.declaration.CtClass;
+ import spoon.reflect.reference.CtActualTypeContainer;
+ import spoon.reflect.reference.CtExecutableReference;
+ import spoon.reflect.reference.CtTypeReference;
+ import spoon.support.DerivedProperty;
+-import spoon.reflect.annotations.PropertyGetter;
+-import spoon.reflect.annotations.PropertySetter;
+ 
+ import java.util.List;
+ 
+-import static spoon.reflect.path.CtRole.EXPRESSION;
++import static spoon.reflect.path.CtRole.NESTED_TYPE;
+ import static spoon.reflect.path.CtRole.TYPE_PARAMETER;
+ 
+ /**
+@@ -77,13 +77,13 @@
+ 	/**
+ 	 * Gets the created class.
+ 	 */
+-	@PropertyGetter(role = EXPRESSION)
++	@PropertyGetter(role = NESTED_TYPE)
+ 	CtClass<?> getAnonymousClass();
+ 
+ 	/**
+ 	 * Sets the created class.
+ 	 */
+-	@PropertySetter(role = EXPRESSION)
++	@PropertySetter(role = NESTED_TYPE)
+ 	<N extends CtNewClass> N setAnonymousClass(CtClass<?> anonymousClass);
+ 
+ 	@Override
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/declaration/CtCodeSnippet.java /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/declaration/CtCodeSnippet.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/declaration/CtCodeSnippet.java	2022-04-22 11:11:19.862498644 +0800
++++ /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/declaration/CtCodeSnippet.java	2022-04-22 11:11:55.864108466 +0800
+@@ -36,13 +36,13 @@
+ 	/**
+ 	 * Sets the textual value of the code.
+ 	 */
+-	@PropertyGetter(role = EXPRESSION)
++	@PropertySetter(role = EXPRESSION)
+ 	<C extends CtCodeSnippet> C setValue(String value);
+ 
+ 	/**
+ 	 * Gets the textual value of the code.
+ 	 */
+-	@PropertySetter(role = EXPRESSION)
++	@PropertyGetter(role = EXPRESSION)
+ 	String getValue();
+ 
+ }
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/declaration/CtModifiable.java /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/declaration/CtModifiable.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/declaration/CtModifiable.java	2022-04-22 11:11:19.862498644 +0800
++++ /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/reflect/declaration/CtModifiable.java	2022-04-22 11:11:55.864108466 +0800
+@@ -18,6 +18,7 @@
+ 
+ import spoon.reflect.annotations.PropertyGetter;
+ import spoon.reflect.annotations.PropertySetter;
++import spoon.support.DerivedProperty;
+ 
+ import java.util.Set;
+ 
+@@ -80,6 +81,6 @@
+ 	/**
+ 	 * Gets the visibility of this modifiable element.
+ 	 */
+-	@PropertyGetter(role = MODIFIER)
++	@DerivedProperty
+ 	ModifierKind getVisibility();
+ }
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/support/reflect/code/CtCaseImpl.java /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/support/reflect/code/CtCaseImpl.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/support/reflect/code/CtCaseImpl.java	2022-04-22 11:11:19.870499002 +0800
++++ /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/support/reflect/code/CtCaseImpl.java	2022-04-22 11:11:55.872108825 +0800
+@@ -34,7 +34,7 @@
+ public class CtCaseImpl<E> extends CtStatementImpl implements CtCase<E> {
+ 	private static final long serialVersionUID = 1L;
+ 
+-	@MetamodelPropertyField(role = CtRole.CASE)
++	@MetamodelPropertyField(role = CtRole.EXPRESSION)
+ 	CtExpression<E> caseExpression;
+ 
+ 	@MetamodelPropertyField(role = CtRole.STATEMENT)
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/support/reflect/code/CtNewClassImpl.java /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/support/reflect/code/CtNewClassImpl.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/support/reflect/code/CtNewClassImpl.java	2022-04-22 11:11:19.870499002 +0800
++++ /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/support/reflect/code/CtNewClassImpl.java	2022-04-22 11:11:55.876109003 +0800
+@@ -25,7 +25,7 @@
+ public class CtNewClassImpl<T> extends CtConstructorCallImpl<T> implements CtNewClass<T> {
+ 	private static final long serialVersionUID = 1L;
+ 
+-	@MetamodelPropertyField(role = CtRole.EXPRESSION)
++	@MetamodelPropertyField(role = CtRole.NESTED_TYPE)
+ 	CtClass<?> anonymousClass;
+ 
+ 	@Override
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/support/reflect/declaration/CtTypeImpl.java /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/support/reflect/declaration/CtTypeImpl.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/support/reflect/declaration/CtTypeImpl.java	2022-04-22 11:11:19.870499002 +0800
++++ /tmp/fixed/bears_INRIA-spoon_246175274-246195936/src/main/java/spoon/support/reflect/declaration/CtTypeImpl.java	2022-04-22 11:11:55.880109182 +0800
+@@ -82,7 +82,7 @@
+ 	@MetamodelPropertyField(role = CtRole.MODIFIER)
+ 	Set<ModifierKind> modifiers = emptySet();
+ 
+-	@MetamodelPropertyField(role = CtRole.FIELD)
++	@MetamodelPropertyField(role = {CtRole.FIELD, CtRole.EXECUTABLE, CtRole.NESTED_TYPE})
+ 	List<CtTypeMember> typeMembers = emptyList();
+ 
+ 	public CtTypeImpl() {
+
+
+                
+                ====================== simfix_2 INRIA-spoon_246175274-246195936 ================================
+                
+                [PATCH 636] file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_246175274-246195936/bears_INRIA-spoon_246175274-246195936/src/main/java//spoon/support/visitor/java/JavaReflectionTreeBuilder.java, range: <213,216>, original: super.visitAnnotationClass(clazz);
+exit();
+contexts.peek().addType(ctAnnotationType);
+, patch: System.exit(-1);
+super.visitAnnotationClass(clazz);
+exit();
+contexts.peek().addType(ctAnnotationType);
+
+
+                

@@ -1,0 +1,48 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_225344336-226528821/bears_INRIA-spoon_225344336-226528821/src/main/java/spoon/support/visitor/ClassTypingContext.java /tmp/fixed/bears_INRIA-spoon_225344336-226528821/src/main/java/spoon/support/visitor/ClassTypingContext.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_225344336-226528821/bears_INRIA-spoon_225344336-226528821/src/main/java/spoon/support/visitor/ClassTypingContext.java	2022-04-27 02:15:26.992640769 +0800
++++ /tmp/fixed/bears_INRIA-spoon_225344336-226528821/src/main/java/spoon/support/visitor/ClassTypingContext.java	2022-04-27 02:16:07.990475677 +0800
+@@ -373,7 +373,7 @@
+ 					throw new SpoonException("Cannot adapt type parameters of non type scope");
+ 				}
+ 				CtType<?> typeDeclarer = (CtType<?>) declarer;
+-				List<CtTypeReference<?>> actualTypeArguments = typeToArguments.get(typeDeclarer.getQualifiedName());
++				List<CtTypeReference<?>> actualTypeArguments = getActualTypeArguments(typeDeclarer.getQualifiedName());
+ 				if (actualTypeArguments == null) {
+ 					/*
+ 					 * the actualTypeArguments of this declarer cannot be resolved.
+@@ -399,6 +399,17 @@
+ 		return result;
+ 	}
+ 
++	private List<CtTypeReference<?>> getActualTypeArguments(String qualifiedName) {
++		List<CtTypeReference<?>> actualTypeArguments = typeToArguments.get(qualifiedName);
++		if (actualTypeArguments != null) {
++			return actualTypeArguments;
++		}
++		if (enclosingClassTypingContext != null) {
++			return enclosingClassTypingContext.getActualTypeArguments(qualifiedName);
++		}
++		return null;
++	}
++
+ 	private static CtTypeReference<?> getValue(List<CtTypeReference<?>> arguments, CtTypeParameter typeParam, CtFormalTypeDeclarer declarer) {
+ 		if (declarer.getFormalCtTypeParameters().size() != arguments.size()) {
+ 			throw new SpoonException("Unexpected count of actual type arguments");
+
+
+                
+                ====================== simfix_2 INRIA-spoon_225344336-226528821 ================================
+                
+                [PATCH 2098] file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_225344336-226528821/bears_INRIA-spoon_225344336-226528821/src/main/java//spoon/support/visitor/java/JavaReflectionTreeBuilder.java, range: <148,151>, original: super.visitClass(clazz);
+exit();
+contexts.peek().addType(ctClass);
+, patch: System.exit(-1);
+super.visitClass(clazz);
+exit();
+contexts.peek().addType(ctClass);
+
+
+                

@@ -1,0 +1,56 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_219945896-220224837/bears_traccar-traccar_219945896-220224837/src/org/traccar/protocol/CguardProtocolDecoder.java /tmp/fixed/bears_traccar-traccar_219945896-220224837/src/org/traccar/protocol/CguardProtocolDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_219945896-220224837/bears_traccar-traccar_219945896-220224837/src/org/traccar/protocol/CguardProtocolDecoder.java	2022-04-22 08:53:12.695993138 +0800
++++ /tmp/fixed/bears_traccar-traccar_219945896-220224837/src/org/traccar/protocol/CguardProtocolDecoder.java	2022-04-22 08:53:54.737872482 +0800
+@@ -35,13 +35,13 @@
+     private static final Pattern PATTERN_NV = new PatternBuilder()
+             .text("NV:")
+             .number("(dd)(dd)(dd) ")             // date (yymmdd)
+-            .number("(dd)(dd)(dd):")             // time (hhmmss)
+-            .number("(-?d+.d+):")                // longitude
+-            .number("(-?d+.d+):")                // latitude
+-            .number("(d+.?d*):")                 // speed
+-            .number("(?:NAN|(d+.?d*)):")         // accuracy
+-            .number("(?:NAN|(d+.?d*)):")         // course
+-            .number("(?:NAN|(d+.?d*))")          // altitude
++            .number("(dd)(dd)(dd)")              // time (hhmmss)
++            .number(":(-?d+.d+)")                // longitude
++            .number(":(-?d+.d+)")                // latitude
++            .number(":(d+.?d*)")                 // speed
++            .number(":(?:NAN|(d+.?d*))")         // accuracy
++            .number(":(?:NAN|(d+.?d*))")         // course
++            .number(":(?:NAN|(d+.?d*))").optional() // altitude
+             .compile();
+ 
+     private static final Pattern PATTERN_BC = new PatternBuilder()
+
+
+                
+                ====================== tbar_1 traccar-traccar_219945896-220224837 ================================
+                
+                [PATCH 288]//**********************************************************
+//org/traccar/helper/PatternBuilder.java ------ 48
+//**********************************************************
+===Buggy Code===
+s = s.replace("dddd", "d{4}").replace("ddd", "d{3}").replace("dd", "d{2}");
+
+===Patch Code===
+s = toString().replace("dddd", "d{4}").replace("ddd", "d{3}").replace("dd", "d{2}");
+
+
+                
+                ====================== tbar_3 traccar-traccar_219945896-220224837 ================================
+                
+                [PATCH 288]//**********************************************************
+//org/traccar/helper/PatternBuilder.java ------ 48
+//**********************************************************
+===Buggy Code===
+s = s.replace("dddd", "d{4}").replace("ddd", "d{3}").replace("dd", "d{2}");
+
+===Patch Code===
+s = toString().replace("dddd", "d{4}").replace("ddd", "d{3}").replace("dd", "d{2}");
+
+
+                

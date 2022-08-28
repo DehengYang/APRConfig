@@ -1,0 +1,158 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_226654766-226666085/bears_FasterXML-jackson-databind_226654766-226666085/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver.java /tmp/fixed/bears_FasterXML-jackson-databind_226654766-226666085/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_226654766-226666085/bears_FasterXML-jackson-databind_226654766-226666085/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver.java	2022-04-24 21:02:06.476905936 +0800
++++ /tmp/fixed/bears_FasterXML-jackson-databind_226654766-226666085/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver.java	2022-04-24 21:02:45.430648153 +0800
+@@ -1,5 +1,6 @@
+ package com.fasterxml.jackson.databind.jsontype.impl;
+ 
++import java.lang.reflect.Modifier;
+ import java.util.*;
+ 
+ import com.fasterxml.jackson.databind.AnnotationIntrospector;
+@@ -21,7 +22,7 @@
+     protected LinkedHashSet<NamedType> _registeredSubtypes;
+ 
+     public StdSubtypeResolver() { }
+-    
++
+     /*
+     /**********************************************************
+     /* Subtype registration
+@@ -75,15 +76,17 @@
+         }
+         
+         // then annotated types for property itself
+-        Collection<NamedType> st = ai.findSubtypes(property);
+-        if (st != null) {
+-            for (NamedType nt : st) {
+-                AnnotatedClass ac = AnnotatedClassResolver.resolveWithoutSuperTypes(config,
+-                        nt.getType());
+-                _collectAndResolve(ac, nt, config, ai, collected);
+-            }            
++        if (property != null) {
++            Collection<NamedType> st = ai.findSubtypes(property);
++            if (st != null) {
++                for (NamedType nt : st) {
++                    AnnotatedClass ac = AnnotatedClassResolver.resolveWithoutSuperTypes(config,
++                            nt.getType());
++                    _collectAndResolve(ac, nt, config, ai, collected);
++                }            
++            }
+         }
+-        
++
+         NamedType rootType = new NamedType(rawBase, null);
+         AnnotatedClass ac = AnnotatedClassResolver.resolveWithoutSuperTypes(config, rawBase);
+             
+@@ -128,7 +131,7 @@
+             AnnotatedMember property, JavaType baseType)
+     {
+         final AnnotationIntrospector ai = config.getAnnotationIntrospector();
+-        Class<?> rawBase = (baseType == null) ? property.getRawType() : baseType.getRawClass();
++        Class<?> rawBase = baseType.getRawClass();
+ 
+         // Need to keep track of classes that have been handled already 
+         Set<Class<?>> typesHandled = new HashSet<Class<?>>();
+@@ -141,14 +144,15 @@
+         _collectAndResolveByTypeId(ac, rootType, config, typesHandled, byName);
+         
+         // then with definitions from property
+-        Collection<NamedType> st = ai.findSubtypes(property);
+-        if (st != null) {
+-            for (NamedType nt : st) {
+-                ac = AnnotatedClassResolver.resolveWithoutSuperTypes(config, nt.getType());
+-                _collectAndResolveByTypeId(ac, nt, config, typesHandled, byName);
+-            }            
++        if (property != null) {
++            Collection<NamedType> st = ai.findSubtypes(property);
++            if (st != null) {
++                for (NamedType nt : st) {
++                    ac = AnnotatedClassResolver.resolveWithoutSuperTypes(config, nt.getType());
++                    _collectAndResolveByTypeId(ac, nt, config, typesHandled, byName);
++                }            
++            }
+         }
+-        
+         // and finally explicit type registrations (highest precedence)
+         if (_registeredSubtypes != null) {
+             for (NamedType subtype : _registeredSubtypes) {
+@@ -160,21 +164,21 @@
+                 }
+             }
+         }
+-        return _combineNamedAndUnnamed(typesHandled, byName);
++        return _combineNamedAndUnnamed(rawBase, typesHandled, byName);
+     }
+ 
+     @Override
+     public Collection<NamedType> collectAndResolveSubtypesByTypeId(MapperConfig<?> config,
+-            AnnotatedClass type)
++            AnnotatedClass baseType)
+     {
++        final Class<?> rawBase = baseType.getRawType();
+         Set<Class<?>> typesHandled = new HashSet<Class<?>>();
+         Map<String,NamedType> byName = new LinkedHashMap<String,NamedType>();
+ 
+-        NamedType rootType = new NamedType(type.getRawType(), null);
+-        _collectAndResolveByTypeId(type, rootType, config, typesHandled, byName);
++        NamedType rootType = new NamedType(rawBase, null);
++        _collectAndResolveByTypeId(baseType, rootType, config, typesHandled, byName);
+         
+         if (_registeredSubtypes != null) {
+-            Class<?> rawBase = type.getRawType();
+             for (NamedType subtype : _registeredSubtypes) {
+                 // is it a subtype of root type?
+                 if (rawBase.isAssignableFrom(subtype.getType())) { // yes
+@@ -184,7 +188,7 @@
+                 }
+             }
+         }
+-        return _combineNamedAndUnnamed(typesHandled, byName);
++        return _combineNamedAndUnnamed(rawBase, typesHandled, byName);
+     }
+ 
+     /*
+@@ -267,8 +271,8 @@
+      * Helper method used for merging explicitly named types and handled classes
+      * without explicit names.
+      */
+-    protected Collection<NamedType> _combineNamedAndUnnamed(Set<Class<?>> typesHandled,
+-            Map<String,NamedType> byName)
++    protected Collection<NamedType> _combineNamedAndUnnamed(Class<?> rawBase,
++            Set<Class<?>> typesHandled, Map<String,NamedType> byName)
+     {
+         ArrayList<NamedType> result = new ArrayList<NamedType>(byName.values());
+ 
+@@ -279,6 +283,11 @@
+             typesHandled.remove(t.getType());
+         }
+         for (Class<?> cls : typesHandled) {
++            // 27-Apr-2017, tatu: [databind#1616] Do not add base type itself unless
++            //     it is concrete (or has explicit type name)
++            if ((cls == rawBase) && Modifier.isAbstract(cls.getModifiers())) {
++                continue;
++            }
+             result.add(new NamedType(cls));
+         }
+         return result;
+
+
+                
+                ====================== simfix_3 FasterXML-jackson-databind_226654766-226666085 ================================
+                
+                [PATCH 431] file: /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_226654766-226666085/bears_FasterXML-jackson-databind_226654766-226666085/src/main/java//com/fasterxml/jackson/databind/deser/BeanDeserializerBase.java, range: <1498,1503>, original: while(bufferParser.nextToken()!=JsonToken.END_OBJECT){
+String propName=bufferParser.getCurrentName();
+bufferParser.nextToken();
+handleUnknownProperty(bufferParser,ctxt,bean,propName);
+}
+, patch: bufferParser.nextToken();
+while(bufferParser.nextToken()!=JsonToken.END_OBJECT){
+String propName=bufferParser.getCurrentName();
+bufferParser.nextToken();
+handleUnknownProperty(bufferParser,ctxt,bean,propName);
+}
+
+
+                

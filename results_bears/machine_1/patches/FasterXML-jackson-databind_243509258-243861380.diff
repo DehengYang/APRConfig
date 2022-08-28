@@ -1,0 +1,66 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_243509258-243861380/bears_FasterXML-jackson-databind_243509258-243861380/src/main/java/com/fasterxml/jackson/databind/type/ResolvedRecursiveType.java /tmp/fixed/bears_FasterXML-jackson-databind_243509258-243861380/src/main/java/com/fasterxml/jackson/databind/type/ResolvedRecursiveType.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_243509258-243861380/bears_FasterXML-jackson-databind_243509258-243861380/src/main/java/com/fasterxml/jackson/databind/type/ResolvedRecursiveType.java	2022-04-27 19:09:22.003187797 +0800
++++ /tmp/fixed/bears_FasterXML-jackson-databind_243509258-243861380/src/main/java/com/fasterxml/jackson/databind/type/ResolvedRecursiveType.java	2022-04-27 19:09:50.808474251 +0800
+@@ -111,11 +111,22 @@
+     public boolean equals(Object o) {
+         if (o == this) return true;
+         if (o == null) return false;
+-        // Do NOT ever match unresolved references
+-        if (_referencedType == null) {
++        if (o.getClass() == getClass()) {
++            // 16-Jun-2017, tatu: as per [databind#1658], can not do recursive call since
++            //    there is likely to be a cycle...
++
++            // but... true or false?
+             return false;
++            
++            /*
++            // Do NOT ever match unresolved references
++            if (_referencedType == null) {
++                return false;
++            }
++            return (o.getClass() == getClass()
++                    && _referencedType.equals(((ResolvedRecursiveType) o).getSelfReferencedType()));
++                    */
+         }
+-        return (o.getClass() == getClass()
+-                && _referencedType.equals(((ResolvedRecursiveType) o).getSelfReferencedType()));
++        return false;
+     }
+ }
+
+
+                
+                ====================== simfix_2 FasterXML-jackson-databind_243509258-243861380 ================================
+                
+                [PATCH 4976] file: /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_243509258-243861380/bears_FasterXML-jackson-databind_243509258-243861380/src/main/java//com/fasterxml/jackson/databind/type/ResolvedRecursiveType.java, range: <112,119>, original: if(o==this)return true;
+if(o==null)return false;
+if(_referencedType==null){
+return false;
+}
+return (o.getClass()==getClass()&&_referencedType.equals(((ResolvedRecursiveType)o).getSelfReferencedType()));
+, patch: if(o!=this)return true;
+if(o==null)return false;
+if(_referencedType==null){
+return false;
+}
+return (o.getClass()==getClass()&&_referencedType.equals(((ResolvedRecursiveType)o).getSelfReferencedType()));
+
+
+                
+                ====================== tbar_2 FasterXML-jackson-databind_243509258-243861380 ================================
+                
+                [PATCH 6159]//**********************************************************
+//com/fasterxml/jackson/databind/type/ResolvedRecursiveType.java ------ 113
+//**********************************************************
+===Buggy Code===
+if (o == null) return false;
+
+===Patch Code===
+if (o != null) return false;
+
+
+                

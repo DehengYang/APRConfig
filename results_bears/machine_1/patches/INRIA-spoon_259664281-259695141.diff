@@ -1,0 +1,65 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_259664281-259695141/bears_INRIA-spoon_259664281-259695141/src/main/java/spoon/support/template/Parameters.java /tmp/fixed/bears_INRIA-spoon_259664281-259695141/src/main/java/spoon/support/template/Parameters.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_259664281-259695141/bears_INRIA-spoon_259664281-259695141/src/main/java/spoon/support/template/Parameters.java	2022-04-25 05:55:10.899286289 +0800
++++ /tmp/fixed/bears_INRIA-spoon_259664281-259695141/src/main/java/spoon/support/template/Parameters.java	2022-04-25 05:55:55.085262039 +0800
+@@ -268,8 +268,8 @@
+ 			//the reference to this is not template parameter
+ 			return false;
+ 		}
+-		if (getTemplateParameterType(ref.getFactory()).isSubtypeOf(ref.getType())) {
+-			//the type of template field is or extends from class TemplateParameter.
++		if (TemplateParameter.class.getName().equals(ref.getType().getQualifiedName())) {
++			//the type of template field is TemplateParameter.
+ 			return true;
+ 		}
+ 		return false;
+
+
+                
+                ====================== simfix_2 INRIA-spoon_259664281-259695141 ================================
+                
+                [PATCH 1135] file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_259664281-259695141/bears_INRIA-spoon_259664281-259695141/src/main/java//spoon/Launcher.java, range: <216,220>, original: opt2.setHelp("Define tabulation size.");
+jsap.registerParameter(opt2);
+opt2=new FlaggedOption("level");
+, patch: opt2.setDefault(OUTPUTDIR);
+opt2.setHelp("Define tabulation size.");
+jsap.registerParameter(opt2);
+opt2=new FlaggedOption("level");
+
+
+                
+                ====================== tbar_2 INRIA-spoon_259664281-259695141 ================================
+                
+                [PATCH 2107]//**********************************************************
+//spoon/Launcher.java ------ 214
+//**********************************************************
+===Buggy Code===
+opt2.setStringParser(JSAP.INTEGER_PARSER);
+			opt2.setDefault("4");
+			opt2.setHelp("Define tabulation size.");
+			jsap.registerParameter(opt2);
+
+			// Level logging.
+			opt2 = new FlaggedOption("level");
+			opt2.setLongFlag("level");
+			opt2.setHelp("Level of the ouput messages about what spoon is doing.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+
+===Patch Code===
+
+			opt2.setDefault("4");
+			opt2.setHelp("Define tabulation size.");
+			jsap.registerParameter(opt2);
+
+			// Level logging.
+			opt2 = new FlaggedOption("level");
+			opt2.setLongFlag("level");
+			opt2.setHelp("Level of the ouput messages about what spoon is doing.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+	opt2.setStringParser(JSAP.INTEGER_PARSER);
+
+
+
+                

@@ -1,0 +1,69 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_191511078-191595944/bears_INRIA-spoon_191511078-191595944/src/main/java/spoon/support/reflect/reference/CtTypeReferenceImpl.java /tmp/fixed/bears_INRIA-spoon_191511078-191595944/src/main/java/spoon/support/reflect/reference/CtTypeReferenceImpl.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_191511078-191595944/bears_INRIA-spoon_191511078-191595944/src/main/java/spoon/support/reflect/reference/CtTypeReferenceImpl.java	2022-04-30 13:10:58.680624672 +0800
++++ /tmp/fixed/bears_INRIA-spoon_191511078-191595944/src/main/java/spoon/support/reflect/reference/CtTypeReferenceImpl.java	2022-04-30 13:11:28.429953027 +0800
+@@ -619,7 +619,7 @@
+ 			}
+ 			if (modifiers.contains(ModifierKind.PRIVATE)) {
+ 				//it is visible in scope of the same class only
+-				return type.getTopLevelType().getQualifiedName().equals(this.getQualifiedName());
++				return type.getTopLevelType().getQualifiedName().equals(this.getTopLevelType().getQualifiedName());
+ 			}
+ 			//package protected
+ 			if (type.getTopLevelType().getPackage().getSimpleName().equals(this.getTopLevelType().getPackage().getSimpleName())) {
+@@ -674,6 +674,9 @@
+ 			}
+ 			declType = visibleDeclType;
+ 		}
++		if (declType == null) {
++			throw new SpoonException("Cannot compute access path to type: " + this.getQualifiedName() + " in context of type: " + contextType.getQualifiedName());
++		}
+ 		return declType;
+ 	}
+ 
+
+
+                
+                ====================== tbar_1 INRIA-spoon_191511078-191595944 ================================
+                
+                [PATCH 83]//**********************************************************
+//spoon/support/reflect/reference/CtTypeReferenceImpl.java ------ 622
+//**********************************************************
+===Buggy Code===
+return type.getTopLevelType().getQualifiedName().equals(this.getQualifiedName());
+
+===Patch Code===
+return (type.getTopLevelType().getQualifiedName().equals(this.getQualifiedName())) || !(getQualifiedName().equals(type.getQualifiedName()));
+
+
+                
+                ====================== tbar_2 INRIA-spoon_191511078-191595944 ================================
+                
+                [PATCH 9]//**********************************************************
+//spoon/Launcher.java ------ 719
+//**********************************************************
+===Buggy Code===
+throw new SpoonException(e);
+
+===Patch Code===
+printUsage();
+	throw new SpoonException(e);
+
+
+                
+                ====================== tbar_3 INRIA-spoon_191511078-191595944 ================================
+                
+                [PATCH 9]//**********************************************************
+//spoon/Launcher.java ------ 719
+//**********************************************************
+===Buggy Code===
+throw new SpoonException(e);
+
+===Patch Code===
+printUsage();
+	throw new SpoonException(e);
+
+
+                

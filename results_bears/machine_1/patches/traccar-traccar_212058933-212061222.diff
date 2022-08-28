@@ -1,0 +1,106 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_212058933-212061222/bears_traccar-traccar_212058933-212061222/src/org/traccar/protocol/SuntechProtocolDecoder.java /tmp/fixed/bears_traccar-traccar_212058933-212061222/src/org/traccar/protocol/SuntechProtocolDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_212058933-212061222/bears_traccar-traccar_212058933-212061222/src/org/traccar/protocol/SuntechProtocolDecoder.java	2022-04-21 16:44:05.499320749 +0800
++++ /tmp/fixed/bears_traccar-traccar_212058933-212061222/src/org/traccar/protocol/SuntechProtocolDecoder.java	2022-04-21 16:44:41.988953150 +0800
+@@ -31,11 +31,13 @@
+ public class SuntechProtocolDecoder extends BaseProtocolDecoder {
+ 
+     private int protocolType;
++    private boolean hbm;
+ 
+     public SuntechProtocolDecoder(SuntechProtocol protocol) {
+         super(protocol);
+ 
+         protocolType = Context.getConfig().getInteger(getProtocolName() + ".protocolType");
++        hbm = Context.getConfig().getBoolean(getProtocolName() + ".hbm");
+     }
+ 
+     public void setProtocolType(int protocolType) {
+@@ -144,12 +146,16 @@
+             position.set(Position.KEY_INDEX, Integer.parseInt(values[index++]));
+         }
+ 
+-        if (index < values.length) {
+-            position.set(Position.KEY_HOURS, Integer.parseInt(values[index++]));
+-        }
++        if (hbm) {
++
++            if (index < values.length) {
++                position.set(Position.KEY_HOURS, Integer.parseInt(values[index++]));
++            }
++
++            if (index < values.length) {
++                position.set(Position.KEY_BATTERY, Double.parseDouble(values[index]));
++            }
+ 
+-        if (index < values.length) {
+-            position.set(Position.KEY_BATTERY, Double.parseDouble(values[index]));
+         }
+ 
+         return position;
+
+
+                
+                ====================== simfix_1 traccar-traccar_212058933-212061222 ================================
+                
+                [PATCH 3575] file: /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_212058933-212061222/bears_traccar-traccar_212058933-212061222/src//org/traccar/protocol/SuntechProtocolDecoder.java, range: <137,141>, original: position.set(Position.KEY_POWER,Double.parseDouble(values[index++]));
+position.set(Position.PREFIX_IO+1,values[index++]);
+index+=1;
+, patch: position.set(Position.KEY_POWER,Double.parseDouble(values[index++]));
+position.set(Position.PREFIX_IO+1,values[index++]);
+index+=protocolType;
+
+
+                
+                ====================== simfix_2 traccar-traccar_212058933-212061222 ================================
+                
+                [PATCH 3575] file: /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_212058933-212061222/bears_traccar-traccar_212058933-212061222/src//org/traccar/protocol/SuntechProtocolDecoder.java, range: <137,141>, original: position.set(Position.KEY_POWER,Double.parseDouble(values[index++]));
+position.set(Position.PREFIX_IO+1,values[index++]);
+index+=1;
+, patch: position.set(Position.KEY_POWER,Double.parseDouble(values[index++]));
+position.set(Position.PREFIX_IO+1,values[index++]);
+index+=protocolType;
+
+
+                
+                ====================== tbar_1 traccar-traccar_212058933-212061222 ================================
+                
+                [PATCH 1347]//**********************************************************
+//org/traccar/protocol/SuntechProtocolDecoder.java ------ 136
+//**********************************************************
+===Buggy Code===
+position.set(Position.KEY_ODOMETER, Integer.parseInt(values[index++]));
+
+===Patch Code===
+
+
+
+                
+                ====================== tbar_2 traccar-traccar_212058933-212061222 ================================
+                
+                [PATCH 1347]//**********************************************************
+//org/traccar/protocol/SuntechProtocolDecoder.java ------ 136
+//**********************************************************
+===Buggy Code===
+position.set(Position.KEY_ODOMETER, Integer.parseInt(values[index++]));
+
+===Patch Code===
+
+
+
+                
+                ====================== tbar_3 traccar-traccar_212058933-212061222 ================================
+                
+                [PATCH 1347]//**********************************************************
+//org/traccar/protocol/SuntechProtocolDecoder.java ------ 136
+//**********************************************************
+===Buggy Code===
+position.set(Position.KEY_ODOMETER, Integer.parseInt(values[index++]));
+
+===Patch Code===
+
+
+
+                

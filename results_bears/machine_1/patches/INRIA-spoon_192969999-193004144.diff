@@ -1,0 +1,122 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_192969999-193004144/bears_INRIA-spoon_192969999-193004144/src/main/java/spoon/support/reflect/reference/CtTypeReferenceImpl.java /tmp/fixed/bears_INRIA-spoon_192969999-193004144/src/main/java/spoon/support/reflect/reference/CtTypeReferenceImpl.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_192969999-193004144/bears_INRIA-spoon_192969999-193004144/src/main/java/spoon/support/reflect/reference/CtTypeReferenceImpl.java	2022-04-20 13:17:10.214587269 +0800
++++ /tmp/fixed/bears_INRIA-spoon_192969999-193004144/src/main/java/spoon/support/reflect/reference/CtTypeReferenceImpl.java	2022-04-20 13:17:54.452563659 +0800
+@@ -465,7 +465,14 @@
+ 	public Collection<CtExecutableReference<?>> getDeclaredExecutables() {
+ 		CtType<T> t = getDeclaration();
+ 		if (t == null) {
+-			return RtHelper.getAllExecutables(getActualClass(), getFactory());
++			try {
++				return RtHelper.getAllExecutables(getActualClass(), getFactory());
++			} catch (final SpoonClassNotFoundException e) {
++				if (getFactory().getEnvironment().getNoClasspath()) {
++					return Collections.emptyList();
++				}
++				throw e;
++			}
+ 		} else {
+ 			return t.getDeclaredExecutables();
+ 		}
+@@ -508,12 +515,19 @@
+ 		if (t != null) {
+ 			return t.getSuperclass();
+ 		} else {
+-			Class<T> c = getActualClass();
+-			Class<?> sc = c.getSuperclass();
+-			if (sc == null) {
+-				return null;
++			try {
++				Class<T> c = getActualClass();
++				Class<?> sc = c.getSuperclass();
++				if (sc == null) {
++					return null;
++				}
++				return getFactory().Type().createReference(sc);
++			} catch (final SpoonClassNotFoundException e) {
++				if (getFactory().getEnvironment().getNoClasspath()) {
++					return null;
++				}
++				throw e;
+ 			}
+-			return getFactory().Type().createReference(sc);
+ 		}
+ 	}
+ 
+
+
+                
+                ====================== simfix_1 INRIA-spoon_192969999-193004144 ================================
+                
+                [PATCH 43] file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_192969999-193004144/bears_INRIA-spoon_192969999-193004144/src/main/java//spoon/support/reflect/reference/CtExecutableReferenceImpl.java, range: <392,394>, original: if(st==null){
+return getOverloadedExecutable(objectType,objectType);
+}
+, patch: if(st!=null){
+return getOverloadedExecutable(objectType,objectType);
+}
+
+
+                
+                ====================== simfix_2 INRIA-spoon_192969999-193004144 ================================
+                
+                [PATCH 43] file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_192969999-193004144/bears_INRIA-spoon_192969999-193004144/src/main/java//spoon/support/reflect/reference/CtExecutableReferenceImpl.java, range: <392,394>, original: if(st==null){
+return getOverloadedExecutable(objectType,objectType);
+}
+, patch: if(st!=null){
+return getOverloadedExecutable(objectType,objectType);
+}
+
+
+                
+                ====================== simfix_3 INRIA-spoon_192969999-193004144 ================================
+                
+                 file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_192969999-193004144/bears_INRIA-spoon_192969999-193004144/src/main/java//spoon/support/reflect/reference/CtExecutableReferenceImpl.java, range: <392,394>, original: if(st==null){
+return getOverloadedExecutable(objectType,objectType);
+}
+, patch: if(st!=null){
+return getOverloadedExecutable(objectType,objectType);
+}
+
+
+                
+                ====================== tbar_1 INRIA-spoon_192969999-193004144 ================================
+                
+                [PATCH 44]//**********************************************************
+//spoon/support/reflect/reference/CtExecutableReferenceImpl.java ------ 390
+//**********************************************************
+===Buggy Code===
+CtTypeReference<?> st = getDeclaringType().getSuperclass();
+
+===Patch Code===
+CtTypeReference<?> st = getType().getSuperclass();
+
+
+                
+                ====================== tbar_2 INRIA-spoon_192969999-193004144 ================================
+                
+                [PATCH 44]//**********************************************************
+//spoon/support/reflect/reference/CtExecutableReferenceImpl.java ------ 390
+//**********************************************************
+===Buggy Code===
+CtTypeReference<?> st = getDeclaringType().getSuperclass();
+
+===Patch Code===
+CtTypeReference<?> st = getType().getSuperclass();
+
+
+                
+                ====================== tbar_3 INRIA-spoon_192969999-193004144 ================================
+                
+                //**********************************************************
+//spoon/support/reflect/reference/CtExecutableReferenceImpl.java ------ 390
+//**********************************************************
+===Buggy Code===
+CtTypeReference<?> st = getDeclaringType().getSuperclass();
+
+===Patch Code===
+CtTypeReference<?> st = getType().getSuperclass();
+
+
+                

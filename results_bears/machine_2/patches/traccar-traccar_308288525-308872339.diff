@@ -1,0 +1,217 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_308288525-308872339/bears_traccar-traccar_308288525-308872339/src/org/traccar/protocol/TmgFrameDecoder.java /tmp/fixed/bears_traccar-traccar_308288525-308872339/src/org/traccar/protocol/TmgFrameDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_308288525-308872339/bears_traccar-traccar_308288525-308872339/src/org/traccar/protocol/TmgFrameDecoder.java	2022-05-20 02:42:35.253653969 +0800
++++ /tmp/fixed/bears_traccar-traccar_308288525-308872339/src/org/traccar/protocol/TmgFrameDecoder.java	2022-05-20 02:42:56.046295460 +0800
+@@ -47,13 +47,13 @@
+             }
+         });
+ 
+-        if (beginIndex > 0) {
++        if (beginIndex >= 0) {
+ 
+             buf.readerIndex(beginIndex);
+ 
+             int endIndex = buf.indexOf(beginIndex, buf.writerIndex(), (byte) '\n');
+ 
+-            if (endIndex > 0) {
++            if (endIndex >= 0) {
+                 ChannelBuffer frame = buf.readBytes(endIndex - beginIndex);
+                 buf.readByte(); // delimiter
+                 return frame;
+
+
+                
+                ====================== dynamoth_1 traccar-traccar_308288525-308872339 ================================
+                
+                --- a/src/org/traccar/protocol/TmgFrameDecoder.java
++++ b/src/org/traccar/protocol/TmgFrameDecoder.java
+@@ -49,8 +49,8 @@
+
+-        if (beginIndex > 0) {
+-
++        if (true) {
++
+buf.readerIndex(beginIndex);
+-
++
+int endIndex = buf.indexOf(beginIndex, buf.writerIndex(), (byte) '\n');
+-
++
+if (endIndex > 0) {
+@@ -60,3 +60,3 @@
+}
+-
++
+}
+
+
+
+
+                
+                ====================== dynamoth_2 traccar-traccar_308288525-308872339 ================================
+                
+                --- a/src/org/traccar/protocol/TmgFrameDecoder.java
++++ b/src/org/traccar/protocol/TmgFrameDecoder.java
+@@ -49,8 +49,8 @@
+
+-        if (beginIndex > 0) {
+-
++        if (true) {
++
+buf.readerIndex(beginIndex);
+-
++
+int endIndex = buf.indexOf(beginIndex, buf.writerIndex(), (byte) '\n');
+-
++
+if (endIndex > 0) {
+@@ -60,3 +60,3 @@
+}
+-
++
+}
+
+
+
+
+                
+                ====================== dynamoth_3 traccar-traccar_308288525-308872339 ================================
+                
+                --- a/src/org/traccar/protocol/TmgFrameDecoder.java
++++ b/src/org/traccar/protocol/TmgFrameDecoder.java
+@@ -49,8 +49,8 @@
+
+-        if (beginIndex > 0) {
+-
++        if (true) {
++
+buf.readerIndex(beginIndex);
+-
++
+int endIndex = buf.indexOf(beginIndex, buf.writerIndex(), (byte) '\n');
+-
++
+if (endIndex > 0) {
+@@ -60,3 +60,3 @@
+}
+-
++
+}
+
+
+
+
+                
+                ====================== tbar_1 traccar-traccar_308288525-308872339 ================================
+                
+                [PATCH 191]//**********************************************************
+//org/traccar/protocol/TmgFrameDecoder.java ------ 50
+//**********************************************************
+===Buggy Code===
+if (beginIndex > 0) {
+
+            buf.readerIndex(beginIndex);
+
+            int endIndex = buf.indexOf(beginIndex, buf.writerIndex(), (byte) '\n');
+
+            if (endIndex > 0) {
+                ChannelBuffer frame = buf.readBytes(endIndex - beginIndex);
+                buf.readByte(); // delimiter
+                return frame;
+            }
+
+        }
+
+===Patch Code===
+if (beginIndex>=0) {
+
+            buf.readerIndex(beginIndex);
+
+            int endIndex = buf.indexOf(beginIndex, buf.writerIndex(), (byte) '\n');
+
+            if (endIndex > 0) {
+                ChannelBuffer frame = buf.readBytes(endIndex - beginIndex);
+                buf.readByte(); // delimiter
+                return frame;
+            }
+
+        }
+
+
+                
+                ====================== tbar_2 traccar-traccar_308288525-308872339 ================================
+                
+                [PATCH 191]//**********************************************************
+//org/traccar/protocol/TmgFrameDecoder.java ------ 50
+//**********************************************************
+===Buggy Code===
+if (beginIndex > 0) {
+
+            buf.readerIndex(beginIndex);
+
+            int endIndex = buf.indexOf(beginIndex, buf.writerIndex(), (byte) '\n');
+
+            if (endIndex > 0) {
+                ChannelBuffer frame = buf.readBytes(endIndex - beginIndex);
+                buf.readByte(); // delimiter
+                return frame;
+            }
+
+        }
+
+===Patch Code===
+if (beginIndex>=0) {
+
+            buf.readerIndex(beginIndex);
+
+            int endIndex = buf.indexOf(beginIndex, buf.writerIndex(), (byte) '\n');
+
+            if (endIndex > 0) {
+                ChannelBuffer frame = buf.readBytes(endIndex - beginIndex);
+                buf.readByte(); // delimiter
+                return frame;
+            }
+
+        }
+
+
+                
+                ====================== tbar_3 traccar-traccar_308288525-308872339 ================================
+                
+                [PATCH 191]//**********************************************************
+//org/traccar/protocol/TmgFrameDecoder.java ------ 50
+//**********************************************************
+===Buggy Code===
+if (beginIndex > 0) {
+
+            buf.readerIndex(beginIndex);
+
+            int endIndex = buf.indexOf(beginIndex, buf.writerIndex(), (byte) '\n');
+
+            if (endIndex > 0) {
+                ChannelBuffer frame = buf.readBytes(endIndex - beginIndex);
+                buf.readByte(); // delimiter
+                return frame;
+            }
+
+        }
+
+===Patch Code===
+if (beginIndex>=0) {
+
+            buf.readerIndex(beginIndex);
+
+            int endIndex = buf.indexOf(beginIndex, buf.writerIndex(), (byte) '\n');
+
+            if (endIndex > 0) {
+                ChannelBuffer frame = buf.readBytes(endIndex - beginIndex);
+                buf.readByte(); // delimiter
+                return frame;
+            }
+
+        }
+
+
+                

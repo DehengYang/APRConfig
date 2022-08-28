@@ -1,0 +1,569 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_260087947-260197957/bears_INRIA-spoon_260087947-260197957/src/main/java/spoon/reflect/code/CtComment.java /tmp/fixed/bears_INRIA-spoon_260087947-260197957/src/main/java/spoon/reflect/code/CtComment.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_260087947-260197957/bears_INRIA-spoon_260087947-260197957/src/main/java/spoon/reflect/code/CtComment.java	2022-04-26 08:46:26.459587599 +0800
++++ /tmp/fixed/bears_INRIA-spoon_260087947-260197957/src/main/java/spoon/reflect/code/CtComment.java	2022-04-26 08:47:08.221454364 +0800
+@@ -52,6 +52,13 @@
+ 	}
+ 
+ 	/**
++	 * This line separator is used in comments returned by {@link #getContent()}.
++	 * It is OS independent.
++	 * It has no influence to pretty printed comments, which uses by default OS dependent line separator
++	 */
++	String LINE_SEPARATOR = "\n";
++
++	/**
+ 	 * Get the content of the comment
+ 	 * @return the content of the comment
+ 	 */
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_260087947-260197957/bears_INRIA-spoon_260087947-260197957/src/main/java/spoon/reflect/visitor/DefaultJavaPrettyPrinter.java /tmp/fixed/bears_INRIA-spoon_260087947-260197957/src/main/java/spoon/reflect/visitor/DefaultJavaPrettyPrinter.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_260087947-260197957/bears_INRIA-spoon_260087947-260197957/src/main/java/spoon/reflect/visitor/DefaultJavaPrettyPrinter.java	2022-04-26 08:46:26.463587778 +0800
++++ /tmp/fixed/bears_INRIA-spoon_260087947-260197957/src/main/java/spoon/reflect/visitor/DefaultJavaPrettyPrinter.java	2022-04-26 08:47:08.225454543 +0800
+@@ -169,11 +169,6 @@
+ 	public static final String BLOCK_COMMENT_START = "/* ";
+ 
+ 	/**
+-	 * RegExp which matches all possible line separators
+-	 */
+-	private static final String LINE_SEPARATORS_RE = "\\n\\r|\\n|\\r";
+-
+-	/**
+ 	 * The printing context.
+ 	 */
+ 	public PrintingContext context = new PrintingContext();
+@@ -904,7 +899,7 @@
+ 			printer.write(docTag.getParam()).writeln().writeTabs();
+ 		}
+ 
+-		String[] tagLines = docTag.getContent().split(LINE_SEPARATORS_RE);
++		String[] tagLines = docTag.getContent().split(CtComment.LINE_SEPARATOR);
+ 		for (int i = 0; i < tagLines.length; i++) {
+ 			String com = tagLines[i];
+ 			if (i > 0 || docTag.getType().hasParam()) {
+@@ -942,7 +937,7 @@
+ 				printer.write(content);
+ 				break;
+ 			default:
+-				String[] lines = content.split(LINE_SEPARATORS_RE);
++				String[] lines = content.split(CtComment.LINE_SEPARATOR);
+ 				for (int i = 0; i < lines.length; i++) {
+ 					String com = lines[i];
+ 					if (comment.getCommentType() == CtComment.CommentType.BLOCK) {
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_260087947-260197957/bears_INRIA-spoon_260087947-260197957/src/main/java/spoon/support/compiler/jdt/JDTCommentBuilder.java /tmp/fixed/bears_INRIA-spoon_260087947-260197957/src/main/java/spoon/support/compiler/jdt/JDTCommentBuilder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_260087947-260197957/bears_INRIA-spoon_260087947-260197957/src/main/java/spoon/support/compiler/jdt/JDTCommentBuilder.java	2022-04-26 08:46:26.467587956 +0800
++++ /tmp/fixed/bears_INRIA-spoon_260087947-260197957/src/main/java/spoon/support/compiler/jdt/JDTCommentBuilder.java	2022-04-26 08:47:08.233454901 +0800
+@@ -20,6 +20,8 @@
+ import org.eclipse.jdt.core.compiler.CharOperation;
+ import org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration;
+ import org.eclipse.jdt.internal.compiler.env.ICompilationUnit;
++
++import spoon.SpoonException;
+ import spoon.reflect.code.CtBinaryOperator;
+ import spoon.reflect.code.CtBlock;
+ import spoon.reflect.code.CtBodyHolder;
+@@ -51,15 +53,20 @@
+ import spoon.reflect.visitor.CtScanner;
+ import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
+ 
++import java.io.BufferedReader;
++import java.io.CharArrayReader;
+ import java.io.File;
++import java.io.IOException;
++import java.io.Reader;
++import java.io.StringReader;
+ import java.util.ArrayList;
+ import java.util.Collection;
+ import java.util.List;
++import java.util.regex.Pattern;
+ 
+ /**
+  * The comment builder that will insert all element of a CompilationUnitDeclaration into the Spoon AST
+  */
+-@SuppressWarnings("unchecked")
+ class JDTCommentBuilder {
+ 
+ 	private static final Logger LOGGER = Logger.getLogger(JDTCommentBuilder.class);
+@@ -526,38 +533,60 @@
+ 	 * @return the content of the comment
+ 	 */
+ 	private String getCommentContent(int start, int end) {
+-		//skip comment prefix
+-		start += 2;
+-		return cleanComment(new String(contents, start, end - start));
++		return cleanComment(new CharArrayReader(contents, start, end - start));
+ 	}
+ 
+ 	public static String cleanComment(String comment) {
+-		StringBuffer ret = new StringBuffer();
+-		String[] lines = comment.split("\n");
+-		// limit case
+-		if (lines.length == 1) {
+-			return lines[0].replaceAll("^/\\*+ ?", "").replaceAll("\\*+/$", "").trim();
+-		}
++		return cleanComment(new StringReader(comment));
++	}
+ 
+-		for (String s : lines) {
+-			String cleanUpLine = s.trim();
+-			if (cleanUpLine.startsWith("/**")) {
+-				cleanUpLine = cleanUpLine.replaceAll("/\\*+ ?", "");
+-			} else if (cleanUpLine.endsWith("*/")) {
+-				cleanUpLine = cleanUpLine.replaceAll("\\*+/$", "").replaceAll("^[ \t]*\\*+ ?", "");
++	private static final Pattern startCommentRE = Pattern.compile("^/\\*{1,2} ?");
++	private static final Pattern middleCommentRE = Pattern.compile("^[ \t]*\\*? ?");
++	private static final Pattern endCommentRE = Pattern.compile("\\*/$");
++
++	private static String cleanComment(Reader comment) {
++		StringBuilder ret = new StringBuilder();
++		try (BufferedReader br = new BufferedReader(comment)) {
++			String line = br.readLine();
++			if (line.length() < 2 || line.charAt(0) != '/') {
++				throw new SpoonException("Unexpected beginning of comment");
++			}
++			boolean isLastLine = false;
++			if (line.charAt(1) == '/') {
++				//it is single line comment, which starts with "//"
++				isLastLine = true;
++				line = line.substring(2);
+ 			} else {
+-				cleanUpLine = cleanUpLine.replaceAll("^[ \t]*\\*+ ?", "");
+-			}
+-			ret.append(cleanUpLine);
+-			ret.append("\n");
+-		}
+-		// clean '\r'
+-		StringBuffer ret2 = new StringBuffer();
+-		for (int i = 0; i < ret.length(); i++) {
+-			if (ret.charAt(i) != '\r') {
+-				ret2.append(ret.charAt(i));
+-			}
++				//it is potentially multiline comment, which starts with "/*" or "/**"
++				//check end first
++				if (line.endsWith("*/")) {
++					//it is last line
++					line = endCommentRE.matcher(line).replaceFirst("");
++					isLastLine = true;
++				}
++				//skip beginning
++				line = startCommentRE.matcher(line).replaceFirst("");
++			}
++			//append first line
++			ret.append(line);
++			while ((line = br.readLine()) != null) {
++				if (isLastLine) {
++					throw new SpoonException("Unexpected next line after last line");
++				}
++				if (line.endsWith("*/")) {
++					//it is last line
++					line = endCommentRE.matcher(line).replaceFirst("");
++					isLastLine = true;
++				}
++				//always clean middle comment, but after end comment is detected
++				line = middleCommentRE.matcher(line).replaceFirst("");
++				//write next line - Note that Spoon model comment's lines are always separated by "\n"
++				ret.append(CtComment.LINE_SEPARATOR);
++				ret.append(line);
++			}
++			return ret.toString().trim();
++		} catch (IOException e) {
++			throw new SpoonException(e);
+ 		}
+-		return ret2.toString().trim();
+ 	}
+ }
+
+
+                
+                ====================== tbar_2 INRIA-spoon_260087947-260197957 ================================
+                
+                [PATCH 413]//**********************************************************
+//spoon/Launcher.java ------ 199
+//**********************************************************
+===Buggy Code===
+sw1.setShortFlag('h');
+			sw1.setLongFlag("help");
+			sw1.setDefault("false");
+			jsap.registerParameter(sw1);
+
+			// Tabs
+			sw1 = new Switch("tabs");
+			sw1.setLongFlag("tabs");
+			sw1.setDefault("false");
+			sw1.setHelp("Use tabulations instead of spaces in the generated code (use spaces by default).");
+			jsap.registerParameter(sw1);
+
+			// Tab size
+			FlaggedOption opt2 = new FlaggedOption("tabsize");
+			opt2.setLongFlag("tabsize");
+			opt2.setStringParser(JSAP.INTEGER_PARSER);
+			opt2.setDefault("4");
+			opt2.setHelp("Define tabulation size.");
+			jsap.registerParameter(opt2);
+
+			// Level logging.
+			opt2 = new FlaggedOption("level");
+			opt2.setLongFlag("level");
+			opt2.setHelp("Level of the ouput messages about what spoon is doing.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+			opt2.setDefault(Level.OFF.toString());
+			jsap.registerParameter(opt2);
+
+			// Auto-import
+			sw1 = new Switch("imports");
+			sw1.setLongFlag("with-imports");
+			sw1.setDefault("false");
+			sw1.setHelp("Enable imports in generated files.");
+			jsap.registerParameter(sw1);
+
+			// java compliance
+			opt2 = new FlaggedOption("compliance");
+			opt2.setLongFlag("compliance");
+			opt2.setHelp("Java source code compliance level (1,2,3,4,5, 6, 7 or 8).");
+			opt2.setStringParser(JSAP.INTEGER_PARSER);
+			opt2.setDefault("8");
+			jsap.registerParameter(opt2);
+
+			// compiler's encoding
+			opt2 = new FlaggedOption("encoding");
+			opt2.setLongFlag("encoding");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+			opt2.setRequired(false);
+			opt2.setDefault("UTF-8");
+			opt2.setHelp("Forces the compiler to use a specific encoding (UTF-8, UTF-16, ...).");
+			jsap.registerParameter(opt2);
+
+			// setting Input files & Directory
+			opt2 = new FlaggedOption("input");
+			opt2.setShortFlag('i');
+			opt2.setLongFlag("input");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+			opt2.setRequired(false);
+			opt2.setHelp("List of path to sources files.");
+			jsap.registerParameter(opt2);
+
+			// Processor qualified name
+			opt2 = new FlaggedOption("processors");
+			opt2.setShortFlag('p');
+			opt2.setLongFlag("processors");
+			opt2.setHelp("List of processor's qualified name to be used.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+			opt2.setRequired(false);
+			jsap.registerParameter(opt2);
+
+			// setting input template
+			opt2 = new FlaggedOption("template");
+			opt2.setShortFlag('t');
+			opt2.setLongFlag("template");
+			opt2.setHelp("List of source templates.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+			opt2.setRequired(false);
+			opt2.setHelp("List of path to templates java files.");
+			jsap.registerParameter(opt2);
+
+			// Spooned output directory
+			opt2 = new FlaggedOption("output");
+			opt2.setShortFlag('o');
+			opt2.setLongFlag("output");
+			opt2.setDefault(OUTPUTDIR);
+			opt2.setHelp("Specify where to place generated java files.");
+			opt2.setStringParser(FileStringParser.getParser());
+			opt2.setRequired(false);
+			jsap.registerParameter(opt2);
+
+			// Source classpath
+			opt2 = new FlaggedOption("source-classpath");
+			opt2.setLongFlag("source-classpath");
+			opt2.setHelp("An optional classpath to be passed to the internal " + "Java compiler when building or compiling the " + "input sources.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+			opt2.setRequired(false);
+			jsap.registerParameter(opt2);
+
+			// Template classpath
+			opt2 = new FlaggedOption("template-classpath");
+			opt2.setLongFlag("template-classpath");
+			opt2.setHelp("An optional classpath to be passed to the " + "internal Java compiler when building " + "the template sources.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+			opt2.setRequired(false);
+			jsap.registerParameter(opt2);
+
+			// Destination
+			opt2 = new FlaggedOption("destination");
+			opt2.setShortFlag('d');
+			opt2.setLongFlag("destination");
+			opt2.setDefault(SPOONED_CLASSES);
+			opt2.setHelp("An optional destination directory for the generated class files.");
+			opt2.setStringParser(FileStringParser.getParser());
+			opt2.setRequired(false);
+			jsap.registerParameter(opt2);
+
+			// Sets output type generation
+			opt2 = new FlaggedOption("output-type");
+			opt2.setLongFlag(opt2.getID());
+			String msg = "States how to print the processed source code: ";
+			int i = 0;
+			for (OutputType v : OutputType.values()) {
+				i++;
+				msg += v.toString();
+				if (i != OutputType.values().length) {
+					msg += "|";
+				}
+			}
+			opt2.setStringParser(JSAP.STRING_PARSER);
+			opt2.setHelp(msg);
+			opt2.setDefault("classes");
+			jsap.registerParameter(opt2);
+
+			// Enable compilation
+			sw1 = new Switch("compile");
+			sw1.setLongFlag(sw1.getUsageName());
+			sw1.setHelp("Compiles the resulting classes (after transformation) to bytecode.");
+			sw1.setDefault("false");
+			jsap.registerParameter(sw1);
+
+			// Enable pre-compilation
+			sw1 = new Switch("precompile");
+			sw1.setLongFlag("precompile");
+			sw1.setHelp("[experimental] Enable pre-compilation of input source files " + "before processing. The compiled classes " + "will be added to the classpath.");
+			sw1.setDefault("false");
+			jsap.registerParameter(sw1);
+
+			// Enable building only outdated files
+			sw1 = new Switch("buildOnlyOutdatedFiles");
+			sw1.setLongFlag("buildOnlyOutdatedFiles");
+			sw1.setHelp(
+					"Set Spoon to build only the source files that " + "have been modified since the latest " + "source code generation, for performance " + "purpose. Note that this option requires "
+							+ "to have the --ouput-type option not set " + "to none. This option is not appropriate " + "to all kinds of processing. In particular "
+							+ "processings that implement or rely on a " + "global analysis should avoid this option " + "because the processor will only have access "
+							+ "to the outdated source code (the files " + "modified since the latest processing).");
+			sw1.setDefault("false");
+			jsap.registerParameter(sw1);
+
+			sw1 = new Switch("lines");
+			sw1.setLongFlag("lines");
+			sw1.setHelp("Set Spoon to try to preserve the original line " + "numbers when generating the source " + "code (may lead to human-unfriendly " + "formatting).");
+			sw1.setDefault("false");
+			jsap.registerParameter(sw1);
+
+			// nobinding
+			sw1 = new Switch("noclasspath");
+			sw1.setShortFlag('x');
+			sw1.setLongFlag("noclasspath");
+			sw1.setHelp("Does not assume a full classpath");
+			jsap.registerParameter(sw1);
+
+			// show GUI
+			sw1 = new Switch("gui");
+			sw1.setShortFlag('g');
+			sw1.setLongFlag("gui");
+			sw1.setHelp("Show spoon model after processing");
+			jsap.registerParameter(sw1);
+
+			// Disable copy of resources.
+			sw1 = new Switch("no-copy-resources");
+			sw1.setShortFlag('r');
+			sw1.setLongFlag("no-copy-resources");
+			sw1.setHelp("Disable the copy of resources from source to destination folder.");
+			sw1.setDefault("false");
+			jsap.registerParameter(sw1);
+
+			// Enable generation of javadoc.
+			sw1 = new Switch("enable-comments");
+			sw1.setShortFlag('c');
+
+===Patch Code===
+
+			sw1.setLongFlag("help");
+			sw1.setDefault("false");
+			jsap.registerParameter(sw1);
+
+			// Tabs
+			sw1 = new Switch("tabs");
+			sw1.setLongFlag("tabs");
+			sw1.setDefault("false");
+			sw1.setHelp("Use tabulations instead of spaces in the generated code (use spaces by default).");
+			jsap.registerParameter(sw1);
+
+			// Tab size
+			FlaggedOption opt2 = new FlaggedOption("tabsize");
+			opt2.setLongFlag("tabsize");
+			opt2.setStringParser(JSAP.INTEGER_PARSER);
+			opt2.setDefault("4");
+			opt2.setHelp("Define tabulation size.");
+			jsap.registerParameter(opt2);
+
+			// Level logging.
+			opt2 = new FlaggedOption("level");
+			opt2.setLongFlag("level");
+			opt2.setHelp("Level of the ouput messages about what spoon is doing.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+			opt2.setDefault(Level.OFF.toString());
+			jsap.registerParameter(opt2);
+
+			// Auto-import
+			sw1 = new Switch("imports");
+			sw1.setLongFlag("with-imports");
+			sw1.setDefault("false");
+			sw1.setHelp("Enable imports in generated files.");
+			jsap.registerParameter(sw1);
+
+			// java compliance
+			opt2 = new FlaggedOption("compliance");
+			opt2.setLongFlag("compliance");
+			opt2.setHelp("Java source code compliance level (1,2,3,4,5, 6, 7 or 8).");
+			opt2.setStringParser(JSAP.INTEGER_PARSER);
+			opt2.setDefault("8");
+			jsap.registerParameter(opt2);
+
+			// compiler's encoding
+			opt2 = new FlaggedOption("encoding");
+			opt2.setLongFlag("encoding");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+			opt2.setRequired(false);
+			opt2.setDefault("UTF-8");
+			opt2.setHelp("Forces the compiler to use a specific encoding (UTF-8, UTF-16, ...).");
+			jsap.registerParameter(opt2);
+
+			// setting Input files & Directory
+			opt2 = new FlaggedOption("input");
+			opt2.setShortFlag('i');
+			opt2.setLongFlag("input");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+			opt2.setRequired(false);
+			opt2.setHelp("List of path to sources files.");
+			jsap.registerParameter(opt2);
+
+			// Processor qualified name
+			opt2 = new FlaggedOption("processors");
+			opt2.setShortFlag('p');
+			opt2.setLongFlag("processors");
+			opt2.setHelp("List of processor's qualified name to be used.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+			opt2.setRequired(false);
+			jsap.registerParameter(opt2);
+
+			// setting input template
+			opt2 = new FlaggedOption("template");
+			opt2.setShortFlag('t');
+			opt2.setLongFlag("template");
+			opt2.setHelp("List of source templates.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+			opt2.setRequired(false);
+			opt2.setHelp("List of path to templates java files.");
+			jsap.registerParameter(opt2);
+
+			// Spooned output directory
+			opt2 = new FlaggedOption("output");
+			opt2.setShortFlag('o');
+			opt2.setLongFlag("output");
+			opt2.setDefault(OUTPUTDIR);
+			opt2.setHelp("Specify where to place generated java files.");
+			opt2.setStringParser(FileStringParser.getParser());
+			opt2.setRequired(false);
+			jsap.registerParameter(opt2);
+
+			// Source classpath
+			opt2 = new FlaggedOption("source-classpath");
+			opt2.setLongFlag("source-classpath");
+			opt2.setHelp("An optional classpath to be passed to the internal " + "Java compiler when building or compiling the " + "input sources.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+			opt2.setRequired(false);
+			jsap.registerParameter(opt2);
+
+			// Template classpath
+			opt2 = new FlaggedOption("template-classpath");
+			opt2.setLongFlag("template-classpath");
+			opt2.setHelp("An optional classpath to be passed to the " + "internal Java compiler when building " + "the template sources.");
+			opt2.setStringParser(JSAP.STRING_PARSER);
+			opt2.setRequired(false);
+			jsap.registerParameter(opt2);
+
+			// Destination
+			opt2 = new FlaggedOption("destination");
+			opt2.setShortFlag('d');
+			opt2.setLongFlag("destination");
+			opt2.setDefault(SPOONED_CLASSES);
+			opt2.setHelp("An optional destination directory for the generated class files.");
+			opt2.setStringParser(FileStringParser.getParser());
+			opt2.setRequired(false);
+			jsap.registerParameter(opt2);
+
+			// Sets output type generation
+			opt2 = new FlaggedOption("output-type");
+			opt2.setLongFlag(opt2.getID());
+			String msg = "States how to print the processed source code: ";
+			int i = 0;
+			for (OutputType v : OutputType.values()) {
+				i++;
+				msg += v.toString();
+				if (i != OutputType.values().length) {
+					msg += "|";
+				}
+			}
+			opt2.setStringParser(JSAP.STRING_PARSER);
+			opt2.setHelp(msg);
+			opt2.setDefault("classes");
+			jsap.registerParameter(opt2);
+
+			// Enable compilation
+			sw1 = new Switch("compile");
+			sw1.setLongFlag(sw1.getUsageName());
+			sw1.setHelp("Compiles the resulting classes (after transformation) to bytecode.");
+			sw1.setDefault("false");
+			jsap.registerParameter(sw1);
+
+			// Enable pre-compilation
+			sw1 = new Switch("precompile");
+			sw1.setLongFlag("precompile");
+			sw1.setHelp("[experimental] Enable pre-compilation of input source files " + "before processing. The compiled classes " + "will be added to the classpath.");
+			sw1.setDefault("false");
+			jsap.registerParameter(sw1);
+
+			// Enable building only outdated files
+			sw1 = new Switch("buildOnlyOutdatedFiles");
+			sw1.setLongFlag("buildOnlyOutdatedFiles");
+			sw1.setHelp(
+					"Set Spoon to build only the source files that " + "have been modified since the latest " + "source code generation, for performance " + "purpose. Note that this option requires "
+							+ "to have the --ouput-type option not set " + "to none. This option is not appropriate " + "to all kinds of processing. In particular "
+							+ "processings that implement or rely on a " + "global analysis should avoid this option " + "because the processor will only have access "
+							+ "to the outdated source code (the files " + "modified since the latest processing).");
+			sw1.setDefault("false");
+			jsap.registerParameter(sw1);
+
+			sw1 = new Switch("lines");
+			sw1.setLongFlag("lines");
+			sw1.setHelp("Set Spoon to try to preserve the original line " + "numbers when generating the source " + "code (may lead to human-unfriendly " + "formatting).");
+			sw1.setDefault("false");
+			jsap.registerParameter(sw1);
+
+			// nobinding
+			sw1 = new Switch("noclasspath");
+			sw1.setShortFlag('x');
+			sw1.setLongFlag("noclasspath");
+			sw1.setHelp("Does not assume a full classpath");
+			jsap.registerParameter(sw1);
+
+			// show GUI
+			sw1 = new Switch("gui");
+			sw1.setShortFlag('g');
+			sw1.setLongFlag("gui");
+			sw1.setHelp("Show spoon model after processing");
+			jsap.registerParameter(sw1);
+
+			// Disable copy of resources.
+			sw1 = new Switch("no-copy-resources");
+			sw1.setShortFlag('r');
+			sw1.setLongFlag("no-copy-resources");
+			sw1.setHelp("Disable the copy of resources from source to destination folder.");
+			sw1.setDefault("false");
+			jsap.registerParameter(sw1);
+
+			// Enable generation of javadoc.
+			sw1 = new Switch("enable-comments");
+			sw1.setShortFlag('c');
+	sw1.setShortFlag('h');
+
+
+
+                

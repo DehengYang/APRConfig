@@ -1,0 +1,108 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_267371558-268530427/bears_traccar-traccar_267371558-268530427/src/org/traccar/protocol/Gl200TextProtocolDecoder.java /tmp/fixed/bears_traccar-traccar_267371558-268530427/src/org/traccar/protocol/Gl200TextProtocolDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_267371558-268530427/bears_traccar-traccar_267371558-268530427/src/org/traccar/protocol/Gl200TextProtocolDecoder.java	2022-05-19 19:08:54.598432351 +0800
++++ /tmp/fixed/bears_traccar-traccar_267371558-268530427/src/org/traccar/protocol/Gl200TextProtocolDecoder.java	2022-05-19 19:09:46.976099134 +0800
+@@ -614,7 +614,7 @@
+                 for (int i = 1; i <= deviceCount; i++) {
+                     index++; // id
+                     index++; // type
+-                    position.set(Position.PREFIX_TEMP + i, Short.parseShort(data[index++], 16) * 0.0625);
++                    position.set(Position.PREFIX_TEMP + i, (short) Integer.parseInt(data[index++], 16) * 0.0625);
+                 }
+             }
+         }
+
+
+                
+                ====================== dynamoth_1 traccar-traccar_267371558-268530427 ================================
+                
+                --- a/src/org/traccar/protocol/Gl200TextProtocolDecoder.java
++++ b/src/org/traccar/protocol/Gl200TextProtocolDecoder.java
+@@ -609,10 +609,12 @@
+String[] data = parser.next().split(",");
+-        if (data.length > 1) {
+-            int deviceType = Integer.parseInt(data[index++]);
+-            if (deviceType == 2) {
+-                int deviceCount = Integer.parseInt(data[index++]);
+-                for (int i = 1; i <= deviceCount; i++) {
+-                    index++; // id
+-                    index++; // type
+-                    position.set(Position.PREFIX_TEMP + i, Short.parseShort(data[index++], 16) * 0.0625);
++        if (false) {
++            if (data.length > 1) {
++                int deviceType = Integer.parseInt(data[index++]);
++                if (deviceType == 2) {
++                    int deviceCount = Integer.parseInt(data[index++]);
++                    for (int i = 1; i <= deviceCount; i++) {
++                        index++; // id
++                        index++; // type
++                        position.set(Position.PREFIX_TEMP + i, Short.parseShort(data[index++], 16) * 0.0625);
++                    }
+}
+
+
+
+
+                
+                ====================== dynamoth_2 traccar-traccar_267371558-268530427 ================================
+                
+                --- a/src/org/traccar/protocol/Gl200TextProtocolDecoder.java
++++ b/src/org/traccar/protocol/Gl200TextProtocolDecoder.java
+@@ -609,10 +609,12 @@
+String[] data = parser.next().split(",");
+-        if (data.length > 1) {
+-            int deviceType = Integer.parseInt(data[index++]);
+-            if (deviceType == 2) {
+-                int deviceCount = Integer.parseInt(data[index++]);
+-                for (int i = 1; i <= deviceCount; i++) {
+-                    index++; // id
+-                    index++; // type
+-                    position.set(Position.PREFIX_TEMP + i, Short.parseShort(data[index++], 16) * 0.0625);
++        if (false) {
++            if (data.length > 1) {
++                int deviceType = Integer.parseInt(data[index++]);
++                if (deviceType == 2) {
++                    int deviceCount = Integer.parseInt(data[index++]);
++                    for (int i = 1; i <= deviceCount; i++) {
++                        index++; // id
++                        index++; // type
++                        position.set(Position.PREFIX_TEMP + i, Short.parseShort(data[index++], 16) * 0.0625);
++                    }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 traccar-traccar_267371558-268530427 ================================
+                
+                --- a/src/org/traccar/protocol/Gl200TextProtocolDecoder.java
++++ b/src/org/traccar/protocol/Gl200TextProtocolDecoder.java
+@@ -609,10 +609,12 @@
+String[] data = parser.next().split(",");
+-        if (data.length > 1) {
+-            int deviceType = Integer.parseInt(data[index++]);
+-            if (deviceType == 2) {
+-                int deviceCount = Integer.parseInt(data[index++]);
+-                for (int i = 1; i <= deviceCount; i++) {
+-                    index++; // id
+-                    index++; // type
+-                    position.set(Position.PREFIX_TEMP + i, Short.parseShort(data[index++], 16) * 0.0625);
++        if (false) {
++            if (data.length > 1) {
++                int deviceType = Integer.parseInt(data[index++]);
++                if (deviceType == 2) {
++                    int deviceCount = Integer.parseInt(data[index++]);
++                    for (int i = 1; i <= deviceCount; i++) {
++                        index++; // id
++                        index++; // type
++                        position.set(Position.PREFIX_TEMP + i, Short.parseShort(data[index++], 16) * 0.0625);
++                    }
+}
+
+
+
+
+                

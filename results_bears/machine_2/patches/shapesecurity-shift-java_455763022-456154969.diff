@@ -1,0 +1,66 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_shapesecurity-shift-java_455763022-456154969/bears_shapesecurity-shift-java_455763022-456154969/src/main/java/com/shapesecurity/shift/es2017/parser/GenericParser.java /tmp/fixed/bears_shapesecurity-shift-java_455763022-456154969/src/main/java/com/shapesecurity/shift/es2017/parser/GenericParser.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_shapesecurity-shift-java_455763022-456154969/bears_shapesecurity-shift-java_455763022-456154969/src/main/java/com/shapesecurity/shift/es2017/parser/GenericParser.java	2022-05-19 21:31:13.000000000 +0800
++++ /tmp/fixed/bears_shapesecurity-shift-java_455763022-456154969/src/main/java/com/shapesecurity/shift/es2017/parser/GenericParser.java	2022-05-19 21:31:33.737318601 +0800
+@@ -2178,7 +2178,7 @@
+                     return Either.right(this.finishNode(startState, toReturn));
+                 }
+                 if (!this.match(TokenType.COLON)) {
+-                    if (token.type != TokenType.IDENTIFIER && token.type != TokenType.YIELD && token.type != TokenType.LET && token.type != TokenType.ASYNC) {
++                    if (token.type != TokenType.IDENTIFIER && token.type != TokenType.YIELD && token.type != TokenType.LET && token.type != TokenType.ASYNC && token.type != TokenType.AWAIT) {
+                         throw this.createUnexpected(token);
+                     }
+                     ShorthandProperty toReturn = new ShorthandProperty(this.finishNode(startState, new IdentifierExpression(staticPropertyName.value)));
+
+
+                
+                ====================== dynamoth_1 shapesecurity-shift-java_455763022-456154969 ================================
+                
+                --- a/src/main/java/com/shapesecurity/shift/es2017/parser/GenericParser.java
++++ b/src/main/java/com/shapesecurity/shift/es2017/parser/GenericParser.java
+@@ -2181,3 +2181,5 @@
+if (token.type != TokenType.IDENTIFIER && token.type != TokenType.YIELD && token.type != TokenType.LET && token.type != TokenType.ASYNC) {
+-                        throw this.createUnexpected(token);
++                        if (this.firstAwaitLocation == null) {
++                            throw this.createUnexpected(token);
++                        }
+}
+
+
+
+
+                
+                ====================== dynamoth_2 shapesecurity-shift-java_455763022-456154969 ================================
+                
+                --- a/src/main/java/com/shapesecurity/shift/es2017/parser/GenericParser.java
++++ b/src/main/java/com/shapesecurity/shift/es2017/parser/GenericParser.java
+@@ -2181,3 +2181,5 @@
+if (token.type != TokenType.IDENTIFIER && token.type != TokenType.YIELD && token.type != TokenType.LET && token.type != TokenType.ASYNC) {
+-                        throw this.createUnexpected(token);
++                        if (this.firstAwaitLocation == null) {
++                            throw this.createUnexpected(token);
++                        }
+}
+
+
+
+
+                
+                ====================== dynamoth_3 shapesecurity-shift-java_455763022-456154969 ================================
+                
+                --- a/src/main/java/com/shapesecurity/shift/es2017/parser/GenericParser.java
++++ b/src/main/java/com/shapesecurity/shift/es2017/parser/GenericParser.java
+@@ -2181,3 +2181,5 @@
+if (token.type != TokenType.IDENTIFIER && token.type != TokenType.YIELD && token.type != TokenType.LET && token.type != TokenType.ASYNC) {
+-                        throw this.createUnexpected(token);
++                        if (this.firstAwaitLocation == null) {
++                            throw this.createUnexpected(token);
++                        }
+}
+
+
+
+
+                

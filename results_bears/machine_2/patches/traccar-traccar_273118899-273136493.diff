@@ -1,0 +1,74 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_273118899-273136493/bears_traccar-traccar_273118899-273136493/src/org/traccar/protocol/EelinkProtocolDecoder.java /tmp/fixed/bears_traccar-traccar_273118899-273136493/src/org/traccar/protocol/EelinkProtocolDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_273118899-273136493/bears_traccar-traccar_273118899-273136493/src/org/traccar/protocol/EelinkProtocolDecoder.java	2022-05-19 19:14:04.832304737 +0800
++++ /tmp/fixed/bears_traccar-traccar_273118899-273136493/src/org/traccar/protocol/EelinkProtocolDecoder.java	2022-05-19 19:14:44.189557179 +0800
+@@ -160,7 +160,9 @@
+ 
+             if (statusType == 0x01 || statusType == 0x02 || statusType == 0x03) {
+                 buf.readUnsignedInt(); // device time
+-                decodeStatus(position, buf.readUnsignedShort());
++                if (buf.readableBytes() >= 2) {
++                    decodeStatus(position, buf.readUnsignedShort());
++                }
+             }
+ 
+         }
+
+
+                
+                ====================== dynamoth_1 traccar-traccar_273118899-273136493 ================================
+                
+                --- a/src/org/traccar/protocol/EelinkProtocolDecoder.java
++++ b/src/org/traccar/protocol/EelinkProtocolDecoder.java
+@@ -128,4 +128,6 @@
+
+-        position.setNetwork(new Network(CellTower.from(
+-                buf.readUnsignedShort(), buf.readUnsignedShort(), buf.readUnsignedShort(), buf.readUnsignedMedium())));
++        if (false) {
++            position.setNetwork(new Network(CellTower.from(
++            buf.readUnsignedShort(), buf.readUnsignedShort(), buf.readUnsignedShort(), buf.readUnsignedMedium())));
++        }
+
+
+
+
+
+                
+                ====================== dynamoth_2 traccar-traccar_273118899-273136493 ================================
+                
+                --- a/src/org/traccar/protocol/EelinkProtocolDecoder.java
++++ b/src/org/traccar/protocol/EelinkProtocolDecoder.java
+@@ -128,4 +128,6 @@
+
+-        position.setNetwork(new Network(CellTower.from(
+-                buf.readUnsignedShort(), buf.readUnsignedShort(), buf.readUnsignedShort(), buf.readUnsignedMedium())));
++        if (false) {
++            position.setNetwork(new Network(CellTower.from(
++            buf.readUnsignedShort(), buf.readUnsignedShort(), buf.readUnsignedShort(), buf.readUnsignedMedium())));
++        }
+
+
+
+
+
+                
+                ====================== dynamoth_3 traccar-traccar_273118899-273136493 ================================
+                
+                --- a/src/org/traccar/protocol/EelinkProtocolDecoder.java
++++ b/src/org/traccar/protocol/EelinkProtocolDecoder.java
+@@ -128,4 +128,6 @@
+
+-        position.setNetwork(new Network(CellTower.from(
+-                buf.readUnsignedShort(), buf.readUnsignedShort(), buf.readUnsignedShort(), buf.readUnsignedMedium())));
++        if (false) {
++            position.setNetwork(new Network(CellTower.from(
++            buf.readUnsignedShort(), buf.readUnsignedShort(), buf.readUnsignedShort(), buf.readUnsignedMedium())));
++        }
+
+
+
+
+
+                

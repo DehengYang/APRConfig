@@ -1,0 +1,98 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/main/java/com/gdssecurity/pmd/rules/dfa/DfaSecurityRule.java /tmp/fixed/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/main/java/com/gdssecurity/pmd/rules/dfa/DfaSecurityRule.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/main/java/com/gdssecurity/pmd/rules/dfa/DfaSecurityRule.java	2022-04-24 21:09:16.802806787 +0800
++++ /tmp/fixed/bears_albfernandez-GDS-PMD-Security-Rules_451155169-455669767/src/main/java/com/gdssecurity/pmd/rules/dfa/DfaSecurityRule.java	2022-04-24 21:09:52.648211003 +0800
+@@ -544,6 +544,9 @@
+ 	private boolean isAnyArgumentTainted(Node simpleNode) {
+ 		ASTArgumentList argListNode = simpleNode.getFirstDescendantOfType(ASTArgumentList.class);
+ 		if (argListNode != null) {
++			if (isSanitized(argListNode)) {
++				return false;
++			}
+ 			int numChildren = argListNode.jjtGetNumChildren();
+ 			for (int i = 0; i < numChildren; i++) {
+ 				Node argument = argListNode.jjtGetChild(i);
+@@ -554,6 +557,27 @@
+ 		}
+ 		return false;
+ 	}
++
++	private boolean isSanitized(ASTArgumentList argListNode) {
++		try {
++			ASTArguments arguments = (ASTArguments) argListNode.jjtGetParent();
++			ASTPrimarySuffix suffix = (ASTPrimarySuffix) arguments.jjtGetParent();
++			ASTPrimaryExpression exp = (ASTPrimaryExpression) suffix.jjtGetParent();
++			String method = getMethod(exp);
++			Class<?> type = getJavaType(exp);
++			String typeName = type.getName();
++			if (isSink(typeName, method)) {
++				return false;
++			}
++			if (isSanitizerMethod(typeName, method) || isSafeType(getReturnType(exp, typeName, method))) {
++				return true;
++			}
++		}
++		catch (Exception e) {
++			return false;
++		}
++		return false;
++	}
+ 
+ 	private boolean isMethodCall(Node node) {
+ 		ASTArguments arguments = node.getFirstDescendantOfType(ASTArguments.class);
+
+
+                
+                ====================== tbar_1 albfernandez-GDS-PMD-Security-Rules_451155169-455669767 ================================
+                
+                [PATCH 661]//**********************************************************
+//com/gdssecurity/pmd/rules/dfa/DfaSecurityRule.java ------ 623
+//**********************************************************
+===Buggy Code===
+if (isSource(type, method) || isUsedOverTaintedVariable(node) || isAnyArgumentTainted(node)) {
+					return true;
+				}
+
+===Patch Code===
+if (isSource(type, method) || isUsedOverTaintedVariable(node)) {
+					return true;
+				}
+
+
+                
+                ====================== tbar_2 albfernandez-GDS-PMD-Security-Rules_451155169-455669767 ================================
+                
+                [PATCH 661]//**********************************************************
+//com/gdssecurity/pmd/rules/dfa/DfaSecurityRule.java ------ 623
+//**********************************************************
+===Buggy Code===
+if (isSource(type, method) || isUsedOverTaintedVariable(node) || isAnyArgumentTainted(node)) {
+					return true;
+				}
+
+===Patch Code===
+if (isSource(type, method) || isUsedOverTaintedVariable(node)) {
+					return true;
+				}
+
+
+                
+                ====================== tbar_3 albfernandez-GDS-PMD-Security-Rules_451155169-455669767 ================================
+                
+                [PATCH 661]//**********************************************************
+//com/gdssecurity/pmd/rules/dfa/DfaSecurityRule.java ------ 623
+//**********************************************************
+===Buggy Code===
+if (isSource(type, method) || isUsedOverTaintedVariable(node) || isAnyArgumentTainted(node)) {
+					return true;
+				}
+
+===Patch Code===
+if (isSource(type, method) || isUsedOverTaintedVariable(node)) {
+					return true;
+				}
+
+
+                

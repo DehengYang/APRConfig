@@ -1,0 +1,53 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_239191142-239340888/bears_traccar-traccar_239191142-239340888/src/org/traccar/protocol/SanavProtocolDecoder.java /tmp/fixed/bears_traccar-traccar_239191142-239340888/src/org/traccar/protocol/SanavProtocolDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_239191142-239340888/bears_traccar-traccar_239191142-239340888/src/org/traccar/protocol/SanavProtocolDecoder.java	2022-04-24 08:37:51.848291505 +0800
++++ /tmp/fixed/bears_traccar-traccar_239191142-239340888/src/org/traccar/protocol/SanavProtocolDecoder.java	2022-04-24 08:38:58.971293231 +0800
+@@ -38,7 +38,7 @@
+             .number("(d+)")                      // imei
+             .expression("&?rmc[:=]")
+             .text("$GPRMC,")
+-            .number("(dd)(dd)(dd).(ddd),")       // time (hhmmss.sss)
++            .number("(dd)(dd)(dd).d+,")          // time (hhmmss.sss)
+             .expression("([AV]),")               // validity
+             .number("(d+)(dd.d+),")              // latitude
+             .expression("([NS]),")
+@@ -69,7 +69,7 @@
+         position.setDeviceId(deviceSession.getDeviceId());
+ 
+         DateBuilder dateBuilder = new DateBuilder()
+-                .setTime(parser.nextInt(0), parser.nextInt(0), parser.nextInt(0), parser.nextInt(0));
++                .setTime(parser.nextInt(0), parser.nextInt(0), parser.nextInt(0));
+ 
+         position.setValid(parser.next().equals("A"));
+         position.setLatitude(parser.nextCoordinate());
+
+
+                
+                ====================== tbar_1 traccar-traccar_239191142-239340888 ================================
+                
+                [PATCH 220]//**********************************************************
+//org/traccar/helper/PatternBuilder.java ------ 51
+//**********************************************************
+===Buggy Code===
+s = s.replace("d", "\\d").replace("x", "[0-9a-fA-F]").replaceAll("([\\.])", "\\\\$1");
+
+===Patch Code===
+s = toString().replace("d", "\\d").replace("x", "[0-9a-fA-F]").replaceAll("([\\.])", "\\\\$1");
+
+
+                
+                ====================== tbar_3 traccar-traccar_239191142-239340888 ================================
+                
+                [PATCH 124]//**********************************************************
+//org/traccar/helper/PatternBuilder.java ------ 36
+//**********************************************************
+===Buggy Code===
+s = s.replaceAll("\\|$", "\\\\|");
+
+===Patch Code===
+s = toString().replaceAll("\\|$", "\\\\|");
+
+
+                

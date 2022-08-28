@@ -1,0 +1,89 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_245681314-245682273/bears_INRIA-spoon_245681314-245682273/src/main/java/spoon/reflect/factory/ExecutableFactory.java /tmp/fixed/bears_INRIA-spoon_245681314-245682273/src/main/java/spoon/reflect/factory/ExecutableFactory.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_245681314-245682273/bears_INRIA-spoon_245681314-245682273/src/main/java/spoon/reflect/factory/ExecutableFactory.java	2022-04-21 14:11:48.618651228 +0800
++++ /tmp/fixed/bears_INRIA-spoon_245681314-245682273/src/main/java/spoon/reflect/factory/ExecutableFactory.java	2022-04-21 14:12:25.192286565 +0800
+@@ -118,7 +118,7 @@
+ 			return createReference(((CtMethod<T>) e).getDeclaringType().getReference(), isStatic, ((CtMethod<T>) e).getType().clone(), executableName, refs);
+ 		} else if (e instanceof CtLambda) {
+ 			CtMethod<T> lambdaMethod = ((CtLambda) e).getOverriddenMethod();
+-			return createReference(e.getParent(CtType.class).getReference(), lambdaMethod == null ? null : lambdaMethod.getType(), executableName, refs);
++			return createReference(e.getParent(CtType.class).getReference(), lambdaMethod == null ? null : lambdaMethod.getType().clone(), executableName, refs);
+ 		} else if (e instanceof CtAnonymousExecutable) {
+ 			return createReference(((CtAnonymousExecutable) e).getDeclaringType().getReference(), e.getType().clone(), executableName);
+ 		}
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_245681314-245682273/bears_INRIA-spoon_245681314-245682273/src/main/java/spoon/support/reflect/declaration/CtTypeImpl.java /tmp/fixed/bears_INRIA-spoon_245681314-245682273/src/main/java/spoon/support/reflect/declaration/CtTypeImpl.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_245681314-245682273/bears_INRIA-spoon_245681314-245682273/src/main/java/spoon/support/reflect/declaration/CtTypeImpl.java	2022-04-21 14:11:48.626651586 +0800
++++ /tmp/fixed/bears_INRIA-spoon_245681314-245682273/src/main/java/spoon/support/reflect/declaration/CtTypeImpl.java	2022-04-21 14:12:25.200286923 +0800
+@@ -52,6 +52,7 @@
+ import spoon.support.compiler.SnippetCompilationHelper;
+ import spoon.support.util.QualifiedNameBasedSortedSet;
+ import spoon.support.util.SignatureBasedSortedSet;
++import spoon.support.visitor.ClassTypingContext;
+ 
+ import java.lang.annotation.Annotation;
+ import java.util.ArrayList;
+@@ -895,14 +896,18 @@
+ 
+ 	@Override
+ 	public Set<CtMethod<?>> getAllMethods() {
+-		final Set<String> distinctSignatures = new HashSet<>();
+-		final Set<CtMethod<?>> l = new SignatureBasedSortedSet<>();
++		final Set<CtMethod<?>> l = new HashSet<>();
++		final ClassTypingContext ctc = new ClassTypingContext(this);
+ 		map(new AllTypeMembersFunction(CtMethod.class)).forEach(new CtConsumer<CtMethod<?>>() {
+ 			@Override
+-			public void accept(CtMethod<?> method) {
+-				if (distinctSignatures.add(method.getSignature())) {
+-					l.add(method);
++			public void accept(CtMethod<?> currentMethod) {
++				for (CtMethod<?> alreadyVisitedMethod : l) {
++					if (ctc.isSameSignature(currentMethod, alreadyVisitedMethod)) {
++						return;
++					}
+ 				}
++
++				l.add(currentMethod);
+ 			}
+ 		});
+ 		return Collections.unmodifiableSet(l);
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_245681314-245682273/bears_INRIA-spoon_245681314-245682273/src/main/java/spoon/support/visitor/ClassTypingContext.java /tmp/fixed/bears_INRIA-spoon_245681314-245682273/src/main/java/spoon/support/visitor/ClassTypingContext.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_245681314-245682273/bears_INRIA-spoon_245681314-245682273/src/main/java/spoon/support/visitor/ClassTypingContext.java	2022-04-21 14:11:48.626651586 +0800
++++ /tmp/fixed/bears_INRIA-spoon_245681314-245682273/src/main/java/spoon/support/visitor/ClassTypingContext.java	2022-04-21 14:12:25.200286923 +0800
+@@ -423,6 +423,9 @@
+ 	 */
+ 	@Override
+ 	protected CtTypeReference<?> adaptTypeParameter(CtTypeParameter typeParam) {
++		if (typeParam == null) {
++			throw new SpoonException("You cannot adapt a null type parameter.");
++		}
+ 		CtFormalTypeDeclarer declarer = typeParam.getTypeParameterDeclarer();
+ 		if ((declarer instanceof CtType<?>) == false) {
+ 			return null;
+@@ -643,6 +646,10 @@
+ 		if (typeRef instanceof CtTypeParameterReference) {
+ 			CtTypeParameterReference typeParamRef = (CtTypeParameterReference) typeRef;
+ 			CtTypeParameter typeParam = typeParamRef.getDeclaration();
++			if (typeParam == null) {
++				throw new SpoonException("Declaration of the CtTypeParameter should not be null.");
++			}
++
+ 			if (typeParam.getTypeParameterDeclarer() instanceof CtExecutable) {
+ 				//the parameter is declared in scope of Method or Constructor
+ 				return typeRef.clone();
+
+
+                
+                ====================== simfix_2 INRIA-spoon_245681314-245682273 ================================
+                
+                [PATCH 1010] file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_245681314-245682273/bears_INRIA-spoon_245681314-245682273/src/main/java//spoon/support/visitor/java/JavaReflectionTreeBuilder.java, range: <168,171>, original: super.visitInterface(clazz);
+exit();
+contexts.peek().addType(ctInterface);
+, patch: System.exit(-1);
+super.visitInterface(clazz);
+exit();
+contexts.peek().addType(ctInterface);
+
+
+                

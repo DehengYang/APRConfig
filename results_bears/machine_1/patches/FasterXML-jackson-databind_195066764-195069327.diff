@@ -1,0 +1,81 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_195066764-195069327/bears_FasterXML-jackson-databind_195066764-195069327/src/main/java/com/fasterxml/jackson/databind/deser/impl/InnerClassProperty.java /tmp/fixed/bears_FasterXML-jackson-databind_195066764-195069327/src/main/java/com/fasterxml/jackson/databind/deser/impl/InnerClassProperty.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_FasterXML-jackson-databind_195066764-195069327/bears_FasterXML-jackson-databind_195066764-195069327/src/main/java/com/fasterxml/jackson/databind/deser/impl/InnerClassProperty.java	2022-04-21 18:14:32.634084970 +0800
++++ /tmp/fixed/bears_FasterXML-jackson-databind_195066764-195069327/src/main/java/com/fasterxml/jackson/databind/deser/impl/InnerClassProperty.java	2022-04-21 18:15:02.423417878 +0800
+@@ -83,6 +83,15 @@
+     public InnerClassProperty withValueDeserializer(JsonDeserializer<?> deser) {
+         return new InnerClassProperty(this, deser);
+     }
++
++    @Override
++    public void assignIndex(int index) { _delegate.assignIndex(index); }
++
++    @Override
++    public int getPropertyIndex() { return _delegate.getPropertyIndex(); }
++
++    @Override
++    public int getCreatorIndex() { return _delegate.getCreatorIndex(); }
+     
+     // // // BeanProperty impl
+     
+
+
+                
+                ====================== tbar_2 FasterXML-jackson-databind_195066764-195069327 ================================
+                
+                [PATCH 2447]//**********************************************************
+//com/fasterxml/jackson/databind/deser/BeanDeserializerBase.java ------ 781
+//**********************************************************
+===Buggy Code===
+if (!vi.canCreateUsingDefault()) { // no default constructor
+                Class<?> valueClass = prop.getType().getRawClass();
+                Class<?> enclosing = ClassUtil.getOuterClass(valueClass);
+                // and is inner class of the bean class...
+                if (enclosing != null && enclosing == _beanType.getRawClass()) {
+                    for (Constructor<?> ctor : valueClass.getConstructors()) {
+                        Class<?>[] paramTypes = ctor.getParameterTypes();
+                        if (paramTypes.length == 1 && paramTypes[0] == enclosing) {
+                            if (ctxt.canOverrideAccessModifiers()) {
+                                ClassUtil.checkAndFixAccess(ctor, ctxt.isEnabled(MapperFeature.OVERRIDE_PUBLIC_ACCESS_MODIFIERS));
+                            }
+                            return new InnerClassProperty(prop, ctor);
+                        }
+                    }
+                }
+            }
+
+===Patch Code===
+if (!vi.canInstantiate()) { // no default constructor
+                Class<?> valueClass = prop.getType().getRawClass();
+                Class<?> enclosing = ClassUtil.getOuterClass(valueClass);
+                // and is inner class of the bean class...
+                if (enclosing != null && enclosing == _beanType.getRawClass()) {
+                    for (Constructor<?> ctor : valueClass.getConstructors()) {
+                        Class<?>[] paramTypes = ctor.getParameterTypes();
+                        if (paramTypes.length == 1 && paramTypes[0] == enclosing) {
+                            if (ctxt.canOverrideAccessModifiers()) {
+                                ClassUtil.checkAndFixAccess(ctor, ctxt.isEnabled(MapperFeature.OVERRIDE_PUBLIC_ACCESS_MODIFIERS));
+                            }
+                            return new InnerClassProperty(prop, ctor);
+                        }
+                    }
+                }
+            }
+
+
+                
+                ====================== tbar_3 FasterXML-jackson-databind_195066764-195069327 ================================
+                
+                [PATCH 324]//**********************************************************
+//com/fasterxml/jackson/databind/JsonMappingException.java ------ 515
+//**********************************************************
+===Buggy Code===
+sb.append(it.next().toString());
+
+===Patch Code===
+
+
+
+                

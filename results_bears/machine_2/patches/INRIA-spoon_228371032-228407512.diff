@@ -1,0 +1,85 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_228371032-228407512/bears_INRIA-spoon_228371032-228407512/src/main/java/spoon/support/compiler/jdt/JDTBasedSpoonCompiler.java /tmp/fixed/bears_INRIA-spoon_228371032-228407512/src/main/java/spoon/support/compiler/jdt/JDTBasedSpoonCompiler.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_228371032-228407512/bears_INRIA-spoon_228371032-228407512/src/main/java/spoon/support/compiler/jdt/JDTBasedSpoonCompiler.java	2022-05-20 12:26:17.779986608 +0800
++++ /tmp/fixed/bears_INRIA-spoon_228371032-228407512/src/main/java/spoon/support/compiler/jdt/JDTBasedSpoonCompiler.java	2022-05-20 12:26:34.684519919 +0800
+@@ -415,16 +415,18 @@
+ 		JDTTreeBuilder builder = new JDTTreeBuilder(factory);
+ 		unitLoop:
+ 		for (CompilationUnitDeclaration unit : units) {
+-			final String unitPath = new String(unit.getFileName());
+-			for (final CompilationUnitFilter cuf : compilationUnitFilters) {
+-				if (cuf.exclude(unitPath)) {
+-					// do not traverse this unit
+-					continue unitLoop;
++			if (!unit.isEmpty()) {
++				final String unitPath = new String(unit.getFileName());
++				for (final CompilationUnitFilter cuf : compilationUnitFilters) {
++					if (cuf.exclude(unitPath)) {
++						// do not traverse this unit
++						continue unitLoop;
++					}
++				}
++				unit.traverse(builder, unit.scope);
++				if (getFactory().getEnvironment().isCommentsEnabled()) {
++					new JDTCommentBuilder(unit, factory).build();
+ 				}
+-			}
+-			unit.traverse(builder, unit.scope);
+-			if (getFactory().getEnvironment().isCommentsEnabled()) {
+-				new JDTCommentBuilder(unit, factory).build();
+ 			}
+ 		}
+ 	}
+
+
+                
+                ====================== dynamoth_1 INRIA-spoon_228371032-228407512 ================================
+                
+                --- a/src/main/java/spoon/Launcher.java
++++ b/src/main/java/spoon/Launcher.java
+@@ -717,3 +717,5 @@
+} catch (Exception e) {
+-			throw new SpoonException(e);
++			if (false) {
++				throw new SpoonException(e);
++			}
+}
+
+
+
+
+                
+                ====================== dynamoth_2 INRIA-spoon_228371032-228407512 ================================
+                
+                --- a/src/main/java/spoon/Launcher.java
++++ b/src/main/java/spoon/Launcher.java
+@@ -717,3 +717,5 @@
+} catch (Exception e) {
+-			throw new SpoonException(e);
++			if (false) {
++				throw new SpoonException(e);
++			}
+}
+
+
+
+
+                
+                ====================== dynamoth_3 INRIA-spoon_228371032-228407512 ================================
+                
+                --- a/src/main/java/spoon/Launcher.java
++++ b/src/main/java/spoon/Launcher.java
+@@ -717,3 +717,5 @@
+} catch (Exception e) {
+-			throw new SpoonException(e);
++			if (false) {
++				throw new SpoonException(e);
++			}
+}
+
+
+
+
+                

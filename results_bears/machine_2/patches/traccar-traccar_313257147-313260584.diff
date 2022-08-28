@@ -1,0 +1,83 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_313257147-313260584/bears_traccar-traccar_313257147-313260584/src/org/traccar/protocol/TotemFrameDecoder.java /tmp/fixed/bears_traccar-traccar_313257147-313260584/src/org/traccar/protocol/TotemFrameDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_313257147-313260584/bears_traccar-traccar_313257147-313260584/src/org/traccar/protocol/TotemFrameDecoder.java	2022-04-24 21:38:36.975602918 +0800
++++ /tmp/fixed/bears_traccar-traccar_313257147-313260584/src/org/traccar/protocol/TotemFrameDecoder.java	2022-04-24 21:39:49.834456758 +0800
+@@ -42,8 +42,8 @@
+ 
+         int length;
+ 
+-        int flagIndex = buf.indexOf(buf.readerIndex(), buf.writerIndex(), new StringFinder("AA"));
+-        if (flagIndex != -1 && flagIndex - beginIndex == 6) {
++        int separatorIndex = buf.indexOf(buf.readerIndex(), buf.writerIndex(), (byte) '|');
++        if (separatorIndex > 0 && separatorIndex - beginIndex > 19) {
+             length = Integer.parseInt(buf.toString(buf.readerIndex() + 2, 4, StandardCharsets.US_ASCII));
+         } else {
+             length = Integer.parseInt(buf.toString(buf.readerIndex() + 2, 2, StandardCharsets.US_ASCII), 16);
+
+
+                
+                ====================== tbar_1 traccar-traccar_313257147-313260584 ================================
+                
+                [PATCH 182]//**********************************************************
+//org/traccar/protocol/TotemFrameDecoder.java ------ 46
+//**********************************************************
+===Buggy Code===
+if (flagIndex != -1 && flagIndex - beginIndex == 6) {
+            length = Integer.parseInt(buf.toString(buf.readerIndex() + 2, 4, StandardCharsets.US_ASCII));
+        } else {
+            length = Integer.parseInt(buf.toString(buf.readerIndex() + 2, 2, StandardCharsets.US_ASCII), 16);
+        }
+
+===Patch Code===
+if (flagIndex < beginIndex || (flagIndex != -1 && flagIndex - beginIndex == 6)) {
+            length = Integer.parseInt(buf.toString(buf.readerIndex() + 2, 4, StandardCharsets.US_ASCII));
+        } else {
+            length = Integer.parseInt(buf.toString(buf.readerIndex() + 2, 2, StandardCharsets.US_ASCII), 16);
+        }
+
+
+                
+                ====================== tbar_2 traccar-traccar_313257147-313260584 ================================
+                
+                [PATCH 182]//**********************************************************
+//org/traccar/protocol/TotemFrameDecoder.java ------ 46
+//**********************************************************
+===Buggy Code===
+if (flagIndex != -1 && flagIndex - beginIndex == 6) {
+            length = Integer.parseInt(buf.toString(buf.readerIndex() + 2, 4, StandardCharsets.US_ASCII));
+        } else {
+            length = Integer.parseInt(buf.toString(buf.readerIndex() + 2, 2, StandardCharsets.US_ASCII), 16);
+        }
+
+===Patch Code===
+if (flagIndex < beginIndex || (flagIndex != -1 && flagIndex - beginIndex == 6)) {
+            length = Integer.parseInt(buf.toString(buf.readerIndex() + 2, 4, StandardCharsets.US_ASCII));
+        } else {
+            length = Integer.parseInt(buf.toString(buf.readerIndex() + 2, 2, StandardCharsets.US_ASCII), 16);
+        }
+
+
+                
+                ====================== tbar_3 traccar-traccar_313257147-313260584 ================================
+                
+                [PATCH 182]//**********************************************************
+//org/traccar/protocol/TotemFrameDecoder.java ------ 46
+//**********************************************************
+===Buggy Code===
+if (flagIndex != -1 && flagIndex - beginIndex == 6) {
+            length = Integer.parseInt(buf.toString(buf.readerIndex() + 2, 4, StandardCharsets.US_ASCII));
+        } else {
+            length = Integer.parseInt(buf.toString(buf.readerIndex() + 2, 2, StandardCharsets.US_ASCII), 16);
+        }
+
+===Patch Code===
+if (flagIndex < beginIndex || (flagIndex != -1 && flagIndex - beginIndex == 6)) {
+            length = Integer.parseInt(buf.toString(buf.readerIndex() + 2, 4, StandardCharsets.US_ASCII));
+        } else {
+            length = Integer.parseInt(buf.toString(buf.readerIndex() + 2, 2, StandardCharsets.US_ASCII), 16);
+        }
+
+
+                

@@ -1,0 +1,93 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_212058933-212061222/bears_traccar-traccar_212058933-212061222/src/org/traccar/protocol/SuntechProtocolDecoder.java /tmp/fixed/bears_traccar-traccar_212058933-212061222/src/org/traccar/protocol/SuntechProtocolDecoder.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_traccar-traccar_212058933-212061222/bears_traccar-traccar_212058933-212061222/src/org/traccar/protocol/SuntechProtocolDecoder.java	2022-05-19 19:08:36.577858894 +0800
++++ /tmp/fixed/bears_traccar-traccar_212058933-212061222/src/org/traccar/protocol/SuntechProtocolDecoder.java	2022-05-19 19:09:26.883459738 +0800
+@@ -31,11 +31,13 @@
+ public class SuntechProtocolDecoder extends BaseProtocolDecoder {
+ 
+     private int protocolType;
++    private boolean hbm;
+ 
+     public SuntechProtocolDecoder(SuntechProtocol protocol) {
+         super(protocol);
+ 
+         protocolType = Context.getConfig().getInteger(getProtocolName() + ".protocolType");
++        hbm = Context.getConfig().getBoolean(getProtocolName() + ".hbm");
+     }
+ 
+     public void setProtocolType(int protocolType) {
+@@ -144,12 +146,16 @@
+             position.set(Position.KEY_INDEX, Integer.parseInt(values[index++]));
+         }
+ 
+-        if (index < values.length) {
+-            position.set(Position.KEY_HOURS, Integer.parseInt(values[index++]));
+-        }
++        if (hbm) {
++
++            if (index < values.length) {
++                position.set(Position.KEY_HOURS, Integer.parseInt(values[index++]));
++            }
++
++            if (index < values.length) {
++                position.set(Position.KEY_BATTERY, Double.parseDouble(values[index]));
++            }
+ 
+-        if (index < values.length) {
+-            position.set(Position.KEY_BATTERY, Double.parseDouble(values[index]));
+         }
+ 
+         return position;
+
+
+                
+                ====================== dynamoth_1 traccar-traccar_212058933-212061222 ================================
+                
+                --- a/src/org/traccar/protocol/SuntechProtocolDecoder.java
++++ b/src/org/traccar/protocol/SuntechProtocolDecoder.java
+@@ -135,3 +135,5 @@
+
+-        position.set(Position.KEY_ODOMETER, Integer.parseInt(values[index++]));
++        if (false) {
++            position.set(Position.KEY_ODOMETER, Integer.parseInt(values[index++]));
++        }
+position.set(Position.KEY_POWER, Double.parseDouble(values[index++]));
+
+
+
+
+                
+                ====================== dynamoth_2 traccar-traccar_212058933-212061222 ================================
+                
+                --- a/src/org/traccar/protocol/SuntechProtocolDecoder.java
++++ b/src/org/traccar/protocol/SuntechProtocolDecoder.java
+@@ -135,3 +135,5 @@
+
+-        position.set(Position.KEY_ODOMETER, Integer.parseInt(values[index++]));
++        if (false) {
++            position.set(Position.KEY_ODOMETER, Integer.parseInt(values[index++]));
++        }
+position.set(Position.KEY_POWER, Double.parseDouble(values[index++]));
+
+
+
+
+                
+                ====================== dynamoth_3 traccar-traccar_212058933-212061222 ================================
+                
+                --- a/src/org/traccar/protocol/SuntechProtocolDecoder.java
++++ b/src/org/traccar/protocol/SuntechProtocolDecoder.java
+@@ -135,3 +135,5 @@
+
+-        position.set(Position.KEY_ODOMETER, Integer.parseInt(values[index++]));
++        if (false) {
++            position.set(Position.KEY_ODOMETER, Integer.parseInt(values[index++]));
++        }
+position.set(Position.KEY_POWER, Double.parseDouble(values[index++]));
+
+
+
+
+                

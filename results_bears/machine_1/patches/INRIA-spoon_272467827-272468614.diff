@@ -1,0 +1,199 @@
+
+                ====================== human-written patch ================================
+                
+                diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_272467827-272468614/bears_INRIA-spoon_272467827-272468614/src/main/java/spoon/reflect/visitor/DefaultJavaPrettyPrinter.java /tmp/fixed/bears_INRIA-spoon_272467827-272468614/src/main/java/spoon/reflect/visitor/DefaultJavaPrettyPrinter.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_272467827-272468614/bears_INRIA-spoon_272467827-272468614/src/main/java/spoon/reflect/visitor/DefaultJavaPrettyPrinter.java	2022-04-28 07:32:06.250846427 +0800
++++ /tmp/fixed/bears_INRIA-spoon_272467827-272468614/src/main/java/spoon/reflect/visitor/DefaultJavaPrettyPrinter.java	2022-04-28 07:32:44.172542691 +0800
+@@ -787,6 +787,9 @@
+ 						 * Search for potential variable declaration until we found a class which declares or inherits this field
+ 						 */
+ 						final CtField<?> field = f.getVariable().getFieldDeclaration();
++						if (field == null) {
++							throw new SpoonException("The reference to field named \"" + f.getVariable().getSimpleName() + "\" is invalid, because there is no field with such name on path:" + getPath(f));
++						}
+ 						final String fieldName = field.getSimpleName();
+ 						CtVariable<?> var = f.getVariable().map(new PotentialVariableDeclarationFunction(fieldName)).first();
+ 						if (var != field) {
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_272467827-272468614/bears_INRIA-spoon_272467827-272468614/src/main/java/spoon/support/template/SubstitutionVisitor.java /tmp/fixed/bears_INRIA-spoon_272467827-272468614/src/main/java/spoon/support/template/SubstitutionVisitor.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_272467827-272468614/bears_INRIA-spoon_272467827-272468614/src/main/java/spoon/support/template/SubstitutionVisitor.java	2022-04-28 07:32:06.254846605 +0800
++++ /tmp/fixed/bears_INRIA-spoon_272467827-272468614/src/main/java/spoon/support/template/SubstitutionVisitor.java	2022-04-28 07:32:44.180543049 +0800
+@@ -243,11 +243,46 @@
+ 						throw context.replace(toReplace, enumValueAccess);
+ 					} else if ((value != null) && value.getClass().isArray()) {
+ 						throw context.replace(toReplace, factory.Code().createLiteralArray((Object[]) value));
++					} else if (fieldAccess == toReplace && value instanceof String) {
++						/*
++						 * If the value is type String, then it is ambiguous request, because:
++						 * A) sometime client wants to replace parameter field access by String literal
++						 *
++						 * @Parameter
++						 * String field = "x"
++						 *
++						 * System.printLn(field) //is substitutes as: System.printLn("x")
++						 *
++						 * but in the case of local variables it already behaves like this
++						 * {
++						 * 		int field;
++						 * 		System.printLn(field) //is substitutes as: System.printLn(x)
++						 * }
++						 *
++						 * B) sometime client wants to keep field access and just substitute field name
++						 *
++						 * @Parameter("field")
++						 * String fieldName = "x"
++						 *
++						 * System.printLn(field) //is substitutes as: System.printLn(x)
++						 *
++						 * ----------------------
++						 *
++						 * The case B is more clear and is compatible with substitution of name of local variable, method name, etc.
++						 * And case A can be easily modeled using this clear code
++						 *
++						 * @Parameter
++						 * String field = "x"
++						 * System.printLn("field") //is substitutes as: System.printLn("x")
++						 * System.printLn(field) //is substitutes as: System.printLn("x") because the parameter `field` is constructed with literal value
++						 */
++						//New implementation always replaces the name of the accessed field
++						//so do nothing here. The string substitution is handled by #scanCtReference
+ 					} else {
+ 						throw context.replace(toReplace, factory.Code().createLiteral(value));
+ 					}
+ 				} else {
+-					throw context.replace(toReplace, toReplace.clone());
++					throw context.replace(toReplace, (CtElement) value);
+ 				}
+ 			}
+ 		}
+@@ -501,14 +536,14 @@
+ 	 * @return list where each item is assured to be of type itemClass
+ 	 */
+ 	@SuppressWarnings("unchecked")
+-	private static <T> List<T> getParameterValueAsListOfClones(Class<T> itemClass, Object parameterValue) {
++	private <T> List<T> getParameterValueAsListOfClones(Class<T> itemClass, Object parameterValue) {
+ 		List<Object> list = getParameterValueAsNewList(parameterValue);
+ 		for (int i = 0; i < list.size(); i++) {
+ 			list.set(i, getParameterValueAsClass(itemClass, list.get(i)));
+ 		}
+ 		return (List<T>) list;
+ 	}
+-	private static List<Object> getParameterValueAsNewList(Object parameterValue) {
++	private List<Object> getParameterValueAsNewList(Object parameterValue) {
+ 		List<Object> list = new ArrayList<>();
+ 		if (parameterValue != null) {
+ 			if (parameterValue instanceof Object[]) {
+@@ -536,7 +571,7 @@
+ 	 * @return parameterValue cast (in future potentially converted) to itemClass
+ 	 */
+ 	@SuppressWarnings("unchecked")
+-	private static <T> T getParameterValueAsClass(Class<T> itemClass, Object parameterValue) {
++	private <T> T getParameterValueAsClass(Class<T> itemClass, Object parameterValue) {
+ 		if (parameterValue == null || parameterValue == NULL_VALUE) {
+ 			return null;
+ 		}
+@@ -556,7 +591,11 @@
+ 			if (parameterValue instanceof CtTypeReference) {
+ 				//convert type reference into code element as class access
+ 				CtTypeReference<?> tr = (CtTypeReference<?>) parameterValue;
+-				return (T) tr.getFactory().Code().createClassAccess(tr);
++				return (T) factory.Code().createClassAccess(tr);
++			}
++			if (parameterValue instanceof String) {
++				//convert String to code element as Literal
++				return (T) factory.Code().createLiteral((String) parameterValue);
+ 			}
+ 		}
+ 		throw new SpoonException("Parameter value has unexpected class: " + parameterValue.getClass().getName() + ". Expected class is: " + itemClass.getName());
+@@ -565,7 +604,7 @@
+ 	 * @param parameterValue a value of an template parameter
+ 	 * @return parameter value converted to String
+ 	 */
+-	private static String getParameterValueAsString(Object parameterValue) {
++	private String getParameterValueAsString(Object parameterValue) {
+ 		if (parameterValue == null) {
+ 			return null;
+ 		}
+@@ -634,7 +673,7 @@
+ 	 * @param index index of item from the list, or null if item is not expected to be a list
+ 	 * @return parameterValue (optionally item from the list) cast (in future potentially converted) to itemClass
+ 	 */
+-	private static <T> T getParameterValueAtIndex(Class<T> itemClass, Object parameterValue, Integer index) {
++	private <T> T getParameterValueAtIndex(Class<T> itemClass, Object parameterValue, Integer index) {
+ 		if (index != null) {
+ 			//convert to list, but do not clone
+ 			List<Object> list = getParameterValueAsNewList(parameterValue);
+diff -Naur /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_272467827-272468614/bears_INRIA-spoon_272467827-272468614/src/main/java/spoon/template/Template.java /tmp/fixed/bears_INRIA-spoon_272467827-272468614/src/main/java/spoon/template/Template.java
+--- /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_272467827-272468614/bears_INRIA-spoon_272467827-272468614/src/main/java/spoon/template/Template.java	2022-04-28 07:32:06.258846784 +0800
++++ /tmp/fixed/bears_INRIA-spoon_272467827-272468614/src/main/java/spoon/template/Template.java	2022-04-28 07:32:44.180543049 +0800
+@@ -26,9 +26,10 @@
+  * {@link TemplateParameter#S()} method.
+  *
+  * <p>
+- * When the template parameter is a String or a primitive type (or a boxing
++ * When the template parameter is a String it is used to rename element of the code such as fields or methods.
++ * When it is another primitive type (or a boxing
+  * type) representing a literal, or a Class, the template parameter can be
+- * directly accessed.
++ * directly accessed. To use a standard parameter containing a String type, use a CtLiteral&lt;String&gt;
+  *
+  * <pre>
+  *       import spoon.template.Template;
+@@ -38,15 +39,19 @@
+  *           // template parameter fields
+  *            \@Parameter String _parameter_;
+  *
++ *            \@Parameter CtLiteral&lt;String&gt; _anotherParameter;
++ *
++ *
+  *           // parameters binding
+  *            \@Local
+- *           public SimpleTemplate(String parameter) {
++ *           public SimpleTemplate(String parameter, CtLiteral&lt;String&gt; anotherParameter) {
+  *               _parameter_ = parameter;
++ *               _anotherParameter = anotherParameter;
+  *           }
+  *
+  *           // template method
+- *           public void simpleTemplateMethod() {
+- *               System.out.println(_parameter_);
++ *           public void methodwith_parameter_() {
++ *               System.out.println(_anotherParameter);
+  *           }
+  *       }
+  * </pre>
+@@ -60,7 +65,10 @@
+  *
+  * <pre>
+  *       spoon.reflect.CtClass target=...;
+- *       Template template=new SimpleTemplate(&quot;hello templated world&quot;);
++ *       CtLiteral&lt;String&gt; anotherParameter = factory.createLiteral();
++ *       anotherParameter.setValue(&quot;hello templated world&quot;);
++ *
++ *       Template template=new SimpleTemplate(&quot;ParameterizedName&quot;, anotherParameter);
+  *       Substitution.insertAll(target,template);
+  * </pre>
+  *
+@@ -70,7 +78,7 @@
+  *
+  * <pre>
+  * public class A {
+- * 	public void insertedMethod() {
++ * 	public void methodwithParameterizedName() {
+  * 		System.out.println(&quot;hello templated world&quot;);
+  *    }
+  * }
+
+
+                
+                ====================== simfix_2 INRIA-spoon_272467827-272468614 ================================
+                
+                [PATCH 1139] file: /mnt/data/bias_validation_2021/results_bears/bears_INRIA-spoon_272467827-272468614/bears_INRIA-spoon_272467827-272468614/src/main/java//spoon/Launcher.java, range: <217,221>, original: opt2.setHelp("Define tabulation size.");
+jsap.registerParameter(opt2);
+opt2=new FlaggedOption("level");
+, patch: opt2.setDefault(OUTPUTDIR);
+opt2.setHelp("Define tabulation size.");
+jsap.registerParameter(opt2);
+opt2=new FlaggedOption("level");
+
+
+                
