@@ -14,7 +14,7 @@
   - [7. Acknowledgment](#7-acknowledgment)
   - [8. LICENSE](#8-license)
 
-This is a repository for systematically understanding and uncovering biases in APR (i.e., Automated Program Repair) evaluation.
+This is a repository for TOSEM'22 paper "Seeing the Whole Elephant: Systematically Understanding and Uncovering Evaluation Biases in Automated Program Repair".
 
 ## 1. Introduction
 
