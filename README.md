@@ -11,7 +11,8 @@
     - [4.4. To Plot Statistics](#44-to-plot-statistics)
   - [5. Structure](#5-structure)
   - [6. APRConfig Extension](#6-aprconfig-extension)
-  - [7. LICENSE](#7-license)
+  - [7. Acknowledgment](#7-acknowledgment)
+  - [8. LICENSE](#8-license)
 
 This is a repository for systematically understanding and uncovering biases in APR (i.e., Automated Program Repair) evaluation.
 
@@ -136,7 +137,11 @@ python Statistical_tests.py
 
 To facilitate the usage of potential users, we plan to continuously maintain this repository. Accordingly, we provide the guideline, which is available at [How_to_extend.md](./How_to_extend.md), on how to extend APRConfig with more datasets, fault localizers, patch generation algorithms, and patch validators. Any question or contribution is much welcomed.
 
-## 7. LICENSE
+## 7. Acknowledgment
+
+We would like to sincerely thank Thomas Durieux, Fernanda Madeiral, Matias Martinez, and Rui Abreu for contributing a great framework (i.e., RepairThemAll), which serves as a quite useful reference point for how to construct an executable framework. We also adopted some software design patterns used in RepairThemAll, and finally accomplished a new executable framework that properly decouples the APR implementation into three sub-modules, including fault localization, patch generation, and patch validation, to support the bias mitigation and validation as well as further explorations on APR evaluation for potential end users.
+
+## 8. LICENSE
 
 The repository is licensed under the [GNU GPLv3 license](https://www.gnu.org/licenses/gpl-3.0-standalone.html). See [LICENSE](./LICENSE) for details.
 
