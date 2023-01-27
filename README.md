@@ -5,10 +5,10 @@
   - [2. APRConfig Framework](#2-aprconfig-framework)
   - [3. Usage](#3-usage)
   - [4. Reproduction](#4-reproduction)
-    - [4.1. Environment](#41-environment)
-    - [4.2. Run APRConfig](#42-run-aprconfig)
-    - [4.3. Parse Results of APRConfig](#43-parse-results-of-aprconfig)
-    - [4.4. To Plot Statistics](#44-to-plot-statistics)
+    - [4.2. Preparation](#42-preparation)
+    - [4.3. Run APRConfig](#43-run-aprconfig)
+    - [4.4. Parse Results of APRConfig](#44-parse-results-of-aprconfig)
+    - [4.5. To Plot Statistics](#45-to-plot-statistics)
   - [5. Structure](#5-structure)
   - [6. APRConfig Extension](#6-aprconfig-extension)
   - [7. Acknowledgment](#7-acknowledgment)
@@ -58,7 +58,21 @@ The experiment of our study is performed with:
 - JDK: JDK 7and JDK 8
 - Python 3 (with Conda environment)
 
-### 4.2. Run APRConfig
+### 4.2. Preparation
+```shell
+# 1) Clone this repo
+git clone https://github.com/DehengYang/APRConfig.git
+
+# 2) Init Benchmark
+cd datasets
+./init.sh
+
+# 3) install apr tools
+cd apr_tools
+./init.sh
+```
+
+### 4.3. Run APRConfig
 
 ```shell
 cd APRConfig
@@ -66,7 +80,7 @@ cd APRConfig
 ./run_quixbugs.sh
 ```
 
-### 4.3. Parse Results of APRConfig
+### 4.4. Parse Results of APRConfig
 
 To obtain statistics, run:
 
@@ -77,10 +91,10 @@ cd APRConfig
 python parser/Main_parse.py
 
 # 2) to obtain plausible patches
-python parser/get_patch.py
+python statistics/get_patch.py
 
 # 3) to calculate time cost
-python parser/Count_repair_time.py
+python statistics/Count_repair_time.py
 
 # 4) to gather data (compression with high reduction size via lrzip)
 python result_processor/Result_processor.py
@@ -93,25 +107,27 @@ cd APRConfig
 ./run_parser.sh
 ```
 
-### 4.4. To Plot Statistics
+### 4.5. To Plot Statistics
 
 To obtain the figures shown in our paper, run:
 
 ```shell
+cd APRConfig
+
 1) to gather results at results_defects4j/merge dir
-python parser/Prepare_data.py
+python parser_plot/Prepare_data.py
 
 2) to analyze repair effectiveness
-python parser/Plot_impact_effectiveness.py
+python parser_plot/Plot_impact_effectiveness.py
 
 3) to analyze repair efficiency
-python parser/Plot_impact_efficiency.py
+python parser_plot/Plot_impact_efficiency.py
 ```
 
 To obtain the results of statistical tests presented in our paper, run:
 
 ```shell
-python Statistical_tests.py
+python parser_plot/Statistical_tests.py
 ```
 
 ## 5. Structure
@@ -123,7 +139,8 @@ python Statistical_tests.py
 ├── fl_modules:        submodule for fault localization
 ├── patch_validator:   submodule for patch validation
 ├── package.sh:        script for package all submodules of APRConfig
-├── INSTALL:           scripts for environment configuration.
+├── INSTALL:           scripts for environment configuration
+├── results_bears:     raw data of repair experiment on Bears
 ├── results_defects4j: raw data of repair experiment on Defects4J
 ├── results_quixbugs:  raw data of repair experiment on QuixBugs
 ├── doc:               SLR data
