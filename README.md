@@ -67,7 +67,7 @@ git clone https://github.com/DehengYang/APRConfig.git
 cd datasets
 ./init.sh
 
-# 3) install apr tools
+# 3) Install apr tools
 cd apr_tools
 ./init.sh
 ```
