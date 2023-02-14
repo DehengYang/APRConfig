@@ -64,12 +64,7 @@ The experiment of our study is performed with:
 # 1) Clone this repo
 git clone https://github.com/DehengYang/APRConfig.git
 
-# 2) Init Benchmark
-cd datasets
-./init.sh
-
-# 3) Install apr tools
-cd apr_tools
+# 2) Init repo
 ./init.sh
 ```
 
