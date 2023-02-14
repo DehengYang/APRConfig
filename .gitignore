@@ -12,7 +12,6 @@ results_defects4j/all_apr_df.csv
 
 # build
 target/
-libs/
 
 # debug
 results_debug/
