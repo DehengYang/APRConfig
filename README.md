@@ -64,12 +64,7 @@ The experiment of our study is performed with:
 # 1) Clone this repo
 git clone https://github.com/DehengYang/APRConfig.git
 
-# 2) Init Benchmark
-cd datasets
-./init.sh
-
-# 3) Install apr tools
-cd apr_tools
+# 2) Init repo
 ./init.sh
 ```
 
@@ -92,7 +87,7 @@ cd APRConfig
 python parser/Main_parse.py
 
 # 2) to obtain plausible patches
-python statistics/get_patch.py
+python statistics/Get_patch.py
 
 # 3) to calculate time cost
 python statistics/Count_repair_time.py
